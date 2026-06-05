@@ -177,7 +177,7 @@ function InboxMockup() {
           </div>
         </div>
       </motion.div>
-    </section>
+    </motion.div>
   );
 }
 
