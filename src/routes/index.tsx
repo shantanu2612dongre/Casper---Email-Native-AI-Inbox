@@ -412,7 +412,7 @@ function CTA() {
               href="#"
               className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:opacity-90 transition-opacity"
             >
-              Get started free <ArrowRight className="h-4 w-4" />
+              Get Started
             </a>
             <a
               href="#"
