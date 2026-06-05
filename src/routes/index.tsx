@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { ArrowRight, Sparkles, Zap, Shield, BarChart3, Workflow, Wand2, Check } from "lucide-react";
+import { Inbox, Sparkles, Zap, Shield, Search, Bot, Check, Star } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Slashy — Ship faster with AI-native workflows" },
-      { name: "description", content: "An AI-native canvas to design, automate, and ship product workflows in minutes — not weeks." },
-      { property: "og:title", content: "Slashy — Ship faster with AI-native workflows" },
-      { property: "og:description", content: "Design, automate and ship product workflows in minutes with an AI-native canvas." },
+      { title: "Slashy — The Intelligent Inbox" },
+      { name: "description", content: "Slashy learns how you write, drafts your replies, and handles the busywork — so you can focus on what matters." },
+      { property: "og:title", content: "Slashy — The Intelligent Inbox" },
+      { property: "og:description", content: "An AI inbox that learns your voice and handles the busywork." },
     ],
   }),
   component: Index,
@@ -29,28 +29,30 @@ function Nav() {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="sticky top-0 z-50 backdrop-blur-md bg-background/60 border-b border-border/40"
+      className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60"
     >
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2 font-semibold text-foreground tracking-tight text-lg">
-          <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-[image:var(--gradient-primary)] text-primary-foreground">
-            <Sparkles className="h-4 w-4" />
-          </span>
-          slashy
+        <a href="#" className="flex items-center gap-2 font-semibold text-foreground tracking-tight text-xl">
+          <span
+            aria-hidden
+            className="inline-block h-5 w-7 rounded-sm"
+            style={{ background: "var(--gradient-primary)" }}
+          />
+          Slashy
         </a>
-        <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
-          <a href="#features" className="hover:text-foreground transition-colors">Features</a>
-          <a href="#how" className="hover:text-foreground transition-colors">How it works</a>
+        <div className="hidden md:flex items-center gap-10 text-sm text-foreground/80">
           <a href="#pricing" className="hover:text-foreground transition-colors">Pricing</a>
-          <a href="#faq" className="hover:text-foreground transition-colors">FAQ</a>
+          <a href="#enterprise" className="hover:text-foreground transition-colors">Enterprise</a>
+          <a href="#security" className="hover:text-foreground transition-colors">Security</a>
+          <a href="#about" className="hover:text-foreground transition-colors">About</a>
         </div>
-        <div className="flex items-center gap-3">
-          <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Sign in</a>
+        <div className="flex items-center gap-5">
+          <a href="#" className="text-sm text-foreground/80 hover:text-foreground transition-colors">Login</a>
           <a
             href="#"
-            className="inline-flex items-center gap-1.5 rounded-full bg-foreground text-background px-4 py-2 text-sm font-medium hover:opacity-90 transition-opacity"
+            className="inline-flex items-center rounded-lg bg-foreground text-background px-4 py-2 text-sm font-medium hover:opacity-90 transition-opacity"
           >
-            Get started <ArrowRight className="h-3.5 w-3.5" />
+            Get Started
           </a>
         </div>
       </nav>
@@ -61,170 +63,141 @@ function Nav() {
 function Hero() {
   return (
     <section className="relative overflow-hidden">
-      {/* Soft gradient wash */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 -top-32 h-[680px] opacity-90"
-        style={{
-          background:
-            "radial-gradient(60% 50% at 20% 100%, var(--pink-wash) 0%, transparent 60%), radial-gradient(50% 50% at 85% 100%, var(--lavender-wash) 0%, transparent 60%)",
-        }}
-      />
-      <motion.div
-        aria-hidden
-        animate={{ y: [0, -18, 0] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute -left-24 top-40 h-72 w-72 rounded-full blur-3xl"
-        style={{ background: "color-mix(in oklab, var(--lavender-wash) 70%, transparent)" }}
-      />
-      <motion.div
-        aria-hidden
-        animate={{ y: [0, 22, 0] }}
-        transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute -right-20 top-24 h-80 w-80 rounded-full blur-3xl"
-        style={{ background: "color-mix(in oklab, var(--pink-wash) 80%, transparent)" }}
-      />
-
-      <div className="relative max-w-7xl mx-auto px-6 pt-24 pb-32 text-center">
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={0}
-          className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/60 backdrop-blur px-3 py-1 text-xs text-muted-foreground"
-        >
-          <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-          New · Slashy 2.0 is live
-        </motion.div>
-
+      <div className="relative max-w-6xl mx-auto px-6 pt-28 pb-16 text-center">
         <motion.h1
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          custom={1}
-          className="mt-6 text-5xl md:text-7xl font-semibold tracking-tight text-foreground leading-[1.05]"
+          custom={0}
+          className="text-5xl md:text-7xl font-semibold tracking-tight text-foreground leading-[1.02]"
         >
-          Ship product workflows
-          <br />
-          <span className="bg-clip-text text-transparent bg-[image:var(--gradient-primary)]">
-            at the speed of thought.
-          </span>
+          The Intelligent Inbox.
         </motion.h1>
 
         <motion.p
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          custom={2}
-          className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground"
+          custom={1}
+          className="mx-auto mt-6 max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed"
         >
-          Slashy is an AI-native canvas where teams design, automate and ship product flows
-          in minutes — not weeks. No glue code. No context switching.
+          Slashy learns how you write, drafts your replies, and handles the busywork, so you can focus on what matters.
         </motion.p>
 
         <motion.div
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          custom={3}
-          className="mt-9 flex items-center justify-center gap-3"
+          custom={2}
+          className="mt-10 flex items-center justify-center"
         >
           <a
             href="#"
-            className="group inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium shadow-[var(--shadow-soft)] hover:translate-y-[-1px] transition-transform"
+            className="inline-flex items-center rounded-lg bg-foreground text-background px-6 py-3 text-base font-medium hover:opacity-90 transition-opacity"
           >
-            Start free
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </a>
-          <a
-            href="#features"
-            className="inline-flex items-center rounded-full border border-border bg-card/70 backdrop-blur px-6 py-3 text-sm font-medium text-foreground hover:bg-card transition-colors"
-          >
-            See how it works
+            Get Started
           </a>
         </motion.div>
 
-        {/* Product preview card */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto mt-20 max-w-5xl"
-        >
-          <div
-            className="rounded-2xl border border-border/60 bg-card/80 backdrop-blur p-2"
-            style={{ boxShadow: "var(--shadow-soft)" }}
-          >
-            <div className="rounded-xl border border-border/50 overflow-hidden">
-              <div className="flex items-center gap-1.5 px-4 py-3 border-b border-border/50 bg-muted/40">
-                <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.85_0.08_20)]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.88_0.1_85)]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.85_0.1_150)]" />
-              </div>
-              <div className="grid grid-cols-12 min-h-[340px]">
-                <div className="col-span-3 border-r border-border/50 p-4 space-y-2 bg-muted/20">
-                  {["Inbox", "Workflows", "Agents", "Reports", "Settings"].map((it, i) => (
-                    <motion.div
-                      key={it}
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.8 + i * 0.07 }}
-                      className={`px-3 py-2 rounded-lg text-sm ${i === 1 ? "bg-primary/10 text-primary font-medium" : "text-muted-foreground"}`}
-                    >
-                      {it}
-                    </motion.div>
-                  ))}
-                </div>
-                <div className="col-span-9 p-6 space-y-4">
-                  {[
-                    { t: "New signup → enrich → assign", c: "Running" },
-                    { t: "Daily revenue digest", c: "Scheduled" },
-                    { t: "Churn-risk auto-outreach", c: "Draft" },
-                    { t: "Support triage agent", c: "Running" },
-                  ].map((row, i) => (
-                    <motion.div
-                      key={row.t}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 1 + i * 0.1 }}
-                      className="flex items-center justify-between rounded-xl border border-border/60 bg-background/70 px-4 py-3"
-                    >
-                      <div className="flex items-center gap-3">
-                        <span className="h-8 w-8 rounded-lg bg-[image:var(--gradient-primary)] inline-flex items-center justify-center text-primary-foreground">
-                          <Workflow className="h-4 w-4" />
-                        </span>
-                        <span className="text-sm text-foreground">{row.t}</span>
-                      </div>
-                      <span className="text-xs text-muted-foreground rounded-full bg-muted px-2.5 py-1">{row.c}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        <InboxMockup />
       </div>
     </section>
   );
 }
 
-function Logos() {
-  const logos = ["northwind", "acme", "monolith", "lumen", "stellar", "zephyr"];
+function InboxMockup() {
+  const rows = [
+    { from: "Huỳnh Anh Tuấn", subject: "Partnership Opportunity – AI Email", preview: "Hi team, I wanted to reach out about…", tag: "Important", time: "12:21 PM", active: true },
+    { from: "Neil Patel", subject: "Have you optimized for agents yet?", preview: "You've heard everyone…", tag: "Newsletter", time: "12:07 PM" },
+    { from: "Business Insider", subject: "Ending soon — 1 year for only $29", preview: "Limited time only. End…", tag: "Newsletter", time: "12:01 PM" },
+    { from: "The Hustle", subject: "✨ A new kind of power suit", preview: "Plus: A popular plumber, a wi…", tag: "Newsletter", time: "11:30 AM" },
+    { from: "Business Insider", subject: "Today: What Amazon's job cuts mean for you", preview: "Plus: More…", tag: "Newsletter", time: "10:52 AM" },
+  ];
   return (
-    <section className="border-y border-border/60 bg-background/50">
-      <div className="max-w-7xl mx-auto px-6 py-10">
+    <motion.div
+      initial={{ opacity: 0, y: 60, rotateX: 8 }}
+      animate={{ opacity: 1, y: 0, rotateX: 0 }}
+      transition={{ delay: 0.4, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+      style={{ perspective: 1400 }}
+      className="relative mx-auto mt-20 max-w-5xl"
+    >
+      <motion.div
+        animate={{ y: [0, -8, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        className="relative rounded-2xl p-3 md:p-4"
+        style={{
+          background: "var(--gradient-hero)",
+          boxShadow: "var(--shadow-soft)",
+        }}
+      >
+        <div className="rounded-xl overflow-hidden bg-card border border-border/60">
+          {/* Window chrome */}
+          <div className="flex items-center gap-2 px-4 py-3 border-b border-border/60">
+            <span className="h-3 w-3 rounded-full bg-[oklch(0.72_0.18_25)]" />
+            <span className="h-3 w-3 rounded-full bg-[oklch(0.82_0.14_85)]" />
+            <span className="h-3 w-3 rounded-full bg-[oklch(0.78_0.16_145)]" />
+            <div className="ml-4 flex items-center gap-2 text-sm text-foreground/80">
+              <span className="inline-flex flex-col gap-[3px]">
+                <span className="block h-[2px] w-4 bg-foreground/60 rounded" />
+                <span className="block h-[2px] w-4 bg-foreground/60 rounded" />
+                <span className="block h-[2px] w-4 bg-foreground/60 rounded" />
+              </span>
+              All Mail
+            </div>
+          </div>
+          {/* Rows */}
+          <div className="divide-y divide-border/60">
+            {rows.map((r, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6 + i * 0.08 }}
+                className={`grid grid-cols-12 items-center gap-3 px-5 py-3 text-sm ${
+                  r.active ? "bg-muted/60" : "hover:bg-muted/40"
+                }`}
+              >
+                <div className="col-span-3 flex items-center gap-3 min-w-0">
+                  <span className="h-2 w-2 rounded-full bg-primary-glow shrink-0" />
+                  <span className="font-medium text-foreground truncate">{r.from}</span>
+                </div>
+                <div className="col-span-6 flex items-center gap-2 min-w-0">
+                  <span className="font-medium text-foreground truncate">{r.subject}</span>
+                  <span className="text-muted-foreground truncate hidden md:inline">{r.preview}</span>
+                </div>
+                <div className="col-span-3 flex items-center justify-end gap-3">
+                  <span className="rounded-md bg-[color:var(--pink-wash)] text-foreground/80 text-xs px-2 py-0.5">
+                    {r.tag}
+                  </span>
+                  <span className="text-xs text-muted-foreground">{r.time}</span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
+function Logos() {
+  const logos = ["Northwind", "Acme", "Monolith", "Lumen", "Stellar", "Zephyr"];
+  return (
+    <section className="border-t border-border/60">
+      <div className="max-w-7xl mx-auto px-6 py-14">
         <p className="text-center text-xs uppercase tracking-[0.18em] text-muted-foreground">
-          Trusted by product teams everywhere
+          Loved by people at fast-moving teams
         </p>
-        <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 items-center">
+        <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 items-center">
           {logos.map((l, i) => (
             <motion.div
               key={l}
               initial={{ opacity: 0 }}
-              whileInView={{ opacity: 0.7 }}
+              whileInView={{ opacity: 0.55 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="text-center text-lg font-semibold tracking-tight text-foreground/70"
+              className="text-center text-base font-semibold tracking-tight text-foreground"
             >
               {l}
             </motion.div>
@@ -236,12 +209,12 @@ function Logos() {
 }
 
 const features = [
-  { icon: Wand2, title: "AI-native canvas", desc: "Sketch a workflow in plain English and watch it assemble itself — nodes, logic and integrations." },
-  { icon: Zap, title: "Real-time execution", desc: "Every change runs instantly. No deploys, no waiting, no broken staging environments." },
-  { icon: BarChart3, title: "Insights built-in", desc: "Track every run, surface anomalies, and learn what your workflows are actually doing." },
-  { icon: Shield, title: "Enterprise-grade", desc: "SOC2, SSO, granular roles and audit logs from day one — not an afterthought." },
-  { icon: Workflow, title: "200+ integrations", desc: "Connect the tools your team already loves. New connectors ship every week." },
-  { icon: Sparkles, title: "Agents you can trust", desc: "Bring your own model or use ours. Guardrails and human-in-the-loop are first-class." },
+  { icon: Sparkles, title: "Drafts in your voice", desc: "Slashy studies the way you write and proposes replies that actually sound like you." },
+  { icon: Inbox, title: "Auto-organized inbox", desc: "Newsletters, receipts, and noise are quietly tucked away so only what matters stays in view." },
+  { icon: Bot, title: "Background agents", desc: "Schedule meetings, summarize threads, and follow up — without lifting a finger." },
+  { icon: Search, title: "Ask your inbox", desc: "Search like you think. Find any email, attachment, or detail with a single question." },
+  { icon: Zap, title: "Faster than zero", desc: "Built on a blazing-fast client that opens, scrolls, and searches instantly." },
+  { icon: Shield, title: "Private by default", desc: "End-to-end encrypted. We never train on your mail — your inbox stays yours." },
 ];
 
 function Features() {
@@ -253,15 +226,13 @@ function Features() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7 }}
-          className="max-w-2xl"
+          className="max-w-2xl mx-auto text-center"
         >
-          <p className="text-sm text-primary font-medium">Features</p>
-          <h2 className="mt-3 text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
-            Everything you need to ship,
-            <br /> nothing you don't.
+          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
+            Email that thinks ahead.
           </h2>
-          <p className="mt-4 text-muted-foreground">
-            Slashy replaces the messy stack of glue scripts, point tools and copy-pasted prompts with a single, beautiful surface.
+          <p className="mt-4 text-muted-foreground text-lg">
+            A quiet, intelligent layer over your inbox — no plug-ins, no extra apps, no learning curve.
           </p>
         </motion.div>
 
@@ -274,15 +245,10 @@ function Features() {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ delay: i * 0.06, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               whileHover={{ y: -4 }}
-              className="group relative rounded-2xl border border-border/70 bg-card p-6 transition-shadow hover:shadow-[var(--shadow-card)]"
+              className="group relative rounded-2xl border border-border bg-card p-7 transition-shadow hover:shadow-[var(--shadow-card)]"
             >
-              <div
-                aria-hidden
-                className="absolute inset-x-0 top-0 h-px opacity-0 group-hover:opacity-100 transition-opacity"
-                style={{ background: "var(--gradient-primary)" }}
-              />
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[image:var(--gradient-primary)] text-primary-foreground">
-                <f.icon className="h-5 w-5" />
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-muted text-foreground">
+                <f.icon className="h-5 w-5" strokeWidth={1.75} />
               </span>
               <h3 className="mt-5 text-lg font-semibold text-foreground tracking-tight">{f.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
@@ -296,21 +262,21 @@ function Features() {
 
 function HowItWorks() {
   const steps = [
-    { n: "01", t: "Describe it", d: "Type what you want your workflow to do. Slashy turns it into a runnable canvas." },
-    { n: "02", t: "Refine on the canvas", d: "Drag, tweak and chain steps visually. Every change is live." },
-    { n: "03", t: "Ship & monitor", d: "Publish in one click. Get real-time insights into every run." },
+    { n: "01", t: "Connect your inbox", d: "Sign in with Gmail or Outlook. Slashy is live in seconds, no migration required." },
+    { n: "02", t: "It learns your voice", d: "Slashy quietly studies how you write and what you care about — privately, on your account." },
+    { n: "03", t: "Reach inbox zero", d: "Triage, drafts, and follow-ups happen in the background. You just review and send." },
   ];
   return (
-    <section id="how" className="relative py-28 bg-muted/30 border-y border-border/60">
+    <section id="how" className="relative py-28 bg-muted/40 border-y border-border/60">
       <div className="max-w-7xl mx-auto px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground max-w-xl"
+          className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground max-w-2xl mx-auto text-center"
         >
-          From idea to running workflow in three steps.
+          From signed-in to inbox zero in three steps.
         </motion.h2>
         <div className="mt-14 grid md:grid-cols-3 gap-6">
           {steps.map((s, i) => (
@@ -320,9 +286,9 @@ function HowItWorks() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="relative rounded-2xl bg-card border border-border/70 p-7"
+              className="relative rounded-2xl bg-card border border-border p-7"
             >
-              <span className="text-sm font-mono text-primary">{s.n}</span>
+              <span className="text-sm font-mono text-muted-foreground">{s.n}</span>
               <h3 className="mt-3 text-xl font-semibold tracking-tight text-foreground">{s.t}</h3>
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{s.d}</p>
             </motion.div>
