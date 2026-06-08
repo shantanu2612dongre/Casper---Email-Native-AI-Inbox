@@ -117,7 +117,7 @@ function InboxMockup() {
     <motion.div
       initial={{ opacity: 0, y: 60, rotateX: 8 }}
       animate={{ opacity: 1, y: 0, rotateX: 0 }}
-      transition={{ delay: 0.4, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ delay: 0.4, duration: 1, ease: "easeOut" }}
       style={{ perspective: 1400 }}
       className="relative mx-auto mt-20 max-w-5xl"
     >
