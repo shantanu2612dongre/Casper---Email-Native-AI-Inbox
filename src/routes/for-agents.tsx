@@ -285,11 +285,12 @@ function CodeBlock() {
 function CTA() {
   return (
     <section className="py-24">
-      <motion.div
-        variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
-        className="max-w-5xl mx-auto mx-6 rounded-3xl border border-border bg-card p-12 text-center"
-        style={{ background: "var(--gradient-hero)" }}
-      >
+      <div className="max-w-5xl mx-auto px-6">
+        <motion.div
+          variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
+          className="rounded-3xl border border-border p-12 text-center"
+          style={{ background: "var(--gradient-hero)" }}
+        >
         <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
           Give your agents an inbox.
         </h2>
@@ -301,7 +302,8 @@ function CTA() {
             Get Started for Free <ArrowRight className="h-4 w-4" />
           </a>
         </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }

@@ -40,7 +40,7 @@ function Nav() {
         <div className="hidden md:flex items-center gap-10 text-sm text-foreground/80">
           <a href="/#pricing" className="hover:text-foreground transition-colors">Pricing</a>
           <a href="/enterprise" className="text-foreground">Enterprise</a>
-          <a href="/#security" className="hover:text-foreground transition-colors">Security</a>
+          <a href="/for-agents" className="hover:text-foreground transition-colors">For Agents</a>
           <a href="/#about" className="hover:text-foreground transition-colors">About</a>
         </div>
         <div className="flex items-center gap-5">
