@@ -6,9 +6,9 @@ import { Lock, ShieldCheck, Sparkles, BadgeCheck, FlaskConical, Trash2, Plus, Mi
 export const Route = createFileRoute("/enterprise")({
   head: () => ({
     meta: [
-      { title: "Enterprise — Slashy" },
+      { title: "Enterprise — Casper" },
       { name: "description", content: "Powerful, secure email for modern teams. SOC 2 Type II, encryption everywhere, and no AI training on your data." },
-      { property: "og:title", content: "Slashy for Enterprise" },
+      { property: "og:title", content: "Casper for Enterprise" },
       { property: "og:description", content: "Enterprise-grade security, compliance, and control for your team's inbox." },
     ],
   }),
@@ -35,7 +35,7 @@ function Nav() {
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="/" className="flex items-center gap-2 font-semibold text-foreground tracking-tight text-xl">
           <span aria-hidden className="inline-block h-5 w-7 rounded-sm" style={{ background: "var(--gradient-primary)" }} />
-          Slashy
+          Casper
         </a>
         <div className="hidden md:flex items-center gap-10 text-sm text-foreground/80">
           <a href="/#pricing" className="hover:text-foreground transition-colors">Pricing</a>
@@ -126,7 +126,7 @@ function Security() {
 
 const testimonials = [
   { name: "Daniel", role: "Investor, Sierra Ventures", quote: "It's like having an EA who's always one step ahead. I'm walking to a meeting, text 'what do we know about this person,' and the full context shows up immediately." },
-  { name: "Priya", role: "COO, Northwind", quote: "Slashy quietly handles 80% of my inbox. I get to focus on the conversations that actually move the company." },
+  { name: "Priya", role: "COO, Northwind", quote: "Casper quietly handles 80% of my inbox. I get to focus on the conversations that actually move the company." },
   { name: "Marcus", role: "Founder, Lumen Labs", quote: "The drafts sound exactly like me. My team had no idea until I told them." },
 ];
 
@@ -170,10 +170,10 @@ function Testimonials() {
 }
 
 const faqs = [
-  { q: "What security certifications does Slashy have?", a: "Slashy is SOC 2 Type II certified and CASA Tier 2 audited. We undergo independent penetration tests every six months." },
+  { q: "What security certifications does Casper have?", a: "Casper is SOC 2 Type II certified and CASA Tier 2 audited. We undergo independent penetration tests every six months." },
   { q: "Do you use customer data to train AI models?", a: "Never. Your email content is never used to train our models, and our AI providers contractually guarantee zero data retention." },
   { q: "How is my data encrypted?", a: "All data is encrypted in transit using TLS 1.3+ and at rest with AES-256. Encryption keys are rotated regularly." },
-  { q: "How does Slashy access my email?", a: "Slashy connects via secure OAuth tokens with the minimum scopes required. You can revoke access at any time." },
+  { q: "How does Casper access my email?", a: "Casper connects via secure OAuth tokens with the minimum scopes required. You can revoke access at any time." },
   { q: "What control do I have over my data?", a: "Full control. Export anytime, delete on request within 24 hours, and backups are destroyed within 7 days." },
   { q: "Can we get a Data Processing Agreement (DPA)?", a: "Yes. We provide a standard DPA for all Enterprise customers. Contact sales to receive a copy." },
 ];
@@ -238,7 +238,7 @@ function Footer() {
           <div>
             <a href="/" className="flex items-center gap-2 font-semibold text-foreground tracking-tight text-xl">
               <span aria-hidden className="inline-block h-5 w-7 rounded-sm" style={{ background: "var(--gradient-primary)" }} />
-              Slashy
+              Casper
             </a>
             <p className="mt-4 text-sm text-muted-foreground max-w-xs leading-relaxed">
               The intelligent inbox that learns your voice and handles the busywork.
@@ -258,7 +258,7 @@ function Footer() {
           ))}
         </div>
         <div className="mt-14 pt-8 border-t border-border/60 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-          <div>© {new Date().getFullYear()} Slashy, Inc. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} Casper, Inc. All rights reserved.</div>
           <div className="flex items-center gap-6">
             <a href="#" className="hover:text-foreground transition-colors">Twitter</a>
             <a href="#" className="hover:text-foreground transition-colors">LinkedIn</a>

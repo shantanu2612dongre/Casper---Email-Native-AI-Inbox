@@ -5,10 +5,10 @@ import { Plug, Zap, Lock, Code2, Workflow, Boxes, ArrowRight, Check } from "luci
 export const Route = createFileRoute("/for-agents")({
   head: () => ({
     meta: [
-      { title: "For Agents — Slashy" },
-      { name: "description", content: "Your inbox, now a tool call. Connect once and use Slashy from Claude, ChatGPT, Cursor, or any agent via MCP." },
-      { property: "og:title", content: "Slashy for Agents" },
-      { property: "og:description", content: "Connect once. Use Slashy from any agent." },
+      { title: "For Agents — Casper" },
+      { name: "description", content: "Your inbox, now a tool call. Connect once and use Casper from Claude, ChatGPT, Cursor, or any agent via MCP." },
+      { property: "og:title", content: "Casper for Agents" },
+      { property: "og:description", content: "Connect once. Use Casper from any agent." },
     ],
   }),
   component: ForAgentsPage,
@@ -34,7 +34,7 @@ function Nav() {
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="/" className="flex items-center gap-2 font-semibold text-foreground tracking-tight text-xl">
           <span aria-hidden className="inline-block h-5 w-7 rounded-sm" style={{ background: "var(--gradient-primary)" }} />
-          Slashy
+          Casper
         </a>
         <div className="hidden md:flex items-center gap-10 text-sm text-foreground/80">
           <a href="/#pricing" className="hover:text-foreground transition-colors">Pricing</a>
@@ -56,7 +56,7 @@ function Nav() {
 function Hero() {
   return (
     <section className="relative overflow-hidden">
-      {/* Soft sunrise wash, echoing the Slashy palette */}
+      {/* Soft sunrise wash, echoing the Casper palette */}
       <div
         aria-hidden
         className="absolute inset-0 -z-10 opacity-80"
@@ -83,7 +83,7 @@ function Hero() {
           variants={fadeUp} initial="hidden" animate="show" custom={2}
           className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
         >
-          Connect once. Use Slashy from Claude, ChatGPT, Cursor — or any agent that speaks MCP.
+          Connect once. Use Casper from Claude, ChatGPT, Cursor — or any agent that speaks MCP.
         </motion.p>
         <motion.div
           variants={fadeUp} initial="hidden" animate="show" custom={3}
@@ -126,7 +126,7 @@ function Hero() {
               </div>
             </div>
             <div className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
-              <Plug className="h-3.5 w-3.5" /> Connected to <span className="text-foreground font-medium">slashy.inbox</span>
+              <Plug className="h-3.5 w-3.5" /> Connected to <span className="text-foreground font-medium">casper.inbox</span>
             </div>
           </div>
         </motion.div>
@@ -177,7 +177,7 @@ function Capabilities() {
             One inbox. Every agent.
           </h2>
           <p className="mt-4 text-muted-foreground text-lg">
-            Slashy turns your email into a first-class surface for AI agents — with the safety rails to actually let them act.
+            Casper turns your email into a first-class surface for AI agents — with the safety rails to actually let them act.
           </p>
         </motion.div>
 
@@ -203,7 +203,7 @@ function Capabilities() {
 
 function HowItWorks() {
   const steps = [
-    { n: "01", t: "Connect your inbox", d: "Authorize Slashy with Gmail in one click. No mailbox copy, no exports." },
+    { n: "01", t: "Connect your inbox", d: "Authorize Casper with Gmail in one click. No mailbox copy, no exports." },
     { n: "02", t: "Add the MCP endpoint", d: "Paste a single URL into Claude, Cursor or your own agent runtime." },
     { n: "03", t: "Let agents act", d: "Triage, reply, schedule and follow up — under scopes you control." },
   ];
@@ -243,7 +243,7 @@ function CodeBlock() {
             A tool call, not a SDK.
           </h2>
           <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
-            Slashy speaks MCP out of the box. Point any compliant client at the endpoint and the tools show up — typed, documented, ready.
+            Casper speaks MCP out of the box. Point any compliant client at the endpoint and the tools show up — typed, documented, ready.
           </p>
           <ul className="mt-6 space-y-3 text-sm text-foreground/90">
             {["Typed schemas for every action", "Streaming results for long lists", "Per-agent rate limits & audit log"].map((x) => (
@@ -267,8 +267,8 @@ function CodeBlock() {
           <pre className="p-6 text-[13px] leading-relaxed text-white/90 overflow-x-auto">
 {`{
   "mcpServers": {
-    "slashy": {
-      "url": "https://mcp.slashy.com/v1",
+    "casper": {
+      "url": "https://mcp.casper.com/v1",
       "headers": {
         "Authorization": "Bearer sk_live_••••"
       }
@@ -322,7 +322,7 @@ function Footer() {
           <div>
             <a href="/" className="flex items-center gap-2 font-semibold text-foreground tracking-tight text-xl">
               <span aria-hidden className="inline-block h-5 w-7 rounded-sm" style={{ background: "var(--gradient-primary)" }} />
-              Slashy
+              Casper
             </a>
             <p className="mt-4 text-sm text-muted-foreground max-w-xs leading-relaxed">
               The intelligent inbox that learns your voice and handles the busywork.
@@ -340,7 +340,7 @@ function Footer() {
           ))}
         </div>
         <div className="mt-14 pt-8 border-t border-border/60 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-          <div>© {new Date().getFullYear()} Slashy, Inc. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} Casper, Inc. All rights reserved.</div>
           <div className="flex items-center gap-6">
             <a href="#" className="hover:text-foreground transition-colors">Twitter</a>
             <a href="#" className="hover:text-foreground transition-colors">LinkedIn</a>
