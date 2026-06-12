@@ -5,9 +5,9 @@ import { Inbox, Sparkles, Zap, Shield, Search, Bot, Check, Star } from "lucide-r
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Slashy — The Intelligent Inbox" },
-      { name: "description", content: "Slashy learns how you write, drafts your replies, and handles the busywork — so you can focus on what matters." },
-      { property: "og:title", content: "Slashy — The Intelligent Inbox" },
+      { title: "Casper — The Intelligent Inbox" },
+      { name: "description", content: "Casper learns how you write, drafts your replies, and handles the busywork — so you can focus on what matters." },
+      { property: "og:title", content: "Casper — The Intelligent Inbox" },
       { property: "og:description", content: "An AI inbox that learns your voice and handles the busywork." },
     ],
   }),
@@ -38,7 +38,7 @@ function Nav() {
             className="inline-block h-5 w-7 rounded-sm"
             style={{ background: "var(--gradient-primary)" }}
           />
-          Slashy
+          Casper
         </a>
         <div className="hidden md:flex items-center gap-10 text-sm text-foreground/80">
           <a href="#pricing" className="hover:text-foreground transition-colors">Pricing</a>
@@ -81,7 +81,7 @@ function Hero() {
           custom={1}
           className="mx-auto mt-6 max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed"
         >
-          Slashy learns how you write, drafts your replies, and handles the busywork, so you can focus on what matters.
+          Casper learns how you write, drafts your replies, and handles the busywork, so you can focus on what matters.
         </motion.p>
 
         <motion.div
@@ -209,7 +209,7 @@ function Logos() {
 }
 
 const features = [
-  { icon: Sparkles, title: "Drafts in your voice", desc: "Slashy studies the way you write and proposes replies that actually sound like you." },
+  { icon: Sparkles, title: "Drafts in your voice", desc: "Casper studies the way you write and proposes replies that actually sound like you." },
   { icon: Inbox, title: "Auto-organized inbox", desc: "Newsletters, receipts, and noise are quietly tucked away so only what matters stays in view." },
   { icon: Bot, title: "Background agents", desc: "Schedule meetings, summarize threads, and follow up — without lifting a finger." },
   { icon: Search, title: "Ask your inbox", desc: "Search like you think. Find any email, attachment, or detail with a single question." },
@@ -262,8 +262,8 @@ function Features() {
 
 function HowItWorks() {
   const steps = [
-    { n: "01", t: "Connect your inbox", d: "Sign in with Gmail or Outlook. Slashy is live in seconds, no migration required." },
-    { n: "02", t: "It learns your voice", d: "Slashy quietly studies how you write and what you care about — privately, on your account." },
+    { n: "01", t: "Connect your inbox", d: "Sign in with Gmail or Outlook. Casper is live in seconds, no migration required." },
+    { n: "02", t: "It learns your voice", d: "Casper quietly studies how you write and what you care about — privately, on your account." },
     { n: "03", t: "Reach inbox zero", d: "Triage, drafts, and follow-ups happen in the background. You just review and send." },
   ];
   return (
@@ -305,7 +305,7 @@ function Pricing() {
       name: "Starter",
       price: "$0",
       sub: "Free forever",
-      features: ["1 workspace", "5 active workflows", "Community support", "Slashy AI starter"],
+      features: ["1 workspace", "5 active workflows", "Community support", "Casper AI starter"],
       cta: "Start free",
       featured: false,
     },
@@ -405,7 +405,7 @@ function CTA() {
             Ready to build something delightful?
           </h2>
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-            Join thousands of teams using Slashy to ship workflows their customers love.
+            Join thousands of teams using Casper to ship workflows their customers love.
           </p>
           <div className="mt-8 flex items-center justify-center gap-3">
             <a
@@ -435,7 +435,7 @@ function Footer() {
           <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-[image:var(--gradient-primary)] text-primary-foreground">
             <Sparkles className="h-3.5 w-3.5" />
           </span>
-          <span className="font-semibold text-foreground">slashy</span>
+          <span className="font-semibold text-foreground">casper</span>
           <span>© {new Date().getFullYear()}</span>
         </div>
         <div className="flex items-center gap-6">
