@@ -284,27 +284,135 @@ function CodeBlock() {
 
 function CTA() {
   return (
-    <section className="py-24">
-      <div className="max-w-5xl mx-auto px-6">
-        <motion.div
+    <section className="relative overflow-hidden pt-28 pb-0">
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-20"
+        style={{
+          background:
+            "linear-gradient(180deg, #ffffff 0%, #f4f7ff 25%, #e3ecff 55%, #c9ddff 85%, #b6d2ff 100%)",
+        }}
+      />
+      <Cloud className="left-[6%] top-[18%] w-40 opacity-70" delay={0} />
+      <Cloud className="left-[78%] top-[10%] w-28 opacity-60" delay={1.2} />
+      <Cloud className="left-[68%] top-[34%] w-36 opacity-55" delay={0.6} />
+      <Cloud className="left-[14%] top-[42%] w-24 opacity-50" delay={1.8} />
+      <Birds className="left-[82%] top-[26%]" />
+
+      <div className="relative max-w-5xl mx-auto px-6 text-center">
+        <motion.h2
           variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
-          className="rounded-3xl border border-border p-12 text-center"
-          style={{ background: "var(--gradient-hero)" }}
+          className="text-5xl md:text-7xl font-semibold tracking-tight"
+          style={{ color: "oklch(0.32 0.18 270)" }}
         >
-        <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
-          Give your agents an inbox.
-        </h2>
-        <p className="mt-4 text-foreground/80 max-w-xl mx-auto">
-          Free to start. Bring your own model. Cancel anytime.
-        </p>
-        <div className="mt-8 flex justify-center">
-          <a href="#" className="inline-flex items-center gap-2 rounded-lg bg-foreground text-background px-5 py-3 text-sm font-medium hover:opacity-90 transition-opacity">
-            Get Started for Free <ArrowRight className="h-4 w-4" />
+          Regain focus
+        </motion.h2>
+        <motion.p
+          variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={1}
+          className="mt-5 text-lg md:text-xl text-foreground/70 max-w-xl mx-auto"
+        >
+          Let Casper handle your inbox so you can focus on what matters most.
+        </motion.p>
+        <motion.div
+          variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={2}
+          className="mt-9 flex justify-center"
+        >
+          <a href="#" className="inline-flex items-center gap-2 rounded-full bg-white border border-white/80 px-6 py-3.5 text-sm font-medium text-foreground shadow-[0_10px_40px_-10px_rgba(80,100,200,0.35)] hover:shadow-[0_14px_50px_-10px_rgba(80,100,200,0.45)] transition-shadow">
+            <span className="grid place-items-center h-5 w-5 rounded-sm bg-gradient-to-br from-red-500 via-yellow-400 to-blue-500 text-[10px] font-bold text-white">M</span>
+            Get Started for Free
           </a>
-        </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
+          className="mt-20 mx-auto max-w-4xl rounded-t-2xl border border-white/70 bg-white/90 backdrop-blur overflow-hidden text-left"
+          style={{ boxShadow: "0 -10px 60px -20px rgba(80,100,200,0.35)" }}
+        >
+          <div className="flex items-center gap-3 px-4 py-2.5 border-b border-border/60 text-xs">
+            <span className="inline-flex items-center gap-1.5 font-semibold text-foreground">
+              <span className="h-3.5 w-3.5 rounded-sm" style={{ background: "var(--gradient-primary)" }} />
+              Casper Inbox
+            </span>
+            <div className="ml-2 flex-1 rounded-md bg-muted/60 px-2.5 py-1 text-muted-foreground">Search</div>
+          </div>
+          <div className="grid grid-cols-[160px_1fr]">
+            <aside className="border-r border-border/60 py-3 text-xs">
+              {["Inbox", "Needs Reply", "Follow Ups", "Starred", "Snoozed", "Sent", "Scheduled", "Drafts", "Spam", "Trash"].map((l, i) => (
+                <div key={l} className={`px-4 py-1.5 ${i === 0 ? "font-semibold text-foreground" : "text-muted-foreground"}`}>{l}</div>
+              ))}
+            </aside>
+            <div>
+              <div className="flex items-center gap-5 px-4 py-2.5 border-b border-border/60 text-xs">
+                <span className="font-semibold text-foreground border-b-2 border-foreground pb-1">Important <span className="text-muted-foreground font-normal">5</span></span>
+                <span className="text-muted-foreground">Needs Reply 2</span>
+                <span className="text-muted-foreground">Follow ups</span>
+                <span className="text-muted-foreground">Newsletters</span>
+                <span className="text-muted-foreground">VIP</span>
+                <span className="text-muted-foreground">Other</span>
+              </div>
+              {[
+                { who: "me, Jonathan", subj: "Does the Snooze mention go away after some time?", time: "12m" },
+                { who: "Me, Patryk, Louis", tag: "Draft", subj: "Coffee Machines", time: "1h" },
+                { who: "Romaine, Re...Jon", tag: "Follow Up", subj: "Casper + Anthropic - YC Credits", time: "3h" },
+                { who: "Arthur, Louis", subj: "Feedback Beta tester", time: "4:50 PM" },
+                { who: "me, Joseph, Patryk", tag: "Draft", subj: "Channels rules launch", time: "11:53 AM" },
+              ].map((r) => (
+                <div key={r.subj} className="grid grid-cols-[140px_90px_1fr_60px] gap-3 items-center px-4 py-2 border-b border-border/40 text-xs hover:bg-muted/30">
+                  <div className="truncate text-foreground/90">{r.who}</div>
+                  <div>{r.tag && <span className="rounded px-1.5 py-0.5 text-[10px] font-medium bg-muted text-foreground/80">{r.tag}</span>}</div>
+                  <div className="truncate text-foreground/80">{r.subj}</div>
+                  <div className="text-right text-muted-foreground">{r.time}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
+  );
+}
+
+function Cloud({ className = "", delay = 0 }: { className?: string; delay?: number }) {
+  return (
+    <motion.svg
+      aria-hidden
+      viewBox="0 0 200 80"
+      className={`absolute -z-10 ${className}`}
+      initial={{ x: -20 }}
+      animate={{ x: [0, 20, 0] }}
+      transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay }}
+    >
+      <defs>
+        <linearGradient id={`c${delay}`} x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
+          <stop offset="100%" stopColor="#e6c7e0" stopOpacity="0.9" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M30,55 C10,55 8,30 30,30 C32,12 60,12 64,28 C70,16 95,18 96,32 C115,28 122,52 102,55 Z"
+        fill={`url(#c${delay})`}
+      />
+    </motion.svg>
+  );
+}
+
+function Birds({ className = "" }: { className?: string }) {
+  return (
+    <motion.svg
+      aria-hidden
+      viewBox="0 0 120 40"
+      className={`absolute -z-10 w-20 text-foreground/40 ${className}`}
+      initial={{ x: 0, y: 0 }}
+      animate={{ x: [0, 12, 0], y: [0, -4, 0] }}
+      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+    >
+      {[10, 35, 60, 85].map((x, i) => (
+        <path key={i} d={`M${x},20 q5,-6 10,0 q5,-6 10,0`} stroke="currentColor" fill="none" strokeWidth="1.5" strokeLinecap="round" />
+      ))}
+    </motion.svg>
   );
 }
 
