@@ -59,10 +59,10 @@ function Hero() {
       {/* Soft sunrise wash, echoing the Casper palette */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 opacity-80"
+        className="absolute inset-0 -z-10"
         style={{
           background:
-            "radial-gradient(60% 50% at 50% 0%, oklch(0.92 0.08 60 / 0.9) 0%, oklch(0.97 0.04 30 / 0.6) 40%, transparent 70%), linear-gradient(180deg, oklch(0.98 0.02 280 / 0.6), transparent)",
+            "linear-gradient(135deg, oklch(0.95 0.045 55) 0%, oklch(0.94 0.04 35) 35%, oklch(0.9 0.06 340) 70%, oklch(0.85 0.08 300) 100%)",
         }}
       />
       <div className="relative max-w-5xl mx-auto px-6 pt-28 pb-20 text-center">
