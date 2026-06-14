@@ -154,9 +154,8 @@ function InboxMockup() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.6 + i * 0.08 }}
-                className={`grid grid-cols-12 items-center gap-3 px-5 py-3 text-sm ${
-                  r.active ? "bg-muted/60" : "hover:bg-muted/40"
-                }`}
+                className={`grid grid-cols-12 items-center gap-3 px-5 py-3 text-sm ${r.active ? "bg-muted/60" : "hover:bg-muted/40"
+                  }`}
               >
                 <div className="col-span-3 flex items-center gap-3 min-w-0">
                   <span className="h-2 w-2 rounded-full bg-primary-glow shrink-0" />
@@ -183,25 +182,61 @@ function InboxMockup() {
 
 function Logos() {
   const logos = ["Northwind", "Acme", "Monolith", "Lumen", "Stellar", "Zephyr"];
+  // Repeat the logos list multiple times so the track is wider than any viewport
+  const marqueeLogos = [...logos, ...logos, ...logos, ...logos];
   return (
-    <section className="border-t border-border/60">
-      <div className="max-w-7xl mx-auto px-6 py-14">
-        <p className="text-center text-xs uppercase tracking-[0.18em] text-muted-foreground">
+    <section className="border-t border-border/60 overflow-hidden">
+      <div className="py-14">
+        <p className="text-center text-xs uppercase tracking-[0.18em] text-muted-foreground px-6">
           Loved by people at fast-moving teams
         </p>
-        <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 items-center">
-          {logos.map((l, i) => (
+        <div className="relative mt-10 w-full overflow-hidden py-2">
+          {/* Edge fade gradients for premium aesthetic */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+
+          <div className="flex w-max">
+            {/* First sliding track */}
             <motion.div
-              key={l}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 0.55 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className="text-center text-base font-semibold tracking-tight text-foreground"
+              animate={{ x: ["0%", "-100%"] }}
+              transition={{
+                ease: "linear",
+                duration: 80,
+                repeat: Infinity,
+              }}
+              className="flex items-center gap-20 pr-20 shrink-0"
             >
-              {l}
+              {marqueeLogos.map((l, i) => (
+                <div
+                  key={`l1-${i}`}
+                  className="text-center text-lg font-semibold tracking-wider text-foreground/50 hover:text-foreground/80 transition-colors cursor-default select-none"
+                >
+                  {l}
+                </div>
+              ))}
             </motion.div>
-          ))}
+
+            {/* Second sliding track to maintain seamless loop */}
+            <motion.div
+              animate={{ x: ["0%", "-100%"] }}
+              transition={{
+                ease: "linear",
+                duration: 80,
+                repeat: Infinity,
+              }}
+              className="flex items-center gap-20 pr-20 shrink-0"
+              aria-hidden="true"
+            >
+              {marqueeLogos.map((l, i) => (
+                <div
+                  key={`l2-${i}`}
+                  className="text-center text-lg font-semibold tracking-wider text-foreground/50 hover:text-foreground/80 transition-colors cursor-default select-none"
+                >
+                  {l}
+                </div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
@@ -344,11 +379,10 @@ function Pricing() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.6 }}
-              className={`relative rounded-2xl border p-7 ${
-                p.featured
-                  ? "border-transparent bg-foreground text-background shadow-[var(--shadow-soft)]"
-                  : "border-border bg-card text-foreground"
-              }`}
+              className={`relative rounded-2xl border p-7 ${p.featured
+                ? "border-transparent bg-foreground text-background shadow-[var(--shadow-soft)]"
+                : "border-border bg-card text-foreground"
+                }`}
             >
               {p.featured && (
                 <span className="absolute -top-3 left-7 rounded-full bg-[image:var(--gradient-primary)] text-primary-foreground text-xs px-3 py-1">
@@ -370,11 +404,10 @@ function Pricing() {
               </ul>
               <a
                 href="#"
-                className={`mt-7 inline-flex w-full items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium transition-colors ${
-                  p.featured
-                    ? "bg-background text-foreground hover:bg-background/90"
-                    : "bg-foreground text-background hover:bg-foreground/90"
-                }`}
+                className={`mt-7 inline-flex w-full items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium transition-colors ${p.featured
+                  ? "bg-background text-foreground hover:bg-background/90"
+                  : "bg-foreground text-background hover:bg-foreground/90"
+                  }`}
               >
                 {p.cta}
               </a>
