@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { Inbox, Sparkles, Zap, Shield, Search, Bot, Check, Star } from "lucide-react";
+import { Inbox, Sparkles, Zap, Shield, Search, Bot, Check, Star, Linkedin, Twitter, Instagram, Youtube, Facebook, Mail } from "lucide-react";
+import { Footer } from "../components/Footer";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -181,19 +182,32 @@ function InboxMockup() {
 }
 
 function Logos() {
-  const logos = ["Northwind", "Acme", "Monolith", "Lumen", "Stellar", "Zephyr"];
+  const integrationLogos = [
+    { name: "Breezeway", domain: "breezeway.io" },
+    { name: "Stripe", domain: "stripe.com" },
+    { name: "Slack", domain: "slack.com" },
+    { name: "Intuit", domain: "intuit.com" },
+    { name: "Zapier", domain: "zapier.com" },
+    { name: "Ramp", domain: "ramp.com" },
+    { name: "Lodgify", domain: "lodgify.com" },
+    { name: "Hostaway", domain: "hostaway.com" },
+    { name: "Airbnb", domain: "airbnb.com" },
+    { name: "Vrbo", domain: "vrbo.com" },
+    { name: "Guesty", domain: "guesty.com" },
+    { name: "Hostfully", domain: "hostfully.com" },
+  ];
   // Repeat the logos list multiple times so the track is wider than any viewport
-  const marqueeLogos = [...logos, ...logos, ...logos, ...logos];
+  const marqueeLogos = [...integrationLogos, ...integrationLogos, ...integrationLogos, ...integrationLogos];
   return (
     <section className="border-t border-border/60 overflow-hidden">
       <div className="py-14">
         <p className="text-center text-xs uppercase tracking-[0.18em] text-muted-foreground px-6">
-          Loved by people at fast-moving teams
+          Your agents work across 200+ tools
         </p>
-        <div className="relative mt-10 w-full overflow-hidden py-2">
+        <div className="relative mt-10 w-full overflow-hidden py-4">
           {/* Edge fade gradients for premium aesthetic */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
           <div className="flex w-max">
             {/* First sliding track */}
@@ -206,13 +220,13 @@ function Logos() {
               }}
               className="flex items-center gap-20 pr-20 shrink-0"
             >
-              {marqueeLogos.map((l, i) => (
-                <div
+              {marqueeLogos.map((logo, i) => (
+                <img
                   key={`l1-${i}`}
-                  className="text-center text-lg font-semibold tracking-wider text-foreground/50 hover:text-foreground/80 transition-colors cursor-default select-none"
-                >
-                  {l}
-                </div>
+                  src={`https://logo.clearbit.com/${logo.domain}`}
+                  alt={logo.name}
+                  className="h-9 w-auto max-w-[140px] object-contain opacity-75 hover:opacity-100 dark:brightness-90 transition-all duration-300 pointer-events-none select-none"
+                />
               ))}
             </motion.div>
 
@@ -227,13 +241,13 @@ function Logos() {
               className="flex items-center gap-20 pr-20 shrink-0"
               aria-hidden="true"
             >
-              {marqueeLogos.map((l, i) => (
-                <div
+              {marqueeLogos.map((logo, i) => (
+                <img
                   key={`l2-${i}`}
-                  className="text-center text-lg font-semibold tracking-wider text-foreground/50 hover:text-foreground/80 transition-colors cursor-default select-none"
-                >
-                  {l}
-                </div>
+                  src={`https://logo.clearbit.com/${logo.domain}`}
+                  alt={logo.name}
+                  className="h-9 w-auto max-w-[140px] object-contain opacity-75 hover:opacity-100 dark:brightness-90 transition-all duration-300 pointer-events-none select-none"
+                />
               ))}
             </motion.div>
           </div>
@@ -460,27 +474,6 @@ function CTA() {
   );
 }
 
-function Footer() {
-  return (
-    <footer className="border-t border-border/60 py-10">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-        <div className="flex items-center gap-2">
-          <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-[image:var(--gradient-primary)] text-primary-foreground">
-            <Sparkles className="h-3.5 w-3.5" />
-          </span>
-          <span className="font-semibold text-foreground">casper</span>
-          <span>© {new Date().getFullYear()}</span>
-        </div>
-        <div className="flex items-center gap-6">
-          <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
-          <a href="#" className="hover:text-foreground transition-colors">Terms</a>
-          <a href="#" className="hover:text-foreground transition-colors">Status</a>
-          <a href="#" className="hover:text-foreground transition-colors">Twitter</a>
-        </div>
-      </div>
-    </footer>
-  );
-}
 
 function Index() {
   return (

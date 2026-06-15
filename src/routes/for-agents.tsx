@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { Plug, Zap, Lock, Code2, Workflow, Boxes, ArrowRight, Check } from "lucide-react";
+import { Footer } from "../components/Footer";
+
 
 export const Route = createFileRoute("/for-agents")({
   head: () => ({
@@ -416,49 +418,7 @@ function Birds({ className = "" }: { className?: string }) {
   );
 }
 
-function Footer() {
-  const cols = [
-    { title: "Product", links: ["Features", "Pricing", "Enterprise", "For Agents", "Changelog"] },
-    { title: "Company", links: ["About", "Careers", "Customers", "Press", "Contact"] },
-    { title: "Resources", links: ["Help Center", "Blog", "Guides", "API Docs", "Status"] },
-    { title: "Legal", links: ["Privacy", "Terms", "DPA", "Sub-processors", "Trust"] },
-  ];
-  return (
-    <footer className="border-t border-border/60 bg-muted/30">
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-[1.4fr_repeat(4,1fr)] gap-10">
-          <div>
-            <a href="/" className="flex items-center gap-2 font-semibold text-foreground tracking-tight text-xl">
-              <span aria-hidden className="inline-block h-5 w-7 rounded-sm" style={{ background: "var(--gradient-primary)" }} />
-              Casper
-            </a>
-            <p className="mt-4 text-sm text-muted-foreground max-w-xs leading-relaxed">
-              The intelligent inbox that learns your voice and handles the busywork.
-            </p>
-          </div>
-          {cols.map((c) => (
-            <div key={c.title}>
-              <div className="text-xs font-semibold uppercase tracking-wider text-foreground">{c.title}</div>
-              <ul className="mt-4 space-y-2.5">
-                {c.links.map((l) => (
-                  <li key={l}><a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{l}</a></li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <div className="mt-14 pt-8 border-t border-border/60 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-          <div>© {new Date().getFullYear()} Casper, Inc. All rights reserved.</div>
-          <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-foreground transition-colors">Twitter</a>
-            <a href="#" className="hover:text-foreground transition-colors">LinkedIn</a>
-            <a href="#" className="hover:text-foreground transition-colors">GitHub</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
+
 
 function ForAgentsPage() {
   return (
