@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Inbox, Sparkles, Zap, Shield, Search, Bot, Check, Star, Linkedin, Twitter, Instagram, Youtube, Facebook, Mail, Send, Clock, FileText, Trash2 } from "lucide-react";
+import { SiGooglecalendar, SiGmail } from "react-icons/si";
 import { Footer } from "../components/Footer";
 
 export const Route = createFileRoute("/")({
@@ -404,7 +406,266 @@ const features = [
   { icon: Shield, title: "Private by default", desc: "End-to-end encrypted. We never train on your mail — your inbox stays yours." },
 ];
 
+function FeatureAnimation({ activeFeature }: { activeFeature: number }) {
+  const animations = [
+    // Drafts in your voice
+    (
+      <div className="w-full h-full flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="relative"
+        >
+          <div className="bg-card border border-border rounded-2xl p-6 w-80 shadow-lg">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+                <Sparkles className="h-4 w-4 text-foreground" />
+              </div>
+              <span className="text-sm font-medium text-foreground">AI Draft</span>
+            </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="space-y-2"
+            >
+              <div className="h-2 bg-muted/30 rounded w-full" />
+              <div className="h-2 bg-muted/30 rounded w-5/6" />
+              <div className="h-2 bg-muted/30 rounded w-4/6" />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+              className="mt-4 text-xs text-muted-foreground italic"
+            >
+              "Sounds just like you..."
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+    ),
+    // Auto-organized inbox
+    (
+      <div className="w-full h-full flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="relative"
+        >
+          <div className="bg-card border border-border rounded-2xl p-4 w-72 shadow-lg">
+            <div className="space-y-2">
+              {[
+                { label: "Important", color: "bg-green-500/20" },
+                { label: "Newsletter", color: "bg-blue-500/20" },
+                { label: "Receipts", color: "bg-yellow-500/20" },
+              ].map((item, i) => (
+                <motion.div
+                  key={item.label}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: i * 0.15, duration: 0.4 }}
+                  className="flex items-center gap-3 p-2 rounded-lg bg-muted/30"
+                >
+                  <div className={`w-2 h-2 rounded-full ${item.color}`} />
+                  <span className="text-xs text-foreground">{item.label}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    ),
+    // Background agents
+    (
+      <div className="w-full h-full flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="relative"
+        >
+          <div className="bg-card border border-border rounded-2xl p-6 w-80 shadow-lg">
+            <div className="flex items-center justify-center gap-4">
+              {[
+                { icon: "📅", label: "Schedule" },
+                { icon: "📝", label: "Summarize" },
+                { icon: "✉️", label: "Follow-up" },
+              ].map((item, i) => (
+                <motion.div
+                  key={item.label}
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ delay: i * 0.2, duration: 0.5, type: "spring" }}
+                  className="flex flex-col items-center gap-2"
+                >
+                  <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-2xl">
+                    {item.icon}
+                  </div>
+                  <span className="text-[10px] text-muted-foreground">{item.label}</span>
+                </motion.div>
+              ))}
+            </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.5 }}
+              className="mt-4 text-center text-xs text-muted-foreground"
+            >
+              Running in background...
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+    ),
+    // Ask your inbox
+    (
+      <div className="w-full h-full flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="relative"
+        >
+          <div className="bg-card border border-border rounded-2xl p-6 w-80 shadow-lg">
+            <div className="flex items-center gap-2 bg-muted/30 rounded-lg px-4 py-3 mb-4">
+              <Search className="h-4 w-4 text-muted-foreground" />
+              <motion.span
+                initial={{ opacity: 0, width: 0 }}
+                animate={{ opacity: 1, width: "auto" }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+                className="text-sm text-foreground"
+              >
+                "Find receipts from last month"
+              </motion.span>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+              className="space-y-2"
+            >
+              <div className="p-3 rounded-lg bg-muted/20 border border-border/60">
+                <div className="text-xs font-medium text-foreground">Amazon Receipt</div>
+                <div className="text-[10px] text-muted-foreground">Dec 15, 2024</div>
+              </div>
+              <div className="p-3 rounded-lg bg-muted/20 border border-border/60">
+                <div className="text-xs font-medium text-foreground">Uber Receipt</div>
+                <div className="text-[10px] text-muted-foreground">Dec 12, 2024</div>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+    ),
+    // Faster than zero
+    (
+      <div className="w-full h-full flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="relative"
+        >
+          <div className="bg-card border border-border rounded-2xl p-6 w-80 shadow-lg">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <Zap className="h-6 w-6 text-yellow-500" />
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.3 }}
+                className="text-2xl font-bold text-foreground"
+              >
+                0.02s
+              </motion.span>
+            </div>
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: "100%" }}
+              transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
+              className="h-2 bg-gradient-to-r from-yellow-500 to-green-500 rounded-full"
+            />
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1, duration: 0.5 }}
+              className="mt-4 text-center text-xs text-muted-foreground"
+            >
+              Instant search & load
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+    ),
+    // Private by default
+    (
+      <div className="w-full h-full flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="relative"
+        >
+          <div className="bg-card border border-border rounded-2xl p-6 w-80 shadow-lg">
+            <div className="flex items-center justify-center mb-4">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.3, duration: 0.5, type: "spring" }}
+                className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center"
+              >
+                <Shield className="h-8 w-8 text-green-500" />
+              </motion.div>
+            </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+              className="space-y-2 text-center"
+            >
+              <div className="text-xs font-medium text-foreground">End-to-end encrypted</div>
+              <div className="text-[10px] text-muted-foreground">Your data never leaves your device</div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9, duration: 0.5 }}
+              className="mt-4 flex justify-center gap-1"
+            >
+              {["🔒", "🔒", "🔒"].map((lock, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 1 + i * 0.1, duration: 0.3 }}
+                  className="text-xl"
+                >
+                  {lock}
+                </motion.span>
+              ))}
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+    ),
+  ];
+
+  return animations[activeFeature];
+}
+
 function Features() {
+  const [activeFeature, setActiveFeature] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveFeature((prev) => (prev + 1) % features.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section id="features" className="relative py-28">
       <div className="max-w-7xl mx-auto px-6">
@@ -423,27 +684,153 @@ function Features() {
           </p>
         </motion.div>
 
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {features.map((f, i) => (
+        <div className="mt-14 grid md:grid-cols-2 gap-12 items-center">
+          {/* Left side - Feature list */}
+          <div className="space-y-4">
+            {features.map((f, i) => (
+              <motion.div
+                key={f.title}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                onClick={() => setActiveFeature(i)}
+                className={`p-5 rounded-xl border cursor-pointer transition-all ${
+                  activeFeature === i
+                    ? "bg-card border-primary-glow/50 shadow-lg"
+                    : "bg-card/50 border-border/60 hover:border-border hover:bg-card"
+                }`}
+              >
+                <div className="flex items-start gap-4">
+                  <span
+                    className={`inline-flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
+                      activeFeature === i ? "bg-primary-glow/20 text-primary-glow" : "bg-muted text-foreground"
+                    }`}
+                  >
+                    <f.icon className="h-5 w-5" strokeWidth={1.75} />
+                  </span>
+                  <div className="flex-1">
+                    <h3 className="text-base font-semibold text-foreground tracking-tight">{f.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Right side - Animation box */}
+          <div className="relative">
             <motion.div
-              key={f.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ delay: i * 0.06, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ y: -4 }}
-              className="group relative rounded-2xl border border-border bg-card p-7 transition-shadow hover:shadow-[var(--shadow-card)]"
+              key={activeFeature}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="bg-gradient-to-br from-muted/20 to-card border border-border/60 rounded-3xl p-8 min-h-[400px] flex items-center justify-center shadow-xl"
             >
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-muted text-foreground">
-                <f.icon className="h-5 w-5" strokeWidth={1.75} />
-              </span>
-              <h3 className="mt-5 text-lg font-semibold text-foreground tracking-tight">{f.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
+              <FeatureAnimation activeFeature={activeFeature} />
             </motion.div>
-          ))}
+          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function OrbitalAnimation() {
+  const apps = [
+    {
+      name: "Gmail",
+      logo: (
+        <svg viewBox="0 0 24 24" className="w-8 h-8">
+          <path fill="#EA4335" d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+        </svg>
+      ),
+    },
+    {
+      name: "Outlook",
+      logo: (
+        <svg viewBox="0 0 24 24" className="w-8 h-8">
+          <path fill="#0078D4" d="M19.5 3h-15C3.1 3 2 4.1 2 5.5v13C2 19.9 3.1 21 4.5 21h15c1.4 0 2.5-1.1 2.5-2.5v-13C22 4.1 20.9 3 19.5 3zm-15 2h15c.3 0 .5.2.5.5v6.5l-2.5-2-3.5 3-3.5-3-2.5 2V5.5c0-.3.2-.5.5-.5zm15 14h-15c-.3 0-.5-.2-.5-.5v-5.5l2.5-2 3.5 3 3.5-3 2.5 2v5.5c0 .3-.2.5-.5.5z"/>
+        </svg>
+      ),
+    },
+    {
+      name: "Calendar",
+      logo: (
+        <svg viewBox="0 0 24 24" className="w-8 h-8">
+          <path fill="#4285F4" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/>
+        </svg>
+      ),
+    },
+    {
+      name: "HubSpot",
+      logo: (
+        <svg viewBox="0 0 24 24" className="w-8 h-8">
+          <path fill="#FF7A59" d="M18.164 7.93V5.086a2.572 2.572 0 0 0-2.572-2.572H8.408a2.572 2.572 0 0 0-2.572 2.572v2.844a2.572 2.572 0 0 0 0 5.14v2.844a2.572 2.572 0 0 0 2.572 2.572h7.184a2.572 2.572 0 0 0 2.572-2.572v-2.844a2.572 2.572 0 0 0 0-5.14zM8.408 4.514h7.184a1.572 1.572 0 0 1 1.572 1.572v1.844H6.836V6.086a1.572 1.572 0 0 1 1.572-1.572zm7.184 10.972H8.408a1.572 1.572 0 0 1-1.572-1.572v-1.844h10.328v1.844a1.572 1.572 0 0 1-1.572 1.572zm1.572-4.416H6.836v-3.072h10.328v3.072z"/>
+        </svg>
+      ),
+    },
+  ];
+
+  return (
+    <div className="relative w-full h-full flex items-center justify-center">
+      {/* Central Casper text */}
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="relative z-10 bg-card border border-border rounded-full px-6 py-3 shadow-lg"
+      >
+        <span className="text-lg font-semibold tracking-tight text-foreground">Casper</span>
+      </motion.div>
+
+      {/* Orbiting apps */}
+      {apps.map((app, i) => {
+        const angle = (i * 90) * (Math.PI / 180);
+        const radius = 70;
+        
+        return (
+          <motion.div
+            key={app.name}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: i * 0.1 + 0.3, duration: 0.5 }}
+            className="absolute"
+            style={{
+              width: 40,
+              height: 40,
+            }}
+          >
+            <motion.div
+              animate={{
+                rotate: 360,
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              style={{
+                transformOrigin: "center center",
+              }}
+              className="w-full h-full"
+            >
+              <motion.div
+                style={{
+                  x: Math.cos(angle) * radius,
+                  y: Math.sin(angle) * radius,
+                }}
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+              >
+                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md">
+                  {app.logo}
+                </div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        );
+      })}
+    </div>
   );
 }
 
@@ -454,7 +841,7 @@ function HowItWorks() {
     { n: "03", t: "Reach inbox zero", d: "Triage, drafts, and follow-ups happen in the background. You just review and send." },
   ];
   return (
-    <section id="how" className="relative py-28 bg-muted/40 border-y border-border/60">
+    <section id="how" className="relative py-28">
       <div className="max-w-7xl mx-auto px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -473,11 +860,54 @@ function HowItWorks() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="relative rounded-2xl bg-card border border-border p-7"
+              className="relative rounded-2xl bg-card border border-border p-10 min-h-[400px] flex flex-col"
             >
               <span className="text-sm font-mono text-muted-foreground">{s.n}</span>
               <h3 className="mt-3 text-xl font-semibold tracking-tight text-foreground">{s.t}</h3>
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{s.d}</p>
+              <div className="mt-auto pt-8">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 + 0.3, duration: 0.6 }}
+                  className="h-32 bg-muted/30 rounded-lg flex items-center justify-center relative"
+                >
+                  {i === 0 && <OrbitalAnimation />}
+                  {i === 1 && (
+                    <motion.div
+                      animate={{ 
+                        y: [0, -10, 0],
+                        opacity: [0.5, 1, 0.5]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      className="text-4xl"
+                    >
+                      🧠
+                    </motion.div>
+                  )}
+                  {i === 2 && (
+                    <motion.div
+                      animate={{ 
+                        y: [0, -10, 0],
+                        opacity: [0.5, 1, 0.5]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      className="text-4xl"
+                    >
+                      ✨
+                    </motion.div>
+                  )}
+                </motion.div>
+              </div>
             </motion.div>
           ))}
         </div>
