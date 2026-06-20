@@ -30,7 +30,7 @@ export function Footer() {
            
 
             {/* App Store / Google Play Buttons */}
-            <div className="flex flex-wrap items-center gap-3">
+            {/* <div className="flex flex-wrap items-center gap-3">
               <a
                 href="#"
                 className="flex items-center gap-2.5 rounded-lg bg-black border border-zinc-850 px-3.5 py-1.5 text-white hover:bg-zinc-900 transition-colors w-max"
@@ -59,10 +59,11 @@ export function Footer() {
                   <div className="text-xs font-semibold mt-0.5 leading-none">Google Play</div>
                 </div>
               </a>
-            </div>
+            </div> */}
 
             {/* Social List */}
             <div className="flex flex-col gap-2.5 text-sm text-muted-foreground mt-2">
+              <h4 className="text-sm font-semibold text-foreground tracking-tight">Socials</h4>
               <a href="https://linkedin.com/company/casper" target="_blank" rel="noreferrer" className="flex items-center gap-2.5 hover:text-foreground transition-colors">
                 <Linkedin className="h-4 w-4 shrink-0" />
                 <span>@casper-email</span>
