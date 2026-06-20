@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { Inbox, Sparkles, Zap, Shield, Search, Bot, Check, Star, Linkedin, Twitter, Instagram, Youtube, Facebook, Mail } from "lucide-react";
+import { Inbox, Sparkles, Zap, Shield, Search, Bot, Check, Star, Linkedin, Twitter, Instagram, Youtube, Facebook, Mail, Send, Clock, FileText, Trash2 } from "lucide-react";
 import { Footer } from "../components/Footer";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Casper — The Intelligent Inbox" },
+      { title: "Casper — The Copilot for Your Professional Relationships" },
       { name: "description", content: "Casper learns how you write, drafts your replies, and handles the busywork — so you can focus on what matters." },
-      { property: "og:title", content: "Casper — The Intelligent Inbox" },
+      { property: "og:title", content: "Casper — The Copilot for Your Professional Relationships" },
       { property: "og:description", content: "An AI inbox that learns your voice and handles the busywork." },
     ],
   }),
@@ -64,7 +64,8 @@ function Nav() {
 function Hero() {
   return (
     <section className="relative overflow-hidden">
-      <div className="relative max-w-6xl mx-auto px-6 pt-28 pb-16 text-center">
+      {/* Centered text container with readable max-width */}
+      <div className="relative max-w-4xl mx-auto px-6 pt-28 pb-10 text-center flex flex-col items-center">
         <motion.h1
           variants={fadeUp}
           initial="hidden"
@@ -72,7 +73,7 @@ function Hero() {
           custom={0}
           className="text-5xl md:text-7xl font-semibold tracking-tight text-foreground leading-[1.02]"
         >
-          The Intelligent Inbox.
+          The copilot for your professional relationships.
         </motion.h1>
 
         <motion.p
@@ -99,7 +100,10 @@ function Hero() {
             Get Started
           </a>
         </motion.div>
+      </div>
 
+      {/* Expanded Mockup Container - showing large visual product walkthrough */}
+      <div className="relative max-w-7xl mx-auto px-6 pb-24">
         <InboxMockup />
       </div>
     </section>
@@ -120,7 +124,7 @@ function InboxMockup() {
       animate={{ opacity: 1, y: 0, rotateX: 0 }}
       transition={{ delay: 0.4, duration: 1, ease: "easeOut" }}
       style={{ perspective: 1400 }}
-      className="relative mx-auto mt-20 max-w-5xl"
+      className="relative mx-auto mt-10 max-w-7xl"
     >
       <motion.div
         animate={{ y: [0, -8, 0] }}
@@ -131,49 +135,184 @@ function InboxMockup() {
           boxShadow: "var(--shadow-soft)",
         }}
       >
-        <div className="rounded-xl overflow-hidden bg-card border border-border/60">
+        <div className="rounded-xl overflow-hidden bg-card border border-border/60 flex flex-col h-[520px]">
           {/* Window chrome */}
-          <div className="flex items-center gap-2 px-4 py-3 border-b border-border/60">
-            <span className="h-3 w-3 rounded-full bg-[oklch(0.72_0.18_25)]" />
-            <span className="h-3 w-3 rounded-full bg-[oklch(0.82_0.14_85)]" />
-            <span className="h-3 w-3 rounded-full bg-[oklch(0.78_0.16_145)]" />
-            <div className="ml-4 flex items-center gap-2 text-sm text-foreground/80">
-              <span className="inline-flex flex-col gap-[3px]">
-                <span className="block h-[2px] w-4 bg-foreground/60 rounded" />
-                <span className="block h-[2px] w-4 bg-foreground/60 rounded" />
-                <span className="block h-[2px] w-4 bg-foreground/60 rounded" />
-              </span>
-              All Mail
+          <div className="flex items-center justify-between px-4 py-3 border-b border-border/60 bg-muted/20">
+            <div className="flex items-center gap-2">
+              <span className="h-3 w-3 rounded-full bg-[oklch(0.72_0.18_25)]" />
+              <span className="h-3 w-3 rounded-full bg-[oklch(0.82_0.14_85)]" />
+              <span className="h-3 w-3 rounded-full bg-[oklch(0.78_0.16_145)]" />
+              <div className="ml-4 flex items-center gap-2 text-xs font-medium text-foreground/70">
+                <Mail className="h-3.5 w-3.5" />
+                <span>Inbox</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 text-xs text-muted-foreground bg-background/50 border border-border/60 px-2.5 py-1 rounded-md max-w-xs w-48">
+              <Search className="h-3.5 w-3.5" />
+              <span>Search mail...</span>
             </div>
           </div>
-          {/* Rows */}
-          <div className="divide-y divide-border/60">
-            {rows.map((r, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.6 + i * 0.08 }}
-                className={`grid grid-cols-12 items-center gap-3 px-5 py-3 text-sm ${r.active ? "bg-muted/60" : "hover:bg-muted/40"
-                  }`}
+
+          {/* Panes */}
+          <div className="flex flex-1 min-h-0 divide-x divide-border/60">
+            {/* Sidebar */}
+            <aside className="hidden md:flex flex-col w-48 flex-shrink-0 bg-muted/10 py-3 text-xs">
+              <div className="px-3 mb-4">
+                <button className="w-full flex items-center justify-center gap-2 rounded-lg bg-foreground text-background py-2 font-medium hover:opacity-90 transition-opacity">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  <span>Compose</span>
+                </button>
+              </div>
+              <div className="space-y-1 px-2">
+                {[
+                  { icon: Inbox, label: "Inbox", count: 12, active: true },
+                  { icon: Clock, label: "Snoozed" },
+                  { icon: Send, label: "Sent" },
+                  { icon: FileText, label: "Drafts", count: 3 },
+                  { icon: Trash2, label: "Trash" },
+                ].map((item) => (
+                  <button
+                    key={item.label}
+                    className={`w-full flex items-center justify-between px-3 py-1.5 rounded-md font-medium transition-colors ${item.active
+                      ? "bg-muted text-foreground"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+                      }`}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <item.icon className="h-3.5 w-3.5" />
+                      <span>{item.label}</span>
+                    </div>
+                    {item.count && (
+                      <span className="text-[10px] bg-muted-foreground/10 px-1.5 py-0.5 rounded-full text-foreground/80">
+                        {item.count}
+                      </span>
+                    )}
+                  </button>
+                ))}
+              </div>
+              <div className="mt-6 px-4 text-[10px] font-semibold text-muted-foreground uppercase tracking-wider text-left">
+                AI Agents
+              </div>
+              <div className="mt-2 space-y-1 px-2">
+                {[
+                  { label: "Auto-Drafting", active: true },
+                  { label: "Meeting scheduler" },
+                  { label: "Thread summarizer" },
+                ].map((agent) => (
+                  <button
+                    key={agent.label}
+                    className={`w-full flex items-center gap-2 px-3 py-1.5 rounded-md font-medium text-left transition-colors ${agent.active
+                      ? "text-primary-glow bg-primary-glow/5"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+                      }`}
+                  >
+                    <span className={`h-1.5 w-1.5 rounded-full ${agent.active ? "bg-primary-glow" : "bg-muted-foreground/30"}`} />
+                    <span className="truncate">{agent.label}</span>
+                  </button>
+                ))}
+              </div>
+            </aside>
+
+            {/* Email List */}
+            <section className="flex flex-col w-full md:w-80 flex-shrink-0 bg-card divide-y divide-border/60 overflow-y-auto">
+              {rows.map((r, i) => (
+                <div
+                  key={i}
+                  className={`p-4 text-xs text-left transition-colors relative ${r.active ? "bg-muted/50" : "hover:bg-muted/20"
+                    }`}
+                >
+                  {r.active && (
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-glow" />
+                  )}
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="font-semibold text-foreground">{r.from}</span>
+                    <span className="text-[10px] text-muted-foreground">{r.time}</span>
+                  </div>
+                  <div className="font-medium text-foreground truncate mb-1">{r.subject}</div>
+                  <div className="text-muted-foreground truncate">{r.preview}</div>
+                  {r.tag && (
+                    <div className="mt-2 flex items-center gap-1.5">
+                      <span className="rounded bg-pink-wash/10 text-foreground/80 text-[10px] px-1.5 py-0.5 border border-pink-wash/20">
+                        {r.tag}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </section>
+
+            {/* Detail & AI Draft Pane */}
+            <section className="hidden lg:flex flex-col flex-1 bg-muted/5 p-6 overflow-y-auto text-left">
+              {/* Selected Email Header */}
+              <div className="border-b border-border/60 pb-4 mb-4">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h3 className="text-sm font-semibold text-foreground">Partnership Opportunity – AI Email</h3>
+                    <div className="mt-1 text-xs text-muted-foreground flex items-center gap-1.5">
+                      <span className="font-medium text-foreground">Huỳnh Anh Tuấn</span>
+                      <span>&lt;tuan@breezeway.io&gt;</span>
+                    </div>
+                  </div>
+                  <span className="text-[10px] text-muted-foreground">12:21 PM (10 minutes ago)</span>
+                </div>
+              </div>
+
+              {/* Selected Email Body */}
+              <div className="text-xs text-foreground/90 leading-relaxed mb-6 space-y-2">
+                <p>Hi team,</p>
+                <p>
+                  I've been following Casper and love what you are building. We have an active developer base that uses automated agents, and we'd love to partner to enable Casper's email tools for them.
+                </p>
+                <p>
+                  Let me know if you have time for a quick intro call next week to discuss details.
+                </p>
+                <p className="text-muted-foreground">Best,<br />Huỳnh Anh Tuấn</p>
+              </div>
+
+              {/* Casper AI Draft Section */}
+              <div
+                className="rounded-xl border border-border p-4 bg-card relative overflow-hidden"
+                style={{
+                  boxShadow: "0 4px 20px -2px oklch(0.7 0.16 230 / 0.08)",
+                }}
               >
-                <div className="col-span-3 flex items-center gap-3 min-w-0">
-                  <span className="h-2 w-2 rounded-full bg-primary-glow shrink-0" />
-                  <span className="font-medium text-foreground truncate">{r.from}</span>
-                </div>
-                <div className="col-span-6 flex items-center gap-2 min-w-0">
-                  <span className="font-medium text-foreground truncate">{r.subject}</span>
-                  <span className="text-muted-foreground truncate hidden md:inline">{r.preview}</span>
-                </div>
-                <div className="col-span-3 flex items-center justify-end gap-3">
-                  <span className="rounded-md bg-[color:var(--pink-wash)] text-foreground/80 text-xs px-2 py-0.5">
-                    {r.tag}
+                {/* Glow/Gradient background border highlight */}
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary-glow via-pink-wash to-lavender-wash" />
+
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+                    <Sparkles className="h-3.5 w-3.5 text-primary-glow" />
+                    <span>Drafted by Casper</span>
+                    <span className="text-[10px] font-normal text-muted-foreground">(in your voice)</span>
+                  </div>
+                  <span className="text-[9px] rounded-full bg-primary-glow/10 text-primary-glow px-2 py-0.5 font-medium border border-primary-glow/20 font-sans">
+                    Ready to send
                   </span>
-                  <span className="text-xs text-muted-foreground">{r.time}</span>
                 </div>
-              </motion.div>
-            ))}
+
+                <div className="text-xs text-foreground/90 leading-relaxed space-y-2 mb-4 bg-muted/30 p-3 rounded-lg border border-border/40 font-serif italic">
+                  <p>Hi Tuấn,</p>
+                  <p>
+                    Thanks for reaching out! This sounds like a great fit. Casper's MCP native integration makes it super easy for developer agents to query and write emails.
+                  </p>
+                  <p>
+                    Let's jump on a quick call next week. Would Wednesday at 3 PM PST work for you?
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-between text-xs">
+                  <div className="flex items-center gap-2">
+                    <button className="inline-flex items-center justify-center rounded-lg bg-foreground text-background px-3 py-1.5 font-medium hover:opacity-90 transition-opacity">
+                      <span>Approve &amp; Send</span>
+                    </button>
+                    <button className="inline-flex items-center justify-center rounded-lg border border-border bg-card px-3 py-1.5 font-medium text-foreground hover:bg-muted transition-colors">
+                      <span>Edit</span>
+                    </button>
+                  </div>
+                  <span className="text-[10px] text-muted-foreground font-mono">⌘Enter</span>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </motion.div>
@@ -202,7 +341,7 @@ function Logos() {
     <section className="border-t border-border/60 overflow-hidden">
       <div className="py-14">
         <p className="text-center text-xs uppercase tracking-[0.18em] text-muted-foreground px-6">
-          Your agents work across 200+ tools
+          Trusted by professionals at
         </p>
         <div className="relative mt-10 w-full overflow-hidden py-4">
           {/* Edge fade gradients for premium aesthetic */}
@@ -215,18 +354,18 @@ function Logos() {
               animate={{ x: ["0%", "-100%"] }}
               transition={{
                 ease: "linear",
-                duration: 80,
+                duration: 180,
                 repeat: Infinity,
               }}
               className="flex items-center gap-20 pr-20 shrink-0"
             >
               {marqueeLogos.map((logo, i) => (
-                <img
+                <span
                   key={`l1-${i}`}
-                  src={`https://logo.clearbit.com/${logo.domain}`}
-                  alt={logo.name}
-                  className="h-9 w-auto max-w-[140px] object-contain opacity-75 hover:opacity-100 dark:brightness-90 transition-all duration-300 pointer-events-none select-none"
-                />
+                  className="text-lg md:text-xl font-semibold tracking-tight text-muted-foreground/60 hover:text-foreground transition-colors duration-300 pointer-events-none select-none"
+                >
+                  {logo.name}
+                </span>
               ))}
             </motion.div>
 
@@ -235,19 +374,19 @@ function Logos() {
               animate={{ x: ["0%", "-100%"] }}
               transition={{
                 ease: "linear",
-                duration: 80,
+                duration: 120,
                 repeat: Infinity,
               }}
               className="flex items-center gap-20 pr-20 shrink-0"
               aria-hidden="true"
             >
               {marqueeLogos.map((logo, i) => (
-                <img
+                <span
                   key={`l2-${i}`}
-                  src={`https://logo.clearbit.com/${logo.domain}`}
-                  alt={logo.name}
-                  className="h-9 w-auto max-w-[140px] object-contain opacity-75 hover:opacity-100 dark:brightness-90 transition-all duration-300 pointer-events-none select-none"
-                />
+                  className="text-lg md:text-xl font-semibold tracking-tight text-muted-foreground/60 hover:text-foreground transition-colors duration-300 pointer-events-none select-none"
+                >
+                  {logo.name}
+                </span>
               ))}
             </motion.div>
           </div>
