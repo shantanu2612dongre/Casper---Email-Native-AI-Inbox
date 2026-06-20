@@ -14,6 +14,7 @@ import { Route as EnterpriseRouteImport } from './routes/enterprise'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LegalDpaRouteImport } from './routes/legal/dpa'
 
 const ForAgentsRoute = ForAgentsRouteImport.update({
   id: '/for-agents',
@@ -40,6 +41,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LegalDpaRoute = LegalDpaRouteImport.update({
+  id: '/legal/dpa',
+  path: '/legal/dpa',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/careers': typeof CareersRoute
   '/enterprise': typeof EnterpriseRoute
   '/for-agents': typeof ForAgentsRoute
+  '/legal/dpa': typeof LegalDpaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/careers': typeof CareersRoute
   '/enterprise': typeof EnterpriseRoute
   '/for-agents': typeof ForAgentsRoute
+  '/legal/dpa': typeof LegalDpaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,27 @@ export interface FileRoutesById {
   '/careers': typeof CareersRoute
   '/enterprise': typeof EnterpriseRoute
   '/for-agents': typeof ForAgentsRoute
+  '/legal/dpa': typeof LegalDpaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/careers' | '/enterprise' | '/for-agents'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/careers'
+    | '/enterprise'
+    | '/for-agents'
+    | '/legal/dpa'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/careers' | '/enterprise' | '/for-agents'
-  id: '__root__' | '/' | '/about' | '/careers' | '/enterprise' | '/for-agents'
+  to: '/' | '/about' | '/careers' | '/enterprise' | '/for-agents' | '/legal/dpa'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/careers'
+    | '/enterprise'
+    | '/for-agents'
+    | '/legal/dpa'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +99,7 @@ export interface RootRouteChildren {
   CareersRoute: typeof CareersRoute
   EnterpriseRoute: typeof EnterpriseRoute
   ForAgentsRoute: typeof ForAgentsRoute
+  LegalDpaRoute: typeof LegalDpaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +139,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/legal/dpa': {
+      id: '/legal/dpa'
+      path: '/legal/dpa'
+      fullPath: '/legal/dpa'
+      preLoaderRoute: typeof LegalDpaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +155,7 @@ const rootRouteChildren: RootRouteChildren = {
   CareersRoute: CareersRoute,
   EnterpriseRoute: EnterpriseRoute,
   ForAgentsRoute: ForAgentsRoute,
+  LegalDpaRoute: LegalDpaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

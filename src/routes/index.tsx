@@ -64,9 +64,9 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden py-28">
       {/* Centered text container with readable max-width */}
-      <div className="relative max-w-4xl mx-auto px-6 pt-28 pb-10 text-center flex flex-col items-center">
+      <div className="relative max-w-4xl mx-auto px-6 pb-10 text-center flex flex-col items-center">
         <motion.h1
           variants={fadeUp}
           initial="hidden"
@@ -339,8 +339,8 @@ function Logos() {
   // Repeat the logos list multiple times so the track is wider than any viewport
   const marqueeLogos = [...integrationLogos, ...integrationLogos, ...integrationLogos, ...integrationLogos];
   return (
-    <section className="border-t border-border/60 overflow-hidden">
-      <div className="py-14">
+    <section className="border-t border-border/60 overflow-hidden py-28">
+      <div>
         <p className="text-center text-xs uppercase tracking-[0.18em] text-muted-foreground px-6">
           Trusted by professionals at
         </p>
@@ -402,7 +402,7 @@ const features = [
   { icon: Inbox, title: "Auto-organized inbox", desc: "Newsletters, receipts, and noise are quietly tucked away so only what matters stays in view." },
   { icon: Bot, title: "Background agents", desc: "Schedule meetings, summarize threads, and follow up — without lifting a finger." },
   { icon: Search, title: "Ask your inbox", desc: "Search like you think. Find any email, attachment, or detail with a single question." },
-  { icon: Zap, title: "Faster than zero", desc: "Built on a blazing-fast client that opens, scrolls, and searches instantly." },
+  { icon: Zap, title: "Your personal email assistant", desc: "Set custom rules that automatically handle CCs, apply templates, and trigger actions based on who you're emailing." },
   { icon: Shield, title: "Private by default", desc: "End-to-end encrypted. We never train on your mail — your inbox stays yours." },
 ];
 
@@ -560,7 +560,7 @@ function FeatureAnimation({ activeFeature }: { activeFeature: number }) {
         </motion.div>
       </div>
     ),
-    // Faster than zero
+    // Your personal email assistant
     (
       <div className="w-full h-full flex items-center justify-center">
         <motion.div
@@ -570,30 +570,44 @@ function FeatureAnimation({ activeFeature }: { activeFeature: number }) {
           className="relative"
         >
           <div className="bg-card border border-border rounded-2xl p-6 w-80 shadow-lg">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Zap className="h-6 w-6 text-yellow-500" />
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.3 }}
-                className="text-2xl font-bold text-foreground"
-              >
-                0.02s
-              </motion.span>
+            <div className="flex items-center gap-2 mb-4">
+              <Zap className="h-5 w-5 text-yellow-500" />
+              <span className="text-sm font-medium text-foreground">Custom Rules</span>
             </div>
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: "100%" }}
-              transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
-              className="h-2 bg-gradient-to-r from-yellow-500 to-green-500 rounded-full"
-            />
+            <div className="space-y-3">
+              {[
+                { rule: "Auto-CC team", action: "When emailing clients", icon: "👥" },
+                { rule: "Apply template", action: "For project updates", icon: "📝" },
+                { rule: "Create event", action: "When scheduling meetings", icon: "📅" },
+              ].map((item, i) => (
+                <motion.div
+                  key={item.rule}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.3 + i * 0.15, duration: 0.4 }}
+                  className="flex items-center gap-3 p-3 rounded-lg bg-muted/30 border border-border/40"
+                >
+                  <span className="text-lg">{item.icon}</span>
+                  <div className="flex-1">
+                    <div className="text-xs font-medium text-foreground">{item.rule}</div>
+                    <div className="text-[10px] text-muted-foreground">{item.action}</div>
+                  </div>
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.6 + i * 0.15, duration: 0.3 }}
+                    className="w-2 h-2 rounded-full bg-green-500"
+                  />
+                </motion.div>
+              ))}
+            </div>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1, duration: 0.5 }}
               className="mt-4 text-center text-xs text-muted-foreground"
             >
-              Instant search & load
+              Rules running automatically...
             </motion.div>
           </div>
         </motion.div>
@@ -944,7 +958,7 @@ function Pricing() {
     },
   ];
   return (
-    <section id="pricing" className="py-28">
+    <section id="pricing" className="py-20">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto">
           <p className="text-sm text-primary font-medium">Pricing</p>
@@ -1003,7 +1017,7 @@ function Pricing() {
 
 function CTA() {
   return (
-    <section className="relative py-28">
+    <section className="relative py-20">
       <div className="max-w-5xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
