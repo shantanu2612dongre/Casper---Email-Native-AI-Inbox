@@ -45,7 +45,6 @@ function Nav() {
           <a href="#pricing" className="hover:text-foreground transition-colors">Pricing</a>
           <a href="/enterprise" className="hover:text-foreground transition-colors">Enterprise</a>
           <a href="/for-agents" className="hover:text-foreground transition-colors">For Agents</a>
-          <a href="#about" className="hover:text-foreground transition-colors">About</a>
         </div>
         <div className="flex items-center gap-5">
           <a href="#" className="text-sm text-foreground/80 hover:text-foreground transition-colors">Login</a>

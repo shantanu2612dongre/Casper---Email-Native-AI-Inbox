@@ -27,18 +27,7 @@ export function Footer() {
               From email overload to inbox zero, on autopilot.
             </p>
 
-            {/* Backed by YC Badge */}
-            <a 
-              href="https://ycombinator.com" 
-              target="_blank" 
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-1.5 text-sm font-medium text-foreground hover:bg-muted/50 transition-colors"
-            >
-              <span className="flex h-5 w-5 items-center justify-center rounded bg-[#FF6600] font-mono text-[10px] font-bold text-white leading-none">
-                Y
-              </span>
-              <span className="text-xs text-muted-foreground font-semibold">Backed by Y Combinator</span>
-            </a>
+           
 
             {/* App Store / Google Play Buttons */}
             <div className="flex flex-wrap items-center gap-3">
@@ -118,8 +107,8 @@ export function Footer() {
               <h4 className="text-sm font-semibold text-foreground tracking-tight">Company</h4>
               <ul className="flex flex-col gap-2.5 text-sm text-muted-foreground">
                 <li><a href="/careers" className="hover:text-foreground transition-colors">Careers</a></li>
-                <li><a href="#about" className="hover:text-foreground transition-colors">About Us</a></li>
-                <li><a href="https://ycombinator.com" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">Y Combinator</a></li>
+                <li><a href="/about" className="hover:text-foreground transition-colors">About Us</a></li>
+                <li><a href="#contact" className="hover:text-foreground transition-colors">Contact Us</a></li>
                 <li><a href="/blog" className="hover:text-foreground transition-colors">Blog</a></li>
               </ul>
             </div>
@@ -128,7 +117,6 @@ export function Footer() {
               <h4 className="text-sm font-semibold text-foreground tracking-tight">Resources</h4>
               <ul className="flex flex-col gap-2.5 text-sm text-muted-foreground">
                 <li><a href="/changelog" className="hover:text-foreground transition-colors">Changelog</a></li>
-                <li><a href="#contact" className="hover:text-foreground transition-colors">Contact Us</a></li>
                 <li><a href="/status" className="hover:text-foreground transition-colors">System Status</a></li>
                 <li><a href="/docs" className="hover:text-foreground transition-colors">Documentation</a></li>
               </ul>
