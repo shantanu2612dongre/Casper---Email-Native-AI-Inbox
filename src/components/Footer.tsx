@@ -61,93 +61,75 @@ export function Footer() {
                 </div>
               </a>
             </div> */}
-
-            {/* Social List */}
-            <div className="flex flex-col gap-2.5 text-sm text-muted-foreground mt-2">
-              <h4 className="text-sm font-semibold text-foreground tracking-tight">Socials</h4>
-              <a
-                href="https://linkedin.com/company/casper"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2.5 hover:text-foreground transition-colors"
-              >
-                <Linkedin className="h-4 w-4 shrink-0" />
-                <span>@casper-email</span>
-              </a>
-              <a
-                href="https://x.com/casper"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2.5 hover:text-foreground transition-colors"
-              >
-                <Twitter className="h-4 w-4 shrink-0" />
-                <span>@usecasper</span>
-              </a>
-              <a
-                href="https://instagram.com/casper"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2.5 hover:text-foreground transition-colors"
-              >
-                <Instagram className="h-4 w-4 shrink-0" />
-                <span>@usecasper</span>
-              </a>
-              <a
-                href="https://youtube.com/casper"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2.5 hover:text-foreground transition-colors"
-              >
-                <Youtube className="h-4 w-4 shrink-0" />
-                <span>@usecasper</span>
-              </a>
-              <a
-                href="https://facebook.com/casper"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2.5 hover:text-foreground transition-colors"
-              >
-                <Facebook className="h-4 w-4 shrink-0" />
-                <span>Casper</span>
-              </a>
-              <a
-                href="mailto:contact@usecasper.com"
-                className="flex items-center gap-2.5 hover:text-foreground transition-colors"
-              >
-                <Mail className="h-4 w-4 shrink-0" />
-                <span>contact@usecasper.com</span>
-              </a>
-            </div>
           </div>
 
           {/* Right section: Links grid */}
           <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">
             <div className="flex flex-col gap-4">
-              <h4 className="text-sm font-semibold text-foreground tracking-tight">Product</h4>
+              <h4 className="text-sm font-semibold text-foreground tracking-tight">Socials</h4>
               <ul className="flex flex-col gap-2.5 text-sm text-muted-foreground">
                 <li>
-                  <a href="#features" className="hover:text-foreground transition-colors">
-                    Inbox
+                  <a
+                    href="https://linkedin.com/company/casper"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2.5 hover:text-foreground transition-colors"
+                  >
+                    <Linkedin className="h-4 w-4 shrink-0" />
+                    <span>@casper-email</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#features" className="hover:text-foreground transition-colors">
-                    Drafts
+                  <a
+                    href="https://x.com/casper"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2.5 hover:text-foreground transition-colors"
+                  >
+                    <Twitter className="h-4 w-4 shrink-0" />
+                    <span>@usecasper</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#features" className="hover:text-foreground transition-colors">
-                    Agents
+                  <a
+                    href="https://instagram.com/casper"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2.5 hover:text-foreground transition-colors"
+                  >
+                    <Instagram className="h-4 w-4 shrink-0" />
+                    <span>@usecasper</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#features" className="hover:text-foreground transition-colors">
-                    Search
+                  <a
+                    href="https://youtube.com/casper"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2.5 hover:text-foreground transition-colors"
+                  >
+                    <Youtube className="h-4 w-4 shrink-0" />
+                    <span>@usecasper</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#pricing" className="hover:text-foreground transition-colors">
-                    Pricing
+                  <a
+                    href="https://facebook.com/casper"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2.5 hover:text-foreground transition-colors"
+                  >
+                    <Facebook className="h-4 w-4 shrink-0" />
+                    <span>Casper</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="mailto:contact@usecasper.com"
+                    className="flex items-center gap-2.5 hover:text-foreground transition-colors"
+                  >
+                    <Mail className="h-4 w-4 shrink-0" />
+                    <span>contact@usecasper.com</span>
                   </a>
                 </li>
               </ul>
@@ -216,12 +198,6 @@ export function Footer() {
             </a>
             <a href="/privacy" className="hover:text-foreground transition-colors">
               Privacy
-            </a>
-            <a href="/legal/data-deletion" className="hover:text-foreground transition-colors">
-              Data Deletion
-            </a>
-            <a href="/legal/cookies" className="hover:text-foreground transition-colors">
-              Cookies
             </a>
           </div>
         </div>

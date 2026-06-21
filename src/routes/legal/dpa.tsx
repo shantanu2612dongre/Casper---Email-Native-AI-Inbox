@@ -9,8 +9,7 @@ export const Route = createFileRoute("/legal/dpa")({
       { title: "Data Processing Agreement — Casper" },
       {
         name: "description",
-        content:
-          "Data Processing Agreement for Casper and Slashy Inc., effective February 3, 2026.",
+        content: "Data Processing Agreement for Casper and Slashy, effective February 3, 2026.",
       },
       { property: "og:title", content: "Data Processing Agreement — Casper" },
       {
@@ -152,7 +151,7 @@ function DpaPage() {
                   Service (&quot;Principal Agreement&quot;) between:
                 </p>
                 <p>You (the &quot;Company&quot; or &quot;Controller&quot;)</p>
-                <p>and Slashy Inc. (the &quot;Processor&quot;)</p>
+                <p>and Slashy (the &quot;Processor&quot;)</p>
                 <p>(together the &quot;Parties&quot;)</p>
                 <p className="font-medium text-foreground">WHEREAS</p>
                 <p>(A) The Company acts as a Data Controller.</p>
@@ -163,7 +162,8 @@ function DpaPage() {
                 <p>
                   (C) The Parties seek to implement a data processing agreement that complies with
                   applicable data protection laws, including the General Data Protection Regulation
-                  (EU) 2016/679 (&quot;GDPR&quot;) and applicable U.S. state privacy laws.
+                  (EU) 2016/679 (&quot;GDPR&quot;), the Digital Personal Data Protection Act, 2023,
+                  and, where applicable, U.S. state privacy laws.
                 </p>
                 <p className="font-medium text-foreground">IT IS AGREED AS FOLLOWS:</p>
               </div>
@@ -175,8 +175,8 @@ function DpaPage() {
                 </p>
                 <p>
                   <strong>1.2</strong> &quot;Data Protection Laws&quot; means the GDPR and, to the
-                  extent applicable, U.S. state privacy laws including the California Consumer
-                  Privacy Act.
+                  extent applicable, the Digital Personal Data Protection Act, 2023, and U.S. state
+                  privacy laws including the California Consumer Privacy Act.
                 </p>
                 <p>
                   <strong>1.3</strong> &quot;Subprocessor&quot; means any third party appointed by
@@ -280,7 +280,8 @@ function DpaPage() {
               <Section number="8" title="Data Transfers">
                 <p>
                   <strong>8.1</strong> Company Personal Data may be transferred to and processed in
-                  the United States.
+                  India, the United States, and other countries where we or our subprocessors
+                  operate.
                 </p>
                 <p>
                   <strong>8.2</strong> For transfers of Personal Data from the EEA, the Parties
@@ -298,8 +299,7 @@ function DpaPage() {
 
               <Section number="10" title="General Terms">
                 <p>
-                  <strong>10.1</strong> This Agreement is governed by the laws of the State of
-                  Delaware, USA.
+                  <strong>10.1</strong> This Agreement is governed by the laws of India.
                 </p>
                 <p>
                   <strong>10.2</strong> This Agreement shall remain in effect for as long as
