@@ -548,6 +548,41 @@ const draftThreadContext = [
   },
 ];
 
+const autoLabelInbox = [
+  {
+    sender: "Maya Patel",
+    subject: "Revised deck for review",
+    preview: "I added the updated slides and tightened the rollout section.",
+    time: "9:12 AM",
+    label: "Important",
+    labelClass: "bg-green-500/15 text-green-600 border-green-500/20",
+  },
+  {
+    sender: "Stripe",
+    subject: "Receipt for your March invoice",
+    preview: "Your payment was processed successfully for workspace billing.",
+    time: "8:41 AM",
+    label: "Receipts",
+    labelClass: "bg-amber-500/15 text-amber-700 border-amber-500/20",
+  },
+  {
+    sender: "Product Hunt",
+    subject: "Your weekly newsletter",
+    preview: "Top launches and updates from the community this week.",
+    time: "7:22 AM",
+    label: "Newsletter",
+    labelClass: "bg-sky-500/15 text-sky-700 border-sky-500/20",
+  },
+  {
+    sender: "Charles Lee",
+    subject: "Can we move tomorrow’s call?",
+    preview: "I’m flexible after 3 PM if that works on your end.",
+    time: "6:05 AM",
+    label: "Follow-up",
+    labelClass: "bg-violet-500/15 text-violet-700 border-violet-500/20",
+  },
+];
+
 function DraftVoiceAnimation() {
   const [displayLines, setDisplayLines] = useState<string[]>(
     Array.from({ length: draftVoiceLines.length }, () => ""),
@@ -716,12 +751,8 @@ function DraftVoiceAnimation() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-1.5">
-                      <span className="font-medium text-foreground truncate">
-                        {message.sender}
-                      </span>
-                      <span className="text-muted-foreground/60 truncate">
-                        {message.body}
-                      </span>
+                      <span className="font-medium text-foreground truncate">{message.sender}</span>
+                      <span className="text-muted-foreground/60 truncate">{message.body}</span>
                     </div>
                   </div>
                 </div>
@@ -806,6 +837,583 @@ function DraftVoiceAnimation() {
   );
 }
 
+function AutoOrganizedInboxAnimation() {
+  const [labeledIndex, setLabeledIndex] = useState(-1);
+  const [isCompleted, setIsCompleted] = useState(false);
+
+  const emails = [
+    {
+      unread: true,
+      sender: "Product Hunt",
+      subject: "You're featured today!",
+      label: "Important",
+      time: "3:45 PM",
+      badgeStyle:
+        "bg-red-500/10 text-red-600 border-red-500/20 dark:bg-red-950/40 dark:text-red-300 dark:border-red-900/50",
+    },
+    {
+      unread: true,
+      sender: "Figma",
+      subject: "Design system updates",
+      label: "Work",
+      time: "3:15 PM",
+      badgeStyle:
+        "bg-sky-500/10 text-sky-600 border-sky-500/20 dark:bg-sky-950/40 dark:text-sky-300 dark:border-sky-900/50",
+    },
+    {
+      unread: true,
+      sender: "Jira",
+      subject: "Sprint review in 30 mins",
+      label: "Calendar",
+      time: "2:45 PM",
+      badgeStyle:
+        "bg-purple-500/10 text-purple-600 border-purple-500/20 dark:bg-purple-950/40 dark:text-purple-300 dark:border-purple-900/50",
+    },
+    {
+      unread: true,
+      sender: "Alex Chen",
+      subject: "Q4 Report ready for review",
+      label: "Important",
+      time: "2:15 PM",
+      badgeStyle:
+        "bg-red-500/10 text-red-600 border-red-500/20 dark:bg-red-950/40 dark:text-red-300 dark:border-red-900/50",
+    },
+    {
+      unread: false,
+      sender: "Y Combinator",
+      subject: "Demo Day reminder",
+      label: "Important",
+      time: "2:00 PM",
+      badgeStyle:
+        "bg-red-500/10 text-red-600 border-red-500/20 dark:bg-red-950/40 dark:text-red-300 dark:border-red-900/50",
+    },
+    {
+      unread: false,
+      sender: "Sarah Kim",
+      subject: "Meeting notes from standup",
+      label: "Work",
+      time: "1:42 PM",
+      badgeStyle:
+        "bg-sky-500/10 text-sky-600 border-sky-500/20 dark:bg-sky-950/40 dark:text-sky-300 dark:border-sky-900/50",
+    },
+    {
+      unread: true,
+      sender: "Sentry",
+      subject: "5 new errors in production",
+      label: "Important",
+      time: "1:30 PM",
+      badgeStyle:
+        "bg-red-500/10 text-red-600 border-red-500/20 dark:bg-red-950/40 dark:text-red-300 dark:border-red-900/50",
+    },
+    {
+      unread: false,
+      sender: "Calendly",
+      subject: "New meeting scheduled",
+      label: "Calendar",
+      time: "12:00 PM",
+      badgeStyle:
+        "bg-purple-500/10 text-purple-600 border-purple-500/20 dark:bg-purple-950/40 dark:text-purple-300 dark:border-purple-900/50",
+    },
+    {
+      unread: false,
+      sender: "Notion",
+      subject: "Your weekly digest is ready",
+      label: "Newsletter",
+      time: "11:30 AM",
+      badgeStyle:
+        "bg-amber-500/10 text-amber-600 border-amber-500/20 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-900/50",
+    },
+  ];
+
+  useEffect(() => {
+    let cancelled = false;
+    const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    const runAnimation = async () => {
+      while (!cancelled) {
+        setIsCompleted(false);
+        setLabeledIndex(-1);
+        await sleep(500);
+
+        for (let i = 0; i < emails.length; i++) {
+          if (cancelled) return;
+          setLabeledIndex(i);
+          await sleep(650);
+        }
+
+        if (cancelled) return;
+        setIsCompleted(true);
+        await sleep(3500);
+      }
+    };
+
+    void runAnimation();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [emails.length]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      className="relative w-full max-w-lg"
+    >
+      <div className="bg-card border border-border rounded-2xl p-4 shadow-xl backdrop-blur-sm">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-border/60">
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-bold text-foreground tracking-tight">All Mail</h3>
+          </div>
+          <motion.div
+            animate={isCompleted ? { scale: [1, 1.05, 1] } : {}}
+            transition={{ duration: 0.4 }}
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border transition-all duration-300 ${
+              isCompleted
+                ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/30 dark:bg-emerald-500/20 dark:text-emerald-400"
+                : "bg-primary-glow/10 text-primary-glow border-primary-glow/30"
+            }`}
+          >
+            <span
+              className={`h-1.5 w-1.5 rounded-full ${
+                isCompleted ? "bg-emerald-500" : "bg-primary-glow animate-pulse"
+              }`}
+            />
+            <span>{isCompleted ? "Inbox Auto-Organized" : "Casper AI Auto-Labeling..."}</span>
+          </motion.div>
+        </div>
+
+        {/* Email Rows List */}
+        <div className="space-y-1">
+          {emails.map((email, index) => {
+            const isLabeled = index <= labeledIndex;
+            const isProcessing = index === labeledIndex;
+
+            return (
+              <motion.div
+                key={`${email.sender}-${index}`}
+                animate={{
+                  backgroundColor: isProcessing
+                    ? "var(--accent)"
+                    : "transparent",
+                }}
+                transition={{ duration: 0.2 }}
+                className={`relative flex items-center justify-between py-1.5 px-2 rounded-lg border transition-colors ${
+                  isProcessing
+                    ? "border-primary-glow/40 shadow-sm"
+                    : "border-transparent hover:bg-muted/40"
+                }`}
+              >
+                {/* Left side: Unread dot + Sender + Subject */}
+                <div className="flex items-center gap-2.5 min-w-0 flex-1 pr-2">
+                  {/* Blue unread dot */}
+                  <div className="w-2 flex justify-center shrink-0">
+                    {email.unread ? (
+                      <span className="h-2 w-2 rounded-full bg-blue-500 shadow-sm shadow-blue-500/50" />
+                    ) : (
+                      <span className="h-2 w-2 rounded-full bg-transparent" />
+                    )}
+                  </div>
+
+                  {/* Sender Name */}
+                  <span
+                    className={`truncate text-xs shrink-0 w-24 ${
+                      email.unread
+                        ? "font-semibold text-foreground"
+                        : "font-medium text-foreground/80"
+                    }`}
+                  >
+                    {email.sender}
+                  </span>
+
+                  {/* Subject Line */}
+                  <span
+                    className={`truncate text-xs flex-1 ${
+                      email.unread
+                        ? "font-medium text-foreground/90"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    {email.subject}
+                  </span>
+                </div>
+
+                {/* Right side: Badge label + Time */}
+                <div className="flex items-center gap-3 shrink-0">
+                  {/* Label slot */}
+                  <div className="w-20 flex justify-end items-center h-5">
+                    {isLabeled ? (
+                      <motion.span
+                        initial={{ scale: 0, opacity: 0, y: 3 }}
+                        animate={{ scale: 1, opacity: 1, y: 0 }}
+                        transition={{ type: "spring", stiffness: 500, damping: 25 }}
+                        className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium border ${email.badgeStyle}`}
+                      >
+                        {email.label}
+                      </motion.span>
+                    ) : isProcessing ? (
+                      <div className="flex items-center justify-center h-4 w-4">
+                        <span className="h-1.5 w-1.5 rounded-full bg-primary-glow animate-pulse" />
+                      </div>
+                    ) : (
+                      <div className="w-12 h-3.5 rounded bg-muted/30 border border-border/30 opacity-40" />
+                    )}
+                  </div>
+
+                  {/* Timestamp */}
+                  <span className="text-[10px] text-muted-foreground/80 w-14 text-right font-sans">
+                    {email.time}
+                  </span>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function AskYourInboxAnimation() {
+  const [demoIndex, setDemoIndex] = useState(0);
+  const [typedQuery, setTypedQuery] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+
+  const searchDemos = [
+    {
+      query: "Find receipts for last month's SF trip",
+      answer: "Found 2 verified expense receipts totaling $592.50 for your San Francisco trip.",
+      sources: [
+        {
+          title: "Delta Air Lines E-Receipt #DL-9482",
+          sender: "Delta Air Lines",
+          time: "May 18",
+          snippet: "Flight receipt confirmed: $480.00 (SFO ➔ JFK) charged to corporate Visa...",
+          badge: "Receipt",
+        },
+        {
+          title: "Uber Trip: SFO Airport to Downtown",
+          sender: "Uber Receipts",
+          time: "May 18",
+          snippet: "Ride total: $112.50 — Business travel profile applied automatically...",
+          badge: "Receipt",
+        },
+      ],
+    },
+    {
+      query: "What was the budget approved for Q3 marketing?",
+      answer: "The approved Q3 marketing budget is $45,000, with $12,000 earmarked for industry events.",
+      sources: [
+        {
+          title: "Q3_Marketing_Budget_Final.pdf",
+          sender: "Sarah Miller",
+          time: "Yesterday",
+          snippet: "Total approved budget for Q3 marketing is set at $45,000 across digital and events...",
+          badge: "PDF Attachment",
+        },
+        {
+          title: "Re: Event sponsorship allocation",
+          sender: "David Chen",
+          time: "3 days ago",
+          snippet: "Confirmed $12,000 allocated for upcoming industry events in September...",
+          badge: "Email Thread",
+        },
+      ],
+    },
+  ];
+
+  useEffect(() => {
+    let cancelled = false;
+    const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    const runLoop = async () => {
+      let currentIndex = 0;
+      while (!cancelled) {
+        setDemoIndex(currentIndex);
+        setTypedQuery("");
+        setIsSearching(false);
+        setShowResults(false);
+        await sleep(300);
+
+        const targetQuery = searchDemos[currentIndex].query;
+        for (let i = 1; i <= targetQuery.length; i++) {
+          if (cancelled) return;
+          setTypedQuery(targetQuery.slice(0, i));
+          await sleep(30);
+        }
+
+        if (cancelled) return;
+        setIsSearching(true);
+        await sleep(500);
+
+        if (cancelled) return;
+        setIsSearching(false);
+        setShowResults(true);
+        await sleep(4000);
+
+        currentIndex = (currentIndex + 1) % searchDemos.length;
+      }
+    };
+
+    void runLoop();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const currentDemo = searchDemos[demoIndex];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      className="relative w-full max-w-lg"
+    >
+      <div className="bg-card border border-border rounded-2xl p-5 shadow-xl backdrop-blur-sm">
+        {/* Search Bar Container */}
+        <div className="relative rounded-xl border border-pink-wash/50 bg-background p-3.5 shadow-sm mb-4">
+          <div className="flex items-center gap-2.5">
+            <Search className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+            <div className="flex-1 min-w-0 text-xs text-foreground font-medium flex items-center">
+              <span>{typedQuery}</span>
+              {!showResults && (
+                <motion.span
+                  animate={{ opacity: [0, 1, 0] }}
+                  transition={{ duration: 0.8, repeat: Infinity }}
+                  className="ml-0.5 inline-block h-4 w-[2px] bg-foreground rounded-full"
+                />
+              )}
+            </div>
+            <div className="flex items-center gap-1.5 shrink-0">
+              {isSearching ? (
+                <span className="h-1.5 w-1.5 rounded-full bg-foreground animate-pulse" />
+              ) : (
+                <kbd className="hidden sm:inline-block text-[10px] bg-muted px-1.5 py-0.5 rounded text-muted-foreground border border-border/60 font-mono">
+                  ⌘K
+                </kbd>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Searching Loader state */}
+        {isSearching && (
+          <motion.div
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center justify-center gap-2 py-6 text-xs text-muted-foreground"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-foreground animate-ping" />
+            <span>Analyzing inbox &amp; attachments...</span>
+          </motion.div>
+        )}
+
+        {/* AI Answer Synthesis & Source Cards */}
+        {showResults && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="space-y-3"
+          >
+            {/* AI Synthesized Answer Card */}
+            <div className="rounded-xl border border-pink-wash/40 bg-gradient-to-br from-pink-wash/15 via-background to-lavender-wash/10 p-3.5 shadow-sm text-left">
+              <div className="text-[11px] font-semibold text-foreground mb-1.5 flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-foreground" />
+                <span>Casper AI Answer</span>
+              </div>
+              <p className="text-xs text-foreground leading-relaxed font-medium">
+                {currentDemo.answer}
+              </p>
+            </div>
+
+            {/* Source Citations Title */}
+            <div className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider px-1 text-left">
+              Matched Sources ({currentDemo.sources.length})
+            </div>
+
+            {/* Source items */}
+            <div className="space-y-2 text-left">
+              {currentDemo.sources.map((source, i) => (
+                <motion.div
+                  key={`${source.title}-${i}`}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.12, duration: 0.3 }}
+                  className="rounded-xl border border-border/60 bg-background/80 p-3 hover:border-border transition-colors"
+                >
+                  <div className="flex items-start justify-between gap-2 mb-1">
+                    <div className="flex items-center gap-1.5 min-w-0">
+                      <span className="truncate text-xs font-semibold text-foreground">
+                        {source.title}
+                      </span>
+                    </div>
+                    <span className="shrink-0 text-[9px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground font-medium border border-border/40">
+                      {source.badge}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 text-[10px] text-muted-foreground mb-1.5">
+                    <span className="font-medium text-foreground/80">{source.sender}</span>
+                    <span>•</span>
+                    <span>{source.time}</span>
+                  </div>
+                  <div className="text-[11px] text-muted-foreground leading-snug truncate">
+                    {source.snippet}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
+function PersonalAssistantAnimation() {
+  const [activeRuleIndex, setActiveRuleIndex] = useState(-1);
+  const [executionCount, setExecutionCount] = useState(1248);
+
+  const rules = [
+    {
+      title: "VIP Client Routing",
+      trigger: "IF Sender in 'Enterprise Accounts'",
+      action: "Auto-CC Account Lead + Apply Executive Template",
+      latency: "12ms",
+      category: "Routing",
+    },
+    {
+      title: "Smart Calendar Resolver",
+      trigger: "IF Subject contains 'Intro Call' or 'Meeting'",
+      action: "Check Google Calendar & propose 3 open slots",
+      latency: "18ms",
+      category: "Scheduling",
+    },
+    {
+      title: "Contract & CRM Sync",
+      trigger: "IF Attachment ends in '.pdf' & contains 'Agreement'",
+      action: "Extract key terms, update CRM & notify #deals",
+      latency: "9ms",
+      category: "Integration",
+    },
+  ];
+
+  useEffect(() => {
+    let cancelled = false;
+    const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    const runLoop = async () => {
+      while (!cancelled) {
+        setActiveRuleIndex(-1);
+        await sleep(600);
+
+        for (let i = 0; i < rules.length; i++) {
+          if (cancelled) return;
+          setActiveRuleIndex(i);
+          setExecutionCount((prev) => prev + 1);
+          await sleep(1800);
+        }
+
+        if (cancelled) return;
+        await sleep(2500);
+      }
+    };
+
+    void runLoop();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [rules.length]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      className="relative w-full max-w-lg text-left"
+    >
+      <div className="bg-card border border-border rounded-2xl p-5 shadow-xl backdrop-blur-sm">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
+          <div>
+            <h3 className="text-sm font-bold text-foreground tracking-tight">Personal Email Assistant</h3>
+            <p className="text-[11px] text-muted-foreground">Automated workflows running continuously</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border bg-pink-wash/20 text-foreground border-pink-wash/40">
+              <span className="h-1.5 w-1.5 rounded-full bg-foreground animate-pulse" />
+              <span>{executionCount.toLocaleString()} Automated Actions</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Workflow Rules List */}
+        <div className="space-y-2.5">
+          {rules.map((rule, i) => {
+            const isActive = i === activeRuleIndex;
+
+            return (
+              <motion.div
+                key={rule.title}
+                animate={{
+                  borderColor: isActive ? "var(--pink-wash)" : "var(--color-border)",
+                  backgroundColor: isActive ? "var(--accent)" : "transparent",
+                }}
+                transition={{ duration: 0.3 }}
+                className={`rounded-xl border p-3.5 transition-all ${
+                  isActive ? "shadow-md" : "border-border/60 hover:border-border"
+                }`}
+              >
+                <div className="flex items-center justify-between mb-1.5">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-semibold text-foreground">{rule.title}</span>
+                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground font-mono">
+                      {rule.category}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {isActive && (
+                      <motion.span
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="text-[10px] text-emerald-600 dark:text-emerald-400 font-mono font-medium"
+                      >
+                        ⚡ Triggered ({rule.latency})
+                      </motion.span>
+                    )}
+                    <span
+                      className={`h-2 w-2 rounded-full transition-colors ${
+                        isActive ? "bg-emerald-500 shadow-sm shadow-emerald-500/50" : "bg-muted-foreground/30"
+                      }`}
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1 text-xs">
+                  <div className="flex items-center gap-1.5 text-muted-foreground">
+                    <span className="text-[10px] font-mono uppercase text-muted-foreground/70 shrink-0">IF</span>
+                    <span className="font-mono text-[11px] text-foreground/90 truncate">{rule.trigger}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[10px] font-mono uppercase text-foreground shrink-0">THEN</span>
+                    <span className="font-medium text-foreground text-[11px] truncate">{rule.action}</span>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 function FeatureAnimation({ activeFeature }: { activeFeature: number }) {
   const animations = [
     // Drafts in your voice
@@ -814,162 +1422,60 @@ function FeatureAnimation({ activeFeature }: { activeFeature: number }) {
     </div>,
     // Auto-organized inbox
     <div className="w-full h-full flex items-center justify-center">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="relative"
-      >
-        <div className="bg-card border border-border rounded-2xl p-4 w-72 shadow-lg">
-          <div className="space-y-2">
-            {[
-              { label: "Important", color: "bg-green-500/20" },
-              { label: "Newsletter", color: "bg-blue-500/20" },
-              { label: "Receipts", color: "bg-yellow-500/20" },
-            ].map((item, i) => (
-              <motion.div
-                key={item.label}
-                initial={{ x: -20, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: i * 0.15, duration: 0.4 }}
-                className="flex items-center gap-3 p-2 rounded-lg bg-muted/30"
-              >
-                <div className={`w-2 h-2 rounded-full ${item.color}`} />
-                <span className="text-xs text-foreground">{item.label}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.div>
+      <AutoOrganizedInboxAnimation />
     </div>,
     // Background agents
     <div className="w-full h-full flex items-center justify-center">
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
+        initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="relative"
+        className="relative w-full max-w-lg text-left"
       >
-        <div className="bg-card border border-border rounded-2xl p-6 w-80 shadow-lg">
-          <div className="flex items-center justify-center gap-4">
+        <div className="bg-card border border-border rounded-2xl p-5 shadow-xl backdrop-blur-sm">
+          <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
+            <div>
+              <h3 className="text-sm font-bold text-foreground tracking-tight">Autonomous Background Agents</h3>
+              <p className="text-[11px] text-muted-foreground">Managing schedule, threads &amp; follow-ups 24/7</p>
+            </div>
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border bg-primary-glow/10 text-primary-glow border-primary-glow/30">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary-glow animate-pulse" />
+              <span>Active</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 gap-3">
             {[
-              { icon: "📅", label: "Schedule" },
-              { icon: "📝", label: "Summarize" },
-              { icon: "✉️", label: "Follow-up" },
+              { title: "Smart Scheduler", status: "Finding open slot...", detail: "Synced with Google Cal" },
+              { title: "Thread Summarizer", status: "Digest ready (4 mails)", detail: "Key points extracted" },
+              { title: "Follow-up Tracker", status: "Reminder set in 2d", detail: "Waiting on client reply" },
             ].map((item, i) => (
               <motion.div
-                key={item.label}
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ delay: i * 0.2, duration: 0.5, type: "spring" }}
-                className="flex flex-col items-center gap-2"
+                key={item.title}
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: i * 0.15, duration: 0.4 }}
+                className="p-3 rounded-xl border border-border/60 bg-background/80 flex flex-col justify-between h-28"
               >
-                <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-2xl">
-                  {item.icon}
+                <div>
+                  <div className="text-xs font-semibold text-foreground mb-1">{item.title}</div>
+                  <div className="text-[10px] text-primary-glow font-medium">{item.status}</div>
                 </div>
-                <span className="text-[10px] text-muted-foreground">{item.label}</span>
+                <div className="text-[9px] text-muted-foreground pt-2 border-t border-border/40">
+                  {item.detail}
+                </div>
               </motion.div>
             ))}
           </div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
-            className="mt-4 text-center text-xs text-muted-foreground"
-          >
-            Running in background...
-          </motion.div>
         </div>
       </motion.div>
     </div>,
     // Ask your inbox
     <div className="w-full h-full flex items-center justify-center">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="relative"
-      >
-        <div className="bg-card border border-border rounded-2xl p-6 w-80 shadow-lg">
-          <div className="flex items-center gap-2 bg-muted/30 rounded-lg px-4 py-3 mb-4">
-            <Search className="h-4 w-4 text-muted-foreground" />
-            <motion.span
-              initial={{ opacity: 0, width: 0 }}
-              animate={{ opacity: 1, width: "auto" }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="text-sm text-foreground"
-            >
-              "Find receipts from last month"
-            </motion.span>
-          </div>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
-            className="space-y-2"
-          >
-            <div className="p-3 rounded-lg bg-muted/20 border border-border/60">
-              <div className="text-xs font-medium text-foreground">Amazon Receipt</div>
-              <div className="text-[10px] text-muted-foreground">Dec 15, 2024</div>
-            </div>
-            <div className="p-3 rounded-lg bg-muted/20 border border-border/60">
-              <div className="text-xs font-medium text-foreground">Uber Receipt</div>
-              <div className="text-[10px] text-muted-foreground">Dec 12, 2024</div>
-            </div>
-          </motion.div>
-        </div>
-      </motion.div>
+      <AskYourInboxAnimation />
     </div>,
     // Your personal email assistant
     <div className="w-full h-full flex items-center justify-center">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="relative"
-      >
-        <div className="bg-card border border-border rounded-2xl p-6 w-80 shadow-lg">
-          <div className="flex items-center gap-2 mb-4">
-            <Zap className="h-5 w-5 text-yellow-500" />
-            <span className="text-sm font-medium text-foreground">Custom Rules</span>
-          </div>
-          <div className="space-y-3">
-            {[
-              { rule: "Auto-CC team", action: "When emailing clients", icon: "👥" },
-              { rule: "Apply template", action: "For project updates", icon: "📝" },
-              { rule: "Create event", action: "When scheduling meetings", icon: "📅" },
-            ].map((item, i) => (
-              <motion.div
-                key={item.rule}
-                initial={{ x: -20, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 0.3 + i * 0.15, duration: 0.4 }}
-                className="flex items-center gap-3 p-3 rounded-lg bg-muted/30 border border-border/40"
-              >
-                <span className="text-lg">{item.icon}</span>
-                <div className="flex-1">
-                  <div className="text-xs font-medium text-foreground">{item.rule}</div>
-                  <div className="text-[10px] text-muted-foreground">{item.action}</div>
-                </div>
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.6 + i * 0.15, duration: 0.3 }}
-                  className="w-2 h-2 rounded-full bg-green-500"
-                />
-              </motion.div>
-            ))}
-          </div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.5 }}
-            className="mt-4 text-center text-xs text-muted-foreground"
-          >
-            Rules running automatically...
-          </motion.div>
-        </div>
-      </motion.div>
+      <PersonalAssistantAnimation />
     </div>,
     // Private by default
     <div className="w-full h-full flex items-center justify-center">
@@ -1029,14 +1535,16 @@ function FeatureAnimation({ activeFeature }: { activeFeature: number }) {
 
 function Features() {
   const [activeFeature, setActiveFeature] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return;
     const interval = setInterval(() => {
       setActiveFeature((prev) => (prev + 1) % features.length);
-    }, 10000);
+    }, 16000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused]);
 
   return (
     <section id="features" className="relative py-28">
@@ -1057,7 +1565,11 @@ function Features() {
           </p>
         </motion.div>
 
-        <div className="mt-14 grid md:grid-cols-2 gap-12 items-center">
+        <div
+          className="mt-14 grid md:grid-cols-2 gap-12 items-center"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           {/* Left side - Feature list */}
           <div className="space-y-4">
             {features.map((f, i) => (
@@ -1070,7 +1582,7 @@ function Features() {
                 onClick={() => setActiveFeature(i)}
                 className={`p-5 rounded-xl border cursor-pointer transition-all ${
                   activeFeature === i
-                    ? "bg-card border-primary-glow/50 shadow-lg"
+                    ? "bg-card border-pink-wash/80 shadow-lg ring-1 ring-pink-wash/40"
                     : "bg-card/50 border-border/60 hover:border-border hover:bg-card"
                 }`}
               >
@@ -1078,7 +1590,7 @@ function Features() {
                   <span
                     className={`inline-flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
                       activeFeature === i
-                        ? "bg-primary-glow/20 text-primary-glow"
+                        ? "bg-pink-wash/20 text-foreground"
                         : "bg-muted text-foreground"
                     }`}
                   >
@@ -1095,17 +1607,25 @@ function Features() {
             ))}
           </div>
 
-          {/* Right side - Animation box */}
+          {/* Right side - Animation box with Gradient Frame */}
           <div className="relative">
-            <motion.div
-              key={activeFeature}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="bg-gradient-to-br from-muted/20 to-card border border-border/60 rounded-3xl p-8 min-h-[400px] flex items-center justify-center shadow-xl"
+            <div
+              className="relative rounded-3xl p-2.5 md:p-3"
+              style={{
+                background: "var(--gradient-hero)",
+                boxShadow: "var(--shadow-soft)",
+              }}
             >
-              <FeatureAnimation activeFeature={activeFeature} />
-            </motion.div>
+              <motion.div
+                key={activeFeature}
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4 }}
+                className="bg-card rounded-2xl p-6 md:p-8 min-h-[420px] flex items-center justify-center border border-border/40 overflow-hidden"
+              >
+                <FeatureAnimation activeFeature={activeFeature} />
+              </motion.div>
+            </div>
           </div>
         </div>
       </div>
