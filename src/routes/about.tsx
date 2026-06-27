@@ -62,7 +62,7 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden pt-32 pb-20">
+    <section className="relative overflow-hidden py-12 md:py-16">
       <div className="absolute inset-0 bg-gradient-to-b from-primary-glow/5 via-transparent to-transparent" />
       <div className="relative max-w-4xl mx-auto px-6 text-center">
         <motion.h1

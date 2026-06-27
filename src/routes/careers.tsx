@@ -63,7 +63,7 @@ function Careers() {
   return (
     <main className="min-h-screen bg-background text-foreground antialiased">
       <Nav />
-      <section className="relative overflow-hidden pt-32 pb-32">
+      <section className="relative overflow-hidden py-12 md:py-16">
         <div className="absolute inset-0 bg-gradient-to-b from-primary-glow/5 via-transparent to-transparent" />
         <div className="relative max-w-3xl mx-auto px-6">
           <motion.div
