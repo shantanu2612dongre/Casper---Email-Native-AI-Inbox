@@ -160,7 +160,7 @@ function PrivacyPage() {
             <div className="space-y-10">
               <div className="space-y-4 text-sm md:text-base leading-7 text-foreground/85">
                 <p>
-                  At Slashy, we take your privacy seriously. This Privacy Policy explains how we
+                  Casper is the product operated by Slashy. This Privacy Policy explains how we
                   collect, use, disclose, and protect personal data when you use Casper, our
                   website, and related services (together, the &quot;Service&quot;).
                 </p>
@@ -184,7 +184,8 @@ function PrivacyPage() {
                   <strong>Connected Google data.</strong> If you connect Gmail, Google Calendar, or
                   Google Meet, we may access email content, attachments, metadata, calendar events,
                   attendees, scheduling details, meeting links, labels, folders, and search activity
-                  needed to provide the Service.
+                  needed to provide the Service. We only request and use the permissions needed for
+                  the features you enable.
                 </p>
                 <p>
                   <strong>Usage and device data.</strong> We may collect IP address, browser and
@@ -210,7 +211,7 @@ function PrivacyPage() {
                   We do not use your email content to train models for other users. Where we use
                   third-party AI providers, they are contractually restricted from retaining or
                   training on customer content except as disclosed in the Service and allowed by
-                  law.
+                  law. We do not use your personal data for third-party advertising.
                 </p>
               </Section>
 
@@ -225,10 +226,21 @@ function PrivacyPage() {
                   authority to provide the necessary consents and instructions for that
                   organization&apos;s data.
                 </p>
+                <p>
+                  For questions, requests, or complaints, contact our privacy team at{" "}
+                  <a
+                    href="mailto:privacy@usecasper.com"
+                    className="font-medium text-foreground hover:underline underline-offset-4"
+                  >
+                    privacy@usecasper.com
+                  </a>
+                  .
+                </p>
               </Section>
 
               <Section number="4" title="How We Share Information" icon={Cloud}>
                 <p>We do not sell your personal data.</p>
+                <p>We do not share personal data for targeted advertising.</p>
                 <p>We may share information with:</p>
                 <div className="space-y-2 pl-5">
                   <p>
@@ -322,6 +334,17 @@ function PrivacyPage() {
                   If you are in India, you may also have rights under the Digital Personal Data
                   Protection Act, 2023 and related rules, including grievance redressal rights and
                   rights to withdraw consent where applicable.
+                </p>
+                <p>
+                  If you have a grievance about our handling of personal data, email{" "}
+                  <a
+                    href="mailto:privacy@usecasper.com"
+                    className="font-medium text-foreground hover:underline underline-offset-4"
+                  >
+                    privacy@usecasper.com
+                  </a>
+                  . We will acknowledge and review the request within a reasonable time and, where
+                  appropriate, route it to the correct internal owner.
                 </p>
                 <p>
                   You can exercise rights by contacting us at{" "}
