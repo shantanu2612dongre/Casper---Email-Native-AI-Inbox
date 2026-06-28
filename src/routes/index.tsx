@@ -20,9 +20,11 @@ import {
   Clock,
   FileText,
   Trash2,
+  MousePointer2,
 } from "lucide-react";
 import { SiGooglecalendar, SiGmail } from "react-icons/si";
 import { Footer } from "../components/Footer";
+import { Testimonials } from "../components/Testimonials";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -58,17 +60,17 @@ function Nav() {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60"
+      className="sticky top-4 z-50 mx-4 md:mx-8 lg:mx-auto lg:max-w-7xl"
     >
-      <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <nav className="backdrop-blur-xl bg-background/70 border border-border/40 rounded-2xl shadow-lg shadow-foreground/5 px-6 h-16 flex items-center justify-between">
         <a
           href="#"
           className="flex items-center gap-2 font-semibold text-foreground tracking-tight text-xl"
         >
-          <span
-            aria-hidden
-            className="inline-block h-5 w-7 rounded-sm"
-            style={{ background: "var(--gradient-primary)" }}
+          <img
+            src="/android-chrome-192x192.png"
+            alt="Casper logo"
+            className="h-7 w-7 object-contain"
           />
           Casper
         </a>
@@ -152,45 +154,195 @@ function Hero() {
   );
 }
 
+const heroThreads = [
+  {
+    id: "tuan",
+    from: "Huỳnh Anh Tuấn",
+    email: "tuan@breezeway.io",
+    subject: "Partnership Opportunity – AI Email",
+    preview: "Hi team, I wanted to reach out about…",
+    time: "12:21 PM",
+    tag: "Important",
+    body: [
+      "Hi team,",
+      "I've been following Casper and love what you are building. We have an active developer base that uses automated agents, and we'd love to partner to enable Casper's email tools for them.",
+      "Let me know if you have time for a quick intro call next week to discuss details.",
+    ],
+    chatPrompt: "Draft an enthusiastic acceptance reply proposing Wednesday at 3 PM PST",
+    draftLines: [
+      "Hi Tuấn,",
+      "Thanks for reaching out! This sounds like a great fit. Casper's MCP native integration makes it super easy for developer agents to query and write emails.",
+      "Let's jump on a quick call next week. Would Wednesday at 3 PM PST work for you?",
+    ],
+  },
+  {
+    id: "neil",
+    from: "Neil Patel",
+    email: "neil@npdigital.com",
+    subject: "Have you optimized for agents yet?",
+    preview: "AI agents are fast becoming the primary consumers of email newsletters...",
+    time: "12:07 PM",
+    tag: "Newsletter",
+    body: [
+      "Hey Alex,",
+      "AI agents are fast becoming the primary consumers of email newsletters and digests. If your headers and metadata aren't structured cleanly, agents miss key insights.",
+      "Would love to share our latest benchmark report on agent readability if you're interested.",
+    ],
+    chatPrompt: "Draft a concise reply asking for the benchmark report PDF",
+    draftLines: [
+      "Hi Neil,",
+      "Thanks for reaching out! We're actively optimizing Casper for agent readability, so I'd love to check out the benchmark report.",
+      "Please send over the PDF whenever you have a chance.",
+    ],
+  },
+  {
+    id: "bi",
+    from: "Business Insider",
+    email: "news@businessinsider.com",
+    subject: "Ending soon — 1 year for only $29",
+    preview: "Limited time offer for digital subscribers...",
+    time: "12:01 PM",
+    tag: "Newsletter",
+    body: ["Get unlimited access to tech news and analysis across all your devices..."],
+    chatPrompt: "",
+    draftLines: [],
+  },
+];
+
 function InboxMockup() {
-  const rows = [
+  const [selectedId, setSelectedId] = useState("tuan");
+  const [chatInput, setChatInput] = useState("");
+  const [messages, setMessages] = useState<Array<{ sender: "user" | "casper"; text: string }>>([
     {
-      from: "Huỳnh Anh Tuấn",
-      subject: "Partnership Opportunity – AI Email",
-      preview: "Hi team, I wanted to reach out about…",
-      tag: "Important",
-      time: "12:21 PM",
-      active: true,
+      sender: "casper",
+      text: "I'm Casper, your email copilot. Ask me to draft a reply, schedule calls, or summarize threads!",
     },
-    {
-      from: "Neil Patel",
-      subject: "Have you optimized for agents yet?",
-      preview: "You've heard everyone…",
-      tag: "Newsletter",
-      time: "12:07 PM",
-    },
-    {
-      from: "Business Insider",
-      subject: "Ending soon — 1 year for only $29",
-      preview: "Limited time only. End…",
-      tag: "Newsletter",
-      time: "12:01 PM",
-    },
-    {
-      from: "The Hustle",
-      subject: "✨ A new kind of power suit",
-      preview: "Plus: A popular plumber, a wi…",
-      tag: "Newsletter",
-      time: "11:30 AM",
-    },
-    {
-      from: "Business Insider",
-      subject: "Today: What Amazon's job cuts mean for you",
-      preview: "Plus: More…",
-      tag: "Newsletter",
-      time: "10:52 AM",
-    },
-  ];
+  ]);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [visibleDraftLines, setVisibleDraftLines] = useState<string[]>(
+    heroThreads[0].draftLines
+  );
+  const [cursorState, setCursorState] = useState<{
+    x: number;
+    y: number;
+    clicking: boolean;
+    opacity: number;
+  }>({ x: 38, y: 15, clicking: false, opacity: 0 });
+  const [clickPulse, setClickPulse] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    const runSequence = async () => {
+      while (!cancelled) {
+        // Step 0: Reset to Tuấn email thread
+        setSelectedId("tuan");
+        setVisibleDraftLines(heroThreads[0].draftLines);
+        setChatInput("");
+        setMessages([
+          {
+            sender: "casper",
+            text: "I'm Casper, your email copilot. Ask me to draft a reply, schedule calls, or summarize threads!",
+          },
+        ]);
+        setCursorState({ x: 38, y: 15, clicking: false, opacity: 0 });
+        await sleep(1500);
+
+        // Step 1: Cursor fades in and glides to Neil Patel in email list
+        if (cancelled) return;
+        setCursorState({ x: 38, y: 15, clicking: false, opacity: 1 });
+        await sleep(300);
+
+        if (cancelled) return;
+        // Move to Neil Patel row (approx 32% x, 32% y)
+        setCursorState({ x: 32, y: 32, clicking: false, opacity: 1 });
+        await sleep(700);
+
+        // Step 2: Click Neil Patel row
+        if (cancelled) return;
+        setCursorState({ x: 32, y: 32, clicking: true, opacity: 1 });
+        setClickPulse(true);
+        await sleep(180);
+        if (cancelled) return;
+        setCursorState({ x: 32, y: 32, clicking: false, opacity: 1 });
+        setClickPulse(false);
+        setSelectedId("neil");
+        setVisibleDraftLines([]);
+        setMessages([
+          {
+            sender: "casper",
+            text: "Viewing thread from Neil Patel. What would you like me to draft?",
+          },
+        ]);
+        await sleep(800);
+
+        // Step 3: Cursor glides to Casper Copilot Chat Input at bottom right
+        if (cancelled) return;
+        setCursorState({ x: 86, y: 92, clicking: false, opacity: 1 });
+        await sleep(800);
+
+        // Step 4: Type instruction into Chat Input
+        if (cancelled) return;
+        const targetPrompt = heroThreads[1].chatPrompt;
+        for (let i = 1; i <= targetPrompt.length; i++) {
+          if (cancelled) return;
+          setChatInput(targetPrompt.slice(0, i));
+          await sleep(28);
+        }
+
+        // Step 5: Cursor clicks Send button
+        if (cancelled) return;
+        await sleep(300);
+        setCursorState({ x: 96, y: 92, clicking: true, opacity: 1 });
+        setClickPulse(true);
+        await sleep(180);
+        if (cancelled) return;
+        setCursorState({ x: 96, y: 92, clicking: false, opacity: 1 });
+        setClickPulse(false);
+
+        // Add user message to chat & show AI generating status
+        setChatInput("");
+        setMessages((prev) => [
+          ...prev,
+          { sender: "user", text: targetPrompt },
+          { sender: "casper", text: "Drafting response in your voice..." },
+        ]);
+        setIsGenerating(true);
+
+        // Fade cursor out while AI works
+        setCursorState((prev) => ({ ...prev, opacity: 0 }));
+        await sleep(1000);
+
+        if (cancelled) return;
+        setIsGenerating(false);
+        setMessages((prev) => [
+          ...prev.slice(0, -1),
+          { sender: "casper", text: "Draft generated and placed in your reply editor below!" },
+        ]);
+
+        // Step 6: Type draft lines into view inside email pane
+        const targetLines = heroThreads[1].draftLines;
+        for (let l = 1; l <= targetLines.length; l++) {
+          if (cancelled) return;
+          setVisibleDraftLines(targetLines.slice(0, l));
+          await sleep(400);
+        }
+
+        // Hold completed state for 5.5s
+        await sleep(5500);
+      }
+    };
+
+    void runSequence();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const selectedThread = heroThreads.find((t) => t.id === selectedId) || heroThreads[0];
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 60, rotateX: 8 }}
@@ -200,16 +352,48 @@ function InboxMockup() {
       className="relative mx-auto mt-10 max-w-7xl"
     >
       <motion.div
-        animate={{ y: [0, -8, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        animate={{
+          y: clickPulse ? [0, -5, 0] : 0,
+          scale: clickPulse ? [1, 1.03, 1] : 1,
+          x: clickPulse ? [0, 3, 0, -3, 0] : 0,
+        }}
+        transition={{
+          duration: 0.3,
+          repeat: clickPulse ? 1 : 0,
+          ease: "easeInOut",
+        }}
         className="relative rounded-2xl p-3 md:p-4"
         style={{
           background: "var(--gradient-hero)",
           boxShadow: "var(--shadow-soft)",
         }}
       >
-        <div className="rounded-xl overflow-hidden bg-card border border-border/60 flex flex-col h-[520px]">
-          {/* Window chrome */}
+        <div className="rounded-xl overflow-hidden bg-card border border-border/60 flex flex-col h-[560px] relative">
+          {/* Animated Mouse Cursor Overlay */}
+          <motion.div
+            animate={{
+              left: `${cursorState.x}%`,
+              top: `${cursorState.y}%`,
+              scale: cursorState.clicking ? 0.85 : 1,
+              opacity: cursorState.opacity,
+            }}
+            transition={{ duration: 0.7, ease: "easeInOut" }}
+            className="absolute z-50 pointer-events-none -translate-x-1/2 -translate-y-1/2"
+          >
+            <div className="relative">
+              <MousePointer2 className="h-5 w-5 text-foreground fill-foreground drop-shadow-lg" />
+              {cursorState.clicking && (
+                <motion.span
+                  initial={{ scale: 0.5, opacity: 1 }}
+                  animate={{ scale: 2, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute -inset-1 rounded-full border-2 border-primary-glow pointer-events-none"
+                />
+              )}
+            </div>
+          </motion.div>
+
+          {/* Window Chrome */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-border/60 bg-muted/20">
             <div className="flex items-center gap-2">
               <span className="h-3 w-3 rounded-full bg-[oklch(0.72_0.18_25)]" />
@@ -226,10 +410,10 @@ function InboxMockup() {
             </div>
           </div>
 
-          {/* Panes */}
+          {/* 4 Main Panes Layout */}
           <div className="flex flex-1 min-h-0 divide-x divide-border/60">
-            {/* Sidebar */}
-            <aside className="hidden md:flex flex-col w-48 flex-shrink-0 bg-muted/10 py-3 text-xs">
+            {/* Pane 1: Left Navigation Sidebar */}
+            <aside className="hidden md:flex flex-col w-44 flex-shrink-0 bg-muted/10 py-3 text-xs text-left">
               <div className="px-3 mb-4">
                 <button className="w-full flex items-center justify-center gap-2 rounded-lg bg-foreground text-background py-2 font-medium hover:opacity-90 transition-opacity">
                   <Sparkles className="h-3.5 w-3.5" />
@@ -264,143 +448,164 @@ function InboxMockup() {
                   </button>
                 ))}
               </div>
-              <div className="mt-6 px-4 text-[10px] font-semibold text-muted-foreground uppercase tracking-wider text-left">
-                AI Agents
-              </div>
-              <div className="mt-2 space-y-1 px-2">
-                {[
-                  { label: "Auto-Drafting", active: true },
-                  { label: "Meeting scheduler" },
-                  { label: "Thread summarizer" },
-                ].map((agent) => (
-                  <button
-                    key={agent.label}
-                    className={`w-full flex items-center gap-2 px-3 py-1.5 rounded-md font-medium text-left transition-colors ${
-                      agent.active
-                        ? "text-primary-glow bg-primary-glow/5"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
-                    }`}
-                  >
-                    <span
-                      className={`h-1.5 w-1.5 rounded-full ${agent.active ? "bg-primary-glow" : "bg-muted-foreground/30"}`}
-                    />
-                    <span className="truncate">{agent.label}</span>
-                  </button>
-                ))}
-              </div>
             </aside>
 
-            {/* Email List */}
-            <section className="flex flex-col w-full md:w-80 flex-shrink-0 bg-card divide-y divide-border/60 overflow-y-auto">
-              {rows.map((r, i) => (
-                <div
-                  key={i}
-                  className={`p-4 text-xs text-left transition-colors relative ${
-                    r.active ? "bg-muted/50" : "hover:bg-muted/20"
-                  }`}
-                >
-                  {r.active && (
-                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-glow" />
-                  )}
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="font-semibold text-foreground">{r.from}</span>
-                    <span className="text-[10px] text-muted-foreground">{r.time}</span>
-                  </div>
-                  <div className="font-medium text-foreground truncate mb-1">{r.subject}</div>
-                  <div className="text-muted-foreground truncate">{r.preview}</div>
-                  {r.tag && (
-                    <div className="mt-2 flex items-center gap-1.5">
-                      <span className="rounded bg-pink-wash/10 text-foreground/80 text-[10px] px-1.5 py-0.5 border border-pink-wash/20">
-                        {r.tag}
+            {/* Pane 2: Email List Pane */}
+            <section className="flex flex-col w-full md:w-64 lg:w-72 flex-shrink-0 bg-card divide-y divide-border/60 overflow-y-auto">
+              {heroThreads.map((r) => {
+                const isActive = r.id === selectedId;
+                return (
+                  <div
+                    key={r.id}
+                    onClick={() => setSelectedId(r.id)}
+                    className={`p-3.5 text-xs text-left transition-colors relative cursor-pointer ${
+                      isActive ? "bg-muted/50" : "hover:bg-muted/20"
+                    }`}
+                  >
+                    {isActive && (
+                      <div className="absolute left-0 top-0 bottom-0 w-1 bg-foreground" />
+                    )}
+                    <div className="flex items-center justify-between mb-1">
+                      <span className={`font-semibold ${isActive ? "text-foreground" : "text-foreground/90"}`}>
+                        {r.from}
                       </span>
+                      <span className="text-[10px] text-muted-foreground">{r.time}</span>
                     </div>
-                  )}
-                </div>
-              ))}
+                    <div className="font-medium text-foreground truncate mb-1">{r.subject}</div>
+                    <div className="text-muted-foreground truncate text-[11px]">{r.preview}</div>
+                    {r.tag && (
+                      <div className="mt-2 flex items-center gap-1.5">
+                        <span className="rounded bg-pink-wash/15 text-foreground/90 text-[10px] px-1.5 py-0.5 border border-pink-wash/30 font-medium">
+                          {r.tag}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </section>
 
-            {/* Detail & AI Draft Pane */}
-            <section className="hidden lg:flex flex-col flex-1 bg-muted/5 p-6 overflow-y-auto text-left">
-              {/* Selected Email Header */}
-              <div className="border-b border-border/60 pb-4 mb-4">
+            {/* Pane 3: Email Thread Detail & AI Draft Pane */}
+            <section className="hidden sm:flex flex-col flex-1 bg-muted/5 p-5 overflow-y-auto text-left min-w-0">
+              <div className="border-b border-border/60 pb-3 mb-3">
                 <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="text-sm font-semibold text-foreground">
-                      Partnership Opportunity – AI Email
+                  <div className="min-w-0">
+                    <h3 className="text-xs md:text-sm font-bold text-foreground truncate">
+                      {selectedThread.subject}
                     </h3>
-                    <div className="mt-1 text-xs text-muted-foreground flex items-center gap-1.5">
-                      <span className="font-medium text-foreground">Huỳnh Anh Tuấn</span>
-                      <span>&lt;tuan@breezeway.io&gt;</span>
+                    <div className="mt-1 text-[11px] text-muted-foreground flex items-center gap-1.5">
+                      <span className="font-medium text-foreground">{selectedThread.from}</span>
+                      <span className="truncate">&lt;{selectedThread.email}&gt;</span>
                     </div>
                   </div>
-                  <span className="text-[10px] text-muted-foreground">
-                    12:21 PM (10 minutes ago)
+                  <span className="text-[10px] text-muted-foreground shrink-0 ml-2">
+                    {selectedThread.time}
                   </span>
                 </div>
               </div>
 
-              {/* Selected Email Body */}
-              <div className="text-xs text-foreground/90 leading-relaxed mb-6 space-y-2">
-                <p>Hi team,</p>
-                <p>
-                  I've been following Casper and love what you are building. We have an active
-                  developer base that uses automated agents, and we'd love to partner to enable
-                  Casper's email tools for them.
-                </p>
-                <p>
-                  Let me know if you have time for a quick intro call next week to discuss details.
-                </p>
-                <p className="text-muted-foreground">
-                  Best,
-                  <br />
-                  Huỳnh Anh Tuấn
-                </p>
+              {/* Email Body */}
+              <div className="text-xs text-foreground/90 leading-relaxed mb-5 space-y-2">
+                {selectedThread.body.map((p, idx) => (
+                  <p key={idx}>{p}</p>
+                ))}
               </div>
 
               {/* Casper AI Draft Section */}
-              <div
-                className="rounded-xl border border-border p-4 bg-card relative overflow-hidden"
-                style={{
-                  boxShadow: "0 4px 20px -2px oklch(0.7 0.16 230 / 0.08)",
-                }}
-              >
-                {/* Glow/Gradient background border highlight */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary-glow via-pink-wash to-lavender-wash" />
-
-                <div className="flex items-center justify-between mb-3">
+              <div className="mt-auto rounded-xl border border-border/70 p-3.5 bg-card relative overflow-hidden shadow-sm">
+                <div className="flex items-center justify-between mb-2.5">
                   <div className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
-                    <Sparkles className="h-3.5 w-3.5 text-primary-glow" />
+                    <Sparkles className="h-3.5 w-3.5 text-foreground" />
                     <span>Drafted by Casper</span>
                     <span className="text-[10px] font-normal text-muted-foreground">
                       (in your voice)
                     </span>
                   </div>
-                  <span className="text-[9px] rounded-full bg-primary-glow/10 text-primary-glow px-2 py-0.5 font-medium border border-primary-glow/20 font-sans">
-                    Ready to send
+                  <span className="text-[9px] rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 font-medium border border-emerald-500/20 font-sans">
+                    {visibleDraftLines.length > 0 ? "Ready to send" : isGenerating ? "Generating..." : "Waiting for prompt"}
                   </span>
                 </div>
 
-                <div className="text-xs text-foreground/90 leading-relaxed space-y-2 mb-4 bg-muted/30 p-3 rounded-lg border border-border/40 font-serif italic">
-                  <p>Hi Tuấn,</p>
-                  <p>
-                    Thanks for reaching out! This sounds like a great fit. Casper's MCP native
-                    integration makes it super easy for developer agents to query and write emails.
-                  </p>
-                  <p>
-                    Let's jump on a quick call next week. Would Wednesday at 3 PM PST work for you?
-                  </p>
+                <div className="text-xs text-foreground/90 leading-relaxed space-y-1.5 min-h-[72px] bg-muted/30 p-3 rounded-lg border border-border/40 font-serif italic">
+                  {visibleDraftLines.length > 0 ? (
+                    visibleDraftLines.map((line, lIdx) => <p key={lIdx}>{line}</p>)
+                  ) : isGenerating ? (
+                    <div className="flex items-center gap-2 text-muted-foreground py-2 font-sans not-italic">
+                      <span className="h-1.5 w-1.5 rounded-full bg-foreground animate-ping" />
+                      <span>Drafting customized response...</span>
+                    </div>
+                  ) : (
+                    <p className="text-muted-foreground font-sans not-italic text-[11px]">
+                      Use the Casper Copilot sidebar on the right to prompt a response...
+                    </p>
+                  )}
                 </div>
 
-                <div className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2">
-                    <button className="inline-flex items-center justify-center rounded-lg bg-foreground text-background px-3 py-1.5 font-medium hover:opacity-90 transition-opacity">
-                      <span>Approve &amp; Send</span>
-                    </button>
-                    <button className="inline-flex items-center justify-center rounded-lg border border-border bg-card px-3 py-1.5 font-medium text-foreground hover:bg-muted transition-colors">
-                      <span>Edit</span>
-                    </button>
+                {visibleDraftLines.length > 0 && (
+                  <div className="flex items-center justify-between text-xs mt-3">
+                    <div className="flex items-center gap-2">
+                      <button className="inline-flex items-center justify-center rounded-lg bg-foreground text-background px-3 py-1.5 font-medium text-xs hover:opacity-90 transition-opacity">
+                        <span>Approve &amp; Send</span>
+                      </button>
+                      <button className="inline-flex items-center justify-center rounded-lg border border-border bg-card px-3 py-1.5 font-medium text-xs text-foreground hover:bg-muted transition-colors">
+                        <span>Edit</span>
+                      </button>
+                    </div>
+                    <span className="text-[10px] text-muted-foreground font-mono">⌘Enter</span>
                   </div>
-                  <span className="text-[10px] text-muted-foreground font-mono">⌘Enter</span>
+                )}
+              </div>
+            </section>
+
+            {/* Pane 4: Right Casper AI Copilot Chat Sidebar */}
+            <section className="hidden lg:flex flex-col w-72 shrink-0 bg-card border-l border-border/60 p-4 justify-between text-left">
+              <div>
+                <div className="flex items-center justify-between pb-3 border-b border-border/60 mb-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-lg bg-foreground text-background flex items-center justify-center">
+                      <Sparkles className="h-3.5 w-3.5" />
+                    </div>
+                    <span className="text-xs font-bold text-foreground tracking-tight">Casper Copilot</span>
+                  </div>
+                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground font-mono">AI Active</span>
+                </div>
+
+                {/* Messages Chat Stream */}
+                <div className="space-y-2.5 max-h-[340px] overflow-y-auto pr-1">
+                  {messages.map((msg, mIdx) => (
+                    <motion.div
+                      key={mIdx}
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={`p-2.5 rounded-xl text-xs ${
+                        msg.sender === "user"
+                          ? "bg-foreground text-background ml-4 font-medium"
+                          : "bg-muted/40 text-foreground border border-border/50"
+                      }`}
+                    >
+                      {msg.text}
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Chat Input Box */}
+              <div className="pt-3 border-t border-border/60">
+                <div className="relative rounded-xl border border-border bg-background p-2 focus-within:border-foreground/50 transition-colors flex items-center gap-2">
+                  <input
+                    type="text"
+                    readOnly
+                    value={chatInput}
+                    placeholder="Ask Casper to draft or reply..."
+                    className="w-full bg-transparent text-xs text-foreground placeholder:text-muted-foreground focus:outline-none px-1"
+                  />
+                  <button
+                    className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                      chatInput ? "bg-foreground text-background" : "bg-muted text-muted-foreground"
+                    }`}
+                  >
+                    <Send className="h-3.5 w-3.5" />
+                  </button>
                 </div>
               </div>
             </section>
@@ -2018,6 +2223,7 @@ function Index() {
       <Features />
       <HowItWorks />
       <Pricing />
+      <Testimonials />
       <CTA />
       <Footer />
     </main>

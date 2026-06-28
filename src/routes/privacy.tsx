@@ -56,11 +56,7 @@ function Nav() {
           href="/"
           className="flex items-center gap-2 font-semibold text-foreground tracking-tight text-xl"
         >
-          <span
-            aria-hidden
-            className="inline-block h-5 w-7 rounded-sm"
-            style={{ background: "var(--gradient-primary)" }}
-          />
+          <img src="/android-chrome-192x192.png" alt="Casper logo" className="h-7 w-7 object-contain" />
           Casper
         </a>
         <div className="hidden md:flex items-center gap-10 text-sm text-foreground/80">
