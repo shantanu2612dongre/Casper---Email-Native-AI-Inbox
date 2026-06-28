@@ -16,12 +16,12 @@ export function Footer() {
           <div className="md:col-span-5 flex flex-col items-start gap-6">
             <a
               href="#"
-              className="flex items-center gap-2 font-semibold text-foreground tracking-tight text-xl"
+              className="flex items-center gap-1.5 font-semibold text-foreground tracking-tight text-xl"
             >
               <img
-                src="/android-chrome-192x192.png"
+                src="/casper-logo.svg"
                 alt="Casper logo"
-                className="h-7 w-7 object-contain"
+                className="h-9 w-9 object-contain"
               />
               Casper
             </a>

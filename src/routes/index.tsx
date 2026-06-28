@@ -65,12 +65,12 @@ function Nav() {
       <nav className="backdrop-blur-xl bg-background/70 border border-border/40 rounded-2xl shadow-lg shadow-foreground/5 px-6 h-16 flex items-center justify-between">
         <a
           href="#"
-          className="flex items-center gap-2 font-semibold text-foreground tracking-tight text-xl"
+          className="flex items-center gap-1.5 font-semibold text-foreground tracking-tight text-xl"
         >
           <img
-            src="/android-chrome-192x192.png"
+            src="/casper-logo.svg"
             alt="Casper logo"
-            className="h-7 w-7 object-contain"
+            className="h-9 w-9 object-contain"
           />
           Casper
         </a>

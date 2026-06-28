@@ -34,8 +34,8 @@ function Nav() {
       className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60"
     >
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-2 font-semibold text-foreground tracking-tight text-xl">
-          <img src="/android-chrome-192x192.png" alt="Casper logo" className="h-7 w-7 object-contain" />
+        <a href="/" className="flex items-center gap-1.5 font-semibold text-foreground tracking-tight text-xl">
+          <img src="/casper-logo.svg" alt="Casper logo" className="h-9 w-9 object-contain" />
           Casper
         </a>
         <div className="hidden md:flex items-center gap-10 text-sm text-foreground/80">
@@ -335,7 +335,7 @@ function CTA() {
         >
           <div className="flex items-center gap-3 px-4 py-2.5 border-b border-border/60 text-xs">
             <span className="inline-flex items-center gap-1.5 font-semibold text-foreground">
-              <img src="/android-chrome-192x192.png" alt="Casper logo" className="h-3.5 w-3.5 object-contain" />
+              <img src="/casper-logo.svg" alt="Casper logo" className="h-3.5 w-3.5 object-contain" />
               Casper Inbox
             </span>
             <div className="ml-2 flex-1 rounded-md bg-muted/60 px-2.5 py-1 text-muted-foreground">Search</div>

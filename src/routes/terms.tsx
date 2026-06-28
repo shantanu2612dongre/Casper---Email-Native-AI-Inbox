@@ -52,9 +52,9 @@ function Nav() {
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <a
           href="/"
-          className="flex items-center gap-2 font-semibold text-foreground tracking-tight text-xl"
+          className="flex items-center gap-1.5 font-semibold text-foreground tracking-tight text-xl"
         >
-          <img src="/android-chrome-192x192.png" alt="Casper logo" className="h-7 w-7 object-contain" />
+          <img src="/casper-logo.svg" alt="Casper logo" className="h-9 w-9 object-contain" />
           Casper
         </a>
         <div className="hidden md:flex items-center gap-10 text-sm text-foreground/80">
