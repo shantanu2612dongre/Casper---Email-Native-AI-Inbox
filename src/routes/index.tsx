@@ -21,6 +21,13 @@ import {
   FileText,
   Trash2,
   MousePointer2,
+  Bell,
+  Ghost,
+  Users,
+  Eye,
+  Handshake,
+  ArrowRight,
+  Timer,
 } from "lucide-react";
 import { SiGooglecalendar, SiGmail } from "react-icons/si";
 import { Footer } from "../components/Footer";
@@ -660,19 +667,9 @@ const features = [
     desc: "Newsletters, receipts, and noise are quietly tucked away so only what matters stays in view.",
   },
   {
-    icon: Bot,
-    title: "Background agents",
-    desc: "Schedule meetings, summarize threads, and follow up — without lifting a finger.",
-  },
-  {
     icon: Search,
     title: "Ask your inbox",
     desc: "Search like you think. Find any email, attachment, or detail with a single question.",
-  },
-  {
-    icon: Zap,
-    title: "Your personal email assistant",
-    desc: "Set custom rules that automatically handle CCs, apply templates, and trigger actions based on who you're emailing.",
   },
   {
     icon: Shield,
@@ -1431,144 +1428,7 @@ function AskYourInboxAnimation() {
   );
 }
 
-function PersonalAssistantAnimation() {
-  const [activeRuleIndex, setActiveRuleIndex] = useState(-1);
-  const [executionCount, setExecutionCount] = useState(1248);
-
-  const rules = [
-    {
-      title: "VIP Client Routing",
-      trigger: "IF Sender in 'Enterprise Accounts'",
-      action: "Auto-CC Account Lead + Apply Executive Template",
-      latency: "12ms",
-      category: "Routing",
-    },
-    {
-      title: "Smart Calendar Resolver",
-      trigger: "IF Subject contains 'Intro Call' or 'Meeting'",
-      action: "Check Google Calendar & propose 3 open slots",
-      latency: "18ms",
-      category: "Scheduling",
-    },
-    {
-      title: "Contract & CRM Sync",
-      trigger: "IF Attachment ends in '.pdf' & contains 'Agreement'",
-      action: "Extract key terms, update CRM & notify #deals",
-      latency: "9ms",
-      category: "Integration",
-    },
-  ];
-
-  useEffect(() => {
-    let cancelled = false;
-    const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-    const runLoop = async () => {
-      while (!cancelled) {
-        setActiveRuleIndex(-1);
-        await sleep(600);
-
-        for (let i = 0; i < rules.length; i++) {
-          if (cancelled) return;
-          setActiveRuleIndex(i);
-          setExecutionCount((prev) => prev + 1);
-          await sleep(1800);
-        }
-
-        if (cancelled) return;
-        await sleep(2500);
-      }
-    };
-
-    void runLoop();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [rules.length]);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5 }}
-      className="relative w-full max-w-lg text-left"
-    >
-      <div className="bg-card border border-border rounded-2xl p-5 shadow-xl backdrop-blur-sm">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
-          <div>
-            <h3 className="text-sm font-bold text-foreground tracking-tight">Personal Email Assistant</h3>
-            <p className="text-[11px] text-muted-foreground">Automated workflows running continuously</p>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border bg-pink-wash/20 text-foreground border-pink-wash/40">
-              <span className="h-1.5 w-1.5 rounded-full bg-foreground animate-pulse" />
-              <span>{executionCount.toLocaleString()} Automated Actions</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Workflow Rules List */}
-        <div className="space-y-2.5">
-          {rules.map((rule, i) => {
-            const isActive = i === activeRuleIndex;
-
-            return (
-              <motion.div
-                key={rule.title}
-                animate={{
-                  borderColor: isActive ? "var(--pink-wash)" : "var(--color-border)",
-                  backgroundColor: isActive ? "var(--accent)" : "transparent",
-                }}
-                transition={{ duration: 0.3 }}
-                className={`rounded-xl border p-3.5 transition-all ${
-                  isActive ? "shadow-md" : "border-border/60 hover:border-border"
-                }`}
-              >
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-semibold text-foreground">{rule.title}</span>
-                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground font-mono">
-                      {rule.category}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    {isActive && (
-                      <motion.span
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="text-[10px] text-emerald-600 dark:text-emerald-400 font-mono font-medium"
-                      >
-                        ⚡ Triggered ({rule.latency})
-                      </motion.span>
-                    )}
-                    <span
-                      className={`h-2 w-2 rounded-full transition-colors ${
-                        isActive ? "bg-emerald-500 shadow-sm shadow-emerald-500/50" : "bg-muted-foreground/30"
-                      }`}
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-1 text-xs">
-                  <div className="flex items-center gap-1.5 text-muted-foreground">
-                    <span className="text-[10px] font-mono uppercase text-muted-foreground/70 shrink-0">IF</span>
-                    <span className="font-mono text-[11px] text-foreground/90 truncate">{rule.trigger}</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-[10px] font-mono uppercase text-foreground shrink-0">THEN</span>
-                    <span className="font-medium text-foreground text-[11px] truncate">{rule.action}</span>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
+// PersonalAssistantAnimation removed — feature moved to RelationshipCopilot section
 
 function FeatureAnimation({ activeFeature }: { activeFeature: number }) {
   const animations = [
@@ -1580,58 +1440,9 @@ function FeatureAnimation({ activeFeature }: { activeFeature: number }) {
     <div className="w-full h-full flex items-center justify-center">
       <AutoOrganizedInboxAnimation />
     </div>,
-    // Background agents
-    <div className="w-full h-full flex items-center justify-center">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="relative w-full max-w-lg text-left"
-      >
-        <div className="bg-card border border-border rounded-2xl p-5 shadow-xl backdrop-blur-sm">
-          <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
-            <div>
-              <h3 className="text-sm font-bold text-foreground tracking-tight">Autonomous Background Agents</h3>
-              <p className="text-[11px] text-muted-foreground">Managing schedule, threads &amp; follow-ups 24/7</p>
-            </div>
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border bg-primary-glow/10 text-primary-glow border-primary-glow/30">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary-glow animate-pulse" />
-              <span>Active</span>
-            </div>
-          </div>
-          <div className="grid grid-cols-3 gap-3">
-            {[
-              { title: "Smart Scheduler", status: "Finding open slot...", detail: "Synced with Google Cal" },
-              { title: "Thread Summarizer", status: "Digest ready (4 mails)", detail: "Key points extracted" },
-              { title: "Follow-up Tracker", status: "Reminder set in 2d", detail: "Waiting on client reply" },
-            ].map((item, i) => (
-              <motion.div
-                key={item.title}
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: i * 0.15, duration: 0.4 }}
-                className="p-3 rounded-xl border border-border/60 bg-background/80 flex flex-col justify-between h-28"
-              >
-                <div>
-                  <div className="text-xs font-semibold text-foreground mb-1">{item.title}</div>
-                  <div className="text-[10px] text-primary-glow font-medium">{item.status}</div>
-                </div>
-                <div className="text-[9px] text-muted-foreground pt-2 border-t border-border/40">
-                  {item.detail}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.div>
-    </div>,
     // Ask your inbox
     <div className="w-full h-full flex items-center justify-center">
       <AskYourInboxAnimation />
-    </div>,
-    // Your personal email assistant
-    <div className="w-full h-full flex items-center justify-center">
-      <PersonalAssistantAnimation />
     </div>,
     // Private by default
     <div className="w-full h-full flex items-center justify-center">
@@ -1899,6 +1710,450 @@ function OrbitalAnimation() {
   );
 }
 
+function FollowUpAnimation() {
+  const [step, setStep] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStep((prev) => (prev + 1) % 4);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const reminders = [
+    { name: "Sarah Chen", subject: "Partnership proposal", days: "2 days ago", status: "No reply" },
+    { name: "Marcus Webb", subject: "Contract renewal", days: "5 days ago", status: "Ghosted" },
+    { name: "Priya Sharma", subject: "Intro call follow-up", days: "1 day ago", status: "Pending" },
+  ];
+
+  return (
+    <div className="w-full space-y-2">
+      {reminders.map((r, i) => (
+        <motion.div
+          key={r.name}
+          initial={{ opacity: 0, x: -10 }}
+          animate={{
+            opacity: 1,
+            x: 0,
+            scale: step === i ? 1.02 : 1,
+            borderColor: step === i ? "var(--pink-wash)" : "var(--color-border)",
+          }}
+          transition={{ delay: i * 0.1, duration: 0.3 }}
+          className="flex items-center justify-between p-3 rounded-xl border bg-background/80"
+        >
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="h-8 w-8 rounded-full bg-pink-wash/20 flex items-center justify-center shrink-0">
+              <span className="text-xs font-semibold text-foreground">{r.name.split(" ").map(n => n[0]).join("")}</span>
+            </div>
+            <div className="min-w-0">
+              <div className="text-xs font-medium text-foreground truncate">{r.subject}</div>
+              <div className="text-[10px] text-muted-foreground">{r.name} · {r.days}</div>
+            </div>
+          </div>
+          <motion.span
+            animate={{
+              backgroundColor: step === i ? "var(--pink-wash)" : undefined,
+              color: step === i ? "var(--foreground)" : undefined,
+            }}
+            className="text-[10px] px-2 py-1 rounded-full bg-muted text-muted-foreground font-medium shrink-0"
+          >
+            {step === i ? "🔔 Ping sent" : r.status}
+          </motion.span>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+function UnifiedInboxAnimation() {
+  const accounts = [
+    { provider: "Gmail", email: "alex@gmail.com", color: "#EA4335", unread: 12 },
+    { provider: "Outlook", email: "alex@company.com", color: "#0078D4", unread: 5 },
+    { provider: "Gmail", email: "alex@startup.io", color: "#34A853", unread: 3 },
+  ];
+
+  return (
+    <div className="w-full space-y-3">
+      <div className="flex items-center gap-2 mb-1">
+        <div className="flex -space-x-2">
+          {accounts.map((a, i) => (
+            <motion.div
+              key={a.provider + i}
+              initial={{ opacity: 0, scale: 0, x: -20 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ delay: i * 0.15, duration: 0.4 }}
+              className="h-7 w-7 rounded-full border-2 border-card flex items-center justify-center"
+              style={{ backgroundColor: a.color + "20" }}
+            >
+              <span className="text-[10px] font-bold" style={{ color: a.color }}>{a.provider[0]}</span>
+            </motion.div>
+          ))}
+        </div>
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="text-[11px] text-muted-foreground"
+        >
+          3 accounts synced
+        </motion.span>
+      </div>
+      {accounts.map((a, i) => (
+        <motion.div
+          key={a.email}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 + i * 0.15, duration: 0.4 }}
+          className="flex items-center justify-between p-3 rounded-xl border border-border/60 bg-background/80"
+        >
+          <div className="flex items-center gap-3">
+            <div className="h-3 w-3 rounded-full" style={{ backgroundColor: a.color }} />
+            <div>
+              <div className="text-xs font-medium text-foreground">{a.provider}</div>
+              <div className="text-[10px] text-muted-foreground">{a.email}</div>
+            </div>
+          </div>
+          <span className="text-[11px] font-semibold text-foreground bg-muted px-2 py-0.5 rounded-full">
+            {a.unread}
+          </span>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+function GhostTrackerAnimation() {
+  const [highlightIdx, setHighlightIdx] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHighlightIdx((prev) => (prev + 1) % 3);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const contacts = [
+    { name: "Jordan Lee", lastSent: "3 days ago", opens: 4, replied: false },
+    { name: "Nina Patel", lastSent: "1 week ago", opens: 0, replied: false },
+    { name: "Tom Wilson", lastSent: "2 days ago", opens: 2, replied: true },
+  ];
+
+  return (
+    <div className="w-full space-y-2">
+      {contacts.map((c, i) => (
+        <motion.div
+          key={c.name}
+          animate={{
+            borderColor: highlightIdx === i ? (c.replied ? "var(--color-border)" : "var(--pink-wash)") : "var(--color-border)",
+          }}
+          className="flex items-center justify-between p-3 rounded-xl border bg-background/80"
+        >
+          <div className="flex items-center gap-3">
+            <div className={`h-8 w-8 rounded-full flex items-center justify-center shrink-0 ${c.replied ? "bg-green-500/15" : "bg-pink-wash/20"}`}>
+              {c.replied
+                ? <Check className="h-3.5 w-3.5 text-green-600" />
+                : <Ghost className="h-3.5 w-3.5 text-foreground/60" />
+              }
+            </div>
+            <div>
+              <div className="text-xs font-medium text-foreground">{c.name}</div>
+              <div className="text-[10px] text-muted-foreground">Sent {c.lastSent}</div>
+            </div>
+          </div>
+          <div className="text-right">
+            <div className="text-[10px] text-muted-foreground flex items-center gap-1">
+              <Eye className="h-3 w-3" />
+              <span>{c.opens} opens</span>
+            </div>
+            <div className={`text-[10px] font-medium mt-0.5 ${c.replied ? "text-green-600" : "text-pink-wash"}`}>
+              {c.replied ? "Replied ✓" : "No reply"}
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+function RelationshipIntelAnimation() {
+  const [phase, setPhase] = useState(0);
+
+  useEffect(() => {
+    const timers = [
+      setTimeout(() => setPhase(1), 800),
+      setTimeout(() => setPhase(2), 1800),
+      setTimeout(() => setPhase(3), 2800),
+      setTimeout(() => setPhase(4), 3800),
+      setTimeout(() => setPhase(0), 8000),
+    ];
+    return () => timers.forEach(clearTimeout);
+  }, [phase === 0 ? Date.now() : 0]);
+
+  const summaryItems = [
+    { label: "Total conversations", value: "47 threads" },
+    { label: "Last contacted", value: "2 days ago" },
+    { label: "Relationship strength", value: "Strong" },
+  ];
+
+  const nextSteps = [
+    "Follow up on Q3 partnership proposal",
+    "Schedule quarterly review call",
+  ];
+
+  return (
+    <div className="w-full max-w-md mx-auto">
+      {/* Search bar */}
+      <div className="relative mb-4">
+        <div className="flex items-center gap-2 p-3 rounded-xl border border-border bg-background/80">
+          <Search className="h-4 w-4 text-muted-foreground shrink-0" />
+          <motion.div className="text-sm text-muted-foreground overflow-hidden">
+            {phase >= 1 ? (
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-foreground font-medium"
+              >
+                Sarah Chen
+              </motion.span>
+            ) : (
+              <span>Search any contact...</span>
+            )}
+          </motion.div>
+        </div>
+      </div>
+
+      {/* AI Summary Card */}
+      {phase >= 2 && (
+        <motion.div
+          initial={{ opacity: 0, y: 10, height: 0 }}
+          animate={{ opacity: 1, y: 0, height: "auto" }}
+          transition={{ duration: 0.4 }}
+          className="bg-card border border-border rounded-2xl p-4 shadow-lg overflow-hidden"
+        >
+          <div className="flex items-center gap-2 mb-3 pb-2 border-b border-border/60">
+            <div className="h-8 w-8 rounded-full bg-pink-wash/20 flex items-center justify-center">
+              <span className="text-xs font-bold text-foreground">SC</span>
+            </div>
+            <div>
+              <div className="text-sm font-semibold text-foreground">Sarah Chen</div>
+              <div className="text-[10px] text-muted-foreground">VP of Partnerships, Acme Corp</div>
+            </div>
+            <div className="ml-auto flex items-center gap-1 px-2 py-0.5 rounded-full bg-green-500/15 text-green-600 text-[10px] font-medium">
+              <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
+              Strong
+            </div>
+          </div>
+
+          {/* Summary */}
+          {phase >= 3 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-2 mb-3"
+            >
+              <div className="text-[11px] text-muted-foreground leading-relaxed">
+                <span className="text-foreground font-medium">AI Summary: </span>
+                Ongoing partnership discussions since Jan 2025. Agreed on co-marketing terms in March. Pending: Q3 budget allocation and launch timeline.
+              </div>
+              <div className="grid grid-cols-3 gap-2">
+                {summaryItems.map((item) => (
+                  <div key={item.label} className="text-center p-2 rounded-lg bg-muted/50">
+                    <div className="text-xs font-semibold text-foreground">{item.value}</div>
+                    <div className="text-[9px] text-muted-foreground">{item.label}</div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {/* Next steps */}
+          {phase >= 4 && (
+            <motion.div
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="pt-2 border-t border-border/60"
+            >
+              <div className="text-[10px] font-semibold text-foreground mb-1.5 flex items-center gap-1">
+                <ArrowRight className="h-3 w-3" /> Suggested next steps
+              </div>
+              {nextSteps.map((step, i) => (
+                <div key={i} className="flex items-center gap-2 text-[11px] text-muted-foreground py-1">
+                  <span className="h-1 w-1 rounded-full bg-pink-wash shrink-0" />
+                  {step}
+                </div>
+              ))}
+            </motion.div>
+          )}
+        </motion.div>
+      )}
+    </div>
+  );
+}
+
+function SmartFollowUpAnimation() {
+  const [activeRow, setActiveRow] = useState(-1);
+
+  useEffect(() => {
+    let cancelled = false;
+    const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    const runLoop = async () => {
+      while (!cancelled) {
+        for (let i = 0; i < 4; i++) {
+          if (cancelled) return;
+          setActiveRow(i);
+          await sleep(2000);
+        }
+        if (cancelled) return;
+        setActiveRow(-1);
+        await sleep(1000);
+      }
+    };
+
+    void runLoop();
+    return () => { cancelled = true; };
+  }, []);
+
+  const emails = [
+    { who: "Sarah Chen", tag: "Follow Up", tagColor: "bg-pink-wash/30 text-foreground/80 border-pink-wash/40", subj: "Q3 Partnership — next steps?", time: "Returns in 2d" },
+    { who: "Me, Patryk", tag: "Draft", tagColor: "bg-muted text-foreground/70 border-border/60", subj: "Re: Budget allocation review", time: "AI draft ready" },
+    { who: "Marcus, Jordan", tag: "Follow Up", tagColor: "bg-pink-wash/30 text-foreground/80 border-pink-wash/40", subj: "Contract renewal — awaiting sign", time: "Returns in 5h" },
+    { who: "Nina Patel", tag: null, tagColor: "", subj: "Intro call with Acme team", time: "3:40 PM" },
+  ];
+
+  return (
+    <div className="w-full">
+      {/* Mini inbox header */}
+      <div className="flex items-center gap-2 px-3 py-2 border-b border-border/60 text-[10px]">
+        <span className="font-semibold text-foreground border-b-2 border-foreground pb-0.5">Follow Ups <span className="text-muted-foreground font-normal">3</span></span>
+        <span className="text-muted-foreground">Important</span>
+        <span className="text-muted-foreground">Drafts</span>
+      </div>
+      {/* Email rows */}
+      <div className="divide-y divide-border/40">
+        {emails.map((e, i) => (
+          <motion.div
+            key={e.subj}
+            animate={{
+              backgroundColor: activeRow === i ? "var(--accent)" : "transparent",
+            }}
+            transition={{ duration: 0.3 }}
+            className="grid grid-cols-[90px_70px_1fr_80px] gap-2 items-center px-3 py-2 text-[11px]"
+          >
+            <div className="truncate text-foreground/90 font-medium">{e.who}</div>
+            <div>
+              {e.tag && (
+                <span className={`rounded px-1.5 py-0.5 text-[9px] font-medium border ${e.tagColor}`}>
+                  {e.tag}
+                </span>
+              )}
+            </div>
+            <div className="truncate text-foreground/80">{e.subj}</div>
+            <div className="text-right text-muted-foreground text-[10px] flex items-center justify-end gap-1">
+              {e.tag === "Follow Up" && <Timer className="h-2.5 w-2.5" />}
+              <span>{e.time}</span>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function RelationshipCopilot() {
+  const copilotFeatures = [
+    {
+      icon: Bell,
+      title: "Never miss a follow-up",
+      desc: "Set reminders, track responses, and get pinged when someone ghosts you. Important deals never go cold.",
+      animation: <FollowUpAnimation />,
+      size: "normal" as const,
+    },
+    {
+      icon: Inbox,
+      title: "Unified inbox",
+      desc: "Gmail, Outlook, and all your accounts in one place. One view, zero tab-switching.",
+      animation: <UnifiedInboxAnimation />,
+      size: "normal" as const,
+    },
+    {
+      icon: Handshake,
+      title: "Relationship intelligence",
+      desc: "Type anyone's name and get the full story — every conversation summarized, what's pending, and what to do next. Your AI-powered CRM, built into your inbox.",
+      animation: <RelationshipIntelAnimation />,
+      size: "hero" as const,
+    },
+    {
+      icon: Ghost,
+      title: "See who's ignoring you",
+      desc: "Casper tracks response patterns and flags who owes you a reply — and for how long.",
+      animation: <GhostTrackerAnimation />,
+      size: "normal" as const,
+    },
+    {
+      icon: Timer,
+      title: "Smart follow-ups",
+      desc: "Casper reads the context and resurfaces conversations at the perfect moment — with an AI draft ready to go, so nothing slips through the cracks.",
+      animation: <SmartFollowUpAnimation />,
+      size: "normal" as const,
+    },
+  ];
+
+  return (
+    <section className="relative py-28">
+      <div className="max-w-7xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="max-w-2xl mx-auto text-center"
+        >
+          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
+            Your relationship copilot.
+          </h2>
+          <p className="mt-4 text-muted-foreground text-lg">
+            More than email — Casper helps you nurture every professional relationship without the overhead.
+          </p>
+        </motion.div>
+
+        {/* Bento Grid */}
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-5">
+          {copilotFeatures.map((feature, i) => (
+            <motion.div
+              key={feature.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              className={`group relative rounded-2xl border border-border bg-card p-6 md:p-8 flex flex-col transition-all hover:border-pink-wash/60 hover:shadow-lg ${
+                feature.size === "hero" ? "md:col-span-2" : ""
+              }`}
+            >
+              {/* Icon + Text */}
+              <div className={`flex flex-col ${feature.size === "hero" ? "md:flex-row md:gap-10" : ""}`}>
+                <div className={`${feature.size === "hero" ? "md:w-2/5" : ""} mb-6`}>
+                  <h3 className="text-lg font-semibold tracking-tight text-foreground">{feature.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed max-w-md">{feature.desc}</p>
+                </div>
+
+                {/* Animation */}
+                <div className={`${feature.size === "hero" ? "md:w-3/5" : ""} mt-auto`}>
+                  <div className="rounded-xl bg-muted/30 border border-border/40 p-4 min-h-[180px] flex items-center">
+                    {feature.animation}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function HowItWorks() {
   const steps = [
     {
@@ -1908,13 +2163,13 @@ function HowItWorks() {
     },
     {
       n: "02",
-      t: "It learns your voice",
-      d: "Casper quietly studies how you write and what you care about — privately, on your account.",
+      t: "Casper gets to work",
+      d: "It reads your history, maps your contacts, and starts organizing — all within minutes.",
     },
     {
       n: "03",
-      t: "Reach inbox zero",
-      d: "Triage, drafts, and follow-ups happen in the background. You just review and send.",
+      t: "You just review & send",
+      d: "Everything is handled in the background. You stay in control, without the busywork.",
     },
   ];
   return (
@@ -2172,6 +2427,7 @@ function Index() {
       <Hero />
       <Logos />
       <Features />
+      <RelationshipCopilot />
       <HowItWorks />
       <Pricing />
       <Testimonials />
