@@ -16,15 +16,15 @@ import { Footer } from "../components/Footer";
 export const Route = createFileRoute("/blog")({
   head: () => ({
     meta: [
-      { title: "Blog — Casper" },
+      { title: "Blog — Wisps" },
       {
         name: "description",
-        content: "Updates, product notes, and security thinking from the Casper team.",
+        content: "Updates, product notes, and security thinking from the Wisps team.",
       },
-      { property: "og:title", content: "Blog — Casper" },
+      { property: "og:title", content: "Blog — Wisps" },
       {
         property: "og:description",
-        content: "Product notes, workflow ideas, and trust updates from Casper.",
+        content: "Product notes, workflow ideas, and trust updates from Wisps.",
       },
     ],
   }),

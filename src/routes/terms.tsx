@@ -16,17 +16,17 @@ import { Nav } from "../components/Nav";
 export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
-      { title: "Terms of Service — Casper" },
+      { title: "Terms of Service — Wisps" },
       {
         name: "description",
         content:
-          "Global Terms of Service for Casper, governed by Indian law and designed for worldwide use.",
+          "Global Terms of Service for Wisps, governed by Indian law and designed for worldwide use.",
       },
-      { property: "og:title", content: "Terms of Service — Casper" },
+      { property: "og:title", content: "Terms of Service — Wisps" },
       {
         property: "og:description",
         content:
-          "Global Terms of Service for Casper, with India as the base jurisdiction and mandatory local law carveouts.",
+          "Global Terms of Service for Wisps, with India as the base jurisdiction and mandatory local law carveouts.",
       },
     ],
   }),

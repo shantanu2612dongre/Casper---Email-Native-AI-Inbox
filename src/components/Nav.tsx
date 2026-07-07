@@ -15,10 +15,10 @@ export function Nav() {
         >
           <img
             src="/casper-logo.svg"
-            alt="Casper logo"
+            alt="Wisps logo"
             className="h-9 w-9 object-contain"
           />
-          Casper
+Wisps
         </a>
         <div className="hidden md:flex items-center gap-10 text-sm text-foreground/80">
           <a href="/#pricing" className="hover:text-foreground transition-colors">

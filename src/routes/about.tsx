@@ -6,9 +6,9 @@ import { Nav } from "../components/Nav";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Casper — Reimagining Email for the AI Era" },
+      { title: "About Wisps — Reimagining Email for the AI Era" },
       { name: "description", content: "We're building the future of email — an intelligent inbox that learns your voice and handles the busywork." },
-      { property: "og:title", content: "About Casper — Reimagining Email for the AI Era" },
+      { property: "og:title", content: "About Wisps — Reimagining Email for the AI Era" },
       { property: "og:description", content: "An AI inbox that learns your voice and handles the busywork." },
     ],
   }),

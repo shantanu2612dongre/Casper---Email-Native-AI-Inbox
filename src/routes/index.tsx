@@ -37,15 +37,15 @@ import { Nav } from "../components/Nav";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Casper — The Copilot for Your Professional Relationships" },
+      { title: "Wisps — The Copilot for Your Professional Relationships" },
       {
         name: "description",
         content:
-          "Casper learns how you write, drafts your replies, and handles the busywork — so you can focus on what matters.",
+          "Wisps learns how you write, drafts your replies, and handles the busywork — so you can focus on what matters.",
       },
-      { property: "og:title", content: "Casper — The Copilot for Your Professional Relationships" },
+      { property: "og:title", content: "Wisps — The Copilot for Your Professional Relationships" },
       {
-        property: "og:description",
+        property: "og:description", 
         content: "An AI inbox that learns your voice and handles the busywork.",
       },
     ],

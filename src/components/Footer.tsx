@@ -3,10 +3,10 @@ import { Sparkles, Linkedin, Twitter, Instagram, Youtube, Facebook, Mail } from 
 export function Footer() {
   return (
     <footer className="relative border-t border-border/60 bg-background pt-20 pb-10 overflow-hidden">
-      {/* Background Wordmark "casper" */}
+      {/* Background Wordmark "wisps" */}
       <div className="absolute bottom-[-2.5rem] md:bottom-[-4rem] left-1/2 -translate-x-1/2 w-full max-w-7xl px-6 pointer-events-none select-none z-0">
         <h2 className="text-[9rem] sm:text-[12rem] md:text-[18rem] lg:text-[22rem] font-bold text-center tracking-tighter text-foreground/[0.03] dark:text-foreground/[0.02] leading-none uppercase">
-          casper
+          wisps
         </h2>
       </div>
 
@@ -17,10 +17,10 @@ export function Footer() {
             <a href="#" className="flex items-center gap-1.5 font-semibold text-foreground tracking-tight text-xl">
               <img
                 src="/casper-logo.svg"
-                alt="Casper logo"
+                alt="Wisps logo"
                 className="h-9 w-9 object-contain"
               />
-              Casper
+              Wisps
             </a>
             
             <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
@@ -82,7 +82,7 @@ export function Footer() {
               </a>
               <a href="https://facebook.com/casper" target="_blank" rel="noreferrer" className="flex items-center gap-2.5 hover:text-foreground transition-colors">
                 <Facebook className="h-4 w-4 shrink-0" />
-                <span>Casper</span>
+                <span>Wisps</span>
               </a>
               <a href="mailto:contact@usecasper.com" className="flex items-center gap-2.5 hover:text-foreground transition-colors">
                 <Mail className="h-4 w-4 shrink-0" />
@@ -138,7 +138,7 @@ export function Footer() {
         {/* Lower footer bar */}
         <div className="border-t border-border/60 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground relative z-10">
           <div>
-            © {new Date().getFullYear()} Casper Tech Inc. All rights reserved.
+            © {new Date().getFullYear()} Wisps. All rights reserved.
           </div>
           <div className="flex items-center gap-6">
             <a href="/terms" className="hover:text-foreground transition-colors">Terms</a>

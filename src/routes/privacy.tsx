@@ -18,17 +18,17 @@ import { Nav } from "../components/Nav";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy — Casper" },
+      { title: "Privacy Policy — Wisps" },
       {
         name: "description",
         content:
-          "Privacy Policy for Casper, including what we collect, how we use it, how we share it, and your rights.",
+          "Privacy Policy for Wisps, including what we collect, how we use it, how we share it, and your rights.",
       },
-      { property: "og:title", content: "Privacy Policy — Casper" },
+      { property: "og:title", content: "Privacy Policy — Wisps" },
       {
         property: "og:description",
         content:
-          "Privacy Policy for Casper with India as the base jurisdiction and worldwide data handling disclosures.",
+          "Privacy Policy for Wisps with India as the base jurisdiction and worldwide data handling disclosures.",
       },
     ],
   }),

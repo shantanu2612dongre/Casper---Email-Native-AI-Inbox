@@ -6,9 +6,9 @@ import { Nav } from "../components/Nav";
 export const Route = createFileRoute("/careers")({
   head: () => ({
     meta: [
-      { title: "Careers at Casper — Join Our Team" },
+      { title: "Careers at Wisps — Join Our Team" },
       { name: "description", content: "We're always looking for talented people to join our mission of reimagining email." },
-      { property: "og:title", content: "Careers at Casper — Join Our Team" },
+      { property: "og:title", content: "Careers at Wisps — Join Our Team" },
       { property: "og:description", content: "Join our team and help build the future of email." },
     ],
   }),

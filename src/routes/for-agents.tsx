@@ -8,10 +8,10 @@ import { Nav } from "../components/Nav";
 export const Route = createFileRoute("/for-agents")({
   head: () => ({
     meta: [
-      { title: "For Agents — Casper" },
-      { name: "description", content: "Your inbox, now a tool call. Connect once and use Casper from Claude, ChatGPT, Cursor, or any agent via MCP." },
-      { property: "og:title", content: "Casper for Agents" },
-      { property: "og:description", content: "Connect once. Use Casper from any agent." },
+      { title: "For Agents — Wisps" },
+      { name: "description", content: "Your inbox, now a tool call. Connect once and use Wisps from Claude, ChatGPT, Cursor, or any agent via MCP." },
+      { property: "og:title", content: "Wisps for Agents" },
+      { property: "og:description", content: "Connect once. Use Wisps from any agent." },
     ],
   }),
   component: ForAgentsPage,
@@ -29,7 +29,7 @@ const fadeUp = {
 function Hero() {
   return (
     <section className="relative overflow-hidden">
-      {/* Soft sunrise wash, echoing the Casper palette */}
+      {/* Soft sunrise wash, echoing the Wisps palette */}
       <div
         aria-hidden
         className="absolute inset-0 -z-10"
@@ -56,7 +56,7 @@ function Hero() {
           variants={fadeUp} initial="hidden" animate="show" custom={2}
           className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
         >
-          Connect once. Use Casper from Claude, ChatGPT, Cursor — or any agent that speaks MCP.
+          Connect once. Use Wisps from Claude, ChatGPT, Cursor — or any agent that speaks MCP.
         </motion.p>
         <motion.div
           variants={fadeUp} initial="hidden" animate="show" custom={3}
@@ -99,7 +99,7 @@ function Hero() {
               </div>
             </div>
             <div className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
-              <Plug className="h-3.5 w-3.5" /> Connected to <span className="text-foreground font-medium">casper.inbox</span>
+              <Plug className="h-3.5 w-3.5" /> Connected to <span className="text-foreground font-medium">wisps.inbox</span>
             </div>
           </div>
         </motion.div>
@@ -150,7 +150,7 @@ function Capabilities() {
             One inbox. Every agent.
           </h2>
           <p className="mt-4 text-muted-foreground text-lg">
-            Casper turns your email into a first-class surface for AI agents — with the safety rails to actually let them act.
+            Wisps turns your email into a first-class surface for AI agents — with the safety rails to actually let them act.
           </p>
         </motion.div>
 
@@ -176,7 +176,7 @@ function Capabilities() {
 
 function HowItWorks() {
   const steps = [
-    { n: "01", t: "Connect your inbox", d: "Authorize Casper with Gmail in one click. No mailbox copy, no exports." },
+    { n: "01", t: "Connect your inbox", d: "Authorize Wisps with Gmail in one click. No mailbox copy, no exports." },
     { n: "02", t: "Add the MCP endpoint", d: "Paste a single URL into Claude, Cursor or your own agent runtime." },
     { n: "03", t: "Let agents act", d: "Triage, reply, schedule and follow up — under scopes you control." },
   ];
@@ -216,7 +216,7 @@ function CodeBlock() {
             A tool call, not a SDK.
           </h2>
           <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
-            Casper speaks MCP out of the box. Point any compliant client at the endpoint and the tools show up — typed, documented, ready.
+            Wisps speaks MCP out of the box. Point any compliant client at the endpoint and the tools show up — typed, documented, ready.
           </p>
           <ul className="mt-6 space-y-3 text-sm text-foreground/90">
             {["Typed schemas for every action", "Streaming results for long lists", "Per-agent rate limits & audit log"].map((x) => (
@@ -240,8 +240,8 @@ function CodeBlock() {
           <pre className="p-6 text-[13px] leading-relaxed text-white/90 overflow-x-auto">
 {`{
   "mcpServers": {
-    "casper": {
-      "url": "https://mcp.casper.com/v1",
+    "wisps": {
+      "url": "https://mcp.wisps.inbox/v1",
       "headers": {
         "Authorization": "Bearer sk_live_••••"
       }
@@ -284,7 +284,7 @@ function CTA() {
           variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={1}
           className="mt-5 text-lg md:text-xl text-foreground/70 max-w-xl mx-auto"
         >
-          Let Casper handle your inbox so you can focus on what matters most.
+          Let Wisps handle your inbox so you can focus on what matters most.
         </motion.p>
         <motion.div
           variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={2}
@@ -306,8 +306,8 @@ function CTA() {
         >
           <div className="flex items-center gap-3 px-4 py-2.5 border-b border-border/60 text-xs">
             <span className="inline-flex items-center gap-1.5 font-semibold text-foreground">
-              <img src="/casper-logo.svg" alt="Casper logo" className="h-3.5 w-3.5 object-contain" />
-              Casper Inbox
+              <img src="/casper-logo.svg" alt="Wisps logo" className="h-3.5 w-3.5 object-contain" />
+              Wisps Inbox
             </span>
             <div className="ml-2 flex-1 rounded-md bg-muted/60 px-2.5 py-1 text-muted-foreground">Search</div>
           </div>
@@ -329,7 +329,7 @@ function CTA() {
               {[
                 { who: "me, Jonathan", subj: "Does the Snooze mention go away after some time?", time: "12m" },
                 { who: "Me, Patryk, Louis", tag: "Draft", subj: "Coffee Machines", time: "1h" },
-                { who: "Romaine, Re...Jon", tag: "Follow Up", subj: "Casper + Anthropic - YC Credits", time: "3h" },
+                { who: "Romaine, Re...Jon", tag: "Follow Up", subj: "Wisps + Anthropic - YC Credits", time: "3h" },
                 { who: "Arthur, Louis", subj: "Feedback Beta tester", time: "4:50 PM" },
                 { who: "me, Joseph, Patryk", tag: "Draft", subj: "Channels rules launch", time: "11:53 AM" },
               ].map((r) => (
