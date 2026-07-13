@@ -33,7 +33,7 @@ Wisps
         </div>
         <div className="flex items-center gap-5">
           <a
-            href="#"
+            href="/login"
             className="text-sm text-foreground/80 hover:text-foreground transition-colors"
           >
             Login
