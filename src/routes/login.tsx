@@ -4,9 +4,15 @@ import { motion } from "motion/react";
 import {
   Mail,
   ArrowRight,
-  Sparkles,
+  ArrowLeft,
+  Send,
+  Paperclip,
   Eye,
   EyeOff,
+  Clock,
+  Calendar,
+  Bell,
+  Check,
 } from "lucide-react";
 
 export const Route = createFileRoute("/login")({
@@ -269,149 +275,152 @@ function LoginPage() {
               initial="hidden"
               animate="show"
               custom={3}
-              className="mt-8 relative"
+              className="mt-8 relative w-[400px] h-[320px]"
             >
-              {/* Background stacked cards */}
-              <div
-                className="absolute -top-3 left-1/2 -translate-x-1/2 w-[88%] h-full rounded-2xl bg-white/40 border border-white/50"
-                style={{ transform: "translateX(-50%) rotate(-3deg)" }}
-              />
-              <div
-                className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-[94%] h-full rounded-2xl bg-white/60 border border-white/60"
-                style={{ transform: "translateX(-50%) rotate(-1.5deg)" }}
-              />
+              {/* Back card 1 (deepest) — notification snippet */}
+              <motion.div
+                initial={{ opacity: 0, y: 30, rotate: -4 }}
+                animate={{ opacity: 1, y: 0, rotate: -4 }}
+                transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute -top-2 left-1/2 w-[86%] rounded-2xl bg-white/90 border border-black/[0.05] shadow-md shadow-black/[0.04] overflow-hidden"
+                style={{ transform: "translateX(-50%) rotate(-4deg)", height: "280px" }}
+              >
+                <div className="px-5 py-3 border-b border-black/[0.04]">
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground/70">
+                    <Bell className="h-3 w-3" />
+                    <span className="font-medium">Notifications</span>
+                  </div>
+                </div>
+                <div className="px-5 py-3 space-y-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center">
+                      <Check className="h-3 w-3 text-blue-500" />
+                    </div>
+                    <span className="text-[11px] text-muted-foreground">3 replies sent automatically</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <div className="h-6 w-6 rounded-full bg-emerald-100 flex items-center justify-center">
+                      <Mail className="h-3 w-3 text-emerald-500" />
+                    </div>
+                    <span className="text-[11px] text-muted-foreground">Inbox sorted — 12 low priority archived</span>
+                  </div>
+                </div>
+              </motion.div>
 
-              {/* Main card — inbox preview */}
-              <div className="relative rounded-2xl bg-white border border-black/[0.06] shadow-xl shadow-black/[0.08] overflow-hidden w-[380px]">
-                {/* Inbox header */}
-                <div className="flex items-center gap-3 px-5 py-3.5 border-b border-black/[0.05] bg-white">
+              {/* Back card 2 (middle) — schedule snippet */}
+              <motion.div
+                initial={{ opacity: 0, y: 25, rotate: -1.5 }}
+                animate={{ opacity: 1, y: 0, rotate: -1.5 }}
+                transition={{ delay: 0.65, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute top-0 left-1/2 w-[93%] rounded-2xl bg-white/95 border border-black/[0.05] shadow-lg shadow-black/[0.05] overflow-hidden"
+                style={{ transform: "translateX(-50%) rotate(-1.5deg)", height: "290px" }}
+              >
+                <div className="px-5 py-3 border-b border-black/[0.04]">
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground/70">
+                    <Calendar className="h-3 w-3" />
+                    <span className="font-medium">Today's Schedule</span>
+                  </div>
+                </div>
+                <div className="px-5 py-3 space-y-2.5">
+                  <div className="flex items-center gap-3">
+                    <span className="text-[10px] text-muted-foreground/60 w-10 shrink-0">10:00</span>
+                    <div className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                    <span className="text-[11px] text-foreground/70">Sync with design team</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-[10px] text-muted-foreground/60 w-10 shrink-0">14:00</span>
+                    <div className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+                    <span className="text-[11px] text-foreground/70">Client review call</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-[10px] text-muted-foreground/60 w-10 shrink-0">16:30</span>
+                    <div className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                    <span className="text-[11px] text-foreground/70">Sprint planning</span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Front card — compose / reply UI */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute top-3 left-1/2 -translate-x-1/2 w-full rounded-2xl bg-white border border-black/[0.06] shadow-xl shadow-black/[0.1] overflow-hidden"
+              >
+                {/* Window chrome */}
+                <div className="flex items-center gap-3 px-5 py-3 border-b border-black/[0.05]">
                   <div className="flex gap-1.5">
-                    <div className="h-3 w-3 rounded-full bg-red-400/80" />
-                    <div className="h-3 w-3 rounded-full bg-amber-400/80" />
-                    <div className="h-3 w-3 rounded-full bg-emerald-400/80" />
+                    <div className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
+                    <div className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
+                    <div className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
                   </div>
                   <div className="flex-1 flex justify-center">
-                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
-                      <Mail className="h-3.5 w-3.5" />
-                      <span>Inbox — 3 AI drafts ready</span>
-                    </div>
+                    <span className="text-[11px] text-muted-foreground/70 font-medium">New Reply</span>
                   </div>
                 </div>
 
-                {/* Email rows */}
-                <div className="divide-y divide-black/[0.04]">
-                  {/* Row 1 — AI drafted */}
-                  <div className="px-5 py-3.5 flex items-start gap-3 bg-violet-50/40">
-                    <div className="mt-0.5 h-8 w-8 rounded-full bg-gradient-to-br from-violet-400 to-indigo-400 flex items-center justify-center text-white text-xs font-semibold shrink-0">
-                      A
+                {/* Email meta */}
+                <div className="px-5 py-3 space-y-1.5 border-b border-black/[0.04]">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] text-muted-foreground/60 w-8">To:</span>
+                    <div className="flex items-center gap-1.5">
+                      <div className="h-5 w-5 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-[9px] text-white font-semibold">A</div>
+                      <span className="text-[12px] text-foreground/80">Alex Rivera</span>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-semibold text-foreground truncate">
-                          Alex Rivera
-                        </span>
-                        <span className="inline-flex items-center gap-1 rounded-full bg-violet-100 px-2 py-0.5 text-[10px] font-medium text-violet-600">
-                          <Sparkles className="h-2.5 w-2.5" />
-                          AI Draft
-                        </span>
-                      </div>
-                      <p className="text-xs text-muted-foreground truncate mt-0.5">
-                        Re: Q3 partnership proposal — Sounds great, I'd love
-                        to...
-                      </p>
-                    </div>
-                    <span className="text-[10px] text-muted-foreground/60 shrink-0 mt-1">
-                      2m
-                    </span>
                   </div>
-
-                  {/* Row 2 */}
-                  <div className="px-5 py-3.5 flex items-start gap-3">
-                    <div className="mt-0.5 h-8 w-8 rounded-full bg-gradient-to-br from-amber-400 to-orange-400 flex items-center justify-center text-white text-xs font-semibold shrink-0">
-                      J
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-semibold text-foreground truncate">
-                          Jordan Lee
-                        </span>
-                      </div>
-                      <p className="text-xs text-muted-foreground truncate mt-0.5">
-                        Meeting follow-up — Thanks for the call today...
-                      </p>
-                    </div>
-                    <span className="text-[10px] text-muted-foreground/60 shrink-0 mt-1">
-                      15m
-                    </span>
-                  </div>
-
-                  {/* Row 3 — AI drafted */}
-                  <div className="px-5 py-3.5 flex items-start gap-3 bg-violet-50/40">
-                    <div className="mt-0.5 h-8 w-8 rounded-full bg-gradient-to-br from-emerald-400 to-teal-400 flex items-center justify-center text-white text-xs font-semibold shrink-0">
-                      M
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-semibold text-foreground truncate">
-                          Maria Santos
-                        </span>
-                        <span className="inline-flex items-center gap-1 rounded-full bg-violet-100 px-2 py-0.5 text-[10px] font-medium text-violet-600">
-                          <Sparkles className="h-2.5 w-2.5" />
-                          AI Draft
-                        </span>
-                      </div>
-                      <p className="text-xs text-muted-foreground truncate mt-0.5">
-                        Re: Design review — Absolutely, the new mockups
-                        look...
-                      </p>
-                    </div>
-                    <span className="text-[10px] text-muted-foreground/60 shrink-0 mt-1">
-                      1h
-                    </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] text-muted-foreground/60 w-8">Re:</span>
+                    <span className="text-[12px] text-foreground/80">Q3 Partnership Proposal</span>
                   </div>
                 </div>
 
-                {/* AI status bar */}
-                <div className="px-5 py-2.5 bg-gradient-to-r from-violet-50 to-indigo-50 border-t border-violet-100/50 flex items-center gap-2">
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    <Sparkles className="h-3.5 w-3.5 text-violet-500" />
-                  </motion.div>
-                  <span className="text-[11px] font-medium text-violet-600">
-                    Wisps drafted 3 replies for you ✨
-                  </span>
+                {/* Compose body with typing animation */}
+                <div className="px-5 py-4">
+                  <p className="text-[13px] text-foreground/85 leading-[1.65]">
+                    Hi Alex,
+                  </p>
+                  <p className="text-[13px] text-foreground/85 leading-[1.65] mt-2">
+                    Thanks for sending this over — the proposal looks solid. I'm on board with the
+                    revenue-share model, and I think a 90-day pilot makes
+                    <motion.span
+                      className="inline-block"
+                      animate={{ opacity: [1, 0] }}
+                      transition={{ duration: 0.8, repeat: Infinity, ease: "steps(1)" }}
+                    >
+                      <span className="inline-block w-[2px] h-[14px] bg-foreground/70 ml-0.5 -mb-[2px]" />
+                    </motion.span>
+                  </p>
                 </div>
-              </div>
+
+                {/* Compose toolbar */}
+                <div className="px-5 py-3 border-t border-black/[0.04] flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <Paperclip className="h-4 w-4 text-muted-foreground/50 hover:text-muted-foreground transition-colors cursor-pointer" />
+                    <Clock className="h-4 w-4 text-muted-foreground/50 hover:text-muted-foreground transition-colors cursor-pointer" />
+                  </div>
+                  <button className="flex items-center gap-1.5 rounded-lg bg-foreground text-background px-3.5 py-1.5 text-[12px] font-medium">
+                    <Send className="h-3 w-3" />
+                    Send
+                  </button>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
 
-          {/* Bottom: back / ready nav like the reference */}
+          {/* Bottom: back nav */}
           <motion.div
             variants={fadeIn}
             initial="hidden"
             animate="show"
             custom={5}
-            className="flex w-full items-center justify-between"
+            className="flex w-full items-center"
           >
             <a
               href="/"
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              <ArrowRight className="h-4 w-4 rotate-180" />
+              <ArrowLeft className="h-4 w-4" />
               <span>Back</span>
-            </a>
-            <a
-              href="#"
-              className="flex items-center gap-2 rounded-lg border border-border/60 bg-white px-4 py-2 text-sm font-medium text-foreground shadow-sm hover:shadow-md transition-all"
-            >
-              <span>I'm ready</span>
-              <ArrowRight className="h-4 w-4" />
             </a>
           </motion.div>
         </div>
