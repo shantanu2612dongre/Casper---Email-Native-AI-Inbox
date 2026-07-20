@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 import { motion } from "motion/react";
 import {
   Inbox,
@@ -33,6 +33,10 @@ import { SiGooglecalendar, SiGmail } from "react-icons/si";
 import { Footer } from "../components/Footer";
 import { Testimonials } from "../components/Testimonials";
 import { Nav } from "../components/Nav";
+import { WaitlistModal } from "../components/WaitlistModal";
+
+// Context to share modal open handler across sections
+const WaitlistContext = createContext<{ openWaitlist: () => void }>({ openWaitlist: () => {} });
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -63,6 +67,7 @@ const fadeUp = {
 };
 
 function Hero() {
+  const { openWaitlist } = useContext(WaitlistContext);
   return (
     <section className="relative overflow-hidden py-28">
       {/* Centered text container with readable max-width */}
@@ -95,12 +100,12 @@ function Hero() {
           custom={2}
           className="mt-10 flex items-center justify-center"
         >
-          <a
-            href="#"
-            className="inline-flex items-center rounded-lg bg-foreground text-background px-6 py-3 text-base font-medium hover:opacity-90 transition-opacity"
+          <button
+            onClick={openWaitlist}
+            className="inline-flex items-center rounded-lg bg-foreground text-background px-6 py-3 text-base font-medium hover:opacity-90 transition-opacity cursor-pointer"
           >
-            Get Started
-          </a>
+            Join Waitlist
+          </button>
         </motion.div>
       </div>
 
@@ -172,8 +177,8 @@ function InboxMockup() {
   const [chatInput, setChatInput] = useState("");
   const [messages, setMessages] = useState<Array<{ sender: "user" | "casper"; text: string }>>([
     {
-      sender: "casper",
-      text: "I'm Casper, your email copilot. Ask me to draft a reply, schedule calls, or summarize threads!",
+      sender: "wisps",
+      text: "I'm wisps, your email copilot. Ask me to draft a reply, schedule calls, or summarize threads!",
     },
   ]);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -474,7 +479,7 @@ function InboxMockup() {
                 <div className="flex items-center justify-between mb-2.5">
                   <div className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
                     <Sparkles className="h-3.5 w-3.5 text-foreground" />
-                    <span>Drafted by Casper</span>
+                    <span>Drafted by Wisps</span>
                     <span className="text-[10px] font-normal text-muted-foreground">
                       (in your voice)
                     </span>
@@ -523,7 +528,7 @@ function InboxMockup() {
                     <div className="w-6 h-6 rounded-lg bg-foreground text-background flex items-center justify-center">
                       <Sparkles className="h-3.5 w-3.5" />
                     </div>
-                    <span className="text-xs font-bold text-foreground tracking-tight">Casper Copilot</span>
+                    <span className="text-xs font-bold text-foreground tracking-tight">Wisps</span>
                   </div>
                   <span className="text-[9px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground font-mono">AI Active</span>
                 </div>
@@ -2380,6 +2385,7 @@ function Pricing() {
 }
 
 function CTA() {
+  const { openWaitlist } = useContext(WaitlistContext);
   return (
     <section className="relative py-20">
       <div className="max-w-5xl mx-auto px-6">
@@ -2401,12 +2407,12 @@ function CTA() {
             Join thousands of teams using Casper to ship workflows their customers love.
           </p>
           <div className="mt-8 flex items-center justify-center gap-3">
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:opacity-90 transition-opacity"
+            <button
+              onClick={openWaitlist}
+              className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
             >
-              Get Started
-            </a>
+              Join Waitlist
+            </button>
             <a
               href="#"
               className="inline-flex items-center rounded-full border border-border bg-card/70 px-6 py-3 text-sm font-medium text-foreground hover:bg-card transition-colors"
@@ -2421,18 +2427,28 @@ function CTA() {
 }
 
 function Index() {
+  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
+  const openWaitlist = () => setIsWaitlistOpen(true);
+  const closeWaitlist = () => setIsWaitlistOpen(false);
+
   return (
-    <main className="min-h-screen bg-background text-foreground antialiased">
-      <Nav />
-      <Hero />
-      <Logos />
-      <Features />
-      <RelationshipCopilot />
-      <HowItWorks />
-      <Pricing />
-      <Testimonials />
-      <CTA />
-      <Footer />
-    </main>
+    <WaitlistContext.Provider value={{ openWaitlist }}>
+      <main className="min-h-screen bg-background text-foreground antialiased">
+        <Nav />
+        <Hero />
+        <Logos />
+        <Features />
+        <RelationshipCopilot />
+        <HowItWorks />
+        <Pricing />
+        <Testimonials />
+        <CTA />
+        <Footer />
+      </main>
+      <WaitlistModal isOpen={isWaitlistOpen} onClose={closeWaitlist} />
+    </WaitlistContext.Provider>
   );
 }
+
+// Export the context so Nav can use it too
+export { WaitlistContext };
