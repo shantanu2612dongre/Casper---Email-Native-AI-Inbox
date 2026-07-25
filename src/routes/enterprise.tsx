@@ -1,18 +1,33 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { useState } from "react";
-import { Lock, ShieldCheck, Sparkles, BadgeCheck, FlaskConical, Trash2, Plus, Minus } from "lucide-react";
+import {
+  Lock,
+  ShieldCheck,
+  Sparkles,
+  BadgeCheck,
+  FlaskConical,
+  Trash2,
+  Plus,
+  Minus,
+} from "lucide-react";
 import { Footer } from "../components/Footer";
 import { Nav } from "../components/Nav";
-
 
 export const Route = createFileRoute("/enterprise")({
   head: () => ({
     meta: [
       { title: "Enterprise — Wisps" },
-      { name: "description", content: "Powerful, secure email for modern teams. SOC 2 Type II, encryption everywhere, and no AI training on your data." },
+      {
+        name: "description",
+        content:
+          "Powerful, secure email for modern teams. SOC 2 Type II, encryption everywhere, and no AI training on your data.",
+      },
       { property: "og:title", content: "Wisps for Enterprise" },
-      { property: "og:description", content: "Enterprise-grade security, compliance, and control for your team's inbox." },
+      {
+        property: "og:description",
+        content: "Enterprise-grade security, compliance, and control for your team's inbox.",
+      },
     ],
   }),
   component: EnterprisePage,
@@ -32,22 +47,36 @@ function Hero() {
     <section className="relative overflow-hidden">
       <div className="max-w-5xl mx-auto px-6 pt-24 pb-16 text-center">
         <motion.h1
-          variants={fadeUp} initial="hidden" animate="show" custom={0}
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
+          custom={0}
           className="text-5xl md:text-6xl font-semibold tracking-tight text-foreground leading-[1.05]"
         >
-          Email that scales <br className="hidden md:block" />with your team
+          Email that scales <br className="hidden md:block" />
+          with your team
         </motion.h1>
         <motion.p
-          variants={fadeUp} initial="hidden" animate="show" custom={1}
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
+          custom={1}
           className="mx-auto mt-6 max-w-xl text-base md:text-lg text-muted-foreground leading-relaxed"
         >
-          Powerful email for modern teams. Collaborate faster, stay secure, and work smarter — all in one place.
+          Powerful email for modern teams. Collaborate faster, stay secure, and work smarter — all
+          in one place.
         </motion.p>
         <motion.div
-          variants={fadeUp} initial="hidden" animate="show" custom={2}
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
+          custom={2}
           className="mt-8 flex items-center justify-center"
         >
-          <a href="#" className="inline-flex items-center rounded-lg bg-foreground text-background px-6 py-3 text-sm font-medium hover:opacity-90 transition-opacity">
+          <a
+            href="#"
+            className="inline-flex items-center rounded-lg bg-foreground text-background px-6 py-3 text-sm font-medium hover:opacity-90 transition-opacity"
+          >
             Contact Sales
           </a>
         </motion.div>
@@ -57,12 +86,36 @@ function Hero() {
 }
 
 const securityItems = [
-  { icon: Lock, title: "Encrypted everywhere", desc: "Your data is encrypted in transit with TLS 1.3+ and at rest with AES-256 encryption." },
-  { icon: BadgeCheck, title: "SOC 2 Type II", desc: "Certified compliant. Independent audits verify our controls year after year." },
-  { icon: ShieldCheck, title: "No AI training on your data", desc: "Your data is never used to train models. Our AI providers guarantee zero data retention." },
-  { icon: Sparkles, title: "CASA Tier 2", desc: "Annual Cloud Application Security Assessment audit for Google API compliance." },
-  { icon: FlaskConical, title: "Semi-annual pentests", desc: "Independent penetration testing every 6 months. Executive summaries available under NDA." },
-  { icon: Trash2, title: "Full data control", desc: "Delete your data within 24 hours on request. Backups destroyed within 7 days. Revoke access anytime." },
+  {
+    icon: Lock,
+    title: "Encrypted everywhere",
+    desc: "Your data is encrypted in transit with TLS 1.3+ and at rest with AES-256 encryption.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "SOC 2 Type II",
+    desc: "Certified compliant. Independent audits verify our controls year after year.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "No AI training on your data",
+    desc: "Your data is never used to train models. Our AI providers guarantee zero data retention.",
+  },
+  {
+    icon: Sparkles,
+    title: "CASA Tier 2",
+    desc: "Annual Cloud Application Security Assessment audit for Google API compliance.",
+  },
+  {
+    icon: FlaskConical,
+    title: "Semi-annual pentests",
+    desc: "Independent penetration testing every 6 months. Executive summaries available under NDA.",
+  },
+  {
+    icon: Trash2,
+    title: "Full data control",
+    desc: "Delete your data within 24 hours on request. Backups destroyed within 7 days. Revoke access anytime.",
+  },
 ];
 
 function Security() {
@@ -70,7 +123,10 @@ function Security() {
     <section className="py-16">
       <div className="max-w-6xl mx-auto px-6">
         <motion.h2
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
           className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground"
         >
           Security you can trust.
@@ -79,7 +135,9 @@ function Security() {
           {securityItems.map((s, i) => (
             <motion.div
               key={s.title}
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
               transition={{ delay: i * 0.06, duration: 0.5 }}
               whileHover={{ y: -3 }}
               className="rounded-2xl bg-muted/50 border border-border/60 p-6"
@@ -87,7 +145,9 @@ function Security() {
               <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-card text-foreground border border-border/60">
                 <s.icon className="h-4 w-4" strokeWidth={1.75} />
               </span>
-              <h3 className="mt-4 text-sm font-semibold text-foreground tracking-tight">{s.title}</h3>
+              <h3 className="mt-4 text-sm font-semibold text-foreground tracking-tight">
+                {s.title}
+              </h3>
               <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
             </motion.div>
           ))}
@@ -98,9 +158,23 @@ function Security() {
 }
 
 const testimonials = [
-  { name: "Daniel", role: "Investor, Sierra Ventures", quote: "It's like having an EA who's always one step ahead. I'm walking to a meeting, text 'what do we know about this person,' and the full context shows up immediately." },
-  { name: "Priya", role: "COO, Northwind", quote: "Wisps quietly handles 80% of my inbox. I get to focus on the conversations that actually move the company." },
-  { name: "Marcus", role: "Founder, Lumen Labs", quote: "The drafts sound exactly like me. My team had no idea until I told them." },
+  {
+    name: "Daniel",
+    role: "Investor, Sierra Ventures",
+    quote:
+      "It's like having an EA who's always one step ahead. I'm walking to a meeting, text 'what do we know about this person,' and the full context shows up immediately.",
+  },
+  {
+    name: "Priya",
+    role: "COO, Northwind",
+    quote:
+      "Wisps quietly handles 80% of my inbox. I get to focus on the conversations that actually move the company.",
+  },
+  {
+    name: "Marcus",
+    role: "Founder, Lumen Labs",
+    quote: "The drafts sound exactly like me. My team had no idea until I told them.",
+  },
 ];
 
 function Testimonials() {
@@ -110,12 +184,22 @@ function Testimonials() {
     <section className="py-12">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
           className="rounded-3xl bg-muted/60 border border-border/60 p-8 md:p-12"
         >
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground">Don't take our word for it.</h2>
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground">
+            Don't take our word for it.
+          </h2>
           <div className="mt-8 rounded-2xl bg-card border border-border/60 p-6 md:p-8 grid md:grid-cols-[1fr_auto] gap-6 items-center">
-            <motion.div key={active} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+            <motion.div
+              key={active}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+            >
               <div className="font-semibold text-foreground">{t.name}</div>
               <div className="text-xs text-muted-foreground mt-0.5">{t.role}</div>
               <p className="mt-4 text-foreground/90 leading-relaxed max-w-xl">"{t.quote}"</p>
@@ -143,12 +227,30 @@ function Testimonials() {
 }
 
 const faqs = [
-  { q: "What security certifications does Wisps have?", a: "Wisps is SOC 2 Type II certified and CASA Tier 2 audited. We undergo independent penetration tests every six months." },
-  { q: "Do you use customer data to train AI models?", a: "Never. Your email content is never used to train our models, and our AI providers contractually guarantee zero data retention." },
-  { q: "How is my data encrypted?", a: "All data is encrypted in transit using TLS 1.3+ and at rest with AES-256. Encryption keys are rotated regularly." },
-  { q: "How does Wisps access my email?", a: "Wisps connects via secure OAuth tokens with the minimum scopes required. You can revoke access at any time." },
-  { q: "What control do I have over my data?", a: "Full control. Export anytime, delete on request within 24 hours, and backups are destroyed within 7 days." },
-  { q: "Can we get a Data Processing Agreement (DPA)?", a: "Yes. We provide a standard DPA for all Enterprise customers. Contact sales to receive a copy." },
+  {
+    q: "What security certifications does Wisps have?",
+    a: "Wisps is SOC 2 Type II certified and CASA Tier 2 audited. We undergo independent penetration tests every six months.",
+  },
+  {
+    q: "Do you use customer data to train AI models?",
+    a: "Never. Your email content is never used to train our models, and our AI providers contractually guarantee zero data retention.",
+  },
+  {
+    q: "How is my data encrypted?",
+    a: "All data is encrypted in transit using TLS 1.3+ and at rest with AES-256. Encryption keys are rotated regularly.",
+  },
+  {
+    q: "How does Wisps access my email?",
+    a: "Wisps connects via secure OAuth tokens with the minimum scopes required. You can revoke access at any time.",
+  },
+  {
+    q: "What control do I have over my data?",
+    a: "Full control. Export anytime, delete on request within 24 hours, and backups are destroyed within 7 days.",
+  },
+  {
+    q: "Can we get a Data Processing Agreement (DPA)?",
+    a: "Yes. We provide a standard DPA for all Enterprise customers. Contact sales to receive a copy.",
+  },
 ];
 
 function FAQ() {
@@ -157,7 +259,10 @@ function FAQ() {
     <section className="py-20">
       <div className="max-w-4xl mx-auto px-6">
         <motion.h2
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
           className="text-3xl md:text-4xl font-semibold tracking-tight"
         >
           <span className="text-foreground">Questions </span>
@@ -172,7 +277,9 @@ function FAQ() {
                   onClick={() => setOpen(isOpen ? null : i)}
                   className="w-full flex items-center justify-between py-5 text-left group"
                 >
-                  <span className="text-sm md:text-base text-foreground font-medium pr-6">{f.q}</span>
+                  <span className="text-sm md:text-base text-foreground font-medium pr-6">
+                    {f.q}
+                  </span>
                   <span className="text-muted-foreground group-hover:text-foreground transition-colors">
                     {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                   </span>
@@ -190,14 +297,16 @@ function FAQ() {
           })}
         </div>
         <p className="mt-6 text-sm text-muted-foreground">
-          Have more questions? Visit our <a href="#" className="underline hover:text-foreground transition-colors">Help Center</a>.
+          Have more questions? Visit our{" "}
+          <a href="#" className="underline hover:text-foreground transition-colors">
+            Help Center
+          </a>
+          .
         </p>
       </div>
     </section>
   );
 }
-
-
 
 function EnterprisePage() {
   return (

@@ -7,7 +7,11 @@ export const Route = createFileRoute("/careers")({
   head: () => ({
     meta: [
       { title: "Careers at Wisps — Join Our Team" },
-      { name: "description", content: "We're always looking for talented people to join our mission of reimagining email." },
+      {
+        name: "description",
+        content:
+          "We're always looking for talented people to join our mission of reimagining email.",
+      },
       { property: "og:title", content: "Careers at Wisps — Join Our Team" },
       { property: "og:description", content: "Join our team and help build the future of email." },
     ],
@@ -44,9 +48,7 @@ function Careers() {
             <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-4">
               Careers
             </h1>
-            <p className="text-xl text-muted-foreground">
-              Job openings will be listed soon
-            </p>
+            <p className="text-xl text-muted-foreground">Job openings will be listed soon</p>
           </motion.div>
         </div>
       </section>

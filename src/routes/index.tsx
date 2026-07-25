@@ -49,7 +49,7 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:title", content: "Wisps — The Copilot for Your Professional Relationships" },
       {
-        property: "og:description", 
+        property: "og:description",
         content: "An AI inbox that learns your voice and handles the busywork.",
       },
     ],
@@ -182,9 +182,7 @@ function InboxMockup() {
     },
   ]);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [visibleDraftLines, setVisibleDraftLines] = useState<string[]>(
-    heroThreads[0].draftLines
-  );
+  const [visibleDraftLines, setVisibleDraftLines] = useState<string[]>(heroThreads[0].draftLines);
   const [cursorState, setCursorState] = useState<{
     x: number;
     y: number;
@@ -429,7 +427,9 @@ function InboxMockup() {
                       <div className="absolute left-0 top-0 bottom-0 w-1 bg-foreground" />
                     )}
                     <div className="flex items-center justify-between mb-1">
-                      <span className={`font-semibold ${isActive ? "text-foreground" : "text-foreground/90"}`}>
+                      <span
+                        className={`font-semibold ${isActive ? "text-foreground" : "text-foreground/90"}`}
+                      >
                         {r.from}
                       </span>
                       <span className="text-[10px] text-muted-foreground">{r.time}</span>
@@ -485,7 +485,11 @@ function InboxMockup() {
                     </span>
                   </div>
                   <span className="text-[9px] rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 font-medium border border-emerald-500/20 font-sans">
-                    {visibleDraftLines.length > 0 ? "Ready to send" : isGenerating ? "Generating..." : "Waiting for prompt"}
+                    {visibleDraftLines.length > 0
+                      ? "Ready to send"
+                      : isGenerating
+                        ? "Generating..."
+                        : "Waiting for prompt"}
                   </span>
                 </div>
 
@@ -530,7 +534,9 @@ function InboxMockup() {
                     </div>
                     <span className="text-xs font-bold text-foreground tracking-tight">Wisps</span>
                   </div>
-                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground font-mono">AI Active</span>
+                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground font-mono">
+                    AI Active
+                  </span>
                 </div>
 
                 {/* Messages Chat Stream */}
@@ -1153,9 +1159,7 @@ function AutoOrganizedInboxAnimation() {
               <motion.div
                 key={`${email.sender}-${index}`}
                 animate={{
-                  backgroundColor: isProcessing
-                    ? "var(--accent)"
-                    : "transparent",
+                  backgroundColor: isProcessing ? "var(--accent)" : "transparent",
                 }}
                 transition={{ duration: 0.2 }}
                 className={`relative flex items-center justify-between py-1.5 px-2 rounded-lg border transition-colors ${
@@ -1189,9 +1193,7 @@ function AutoOrganizedInboxAnimation() {
                   {/* Subject Line */}
                   <span
                     className={`truncate text-xs flex-1 ${
-                      email.unread
-                        ? "font-medium text-foreground/90"
-                        : "text-muted-foreground"
+                      email.unread ? "font-medium text-foreground/90" : "text-muted-foreground"
                     }`}
                   >
                     {email.subject}
@@ -1263,13 +1265,15 @@ function AskYourInboxAnimation() {
     },
     {
       query: "What was the budget approved for Q3 marketing?",
-      answer: "The approved Q3 marketing budget is $45,000, with $12,000 earmarked for industry events.",
+      answer:
+        "The approved Q3 marketing budget is $45,000, with $12,000 earmarked for industry events.",
       sources: [
         {
           title: "Q3_Marketing_Budget_Final.pdf",
           sender: "Sarah Miller",
           time: "Yesterday",
-          snippet: "Total approved budget for Q3 marketing is set at $45,000 across digital and events...",
+          snippet:
+            "Total approved budget for Q3 marketing is set at $45,000 across digital and events...",
           badge: "PDF Attachment",
         },
         {
@@ -1748,11 +1752,18 @@ function FollowUpAnimation() {
         >
           <div className="flex items-center gap-3 min-w-0">
             <div className="h-8 w-8 rounded-full bg-pink-wash/20 flex items-center justify-center shrink-0">
-              <span className="text-xs font-semibold text-foreground">{r.name.split(" ").map(n => n[0]).join("")}</span>
+              <span className="text-xs font-semibold text-foreground">
+                {r.name
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")}
+              </span>
             </div>
             <div className="min-w-0">
               <div className="text-xs font-medium text-foreground truncate">{r.subject}</div>
-              <div className="text-[10px] text-muted-foreground">{r.name} · {r.days}</div>
+              <div className="text-[10px] text-muted-foreground">
+                {r.name} · {r.days}
+              </div>
             </div>
           </div>
           <motion.span
@@ -1790,7 +1801,9 @@ function UnifiedInboxAnimation() {
               className="h-7 w-7 rounded-full border-2 border-card flex items-center justify-center"
               style={{ backgroundColor: a.color + "20" }}
             >
-              <span className="text-[10px] font-bold" style={{ color: a.color }}>{a.provider[0]}</span>
+              <span className="text-[10px] font-bold" style={{ color: a.color }}>
+                {a.provider[0]}
+              </span>
             </motion.div>
           ))}
         </div>
@@ -1849,16 +1862,24 @@ function GhostTrackerAnimation() {
         <motion.div
           key={c.name}
           animate={{
-            borderColor: highlightIdx === i ? (c.replied ? "var(--color-border)" : "var(--pink-wash)") : "var(--color-border)",
+            borderColor:
+              highlightIdx === i
+                ? c.replied
+                  ? "var(--color-border)"
+                  : "var(--pink-wash)"
+                : "var(--color-border)",
           }}
           className="flex items-center justify-between p-3 rounded-xl border bg-background/80"
         >
           <div className="flex items-center gap-3">
-            <div className={`h-8 w-8 rounded-full flex items-center justify-center shrink-0 ${c.replied ? "bg-green-500/15" : "bg-pink-wash/20"}`}>
-              {c.replied
-                ? <Check className="h-3.5 w-3.5 text-green-600" />
-                : <Ghost className="h-3.5 w-3.5 text-foreground/60" />
-              }
+            <div
+              className={`h-8 w-8 rounded-full flex items-center justify-center shrink-0 ${c.replied ? "bg-green-500/15" : "bg-pink-wash/20"}`}
+            >
+              {c.replied ? (
+                <Check className="h-3.5 w-3.5 text-green-600" />
+              ) : (
+                <Ghost className="h-3.5 w-3.5 text-foreground/60" />
+              )}
             </div>
             <div>
               <div className="text-xs font-medium text-foreground">{c.name}</div>
@@ -1870,7 +1891,9 @@ function GhostTrackerAnimation() {
               <Eye className="h-3 w-3" />
               <span>{c.opens} opens</span>
             </div>
-            <div className={`text-[10px] font-medium mt-0.5 ${c.replied ? "text-green-600" : "text-pink-wash"}`}>
+            <div
+              className={`text-[10px] font-medium mt-0.5 ${c.replied ? "text-green-600" : "text-pink-wash"}`}
+            >
               {c.replied ? "Replied ✓" : "No reply"}
             </div>
           </div>
@@ -1900,10 +1923,7 @@ function RelationshipIntelAnimation() {
     { label: "Relationship strength", value: "Strong" },
   ];
 
-  const nextSteps = [
-    "Follow up on Q3 partnership proposal",
-    "Schedule quarterly review call",
-  ];
+  const nextSteps = ["Follow up on Q3 partnership proposal", "Schedule quarterly review call"];
 
   return (
     <div className="w-full max-w-md mx-auto">
@@ -1959,7 +1979,8 @@ function RelationshipIntelAnimation() {
             >
               <div className="text-[11px] text-muted-foreground leading-relaxed">
                 <span className="text-foreground font-medium">AI Summary: </span>
-                Ongoing partnership discussions since Jan 2025. Agreed on co-marketing terms in March. Pending: Q3 budget allocation and launch timeline.
+                Ongoing partnership discussions since Jan 2025. Agreed on co-marketing terms in
+                March. Pending: Q3 budget allocation and launch timeline.
               </div>
               <div className="grid grid-cols-3 gap-2">
                 {summaryItems.map((item) => (
@@ -1984,7 +2005,10 @@ function RelationshipIntelAnimation() {
                 <ArrowRight className="h-3 w-3" /> Suggested next steps
               </div>
               {nextSteps.map((step, i) => (
-                <div key={i} className="flex items-center gap-2 text-[11px] text-muted-foreground py-1">
+                <div
+                  key={i}
+                  className="flex items-center gap-2 text-[11px] text-muted-foreground py-1"
+                >
                   <span className="h-1 w-1 rounded-full bg-pink-wash shrink-0" />
                   {step}
                 </div>
@@ -2018,21 +2042,49 @@ function SmartFollowUpAnimation() {
     };
 
     void runLoop();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const emails = [
-    { who: "Sarah Chen", tag: "Follow Up", tagColor: "bg-pink-wash/30 text-foreground/80 border-pink-wash/40", subj: "Q3 Partnership — next steps?", time: "Returns in 2d" },
-    { who: "Me, Patryk", tag: "Draft", tagColor: "bg-muted text-foreground/70 border-border/60", subj: "Re: Budget allocation review", time: "AI draft ready" },
-    { who: "Marcus, Jordan", tag: "Follow Up", tagColor: "bg-pink-wash/30 text-foreground/80 border-pink-wash/40", subj: "Contract renewal — awaiting sign", time: "Returns in 5h" },
-    { who: "Nina Patel", tag: null, tagColor: "", subj: "Intro call with Acme team", time: "3:40 PM" },
+    {
+      who: "Sarah Chen",
+      tag: "Follow Up",
+      tagColor: "bg-pink-wash/30 text-foreground/80 border-pink-wash/40",
+      subj: "Q3 Partnership — next steps?",
+      time: "Returns in 2d",
+    },
+    {
+      who: "Me, Patryk",
+      tag: "Draft",
+      tagColor: "bg-muted text-foreground/70 border-border/60",
+      subj: "Re: Budget allocation review",
+      time: "AI draft ready",
+    },
+    {
+      who: "Marcus, Jordan",
+      tag: "Follow Up",
+      tagColor: "bg-pink-wash/30 text-foreground/80 border-pink-wash/40",
+      subj: "Contract renewal — awaiting sign",
+      time: "Returns in 5h",
+    },
+    {
+      who: "Nina Patel",
+      tag: null,
+      tagColor: "",
+      subj: "Intro call with Acme team",
+      time: "3:40 PM",
+    },
   ];
 
   return (
     <div className="w-full">
       {/* Mini inbox header */}
       <div className="flex items-center gap-2 px-3 py-2 border-b border-border/60 text-[10px]">
-        <span className="font-semibold text-foreground border-b-2 border-foreground pb-0.5">Follow Ups <span className="text-muted-foreground font-normal">3</span></span>
+        <span className="font-semibold text-foreground border-b-2 border-foreground pb-0.5">
+          Follow Ups <span className="text-muted-foreground font-normal">3</span>
+        </span>
         <span className="text-muted-foreground">Important</span>
         <span className="text-muted-foreground">Drafts</span>
       </div>
@@ -2050,7 +2102,9 @@ function SmartFollowUpAnimation() {
             <div className="truncate text-foreground/90 font-medium">{e.who}</div>
             <div>
               {e.tag && (
-                <span className={`rounded px-1.5 py-0.5 text-[9px] font-medium border ${e.tagColor}`}>
+                <span
+                  className={`rounded px-1.5 py-0.5 text-[9px] font-medium border ${e.tagColor}`}
+                >
                   {e.tag}
                 </span>
               )}
@@ -2120,7 +2174,8 @@ function RelationshipCopilot() {
             Your relationship copilot.
           </h2>
           <p className="mt-4 text-muted-foreground text-lg">
-            More than email — Casper helps you nurture every professional relationship without the overhead.
+            More than email — Casper helps you nurture every professional relationship without the
+            overhead.
           </p>
         </motion.div>
 
@@ -2138,10 +2193,16 @@ function RelationshipCopilot() {
               }`}
             >
               {/* Icon + Text */}
-              <div className={`flex flex-col ${feature.size === "hero" ? "md:flex-row md:gap-10" : ""}`}>
+              <div
+                className={`flex flex-col ${feature.size === "hero" ? "md:flex-row md:gap-10" : ""}`}
+              >
                 <div className={`${feature.size === "hero" ? "md:w-2/5" : ""} mb-6`}>
-                  <h3 className="text-lg font-semibold tracking-tight text-foreground">{feature.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed max-w-md">{feature.desc}</p>
+                  <h3 className="text-lg font-semibold tracking-tight text-foreground">
+                    {feature.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed max-w-md">
+                    {feature.desc}
+                  </p>
                 </div>
 
                 {/* Animation */}

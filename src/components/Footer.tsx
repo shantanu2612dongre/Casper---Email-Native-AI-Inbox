@@ -14,20 +14,17 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16">
           {/* Left Column (Logo, YC badge, App links, socials) */}
           <div className="md:col-span-5 flex flex-col items-start gap-6">
-            <a href="#" className="flex items-center gap-1.5 font-semibold text-foreground tracking-tight text-xl">
-              <img
-                src="/casper-logo.svg"
-                alt="Wisps logo"
-                className="h-9 w-9 object-contain"
-              />
+            <a
+              href="#"
+              className="flex items-center gap-1.5 font-semibold text-foreground tracking-tight text-xl"
+            >
+              <img src="/casper-logo.svg" alt="Wisps logo" className="h-9 w-9 object-contain" />
               Wisps
             </a>
-            
+
             <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
               From email overload to inbox zero, on autopilot.
             </p>
-
-           
 
             {/* App Store / Google Play Buttons */}
             {/* <div className="flex flex-wrap items-center gap-3">
@@ -64,27 +61,55 @@ export function Footer() {
             {/* Social List */}
             <div className="flex flex-col gap-2.5 text-sm text-muted-foreground mt-2">
               <h4 className="text-sm font-semibold text-foreground tracking-tight">Socials</h4>
-              <a href="https://linkedin.com/company/casper" target="_blank" rel="noreferrer" className="flex items-center gap-2.5 hover:text-foreground transition-colors">
+              <a
+                href="https://linkedin.com/company/casper"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2.5 hover:text-foreground transition-colors"
+              >
                 <Linkedin className="h-4 w-4 shrink-0" />
                 <span>@casper-email</span>
               </a>
-              <a href="https://x.com/casper" target="_blank" rel="noreferrer" className="flex items-center gap-2.5 hover:text-foreground transition-colors">
+              <a
+                href="https://x.com/casper"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2.5 hover:text-foreground transition-colors"
+              >
                 <Twitter className="h-4 w-4 shrink-0" />
                 <span>@usecasper</span>
               </a>
-              <a href="https://instagram.com/casper" target="_blank" rel="noreferrer" className="flex items-center gap-2.5 hover:text-foreground transition-colors">
+              <a
+                href="https://instagram.com/casper"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2.5 hover:text-foreground transition-colors"
+              >
                 <Instagram className="h-4 w-4 shrink-0" />
                 <span>@usecasper</span>
               </a>
-              <a href="https://youtube.com/casper" target="_blank" rel="noreferrer" className="flex items-center gap-2.5 hover:text-foreground transition-colors">
+              <a
+                href="https://youtube.com/casper"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2.5 hover:text-foreground transition-colors"
+              >
                 <Youtube className="h-4 w-4 shrink-0" />
                 <span>@usecasper</span>
               </a>
-              <a href="https://facebook.com/casper" target="_blank" rel="noreferrer" className="flex items-center gap-2.5 hover:text-foreground transition-colors">
+              <a
+                href="https://facebook.com/casper"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2.5 hover:text-foreground transition-colors"
+              >
                 <Facebook className="h-4 w-4 shrink-0" />
                 <span>Wisps</span>
               </a>
-              <a href="mailto:contact@usecasper.com" className="flex items-center gap-2.5 hover:text-foreground transition-colors">
+              <a
+                href="mailto:contact@usecasper.com"
+                className="flex items-center gap-2.5 hover:text-foreground transition-colors"
+              >
                 <Mail className="h-4 w-4 shrink-0" />
                 <span>contact@usecasper.com</span>
               </a>
@@ -96,40 +121,94 @@ export function Footer() {
             <div className="flex flex-col gap-4">
               <h4 className="text-sm font-semibold text-foreground tracking-tight">Product</h4>
               <ul className="flex flex-col gap-2.5 text-sm text-muted-foreground">
-                <li><a href="#features" className="hover:text-foreground transition-colors">Inbox</a></li>
-                <li><a href="#features" className="hover:text-foreground transition-colors">Drafts</a></li>
-                <li><a href="#features" className="hover:text-foreground transition-colors">Agents</a></li>
-                <li><a href="#features" className="hover:text-foreground transition-colors">Search</a></li>
-                <li><a href="#pricing" className="hover:text-foreground transition-colors">Pricing</a></li>
+                <li>
+                  <a href="#features" className="hover:text-foreground transition-colors">
+                    Inbox
+                  </a>
+                </li>
+                <li>
+                  <a href="#features" className="hover:text-foreground transition-colors">
+                    Drafts
+                  </a>
+                </li>
+                <li>
+                  <a href="#features" className="hover:text-foreground transition-colors">
+                    Agents
+                  </a>
+                </li>
+                <li>
+                  <a href="#features" className="hover:text-foreground transition-colors">
+                    Search
+                  </a>
+                </li>
+                <li>
+                  <a href="#pricing" className="hover:text-foreground transition-colors">
+                    Pricing
+                  </a>
+                </li>
               </ul>
             </div>
 
             <div className="flex flex-col gap-4">
               <h4 className="text-sm font-semibold text-foreground tracking-tight">Company</h4>
               <ul className="flex flex-col gap-2.5 text-sm text-muted-foreground">
-                <li><a href="/careers" className="hover:text-foreground transition-colors">Careers</a></li>
-                <li><a href="/about" className="hover:text-foreground transition-colors">About Us</a></li>
-                <li><a href="#contact" className="hover:text-foreground transition-colors">Contact Us</a></li>
-                <li><a href="/blog" className="hover:text-foreground transition-colors">Blog</a></li>
+                <li>
+                  <a href="/careers" className="hover:text-foreground transition-colors">
+                    Careers
+                  </a>
+                </li>
+                <li>
+                  <a href="/about" className="hover:text-foreground transition-colors">
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a href="#contact" className="hover:text-foreground transition-colors">
+                    Contact Us
+                  </a>
+                </li>
+                <li>
+                  <a href="/blog" className="hover:text-foreground transition-colors">
+                    Blog
+                  </a>
+                </li>
               </ul>
             </div>
 
             <div className="flex flex-col gap-4">
               <h4 className="text-sm font-semibold text-foreground tracking-tight">Resources</h4>
               <ul className="flex flex-col gap-2.5 text-sm text-muted-foreground">
-                <li><a href="/changelog" className="hover:text-foreground transition-colors">Changelog</a></li>
-                <li><a href="/status" className="hover:text-foreground transition-colors">System Status</a></li>
-                <li><a href="/docs" className="hover:text-foreground transition-colors">Documentation</a></li>
+                <li>
+                  <a href="/changelog" className="hover:text-foreground transition-colors">
+                    Changelog
+                  </a>
+                </li>
+                <li>
+                  <a href="/status" className="hover:text-foreground transition-colors">
+                    System Status
+                  </a>
+                </li>
+                <li>
+                  <a href="/docs" className="hover:text-foreground transition-colors">
+                    Documentation
+                  </a>
+                </li>
               </ul>
             </div>
 
             <div className="flex flex-col gap-4">
               <h4 className="text-sm font-semibold text-foreground tracking-tight">Legal</h4>
               <ul className="flex flex-col gap-2.5 text-sm text-muted-foreground">
-  
-  
-                <li><a href="/legal/dpa" className="hover:text-foreground transition-colors">DPA</a></li>
-                <li><a href="/legal/api-terms" className="hover:text-foreground transition-colors">API Terms</a></li>
+                <li>
+                  <a href="/legal/dpa" className="hover:text-foreground transition-colors">
+                    DPA
+                  </a>
+                </li>
+                <li>
+                  <a href="/legal/api-terms" className="hover:text-foreground transition-colors">
+                    API Terms
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -137,14 +216,20 @@ export function Footer() {
 
         {/* Lower footer bar */}
         <div className="border-t border-border/60 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground relative z-10">
-          <div>
-            © {new Date().getFullYear()} Wisps. All rights reserved.
-          </div>
+          <div>© {new Date().getFullYear()} Wisps. All rights reserved.</div>
           <div className="flex items-center gap-6">
-            <a href="/terms" className="hover:text-foreground transition-colors">Terms</a>
-            <a href="/privacy" className="hover:text-foreground transition-colors">Privacy</a>
-            <a href="/legal/data-deletion" className="hover:text-foreground transition-colors">Data Deletion</a>
-            <a href="/legal/cookies" className="hover:text-foreground transition-colors">Cookies</a>
+            <a href="/terms" className="hover:text-foreground transition-colors">
+              Terms
+            </a>
+            <a href="/privacy" className="hover:text-foreground transition-colors">
+              Privacy
+            </a>
+            <a href="/legal/data-deletion" className="hover:text-foreground transition-colors">
+              Data Deletion
+            </a>
+            <a href="/legal/cookies" className="hover:text-foreground transition-colors">
+              Cookies
+            </a>
           </div>
         </div>
       </div>

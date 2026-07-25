@@ -17,7 +17,7 @@ export const sendWaitlistOtp = createServerFn({ method: "POST" })
     z.object({
       name: z.string().min(1, "Name is required"),
       email: z.string().email("Invalid email address"),
-    })
+    }),
   )
   .handler(async ({ data }) => {
     // Dynamic import keeps Resend out of the client bundle
@@ -80,14 +80,17 @@ export const verifyWaitlistOtp = createServerFn({ method: "POST" })
     z.object({
       email: z.string().email("Invalid email address"),
       code: z.string().length(6, "Code must be 6 digits"),
-    })
+    }),
   )
   .handler(async ({ data }) => {
     const key = data.email.toLowerCase();
     const stored = otpStore.get(key);
 
     if (!stored) {
-      return { success: false as const, error: "No verification code found. Please request a new one." };
+      return {
+        success: false as const,
+        error: "No verification code found. Please request a new one.",
+      };
     }
 
     if (Date.now() > stored.expiresAt) {
@@ -123,9 +126,7 @@ export const verifyWaitlistOtp = createServerFn({ method: "POST" })
     }
 
     // Get next position (count existing + 1)
-    const { count } = await supabase
-      .from("waitlist")
-      .select("*", { count: "exact", head: true });
+    const { count } = await supabase.from("waitlist").select("*", { count: "exact", head: true });
 
     const position = (count ?? 0) + 1;
 

@@ -142,9 +142,7 @@ function ConnectorButton({
       onClick={onClick}
       className="group relative flex w-full items-center gap-3 rounded-xl border border-border/60 bg-white px-5 py-3.5 text-[15px] font-medium text-foreground shadow-sm transition-all duration-200 hover:border-foreground/20 hover:shadow-md hover:bg-secondary/50 active:scale-[0.98] cursor-pointer"
     >
-      <span className="flex h-6 w-6 shrink-0 items-center justify-center">
-        {icon}
-      </span>
+      <span className="flex h-6 w-6 shrink-0 items-center justify-center">{icon}</span>
       <span>{label}</span>
       <ArrowRight className="ml-auto h-4 w-4 opacity-0 -translate-x-2 transition-all duration-200 group-hover:opacity-60 group-hover:translate-x-0" />
     </motion.button>
@@ -180,8 +178,7 @@ function LoginPage() {
             transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
             className="absolute -top-10 right-10 h-72 w-72 rounded-full"
             style={{
-              background:
-                "radial-gradient(circle, oklch(0.88 0.1 30 / 0.4) 0%, transparent 70%)",
+              background: "radial-gradient(circle, oklch(0.88 0.1 30 / 0.4) 0%, transparent 70%)",
             }}
           />
           <motion.div
@@ -198,8 +195,7 @@ function LoginPage() {
             }}
             className="absolute bottom-32 -left-8 h-56 w-56 rounded-full"
             style={{
-              background:
-                "radial-gradient(circle, oklch(0.85 0.12 300 / 0.3) 0%, transparent 70%)",
+              background: "radial-gradient(circle, oklch(0.85 0.12 300 / 0.3) 0%, transparent 70%)",
             }}
           />
           <motion.div
@@ -215,8 +211,7 @@ function LoginPage() {
             }}
             className="absolute top-1/3 left-1/4 h-44 w-44 rounded-full"
             style={{
-              background:
-                "radial-gradient(circle, oklch(0.9 0.08 50 / 0.25) 0%, transparent 70%)",
+              background: "radial-gradient(circle, oklch(0.9 0.08 50 / 0.25) 0%, transparent 70%)",
             }}
           />
         </div>
@@ -233,14 +228,8 @@ function LoginPage() {
               custom={0}
               className="flex items-center gap-2 text-foreground"
             >
-              <img
-                src="/casper-logo.svg"
-                alt="Wisps logo"
-                className="h-9 w-9 object-contain"
-              />
-              <span className="text-lg font-semibold tracking-tight">
-                Wisps
-              </span>
+              <img src="/casper-logo.svg" alt="Wisps logo" className="h-9 w-9 object-contain" />
+              <span className="text-lg font-semibold tracking-tight">Wisps</span>
             </motion.a>
           </div>
 
@@ -265,8 +254,8 @@ function LoginPage() {
               custom={2}
               className="mt-4 text-[15px] text-muted-foreground leading-relaxed max-w-sm"
             >
-              Sign in and let Wisps learn how you write — it'll draft replies,
-              sort your inbox, and handle the busywork for you.
+              Sign in and let Wisps learn how you write — it'll draft replies, sort your inbox, and
+              handle the busywork for you.
             </motion.p>
 
             {/* Product preview mockup — stacked card effect */}
@@ -296,13 +285,17 @@ function LoginPage() {
                     <div className="h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center">
                       <Check className="h-3 w-3 text-blue-500" />
                     </div>
-                    <span className="text-[11px] text-muted-foreground">3 replies sent automatically</span>
+                    <span className="text-[11px] text-muted-foreground">
+                      3 replies sent automatically
+                    </span>
                   </div>
                   <div className="flex items-center gap-2.5">
                     <div className="h-6 w-6 rounded-full bg-emerald-100 flex items-center justify-center">
                       <Mail className="h-3 w-3 text-emerald-500" />
                     </div>
-                    <span className="text-[11px] text-muted-foreground">Inbox sorted — 12 low priority archived</span>
+                    <span className="text-[11px] text-muted-foreground">
+                      Inbox sorted — 12 low priority archived
+                    </span>
                   </div>
                 </div>
               </motion.div>
@@ -323,17 +316,23 @@ function LoginPage() {
                 </div>
                 <div className="px-5 py-3 space-y-2.5">
                   <div className="flex items-center gap-3">
-                    <span className="text-[10px] text-muted-foreground/60 w-10 shrink-0">10:00</span>
+                    <span className="text-[10px] text-muted-foreground/60 w-10 shrink-0">
+                      10:00
+                    </span>
                     <div className="h-1.5 w-1.5 rounded-full bg-blue-400" />
                     <span className="text-[11px] text-foreground/70">Sync with design team</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-[10px] text-muted-foreground/60 w-10 shrink-0">14:00</span>
+                    <span className="text-[10px] text-muted-foreground/60 w-10 shrink-0">
+                      14:00
+                    </span>
                     <div className="h-1.5 w-1.5 rounded-full bg-amber-400" />
                     <span className="text-[11px] text-foreground/70">Client review call</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-[10px] text-muted-foreground/60 w-10 shrink-0">16:30</span>
+                    <span className="text-[10px] text-muted-foreground/60 w-10 shrink-0">
+                      16:30
+                    </span>
                     <div className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                     <span className="text-[11px] text-foreground/70">Sprint planning</span>
                   </div>
@@ -355,7 +354,9 @@ function LoginPage() {
                     <div className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
                   </div>
                   <div className="flex-1 flex justify-center">
-                    <span className="text-[11px] text-muted-foreground/70 font-medium">New Reply</span>
+                    <span className="text-[11px] text-muted-foreground/70 font-medium">
+                      New Reply
+                    </span>
                   </div>
                 </div>
 
@@ -364,7 +365,9 @@ function LoginPage() {
                   <div className="flex items-center gap-2">
                     <span className="text-[11px] text-muted-foreground/60 w-8">To:</span>
                     <div className="flex items-center gap-1.5">
-                      <div className="h-5 w-5 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-[9px] text-white font-semibold">A</div>
+                      <div className="h-5 w-5 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-[9px] text-white font-semibold">
+                        A
+                      </div>
                       <span className="text-[12px] text-foreground/80">Alex Rivera</span>
                     </div>
                   </div>
@@ -376,9 +379,7 @@ function LoginPage() {
 
                 {/* Compose body with typing animation */}
                 <div className="px-5 py-4">
-                  <p className="text-[13px] text-foreground/85 leading-[1.65]">
-                    Hi Alex,
-                  </p>
+                  <p className="text-[13px] text-foreground/85 leading-[1.65]">Hi Alex,</p>
                   <p className="text-[13px] text-foreground/85 leading-[1.65] mt-2">
                     Thanks for sending this over — the proposal looks solid. I'm on board with the
                     revenue-share model, and I think a 90-day pilot makes
@@ -437,25 +438,14 @@ function LoginPage() {
           custom={0}
           className="flex items-center gap-2 text-foreground lg:hidden mb-10"
         >
-          <img
-            src="/casper-logo.svg"
-            alt="Wisps logo"
-            className="h-9 w-9 object-contain"
-          />
+          <img src="/casper-logo.svg" alt="Wisps logo" className="h-9 w-9 object-contain" />
           <span className="text-xl font-semibold tracking-tight">Wisps</span>
         </motion.a>
 
         <div className="w-full max-w-[400px]">
           {/* Header */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            custom={0}
-          >
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-              Welcome back
-            </h2>
+          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={0}>
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground">Welcome back</h2>
             <p className="mt-2 text-[15px] text-muted-foreground">
               Sign in to your Wisps account to continue
             </p>
@@ -463,26 +453,10 @@ function LoginPage() {
 
           {/* SSO Connectors */}
           <div className="mt-8 space-y-3">
-            <ConnectorButton
-              icon={<GoogleIcon />}
-              label="Continue with Google"
-              delay={1}
-            />
-            <ConnectorButton
-              icon={<MicrosoftIcon />}
-              label="Continue with Microsoft"
-              delay={2}
-            />
-            <ConnectorButton
-              icon={<AppleIcon />}
-              label="Continue with Apple"
-              delay={3}
-            />
-            <ConnectorButton
-              icon={<SlackIcon />}
-              label="Continue with Slack"
-              delay={4}
-            />
+            <ConnectorButton icon={<GoogleIcon />} label="Continue with Google" delay={1} />
+            <ConnectorButton icon={<MicrosoftIcon />} label="Continue with Microsoft" delay={2} />
+            <ConnectorButton icon={<AppleIcon />} label="Continue with Apple" delay={3} />
+            <ConnectorButton icon={<SlackIcon />} label="Continue with Slack" delay={4} />
           </div>
 
           {/* Divider */}
@@ -569,9 +543,7 @@ function LoginPage() {
                     type="checkbox"
                     className="h-4 w-4 rounded border-border text-foreground focus:ring-foreground/20 cursor-pointer"
                   />
-                  <span className="text-sm text-muted-foreground">
-                    Remember me
-                  </span>
+                  <span className="text-sm text-muted-foreground">Remember me</span>
                 </label>
                 <a
                   href="#"

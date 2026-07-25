@@ -72,7 +72,10 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   const handleOtpChange = (index: number, value: string) => {
     if (value.length > 1) {
       // Handle paste
-      const chars = value.replace(/[^0-9]/g, "").slice(0, 6).split("");
+      const chars = value
+        .replace(/[^0-9]/g, "")
+        .slice(0, 6)
+        .split("");
       const newOtp = [...otp];
       chars.forEach((char, i) => {
         if (index + i < 6) newOtp[index + i] = char;
@@ -198,8 +201,8 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                         Join the waitlist
                       </h2>
                       <p className="mt-2 text-sm text-muted-foreground text-center max-w-xs leading-relaxed">
-                        Your name and email. We send the code over
-                        email, because that is the whole point.
+                        Your name and email. We send the code over email, because that is the whole
+                        point.
                       </p>
 
                       {/* Error message */}
@@ -271,10 +274,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                       {/* Login link */}
                       <p className="mt-6 text-sm text-muted-foreground">
                         Already have access?{" "}
-                        <a
-                          href="/login"
-                          className="text-[#2196F3] font-medium hover:underline"
-                        >
+                        <a href="/login" className="text-[#2196F3] font-medium hover:underline">
                           Log in
                         </a>
                       </p>
@@ -295,8 +295,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                         Join the waitlist
                       </h2>
                       <p className="mt-2 text-sm text-muted-foreground text-center flex items-center gap-1.5">
-                        Check your Mail{" "}
-                        <Mail className="h-4 w-4 text-muted-foreground" />
+                        Check your Mail <Mail className="h-4 w-4 text-muted-foreground" />
                       </p>
 
                       {/* Error message */}
@@ -324,10 +323,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                             maxLength={1}
                             value={digit}
                             onChange={(e) =>
-                              handleOtpChange(
-                                index,
-                                e.target.value.replace(/[^0-9]/g, "")
-                              )
+                              handleOtpChange(index, e.target.value.replace(/[^0-9]/g, ""))
                             }
                             onKeyDown={(e) => handleOtpKeyDown(index, e)}
                             initial={{ opacity: 0, y: 10 }}
@@ -372,10 +368,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                         </button>
                         <p className="text-sm text-muted-foreground">
                           Already have access?{" "}
-                          <a
-                            href="/login"
-                            className="text-[#2196F3] font-medium hover:underline"
-                          >
+                          <a href="/login" className="text-[#2196F3] font-medium hover:underline">
                             Log in
                           </a>
                         </p>
@@ -454,19 +447,14 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                         {alreadyJoined ? (
                           <>
                             You're already on the waitlist with{" "}
-                            <span className="font-medium text-foreground">
-                              {email}
-                            </span>
-                            . We'll notify you when your spot is ready!
+                            <span className="font-medium text-foreground">{email}</span>. We'll
+                            notify you when your spot is ready!
                           </>
                         ) : (
                           <>
-                            You're on the list! We'll send you an invite
-                            to{" "}
-                            <span className="font-medium text-foreground">
-                              {email}
-                            </span>{" "}
-                            as soon as your spot is ready.
+                            You're on the list! We'll send you an invite to{" "}
+                            <span className="font-medium text-foreground">{email}</span> as soon as
+                            your spot is ready.
                           </>
                         )}
                       </motion.p>
@@ -481,9 +469,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                         <div className="flex items-center gap-2">
                           <PartyPopper className="h-5 w-5 text-amber-500" />
                           <div>
-                            <div className="text-xs text-muted-foreground">
-                              Your position
-                            </div>
+                            <div className="text-xs text-muted-foreground">Your position</div>
                             <div className="text-lg font-bold text-foreground tracking-tight">
                               #{position?.toLocaleString() ?? "—"}
                             </div>
