@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { useState } from "react";
 import { WaitlistModal } from "./WaitlistModal";
+import { trackEvent } from "../lib/utils";
 
 export function Nav() {
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
@@ -40,7 +41,14 @@ export function Nav() {
               Login
             </a>
             <button
-              onClick={() => setIsWaitlistOpen(true)}
+              onClick={() => {
+                trackEvent("join_waitlist_click", {
+                  event_category: "engagement",
+                  event_label: "Navbar Join Waitlist Button",
+                  button_location: "navbar",
+                });
+                setIsWaitlistOpen(true);
+              }}
               className="inline-flex items-center rounded-lg bg-foreground text-background px-4 py-2 text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
             >
               Join Waitlist

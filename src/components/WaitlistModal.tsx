@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Mail, X, Check, PartyPopper, Sparkles, AlertCircle } from "lucide-react";
 import { sendWaitlistOtp, verifyWaitlistOtp } from "../lib/api/waitlist.functions";
+import { trackEvent } from "../lib/utils";
 
 type WaitlistStep = "email" | "otp" | "success";
 
@@ -61,6 +62,10 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
 
     try {
       await sendWaitlistOtp({ data: { name: name.trim(), email: email.trim() } });
+      trackEvent("join_waitlist_email_submit", {
+        event_category: "conversion",
+        event_label: "Waitlist Email Submitted",
+      });
       setStep("otp");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to send code. Please try again.");
@@ -110,6 +115,12 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
     try {
       const result = await verifyWaitlistOtp({ data: { email: email.trim(), code } });
       if (result.success) {
+        trackEvent("join_waitlist_success", {
+          event_category: "conversion",
+          event_label: "Waitlist Joined Successfully",
+          already_joined: result.alreadyJoined,
+          position: result.position,
+        });
         setPosition(result.position);
         setAlreadyJoined(result.alreadyJoined);
         setStep("success");

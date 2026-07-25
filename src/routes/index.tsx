@@ -34,9 +34,12 @@ import { Footer } from "../components/Footer";
 import { Testimonials } from "../components/Testimonials";
 import { Nav } from "../components/Nav";
 import { WaitlistModal } from "../components/WaitlistModal";
+import { trackEvent } from "../lib/utils";
 
 // Context to share modal open handler across sections
-const WaitlistContext = createContext<{ openWaitlist: () => void }>({ openWaitlist: () => {} });
+const WaitlistContext = createContext<{ openWaitlist: (location?: string) => void }>({
+  openWaitlist: () => {},
+});
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -101,7 +104,7 @@ function Hero() {
           className="mt-10 flex items-center justify-center"
         >
           <button
-            onClick={openWaitlist}
+            onClick={() => openWaitlist("hero")}
             className="inline-flex items-center rounded-lg bg-foreground text-background px-6 py-3 text-base font-medium hover:opacity-90 transition-opacity cursor-pointer"
           >
             Join Waitlist
@@ -2469,7 +2472,7 @@ function CTA() {
           </p>
           <div className="mt-8 flex items-center justify-center gap-3">
             <button
-              onClick={openWaitlist}
+              onClick={() => openWaitlist("cta")}
               className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
             >
               Join Waitlist
@@ -2489,7 +2492,16 @@ function CTA() {
 
 function Index() {
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
-  const openWaitlist = () => setIsWaitlistOpen(true);
+  const openWaitlist = (location?: string) => {
+    trackEvent("join_waitlist_click", {
+      event_category: "engagement",
+      event_label: location
+        ? `${location.toUpperCase()} Join Waitlist Button`
+        : "Join Waitlist Button",
+      button_location: location || "unknown",
+    });
+    setIsWaitlistOpen(true);
+  };
   const closeWaitlist = () => setIsWaitlistOpen(false);
 
   return (
