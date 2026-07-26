@@ -61,7 +61,7 @@ function checkSendRateLimit(email: string) {
 
 // ─── Send OTP Email ───
 export const sendWaitlistOtp = createServerFn({ method: "POST" })
-  .inputValidator(
+  .validator(
     z.object({
       name: z.string().min(1, "Name is required"),
       email: z.string().email("Invalid email address"),
@@ -139,7 +139,7 @@ export const sendWaitlistOtp = createServerFn({ method: "POST" })
 
 // ─── Verify OTP & Save to Supabase Waitlist ───
 export const verifyWaitlistOtp = createServerFn({ method: "POST" })
-  .inputValidator(
+  .validator(
     z.object({
       email: z.string().email("Invalid email address"),
       code: z.string().length(4, "Code must be 4 digits"),
