@@ -37,9 +37,9 @@ export function normalizeEmail(rawEmail: string): string {
   return `${localPart}@${domain}`;
 }
 
-// ─── Generate a random 6-digit OTP ───
+// ─── Generate a random 4-digit OTP ───
 function generateOtp(): string {
-  return Math.floor(100000 + Math.random() * 900000).toString();
+  return Math.floor(1000 + Math.random() * 9000).toString();
 }
 
 // ─── Check Rate Limit (Max 3 OTP requests per 15 minutes per email) ───
@@ -142,7 +142,7 @@ export const verifyWaitlistOtp = createServerFn({ method: "POST" })
   .inputValidator(
     z.object({
       email: z.string().email("Invalid email address"),
-      code: z.string().length(6, "Code must be 6 digits"),
+      code: z.string().length(4, "Code must be 4 digits"),
     }),
   )
   .handler(async ({ data }) => {

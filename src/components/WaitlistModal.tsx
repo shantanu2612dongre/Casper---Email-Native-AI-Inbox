@@ -15,7 +15,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   const [step, setStep] = useState<WaitlistStep>("email");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [otp, setOtp] = useState(["", "", "", ""]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [position, setPosition] = useState<number | null>(null);
@@ -28,7 +28,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
       setStep("email");
       setName("");
       setEmail("");
-      setOtp(["", "", "", "", "", ""]);
+      setOtp(["", "", "", ""]);
       setIsLoading(false);
       setError("");
       setPosition(null);
@@ -79,14 +79,14 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
       // Handle paste
       const chars = value
         .replace(/[^0-9]/g, "")
-        .slice(0, 6)
+        .slice(0, 4)
         .split("");
       const newOtp = [...otp];
       chars.forEach((char, i) => {
-        if (index + i < 6) newOtp[index + i] = char;
+        if (index + i < 4) newOtp[index + i] = char;
       });
       setOtp(newOtp);
-      const nextFocus = Math.min(index + chars.length, 5);
+      const nextFocus = Math.min(index + chars.length, 3);
       otpRefs.current[nextFocus]?.focus();
       return;
     }
@@ -95,7 +95,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
     newOtp[index] = value;
     setOtp(newOtp);
 
-    if (value && index < 5) {
+    if (value && index < 3) {
       otpRefs.current[index + 1]?.focus();
     }
   };
@@ -108,7 +108,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
 
   const handleVerify = async () => {
     const code = otp.join("");
-    if (code.length !== 6) return;
+    if (code.length !== 4) return;
     setIsLoading(true);
     setError("");
 
@@ -137,7 +137,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   const handleResendCode = async () => {
     setIsLoading(true);
     setError("");
-    setOtp(["", "", "", "", "", ""]);
+    setOtp(["", "", "", ""]);
 
     try {
       await sendWaitlistOtp({ data: { name: name.trim(), email: email.trim() } });
