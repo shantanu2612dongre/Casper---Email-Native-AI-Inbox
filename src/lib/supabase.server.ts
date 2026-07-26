@@ -8,11 +8,25 @@ import process from "node:process";
 // Cloudflare Workers where env binds at request time.
 
 export function getSupabaseAdmin() {
-  const url = process.env.SUPABASE_URL;
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const url =
+    process.env.SUPABASE_URL ||
+    import.meta.env?.SUPABASE_URL ||
+    process.env.VITE_SUPABASE_URL ||
+    import.meta.env?.VITE_SUPABASE_URL;
+  const serviceKey =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    import.meta.env?.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.VITE_SUPABASE_SERVICE_ROLE_KEY ||
+    import.meta.env?.VITE_SUPABASE_SERVICE_ROLE_KEY;
 
   if (!url || !serviceKey) {
-    throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY environment variables");
+    const missing = [];
+    if (!url) missing.push("SUPABASE_URL (or VITE_SUPABASE_URL)");
+    if (!serviceKey)
+      missing.push("SUPABASE_SERVICE_ROLE_KEY (or VITE_SUPABASE_SERVICE_ROLE_KEY)");
+    throw new Error(
+      `Missing environment variable(s): ${missing.join(", ")}. Please check your .env.local file and RESTART 'npm run dev'!`,
+    );
   }
 
   return createClient(url, serviceKey, {

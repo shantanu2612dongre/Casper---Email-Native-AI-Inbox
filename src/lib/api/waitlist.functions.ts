@@ -73,9 +73,15 @@ export const sendWaitlistOtp = createServerFn({ method: "POST" })
     // Dynamic import keeps Resend out of the client bundle
     const { Resend } = await import("resend");
 
-    const apiKey = process.env.RESEND_API_KEY;
+    const apiKey =
+      process.env.RESEND_API_KEY ||
+      import.meta.env?.RESEND_API_KEY ||
+      process.env.VITE_RESEND_API_KEY ||
+      import.meta.env?.VITE_RESEND_API_KEY;
     if (!apiKey) {
-      throw new Error("RESEND_API_KEY is not configured");
+      throw new Error(
+        "RESEND_API_KEY is not configured. Please check your .env.local file and RESTART 'npm run dev'!",
+      );
     }
 
     const resend = new Resend(apiKey);
