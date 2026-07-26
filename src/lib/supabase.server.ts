@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import process from "node:process";
+import { loadServerEnv } from "./config.server";
 
 // Server-only Supabase client using the service role key.
 // The .server.ts suffix ensures this never reaches the browser bundle.
@@ -8,6 +9,7 @@ import process from "node:process";
 // Cloudflare Workers where env binds at request time.
 
 export function getSupabaseAdmin() {
+  loadServerEnv();
   const url =
     process.env.SUPABASE_URL ||
     import.meta.env?.SUPABASE_URL ||

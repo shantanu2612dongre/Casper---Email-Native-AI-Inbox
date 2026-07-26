@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
 import { getSupabaseAdmin } from "../supabase.server";
+import { loadServerEnv } from "../config.server";
 
 // ─── In-memory OTP store (with attempts counter for brute-force protection) ───
 const otpStore = new Map<
@@ -67,6 +68,7 @@ export const sendWaitlistOtp = createServerFn({ method: "POST" })
     }),
   )
   .handler(async ({ data }) => {
+    loadServerEnv();
     const normalizedEmail = normalizeEmail(data.email);
     checkSendRateLimit(normalizedEmail);
 
