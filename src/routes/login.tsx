@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion } from "motion/react";
+import { LoginCardLoop } from "../components/LoginCardLoop";
 import {
   Mail,
   ArrowRight,
@@ -339,72 +340,8 @@ function LoginPage() {
                 </div>
               </motion.div>
 
-              {/* Front card — compose / reply UI */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute top-3 left-1/2 -translate-x-1/2 w-full rounded-2xl bg-white border border-black/[0.06] shadow-xl shadow-black/[0.1] overflow-hidden"
-              >
-                {/* Window chrome */}
-                <div className="flex items-center gap-3 px-5 py-3 border-b border-black/[0.05]">
-                  <div className="flex gap-1.5">
-                    <div className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
-                    <div className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
-                    <div className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
-                  </div>
-                  <div className="flex-1 flex justify-center">
-                    <span className="text-[11px] text-muted-foreground/70 font-medium">
-                      New Reply
-                    </span>
-                  </div>
-                </div>
-
-                {/* Email meta */}
-                <div className="px-5 py-3 space-y-1.5 border-b border-black/[0.04]">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[11px] text-muted-foreground/60 w-8">To:</span>
-                    <div className="flex items-center gap-1.5">
-                      <div className="h-5 w-5 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-[9px] text-white font-semibold">
-                        A
-                      </div>
-                      <span className="text-[12px] text-foreground/80">Alex Rivera</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[11px] text-muted-foreground/60 w-8">Re:</span>
-                    <span className="text-[12px] text-foreground/80">Q3 Partnership Proposal</span>
-                  </div>
-                </div>
-
-                {/* Compose body with typing animation */}
-                <div className="px-5 py-4">
-                  <p className="text-[13px] text-foreground/85 leading-[1.65]">Hi Alex,</p>
-                  <p className="text-[13px] text-foreground/85 leading-[1.65] mt-2">
-                    Thanks for sending this over — the proposal looks solid. I'm on board with the
-                    revenue-share model, and I think a 90-day pilot makes
-                    <motion.span
-                      className="inline-block"
-                      animate={{ opacity: [1, 0] }}
-                      transition={{ duration: 0.8, repeat: Infinity, ease: "steps(1)" }}
-                    >
-                      <span className="inline-block w-[2px] h-[14px] bg-foreground/70 ml-0.5 -mb-[2px]" />
-                    </motion.span>
-                  </p>
-                </div>
-
-                {/* Compose toolbar */}
-                <div className="px-5 py-3 border-t border-black/[0.04] flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <Paperclip className="h-4 w-4 text-muted-foreground/50 hover:text-muted-foreground transition-colors cursor-pointer" />
-                    <Clock className="h-4 w-4 text-muted-foreground/50 hover:text-muted-foreground transition-colors cursor-pointer" />
-                  </div>
-                  <button className="flex items-center gap-1.5 rounded-lg bg-foreground text-background px-3.5 py-1.5 text-[12px] font-medium">
-                    <Send className="h-3 w-3" />
-                    Send
-                  </button>
-                </div>
-              </motion.div>
+              {/* Front card — looping animated card component */}
+              <LoginCardLoop />
             </motion.div>
           </div>
 
