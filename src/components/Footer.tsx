@@ -1,4 +1,5 @@
 import { Sparkles, Linkedin, Twitter, Instagram, Youtube, Facebook, Mail } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Footer() {
   return (
@@ -215,8 +216,11 @@ export function Footer() {
         </div>
 
         {/* Lower footer bar */}
-        <div className="border-t border-border/60 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground relative z-10">
-          <div>© {new Date().getFullYear()} Wisps. All rights reserved.</div>
+        <div className="border-t border-border/60 pt-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-muted-foreground relative z-10">
+          <div className="flex flex-col sm:flex-row items-center gap-6">
+            <div>© {new Date().getFullYear()} Wisps. All rights reserved.</div>
+            <ThemeToggle />
+          </div>
           <div className="flex items-center gap-6">
             <a href="/terms" className="hover:text-foreground transition-colors">
               Terms

@@ -2319,60 +2319,93 @@ function HowItWorks() {
 
 function Pricing() {
   const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
-  const pricing = {
-    starter: { price: "$0", sub: "Free forever" },
-    pro:
-      billingCycle === "monthly"
-        ? { price: "$29", sub: "per user / month" }
-        : { price: "$290", sub: "per user / year" },
-    enterprise: { price: "Custom", sub: "Talk to sales" },
-  };
 
   const plans = [
     {
       name: "Starter",
-      price: pricing.starter.price,
-      sub: pricing.starter.sub,
+      description: "Free forever",
+      price: "$0",
+      interval: "",
+      annualNote: "",
       features: ["1 workspace", "5 active workflows", "Community support", "Casper AI starter"],
       cta: "Start free",
       featured: false,
+      styles: {
+        card: "bg-white dark:bg-card text-black dark:text-foreground border border-gray-200 dark:border-border shadow-sm",
+        title: "text-black dark:text-foreground",
+        desc: "text-gray-500 dark:text-muted-foreground",
+        price: "text-black dark:text-foreground",
+        interval: "text-gray-500 dark:text-muted-foreground",
+        note: "text-gray-400 dark:text-muted-foreground",
+        check: "text-green-600",
+        featureText: "text-gray-700 dark:text-foreground/80",
+        button: "bg-[#0a0a0a] dark:bg-foreground text-white dark:text-background hover:bg-black dark:hover:bg-foreground/90",
+      }
     },
     {
       name: "Pro",
-      price: pricing.pro.price,
-      sub: pricing.pro.sub,
+      description: "per user / month",
+      price: billingCycle === "monthly" ? "$29" : "$290",
+      interval: billingCycle === "monthly" ? "/month" : "/year",
+      annualNote: billingCycle === "monthly" ? "Or $290/yr billed annually — 2 months free" : "",
       features: ["Unlimited workflows", "All integrations", "Priority support", "Advanced agents"],
       cta: "Start 14-day trial",
       featured: true,
+      styles: {
+        card: "bg-[#0a0a0a] text-white shadow-xl scale-100 md:scale-105 z-10",
+        title: "text-white",
+        desc: "text-gray-400",
+        price: "text-white",
+        interval: "text-gray-400",
+        note: "text-gray-400",
+        check: "text-[#D4F826]",
+        featureText: "text-gray-200",
+        button: "bg-[#D4F826] text-black hover:bg-[#c4e61f]",
+      }
     },
     {
       name: "Enterprise",
-      price: pricing.enterprise.price,
-      sub: pricing.enterprise.sub,
+      description: "Talk to sales",
+      price: "Custom",
+      interval: "",
+      annualNote: "",
       features: ["SSO & SAML", "Audit logs", "Dedicated CSM", "Custom SLAs"],
       cta: "Contact sales",
       featured: false,
+      styles: {
+        card: "bg-white dark:bg-card text-black dark:text-foreground border border-gray-200 dark:border-border shadow-sm",
+        title: "text-black dark:text-foreground",
+        desc: "text-gray-500 dark:text-muted-foreground",
+        price: "text-black dark:text-foreground",
+        interval: "text-gray-500 dark:text-muted-foreground",
+        note: "text-gray-400 dark:text-muted-foreground",
+        check: "text-green-600",
+        featureText: "text-gray-700 dark:text-foreground/80",
+        button: "bg-[#0a0a0a] dark:bg-foreground text-white dark:text-background hover:bg-black dark:hover:bg-foreground/90",
+      }
     },
   ];
+
   return (
-    <section id="pricing" className="py-20">
+    <section id="pricing" className="py-24 bg-gray-50 dark:bg-background">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center max-w-2xl mx-auto">
+        <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-sm text-primary font-medium">Pricing</p>
           <h2 className="mt-3 text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
             Simple, transparent pricing.
           </h2>
           <p className="mt-4 text-muted-foreground">Start free. Scale when you're ready.</p>
         </div>
-        <div className="mt-8 flex justify-center">
-          <div className="inline-flex rounded-full border border-border bg-card p-1 shadow-sm">
+
+        <div className="flex justify-center mb-12">
+          <div className="inline-flex rounded-full border border-gray-200 dark:border-border bg-white dark:bg-card p-1 shadow-sm">
             <button
               type="button"
               onClick={() => setBillingCycle("monthly")}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+              className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${
                 billingCycle === "monthly"
-                  ? "bg-foreground text-background"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "bg-[#0a0a0a] dark:bg-foreground text-white dark:text-background"
+                  : "text-gray-500 dark:text-muted-foreground hover:text-black dark:hover:text-foreground"
               }`}
             >
               Monthly
@@ -2380,65 +2413,71 @@ function Pricing() {
             <button
               type="button"
               onClick={() => setBillingCycle("yearly")}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+              className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${
                 billingCycle === "yearly"
-                  ? "bg-foreground text-background"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "bg-[#0a0a0a] dark:bg-foreground text-white dark:text-background"
+                  : "text-gray-500 dark:text-muted-foreground hover:text-black dark:hover:text-foreground"
               }`}
             >
               Yearly
             </button>
           </div>
         </div>
-        <div className="mt-14 grid md:grid-cols-3 gap-5">
+
+        <div className="grid md:grid-cols-3 gap-6 md:gap-0 max-w-6xl mx-auto items-center">
           {plans.map((p, i) => (
             <motion.div
               key={p.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.6 }}
-              className={`relative rounded-2xl border p-7 ${
-                p.featured
-                  ? "border-transparent bg-foreground text-background shadow-[var(--shadow-soft)]"
-                  : "border-border bg-card text-foreground"
-              }`}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+              className={`relative rounded-[2rem] p-8 md:p-10 flex flex-col h-full ${p.styles.card}`}
             >
               {p.featured && (
-                <span className="absolute -top-3 left-7 rounded-full bg-[image:var(--gradient-primary)] text-primary-foreground text-xs px-3 py-1">
-                  Most popular
-                </span>
+                <div className="mb-6">
+                  <span className="inline-flex rounded-full bg-[#D4F826] text-black text-xs font-bold px-3 py-1">
+                    Most popular
+                  </span>
+                </div>
               )}
-              <h3 className="text-lg font-semibold tracking-tight">{p.name}</h3>
-              <div className="mt-4 flex items-baseline gap-2">
-                <span className="text-4xl font-semibold tracking-tight">{p.price}</span>
-                <span
-                  className={`text-sm ${p.featured ? "text-background/70" : "text-muted-foreground"}`}
-                >
-                  {p.sub}
-                </span>
+              <div className="mb-6">
+                <h3 className={`text-2xl font-bold ${p.styles.title}`}>{p.name}</h3>
+                {p.description && (
+                  <p className={`text-sm mt-2 font-medium ${p.styles.desc}`}>{p.description}</p>
+                )}
               </div>
-              <ul className="mt-6 space-y-2.5 text-sm">
+              
+              <div className="mb-8">
+                <div className="flex items-end gap-1">
+                  <span className={`text-5xl font-bold tracking-tight ${p.styles.price}`}>{p.price}</span>
+                  {p.interval && (
+                    <span className={`text-base font-medium mb-1 ${p.styles.interval}`}>{p.interval}</span>
+                  )}
+                </div>
+                {p.annualNote ? (
+                  <p className={`text-xs mt-3 ${p.styles.note}`}>{p.annualNote}</p>
+                ) : (
+                  <p className={`text-xs mt-3 opacity-0`}>Spacer</p> // To keep alignment
+                )}
+              </div>
+
+              <ul className="flex-1 space-y-4 mb-10">
                 {p.features.map((ft) => (
-                  <li key={ft} className="flex items-center gap-2">
-                    <Check
-                      className={`h-4 w-4 ${p.featured ? "text-primary-glow" : "text-primary"}`}
-                    />
-                    <span className={p.featured ? "text-background/90" : "text-foreground/80"}>
+                  <li key={ft} className="flex items-start gap-3">
+                    <Check className={`h-5 w-5 shrink-0 ${p.styles.check}`} strokeWidth={2.5} />
+                    <span className={`text-sm font-medium ${p.styles.featureText}`}>
                       {ft}
                     </span>
                   </li>
                 ))}
               </ul>
+
               <a
                 href="#"
-                className={`mt-7 inline-flex w-full items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium transition-colors ${
-                  p.featured
-                    ? "bg-background text-foreground hover:bg-background/90"
-                    : "bg-foreground text-background hover:bg-foreground/90"
-                }`}
+                className={`w-full flex items-center justify-center gap-2 rounded-full py-3.5 text-sm font-bold transition-all ${p.styles.button}`}
               >
-                {p.cta}
+                {p.cta} <ArrowRight className="h-4 w-4" />
               </a>
             </motion.div>
           ))}
@@ -2451,35 +2490,34 @@ function Pricing() {
 function CTA() {
   const { openWaitlist } = useContext(WaitlistContext);
   return (
-    <section className="relative py-20">
-      <div className="max-w-5xl mx-auto px-6">
+    <section className="relative py-24 bg-[#0a0a0a]">
+      <div className="max-w-4xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="relative overflow-hidden rounded-3xl border border-border/60 p-12 md:p-16 text-center"
-          style={{
-            background:
-              "radial-gradient(80% 100% at 50% 0%, var(--lavender-wash) 0%, transparent 70%), radial-gradient(80% 100% at 50% 120%, var(--pink-wash) 0%, transparent 70%), var(--card)",
-          }}
+          className="text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
-            Ready to build something delightful?
+          <h2 
+            className="text-5xl md:text-6xl text-white font-medium tracking-tight" 
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
+            Tell your inbox what you need
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-            Join thousands of teams using Casper to ship workflows their customers love.
+          <p className="mt-6 text-[17px] leading-relaxed text-zinc-400 max-w-2xl mx-auto font-sans">
+            Ask Slashy to draft a reply, find context, schedule a meeting, or follow up. It handles the work across your inbox.
           </p>
-          <div className="mt-8 flex items-center justify-center gap-3">
+          <div className="mt-10 flex items-center justify-center gap-4">
             <button
               onClick={() => openWaitlist("cta")}
-              className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
+              className="inline-flex items-center justify-center rounded-full bg-[#f4f4f5] text-[#18181b] px-8 py-3 text-[14px] font-semibold hover:bg-white transition-colors cursor-pointer"
             >
-              Join Waitlist
+              Get started
             </button>
             <a
               href="#"
-              className="inline-flex items-center rounded-full border border-border bg-card/70 px-6 py-3 text-sm font-medium text-foreground hover:bg-card transition-colors"
+              className="inline-flex items-center justify-center rounded-full bg-[#18181b] text-[#f4f4f5] px-8 py-3 text-[14px] font-semibold hover:bg-[#27272a] transition-colors"
             >
               Book a demo
             </a>
