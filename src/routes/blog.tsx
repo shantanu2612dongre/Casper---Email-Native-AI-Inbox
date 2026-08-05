@@ -292,7 +292,8 @@ function PostCard({ post, index }: { post: (typeof posts)[number]; index: number
 
 function BlogPage() {
   return (
-    <main className="min-h-screen bg-background text-foreground antialiased">
+    <main className="relative min-h-screen bg-background text-foreground antialiased overflow-x-hidden">
+      <div className="absolute top-0 left-0 right-0 h-[800px] bg-gradient-to-b from-primary-glow/10 via-transparent to-transparent pointer-events-none" />
       <Nav />
       <div className="relative overflow-hidden pb-16">
         <Hero />

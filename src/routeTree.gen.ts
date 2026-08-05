@@ -13,6 +13,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForAgentsRouteImport } from './routes/for-agents'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EnterpriseRouteImport } from './routes/enterprise'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as BlogRouteImport } from './routes/blog'
@@ -38,6 +39,11 @@ const LoginRoute = LoginRouteImport.update({
 const ForAgentsRoute = ForAgentsRouteImport.update({
   id: '/for-agents',
   path: '/for-agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnterpriseRoute = EnterpriseRouteImport.update({
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRoute
   '/careers': typeof CareersRoute
   '/enterprise': typeof EnterpriseRoute
+  '/faq': typeof FaqRoute
   '/for-agents': typeof ForAgentsRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogRoute
   '/careers': typeof CareersRoute
   '/enterprise': typeof EnterpriseRoute
+  '/faq': typeof FaqRoute
   '/for-agents': typeof ForAgentsRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/blog': typeof BlogRoute
   '/careers': typeof CareersRoute
   '/enterprise': typeof EnterpriseRoute
+  '/faq': typeof FaqRoute
   '/for-agents': typeof ForAgentsRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/careers'
     | '/enterprise'
+    | '/faq'
     | '/for-agents'
     | '/login'
     | '/privacy'
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/careers'
     | '/enterprise'
+    | '/faq'
     | '/for-agents'
     | '/login'
     | '/privacy'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/careers'
     | '/enterprise'
+    | '/faq'
     | '/for-agents'
     | '/login'
     | '/privacy'
@@ -153,6 +165,7 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRoute
   CareersRoute: typeof CareersRoute
   EnterpriseRoute: typeof EnterpriseRoute
+  FaqRoute: typeof FaqRoute
   ForAgentsRoute: typeof ForAgentsRoute
   LoginRoute: typeof LoginRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -188,6 +201,13 @@ declare module '@tanstack/react-router' {
       path: '/for-agents'
       fullPath: '/for-agents'
       preLoaderRoute: typeof ForAgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/enterprise': {
@@ -241,6 +261,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRoute,
   CareersRoute: CareersRoute,
   EnterpriseRoute: EnterpriseRoute,
+  FaqRoute: FaqRoute,
   ForAgentsRoute: ForAgentsRoute,
   LoginRoute: LoginRoute,
   PrivacyRoute: PrivacyRoute,

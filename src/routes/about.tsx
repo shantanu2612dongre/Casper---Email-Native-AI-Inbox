@@ -33,8 +33,7 @@ const fadeUp = {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden py-12 md:py-16">
-      <div className="absolute inset-0 bg-gradient-to-b from-primary-glow/5 via-transparent to-transparent" />
+    <section className="relative py-12 md:py-16">
       <div className="relative max-w-4xl mx-auto px-6 text-center">
         <motion.h1
           variants={fadeUp}
@@ -113,7 +112,8 @@ function Manifesto() {
 
 function About() {
   return (
-    <main className="min-h-screen bg-background text-foreground antialiased">
+    <main className="relative min-h-screen bg-background text-foreground antialiased overflow-x-hidden">
+      <div className="absolute top-0 left-0 right-0 h-[800px] bg-gradient-to-b from-primary-glow/10 via-transparent to-transparent pointer-events-none" />
       <Nav />
       <Hero />
       <Manifesto />
