@@ -53,8 +53,8 @@ function Nav() {
           href="/"
           className="flex items-center gap-1.5 font-semibold text-foreground tracking-tight text-xl"
         >
-          <img src="/casper-logo.svg" alt="Casper logo" className="h-9 w-9 object-contain" />
-          Casper
+          <img src="/wisps-logo.svg" alt="Wisps logo" className="h-9 w-9 object-contain" />
+          Wisps
         </a>
         <div className="hidden md:flex items-center gap-10 text-sm text-foreground/80">
           <a href="/#pricing" className="hover:text-foreground transition-colors">
@@ -97,7 +97,7 @@ const categories = ["All posts", "Product", "Workflow", "Security", "Company"];
 
 const posts = [
   {
-    title: "How Casper turns busy inboxes into clear next steps",
+    title: "How Wisps turns busy inboxes into clear next steps",
     excerpt:
       "A look at the triage patterns behind the inbox experience, and how we keep the system useful without over-automating the user out of the loop.",
     category: "Product",
@@ -149,13 +149,13 @@ function Hero() {
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-3 py-1 text-xs text-muted-foreground">
             <Sparkles className="h-3.5 w-3.5" />
-            Latest updates from Casper
+            Latest updates from Wisps
           </div>
           <h1 className="mt-6 text-5xl md:text-7xl font-semibold tracking-tight text-foreground leading-[0.98] font-serif">
             Blog
           </h1>
           <p className="mt-5 text-base md:text-lg text-muted-foreground leading-relaxed">
-            Product notes, workflow ideas, and trust updates from the team behind Casper.
+            Product notes, workflow ideas, and trust updates from the team behind Wisps.
           </p>
         </div>
       </motion.section>
@@ -324,7 +324,7 @@ function BlogPage() {
                   Want product notes and security updates in your inbox?
                 </h2>
                 <p className="mt-3 text-muted-foreground leading-relaxed">
-                  We&apos;ll keep publishing short posts about Casper&apos;s product direction,
+                  We&apos;ll keep publishing short posts about Wisps&apos;s product direction,
                   trust model, and the systems behind the inbox.
                 </p>
               </div>

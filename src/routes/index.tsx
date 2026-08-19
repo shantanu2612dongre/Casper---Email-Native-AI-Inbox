@@ -108,7 +108,7 @@ function Hero() {
           custom={1}
           className="mx-auto mt-6 max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed"
         >
-          Casper learns how you write, drafts your replies, and handles the busywork, so you can focus on what matters.
+          Wisps learns how you write, drafts your replies, and handles the busywork, so you can focus on what matters.
         </motion.p>
 
         <motion.div
@@ -143,10 +143,7 @@ function Hero() {
                   : 'text-foreground/70 hover:text-foreground'
               }`}
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#34C759" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2C6.48 2 2 6.03 2 11c0 2.85 1.48 5.38 3.79 7.03C5.64 19.34 5.09 21 4.5 22c1.77 0 4.09-.84 5.56-2.03C10.7 20.21 11.34 20 12 20c5.52 0 10-4.03 10-9s-4.48-9-10-9z"/>
-                <path d="M11.11 15.35c-1.39 0-2.48-.96-2.48-2.26 0-1.28 1.05-2.22 2.37-2.22s2.34.91 2.37 2.16c0 1.25-.97 2.32-2.26 2.32z" fill="#fff"/>
-              </svg>
+              <img src="/imessage.svg" className="w-[18px] h-[18px] object-contain" alt="iMessage" />
               iMessage
             </button>
             <button
@@ -157,16 +154,7 @@ function Hero() {
                   : 'text-foreground/70 hover:text-foreground'
               }`}
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52z" fill="#E01E5A"/>
-                <path d="M6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z" fill="#E01E5A"/>
-                <path d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834z" fill="#36C5F0"/>
-                <path d="M8.834 6.313a2.527 2.527 0 0 1 2.521 2.521 2.527 2.527 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z" fill="#36C5F0"/>
-                <path d="M18.956 8.835a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.835a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.835z" fill="#2EB67D"/>
-                <path d="M17.687 8.835a2.527 2.527 0 0 1-2.521 2.521 2.527 2.527 0 0 1-2.522-2.521V2.522A2.528 2.528 0 0 1 15.166 0a2.528 2.528 0 0 1 2.521 2.522v6.313z" fill="#2EB67D"/>
-                <path d="M15.166 18.958a2.528 2.528 0 0 1 2.522 2.522A2.528 2.528 0 0 1 15.166 24a2.527 2.527 0 0 1-2.521-2.52v-2.522h2.521z" fill="#ECB22E"/>
-                <path d="M15.166 17.687a2.527 2.527 0 0 1-2.522-2.521 2.527 2.527 0 0 1 2.522-2.521h6.312A2.528 2.528 0 0 1 24 15.166a2.528 2.528 0 0 1-2.522 2.521h-6.312z" fill="#ECB22E"/>
-              </svg>
+              <img src="/slack.svg" className="w-[18px] h-[18px] object-contain" alt="Slack" />
               Slack
             </button>
           </div>
@@ -212,13 +200,13 @@ const heroThreads = [
     tag: "Important",
     body: [
       "Hi team,",
-      "I've been following Casper and love what you are building. We have an active developer base that uses automated agents, and we'd love to partner to enable Casper's email tools for them.",
+      "I've been following Wisps and love what you are building. We have an active developer base that uses automated agents, and we'd love to partner to enable Wisps's email tools for them.",
       "Let me know if you have time for a quick intro call next week to discuss details.",
     ],
     chatPrompt: "Draft an enthusiastic acceptance reply proposing Wednesday at 3 PM PST",
     draftLines: [
       "Hi Tuấn,",
-      "Thanks for reaching out! This sounds like a great fit. Casper's MCP native integration makes it super easy for developer agents to query and write emails.",
+      "Thanks for reaching out! This sounds like a great fit. Wisps's MCP native integration makes it super easy for developer agents to query and write emails.",
       "Let's jump on a quick call next week. Would Wednesday at 3 PM PST work for you?",
     ],
   },
@@ -238,7 +226,7 @@ const heroThreads = [
     chatPrompt: "Draft a concise reply asking for the benchmark report PDF",
     draftLines: [
       "Hi Neil,",
-      "Thanks for reaching out! We're actively optimizing Casper for agent readability, so I'd love to check out the benchmark report.",
+      "Thanks for reaching out! We're actively optimizing Wisps for agent readability, so I'd love to check out the benchmark report.",
       "Please send over the PDF whenever you have a chance.",
     ],
   },
@@ -288,7 +276,7 @@ function InboxMockup() {
         setMessages([
           {
             sender: "wisps",
-            text: "I'm Casper, your email copilot. Ask me to draft a reply, schedule calls, or summarize threads!",
+            text: "I'm Wisps, your email copilot. Ask me to draft a reply, schedule calls, or summarize threads!",
           },
         ]);
         setCursorState({ x: 38, y: 15, clicking: false, opacity: 0 });
@@ -322,7 +310,7 @@ function InboxMockup() {
         ]);
         await sleep(800);
 
-        // Step 3: Cursor glides to Casper Copilot Chat Input at bottom right
+        // Step 3: Cursor glides to Wisps Copilot Chat Input at bottom right
         if (cancelled) return;
         setCursorState({ x: 86, y: 92, clicking: false, opacity: 1 });
         await sleep(800);
@@ -556,7 +544,7 @@ function InboxMockup() {
                 ))}
               </div>
 
-              {/* Casper AI Draft Section */}
+              {/* Wisps AI Draft Section */}
               <div className="mt-auto rounded-xl border border-border/70 p-3.5 bg-card relative overflow-hidden shadow-sm">
                 <div className="flex items-center justify-between mb-2.5">
                   <div className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
@@ -585,7 +573,7 @@ function InboxMockup() {
                     </div>
                   ) : (
                     <p className="text-muted-foreground font-sans not-italic text-[11px]">
-                      Use the Casper Copilot sidebar on the right to prompt a response...
+                      Use the Wisps Copilot sidebar on the right to prompt a response...
                     </p>
                   )}
                 </div>
@@ -606,7 +594,7 @@ function InboxMockup() {
               </div>
             </section>
 
-            {/* Pane 4: Right Casper AI Copilot Chat Sidebar */}
+            {/* Pane 4: Right Wisps AI Copilot Chat Sidebar */}
             <section className="hidden lg:flex flex-col w-72 shrink-0 bg-card border-l border-border/60 p-4 justify-between text-left">
               <div>
                 <div className="flex items-center justify-between pb-3 border-b border-border/60 mb-3">
@@ -646,7 +634,7 @@ function InboxMockup() {
                     type="text"
                     readOnly
                     value={chatInput}
-                    placeholder="Ask Casper to draft or reply..."
+                    placeholder="Ask Wisps to draft or reply..."
                     className="w-full bg-transparent text-xs text-foreground placeholder:text-muted-foreground focus:outline-none px-1"
                   />
                   <button
@@ -750,7 +738,7 @@ const features = [
   {
     icon: Sparkles,
     title: "Drafts in your voice",
-    desc: "Casper studies the way you write and proposes replies that actually sound like you.",
+    desc: "Wisps studies the way you write and proposes replies that actually sound like you.",
   },
   {
     icon: Inbox,
@@ -1222,7 +1210,7 @@ function AutoOrganizedInboxAnimation() {
               className={`h-1.5 w-1.5 rounded-full ${isCompleted ? "bg-emerald-500" : "bg-primary-glow animate-pulse"
                 }`}
             />
-            <span>{isCompleted ? "Inbox Auto-Organized" : "Casper AI Auto-Labeling..."}</span>
+            <span>{isCompleted ? "Inbox Auto-Organized" : "Wisps AI Auto-Labeling..."}</span>
           </motion.div>
         </div>
 
@@ -1461,7 +1449,7 @@ function AskYourInboxAnimation() {
             <div className="rounded-xl border border-pink-wash/40 bg-gradient-to-br from-pink-wash/15 via-background to-lavender-wash/10 p-3.5 shadow-sm text-left">
               <div className="text-[11px] font-semibold text-foreground mb-1.5 flex items-center gap-1.5">
                 <span className="h-1.5 w-1.5 rounded-full bg-foreground" />
-                <span>Casper AI Answer</span>
+                <span>Wisps AI Answer</span>
               </div>
               <p className="text-xs text-foreground leading-relaxed font-medium">
                 {currentDemo.answer}
@@ -1731,14 +1719,14 @@ function OrbitalAnimation() {
 
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      {/* Central Casper text */}
+      {/* Central Wisps text */}
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.5 }}
         className="relative z-10 bg-card border border-border rounded-full px-6 py-3 shadow-lg"
       >
-        <span className="text-lg font-semibold tracking-tight text-foreground">Casper</span>
+        <span className="text-lg font-semibold tracking-tight text-foreground">Wisps</span>
       </motion.div>
 
       {/* Orbiting apps */}
@@ -2219,14 +2207,14 @@ function RelationshipCopilot() {
     {
       icon: Ghost,
       title: "See who's ignoring you",
-      desc: "Casper tracks response patterns and flags who owes you a reply — and for how long.",
+      desc: "Wisps tracks response patterns and flags who owes you a reply — and for how long.",
       animation: <GhostTrackerAnimation />,
       size: "normal" as const,
     },
     {
       icon: Timer,
       title: "Smart follow-ups",
-      desc: "Casper reads the context and resurfaces conversations at the perfect moment — with an AI draft ready to go, so nothing slips through the cracks.",
+      desc: "Wisps reads the context and resurfaces conversations at the perfect moment — with an AI draft ready to go, so nothing slips through the cracks.",
       animation: <SmartFollowUpAnimation />,
       size: "normal" as const,
     },
@@ -2246,7 +2234,7 @@ function RelationshipCopilot() {
             Your relationship copilot.
           </h2>
           <p className="mt-4 text-muted-foreground text-lg">
-            More than email — Casper helps you nurture every professional relationship without the
+            More than email — Wisps helps you nurture every professional relationship without the
             overhead.
           </p>
         </motion.div>
@@ -2296,11 +2284,11 @@ function HowItWorks() {
     {
       n: "01",
       t: "Connect your inbox",
-      d: "Sign in with Gmail or Outlook. Casper is live in seconds, no migration required.",
+      d: "Sign in with Gmail or Outlook. Wisps is live in seconds, no migration required.",
     },
     {
       n: "02",
-      t: "Casper gets to work",
+      t: "Wisps gets to work",
       d: "It reads your history, maps your contacts, and starts organizing — all within minutes.",
     },
     {
@@ -2395,7 +2383,7 @@ function Pricing() {
       price: "$0",
       interval: "",
       annualNote: "",
-      features: ["1 workspace", "5 active workflows", "Community support", "Casper AI starter"],
+      features: ["1 workspace", "5 active workflows", "Community support", "Wisps AI starter"],
       cta: "Start free",
       featured: false,
       styles: {

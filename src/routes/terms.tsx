@@ -341,10 +341,10 @@ function TermsPage() {
                 <p>
                   If you have questions about these Terms, contact us at{" "}
                   <a
-                    href="mailto:contact@usecasper.com"
+                    href="mailto:contact@usewisps.com"
                     className="font-medium text-foreground hover:underline underline-offset-4"
                   >
-                    contact@usecasper.com
+                    contact@usewisps.com
                   </a>
                   .
                 </p>

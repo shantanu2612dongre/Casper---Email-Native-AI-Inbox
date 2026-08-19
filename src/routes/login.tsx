@@ -229,7 +229,7 @@ function LoginPage() {
               custom={0}
               className="flex items-center gap-2 text-foreground"
             >
-              <img src="/casper-logo.svg" alt="Wisps logo" className="h-9 w-9 object-contain" />
+              <img src="/wisps-logo.svg" alt="Wisps logo" className="h-9 w-9 object-contain" />
               <span className="text-lg font-semibold tracking-tight">Wisps</span>
             </motion.a>
           </div>
@@ -375,7 +375,7 @@ function LoginPage() {
           custom={0}
           className="flex items-center gap-2 text-foreground lg:hidden mb-10"
         >
-          <img src="/casper-logo.svg" alt="Wisps logo" className="h-9 w-9 object-contain" />
+          <img src="/wisps-logo.svg" alt="Wisps logo" className="h-9 w-9 object-contain" />
           <span className="text-xl font-semibold tracking-tight">Wisps</span>
         </motion.a>
 

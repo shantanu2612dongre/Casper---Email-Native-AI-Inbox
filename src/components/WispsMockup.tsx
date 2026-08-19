@@ -17,10 +17,10 @@ import React, { useEffect, useRef, useState } from "react";
  * ------------------------------------------------------------------
  */
 
-const DEFAULT_LOGO_SRC = "/casper-logo.svg";
+const DEFAULT_LOGO_SRC = "/wisps-logo.svg";
 
 const CONVERSATION = [
-  { from: "user", text: "hey wisps, what's pending with Mark from dev team" },
+  { from: "user", text: "hey Wisps, what's pending with Mark from dev team" },
   {
     from: "wisps",
     text: "hey — last he confirmed the PR is merged, now waiting on your approval",
@@ -236,7 +236,8 @@ export default function WispsMockup({ logoSrc }: { logoSrc?: string }) {
           width: 46px;
           height: 46px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #dcdaff, #b9bcff);
+          background: #ffffff;
+          border: 1px solid rgba(0,0,0,0.05);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -369,10 +370,10 @@ export default function WispsMockup({ logoSrc }: { logoSrc?: string }) {
               ‹<span className="count">12</span>
             </span>
             <div className="wisps-avatar">
-              <img src={logoSrc || DEFAULT_LOGO_SRC} alt="wisps" />
+              <img src={logoSrc || DEFAULT_LOGO_SRC} alt="Wisps" />
             </div>
             <div className="wisps-headertext">
-              <span className="name">wisps</span>
+              <span className="name">Wisps</span>
               <span className="chevron">›</span>
             </div>
             <svg className="wisps-video" width="20" height="15" viewBox="0 0 20 15" fill="currentColor">

@@ -58,7 +58,7 @@ const manifestoPoints = [
   {
     title: "Human-first AI",
     description:
-      "AI should amplify your capabilities, not replace your judgment. Casper learns from you but always lets you stay in control.",
+      "AI should amplify your capabilities, not replace your judgment. Wisps learns from you but always lets you stay in control.",
   },
   {
     title: "Privacy is non-negotiable",
@@ -68,17 +68,17 @@ const manifestoPoints = [
   {
     title: "Speed matters",
     description:
-      "The best tools feel instant. We've built Casper on a blazing-fast client that opens, scrolls, and searches without delay.",
+      "The best tools feel instant. We've built Wisps on a blazing-fast client that opens, scrolls, and searches without delay.",
   },
   {
     title: "Delight in details",
     description:
-      "Great software feels magical. We obsess over micro-interactions, animations, and the small moments that make using Casper enjoyable.",
+      "Great software feels magical. We obsess over micro-interactions, animations, and the small moments that make using Wisps enjoyable.",
   },
   {
     title: "Built for teams",
     description:
-      "Email is a team sport. Casper works seamlessly across organizations, with shared workflows and consistent experiences.",
+      "Email is a team sport. Wisps works seamlessly across organizations, with shared workflows and consistent experiences.",
   },
 ];
 

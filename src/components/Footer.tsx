@@ -19,7 +19,7 @@ export function Footer() {
               href="#"
               className="flex items-center gap-1.5 font-semibold text-foreground tracking-tight text-xl"
             >
-              <img src="/casper-logo.svg" alt="Wisps logo" className="h-9 w-9 object-contain" />
+              <img src="/wisps-logo.svg" alt="Wisps logo" className="h-9 w-9 object-contain" />
               Wisps
             </a>
 
@@ -63,43 +63,43 @@ export function Footer() {
             <div className="flex flex-col gap-2.5 text-sm text-muted-foreground mt-2">
               <h4 className="text-sm font-semibold text-foreground tracking-tight">Socials</h4>
               <a
-                href="https://linkedin.com/company/casper"
+                href="https://linkedin.com/company/wisps"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2.5 hover:text-foreground transition-colors"
               >
                 <Linkedin className="h-4 w-4 shrink-0" />
-                <span>@casper-email</span>
+                <span>@wisps-email</span>
               </a>
               <a
-                href="https://x.com/casper"
+                href="https://x.com/wisps"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2.5 hover:text-foreground transition-colors"
               >
                 <Twitter className="h-4 w-4 shrink-0" />
-                <span>@usecasper</span>
+                <span>@usewisps</span>
               </a>
               <a
-                href="https://instagram.com/casper"
+                href="https://instagram.com/wisps"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2.5 hover:text-foreground transition-colors"
               >
                 <Instagram className="h-4 w-4 shrink-0" />
-                <span>@usecasper</span>
+                <span>@usewisps</span>
               </a>
               <a
-                href="https://youtube.com/casper"
+                href="https://youtube.com/wisps"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2.5 hover:text-foreground transition-colors"
               >
                 <Youtube className="h-4 w-4 shrink-0" />
-                <span>@usecasper</span>
+                <span>@usewisps</span>
               </a>
               <a
-                href="https://facebook.com/casper"
+                href="https://facebook.com/wisps"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2.5 hover:text-foreground transition-colors"
@@ -108,11 +108,11 @@ export function Footer() {
                 <span>Wisps</span>
               </a>
               <a
-                href="mailto:contact@usecasper.com"
+                href="mailto:contact@usewisps.com"
                 className="flex items-center gap-2.5 hover:text-foreground transition-colors"
               >
                 <Mail className="h-4 w-4 shrink-0" />
-                <span>contact@usecasper.com</span>
+                <span>contact@usewisps.com</span>
               </a>
             </div>
           </div>
