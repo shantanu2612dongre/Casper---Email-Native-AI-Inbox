@@ -72,24 +72,29 @@ const fadeUp = {
 function Hero() {
   const { openWaitlist } = useContext(WaitlistContext);
   return (
-    <section className="relative overflow-hidden py-28 z-0">
-      {/* Dynamic Watercolor Background */}
+    <section className="relative overflow-hidden py-32 md:py-40 z-0 bg-textured-paper">
+      {/* Dynamic Watercolor Background - reduced opacity for readability */}
       <div
-        className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat transition-all duration-300 opacity-90 dark:opacity-25 dark:invert"
+        className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat transition-all duration-300 opacity-40 dark:opacity-20 dark:invert"
         style={{
           backgroundImage: "url('/website-back.png')",
-          maskImage: "linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)",
-          WebkitMaskImage: "linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)"
+          maskImage: "linear-gradient(to bottom, black 0%, black 50%, transparent)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 50%, transparent)"
         }}
       />
+      
       {/* Centered text container with readable max-width */}
-      <div className="relative max-w-4xl mx-auto px-6 pb-10 text-center flex flex-col items-center">
+      <div className="relative max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
+        {/* Subtle glow behind text to ensure readability */}
+        <div className="absolute inset-0 -z-10 bg-white/40 dark:bg-transparent blur-3xl rounded-full" />
+        
         <motion.h1
           variants={fadeUp}
           initial="hidden"
           animate="show"
           custom={0}
-          className="text-5xl md:text-7xl font-semibold tracking-tight text-foreground leading-[1.02]"
+          className="text-5xl md:text-7xl font-semibold tracking-tight text-foreground leading-[1.05]"
+          style={{ fontFamily: "'Playfair Display', serif" }}
         >
           The copilot for your professional relationships.
         </motion.h1>
@@ -101,8 +106,7 @@ function Hero() {
           custom={1}
           className="mx-auto mt-6 max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed"
         >
-          Casper learns how you write, drafts your replies, and handles the busywork, so you can
-          focus on what matters.
+          Casper learns how you write, drafts your replies, and handles the busywork, so you can focus on what matters.
         </motion.p>
 
         <motion.div
@@ -114,16 +118,11 @@ function Hero() {
         >
           <button
             onClick={() => openWaitlist("hero")}
-            className="inline-flex items-center rounded-lg bg-foreground text-background px-6 py-3 text-base font-medium hover:opacity-90 transition-opacity cursor-pointer"
+            className="inline-flex items-center rounded-full bg-foreground text-background px-8 py-3.5 text-base font-medium hover:opacity-90 transition-opacity cursor-pointer shadow-sm"
           >
             Join Waitlist
           </button>
         </motion.div>
-      </div>
-
-      {/* Expanded Mockup Container - showing large visual product walkthrough */}
-      <div className="relative max-w-7xl mx-auto px-6 pb-24">
-        <InboxMockup />
       </div>
     </section>
   );
@@ -616,15 +615,15 @@ function Logos() {
     ...integrationLogos,
   ];
   return (
-    <section className="border-t border-border/60 overflow-hidden py-28">
+    <section className="overflow-hidden py-28 bg-textured-paper">
       <div>
         <p className="text-center text-xs uppercase tracking-[0.18em] text-muted-foreground px-6">
           Trusted by professionals at
         </p>
         <div className="relative mt-10 w-full overflow-hidden py-4">
           {/* Edge fade gradients for premium aesthetic */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#EEE8E0] dark:from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#EEE8E0] dark:from-background to-transparent z-10 pointer-events-none" />
 
           <div className="flex w-max">
             {/* First sliding track */}
@@ -1525,7 +1524,7 @@ function Features() {
   }, [isPaused]);
 
   return (
-    <section id="features" className="relative py-28">
+    <section id="features" className="relative py-28 bg-textured-paper">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -2161,7 +2160,7 @@ function RelationshipCopilot() {
   ];
 
   return (
-    <section className="relative py-28">
+    <section className="relative py-28 bg-textured-paper">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -2238,7 +2237,7 @@ function HowItWorks() {
     },
   ];
   return (
-    <section id="how" className="relative py-28">
+    <section id="how" className="relative py-28 bg-textured-paper">
       <div className="max-w-7xl mx-auto px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -2383,7 +2382,7 @@ function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="py-24 bg-gray-50 dark:bg-background">
+    <section id="pricing" className="py-24 bg-textured-paper">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-sm text-primary font-medium">Pricing</p>
@@ -2484,7 +2483,7 @@ function Pricing() {
 function CTA() {
   const { openWaitlist } = useContext(WaitlistContext);
   return (
-    <section className="relative py-24 bg-[#0a0a0a]">
+    <section className="relative py-24 bg-textured-paper">
       <div className="max-w-4xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -2494,24 +2493,24 @@ function CTA() {
           className="text-center"
         >
           <h2
-            className="text-5xl md:text-6xl text-white font-medium tracking-tight"
+            className="text-5xl md:text-6xl text-foreground font-medium tracking-tight"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             Tell your inbox what you need
           </h2>
-          <p className="mt-6 text-[17px] leading-relaxed text-zinc-400 max-w-2xl mx-auto font-sans">
+          <p className="mt-6 text-[17px] leading-relaxed text-muted-foreground max-w-2xl mx-auto font-sans">
             Ask Slashy to draft a reply, find context, schedule a meeting, or follow up. It handles the work across your inbox.
           </p>
           <div className="mt-10 flex items-center justify-center gap-4">
             <button
               onClick={() => openWaitlist("cta")}
-              className="inline-flex items-center justify-center rounded-full bg-[#f4f4f5] text-[#18181b] px-8 py-3 text-[14px] font-semibold hover:bg-white transition-colors cursor-pointer"
+              className="inline-flex items-center justify-center rounded-full bg-foreground text-background px-8 py-3 text-[14px] font-semibold hover:opacity-90 transition-opacity cursor-pointer"
             >
               Get started
             </button>
             <a
               href="#"
-              className="inline-flex items-center justify-center rounded-full bg-[#18181b] text-[#f4f4f5] px-8 py-3 text-[14px] font-semibold hover:bg-[#27272a] transition-colors"
+              className="inline-flex items-center justify-center rounded-full border border-border bg-card text-foreground px-8 py-3 text-[14px] font-semibold hover:bg-muted transition-colors"
             >
               Book a demo
             </a>

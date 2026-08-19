@@ -3,7 +3,7 @@ import { ThemeToggle } from "./ThemeToggle";
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-border/60 bg-background pt-20 pb-10 overflow-hidden">
+    <footer className="relative border-t border-border/60 bg-textured-paper pt-20 pb-10 overflow-hidden">
       {/* Background Wordmark "wisps" */}
       <div className="absolute bottom-[-2.5rem] md:bottom-[-4rem] left-1/2 -translate-x-1/2 w-full max-w-7xl px-6 pointer-events-none select-none z-0">
         <h2 className="text-[9rem] sm:text-[12rem] md:text-[18rem] lg:text-[22rem] font-bold text-center tracking-tighter text-foreground/[0.03] dark:text-foreground/[0.02] leading-none uppercase">

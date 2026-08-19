@@ -12,9 +12,9 @@ export function Nav() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="sticky top-4 z-50 mx-4 md:mx-8 lg:mx-auto lg:max-w-7xl"
+        className="fixed top-4 left-0 right-0 z-50 mx-4 md:mx-8 lg:mx-auto lg:max-w-7xl"
       >
-        <nav className="backdrop-blur-xl bg-background/70 border border-border/40 rounded-2xl shadow-lg shadow-foreground/5 px-6 h-16 flex items-center justify-between">
+        <nav className="backdrop-blur-2xl backdrop-saturate-150 bg-white/30 dark:bg-black/30 bg-gradient-to-b from-white/60 to-white/20 dark:from-white/10 dark:to-white/5 border border-white/50 dark:border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] px-6 h-16 flex items-center justify-between">
           <a
             href="/"
             className="flex items-center gap-1.5 font-semibold text-foreground tracking-tight text-xl"
