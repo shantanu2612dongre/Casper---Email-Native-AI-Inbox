@@ -38,7 +38,7 @@ import { trackEvent } from "../lib/utils";
 
 // Context to share modal open handler across sections
 const WaitlistContext = createContext<{ openWaitlist: (location?: string) => void }>({
-  openWaitlist: () => {},
+  openWaitlist: () => { },
 });
 
 export const Route = createFileRoute("/")({
@@ -72,7 +72,16 @@ const fadeUp = {
 function Hero() {
   const { openWaitlist } = useContext(WaitlistContext);
   return (
-    <section className="relative overflow-hidden py-28">
+    <section className="relative overflow-hidden py-28 z-0">
+      {/* Dynamic Watercolor Background */}
+      <div
+        className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat transition-all duration-300 opacity-90 dark:opacity-25 dark:invert"
+        style={{
+          backgroundImage: "url('/website-back.png')",
+          maskImage: "linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)",
+          WebkitMaskImage: "linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)"
+        }}
+      />
       {/* Centered text container with readable max-width */}
       <div className="relative max-w-4xl mx-auto px-6 pb-10 text-center flex flex-col items-center">
         <motion.h1
@@ -394,11 +403,10 @@ function InboxMockup() {
                 ].map((item) => (
                   <button
                     key={item.label}
-                    className={`w-full flex items-center justify-between px-3 py-1.5 rounded-md font-medium transition-colors ${
-                      item.active
+                    className={`w-full flex items-center justify-between px-3 py-1.5 rounded-md font-medium transition-colors ${item.active
                         ? "bg-muted text-foreground"
                         : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center gap-2.5">
                       <item.icon className="h-3.5 w-3.5" />
@@ -422,9 +430,8 @@ function InboxMockup() {
                   <div
                     key={r.id}
                     onClick={() => setSelectedId(r.id)}
-                    className={`p-3.5 text-xs text-left transition-colors relative cursor-pointer ${
-                      isActive ? "bg-muted/50" : "hover:bg-muted/20"
-                    }`}
+                    className={`p-3.5 text-xs text-left transition-colors relative cursor-pointer ${isActive ? "bg-muted/50" : "hover:bg-muted/20"
+                      }`}
                   >
                     {isActive && (
                       <div className="absolute left-0 top-0 bottom-0 w-1 bg-foreground" />
@@ -549,11 +556,10 @@ function InboxMockup() {
                       key={mIdx}
                       initial={{ opacity: 0, y: 4 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className={`p-2.5 rounded-xl text-xs ${
-                        msg.sender === "user"
+                      className={`p-2.5 rounded-xl text-xs ${msg.sender === "user"
                           ? "bg-foreground text-background ml-4 font-medium"
                           : "bg-muted/40 text-foreground border border-border/50"
-                      }`}
+                        }`}
                     >
                       {msg.text}
                     </motion.div>
@@ -572,9 +578,8 @@ function InboxMockup() {
                     className="w-full bg-transparent text-xs text-foreground placeholder:text-muted-foreground focus:outline-none px-1"
                   />
                   <button
-                    className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
-                      chatInput ? "bg-foreground text-background" : "bg-muted text-muted-foreground"
-                    }`}
+                    className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${chatInput ? "bg-foreground text-background" : "bg-muted text-muted-foreground"
+                      }`}
                   >
                     <Send className="h-3.5 w-3.5" />
                   </button>
@@ -908,11 +913,10 @@ function DraftVoiceAnimation() {
                   className="flex items-start gap-2 text-[10px]"
                 >
                   <div
-                    className={`w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-semibold shrink-0 ${
-                      message.sender === "You"
+                    className={`w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-semibold shrink-0 ${message.sender === "You"
                         ? "bg-foreground text-background"
                         : "bg-primary/20 text-primary"
-                    }`}
+                      }`}
                   >
                     {message.initials}
                   </div>
@@ -1137,16 +1141,14 @@ function AutoOrganizedInboxAnimation() {
           <motion.div
             animate={isCompleted ? { scale: [1, 1.05, 1] } : {}}
             transition={{ duration: 0.4 }}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border transition-all duration-300 ${
-              isCompleted
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border transition-all duration-300 ${isCompleted
                 ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/30 dark:bg-emerald-500/20 dark:text-emerald-400"
                 : "bg-primary-glow/10 text-primary-glow border-primary-glow/30"
-            }`}
+              }`}
           >
             <span
-              className={`h-1.5 w-1.5 rounded-full ${
-                isCompleted ? "bg-emerald-500" : "bg-primary-glow animate-pulse"
-              }`}
+              className={`h-1.5 w-1.5 rounded-full ${isCompleted ? "bg-emerald-500" : "bg-primary-glow animate-pulse"
+                }`}
             />
             <span>{isCompleted ? "Inbox Auto-Organized" : "Casper AI Auto-Labeling..."}</span>
           </motion.div>
@@ -1165,11 +1167,10 @@ function AutoOrganizedInboxAnimation() {
                   backgroundColor: isProcessing ? "var(--accent)" : "transparent",
                 }}
                 transition={{ duration: 0.2 }}
-                className={`relative flex items-center justify-between py-1.5 px-2 rounded-lg border transition-colors ${
-                  isProcessing
+                className={`relative flex items-center justify-between py-1.5 px-2 rounded-lg border transition-colors ${isProcessing
                     ? "border-primary-glow/40 shadow-sm"
                     : "border-transparent hover:bg-muted/40"
-                }`}
+                  }`}
               >
                 {/* Left side: Unread dot + Sender + Subject */}
                 <div className="flex items-center gap-2.5 min-w-0 flex-1 pr-2">
@@ -1184,20 +1185,18 @@ function AutoOrganizedInboxAnimation() {
 
                   {/* Sender Name */}
                   <span
-                    className={`truncate text-xs shrink-0 w-24 ${
-                      email.unread
+                    className={`truncate text-xs shrink-0 w-24 ${email.unread
                         ? "font-semibold text-foreground"
                         : "font-medium text-foreground/80"
-                    }`}
+                      }`}
                   >
                     {email.sender}
                   </span>
 
                   {/* Subject Line */}
                   <span
-                    className={`truncate text-xs flex-1 ${
-                      email.unread ? "font-medium text-foreground/90" : "text-muted-foreground"
-                    }`}
+                    className={`truncate text-xs flex-1 ${email.unread ? "font-medium text-foreground/90" : "text-muted-foreground"
+                      }`}
                   >
                     {email.subject}
                   </span>
@@ -1559,19 +1558,17 @@ function Features() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
                 onClick={() => setActiveFeature(i)}
-                className={`p-5 rounded-xl border cursor-pointer transition-all ${
-                  activeFeature === i
+                className={`p-5 rounded-xl border cursor-pointer transition-all ${activeFeature === i
                     ? "bg-card border-pink-wash/80 shadow-lg ring-1 ring-pink-wash/40"
                     : "bg-card/50 border-border/60 hover:border-border hover:bg-card"
-                }`}
+                  }`}
               >
                 <div className="flex items-start gap-4">
                   <span
-                    className={`inline-flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
-                      activeFeature === i
+                    className={`inline-flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${activeFeature === i
                         ? "bg-pink-wash/20 text-foreground"
                         : "bg-muted text-foreground"
-                    }`}
+                      }`}
                   >
                     <f.icon className="h-5 w-5" strokeWidth={1.75} />
                   </span>
@@ -2191,9 +2188,8 @@ function RelationshipCopilot() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className={`group relative rounded-2xl border border-border bg-card p-6 md:p-8 flex flex-col transition-all hover:border-pink-wash/60 hover:shadow-lg ${
-                feature.size === "hero" ? "md:col-span-2" : ""
-              }`}
+              className={`group relative rounded-2xl border border-border bg-card p-6 md:p-8 flex flex-col transition-all hover:border-pink-wash/60 hover:shadow-lg ${feature.size === "hero" ? "md:col-span-2" : ""
+                }`}
             >
               {/* Icon + Text */}
               <div
@@ -2402,22 +2398,20 @@ function Pricing() {
             <button
               type="button"
               onClick={() => setBillingCycle("monthly")}
-              className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${
-                billingCycle === "monthly"
+              className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${billingCycle === "monthly"
                   ? "bg-[#0a0a0a] dark:bg-foreground text-white dark:text-background"
                   : "text-gray-500 dark:text-muted-foreground hover:text-black dark:hover:text-foreground"
-              }`}
+                }`}
             >
               Monthly
             </button>
             <button
               type="button"
               onClick={() => setBillingCycle("yearly")}
-              className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${
-                billingCycle === "yearly"
+              className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${billingCycle === "yearly"
                   ? "bg-[#0a0a0a] dark:bg-foreground text-white dark:text-background"
                   : "text-gray-500 dark:text-muted-foreground hover:text-black dark:hover:text-foreground"
-              }`}
+                }`}
             >
               Yearly
             </button>
@@ -2447,7 +2441,7 @@ function Pricing() {
                   <p className={`text-sm mt-2 font-medium ${p.styles.desc}`}>{p.description}</p>
                 )}
               </div>
-              
+
               <div className="mb-8">
                 <div className="flex items-end gap-1">
                   <span className={`text-5xl font-bold tracking-tight ${p.styles.price}`}>{p.price}</span>
@@ -2499,8 +2493,8 @@ function CTA() {
           transition={{ duration: 0.7 }}
           className="text-center"
         >
-          <h2 
-            className="text-5xl md:text-6xl text-white font-medium tracking-tight" 
+          <h2
+            className="text-5xl md:text-6xl text-white font-medium tracking-tight"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             Tell your inbox what you need
