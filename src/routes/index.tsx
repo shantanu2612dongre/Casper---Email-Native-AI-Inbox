@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, createContext, useContext } from "react";
+import WispsMockup from "../components/WispsMockup";
 import { motion } from "motion/react";
 import {
   Inbox,
@@ -71,6 +72,7 @@ const fadeUp = {
 
 function Hero() {
   const { openWaitlist } = useContext(WaitlistContext);
+  const [activeMockup, setActiveMockup] = useState<'imessage' | 'slack'>('imessage');
   return (
     <section className="relative overflow-hidden py-32 md:py-40 z-0 bg-textured-paper">
       {/* Dynamic Watercolor Background - reduced opacity for readability */}
@@ -124,6 +126,77 @@ function Hero() {
           </button>
         </motion.div>
       </div>
+
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
+          custom={3}
+          className="mt-12 flex justify-center w-full relative z-20"
+        >
+          <div className="flex items-center p-1 rounded-full bg-white/40 border border-white/40 dark:bg-black/20 dark:border-white/10 shadow-sm backdrop-blur-md">
+            <button
+              onClick={() => setActiveMockup('imessage')}
+              className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium transition-all ${
+                activeMockup === 'imessage'
+                  ? 'bg-[#1D1C20] text-white shadow-md'
+                  : 'text-foreground/70 hover:text-foreground'
+              }`}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#34C759" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.03 2 11c0 2.85 1.48 5.38 3.79 7.03C5.64 19.34 5.09 21 4.5 22c1.77 0 4.09-.84 5.56-2.03C10.7 20.21 11.34 20 12 20c5.52 0 10-4.03 10-9s-4.48-9-10-9z"/>
+                <path d="M11.11 15.35c-1.39 0-2.48-.96-2.48-2.26 0-1.28 1.05-2.22 2.37-2.22s2.34.91 2.37 2.16c0 1.25-.97 2.32-2.26 2.32z" fill="#fff"/>
+              </svg>
+              iMessage
+            </button>
+            <button
+              onClick={() => setActiveMockup('slack')}
+              className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium transition-all ${
+                activeMockup === 'slack'
+                  ? 'bg-[#1D1C20] text-white shadow-md'
+                  : 'text-foreground/70 hover:text-foreground'
+              }`}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52z" fill="#E01E5A"/>
+                <path d="M6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z" fill="#E01E5A"/>
+                <path d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834z" fill="#36C5F0"/>
+                <path d="M8.834 6.313a2.527 2.527 0 0 1 2.521 2.521 2.527 2.527 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z" fill="#36C5F0"/>
+                <path d="M18.956 8.835a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.835a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.835z" fill="#2EB67D"/>
+                <path d="M17.687 8.835a2.527 2.527 0 0 1-2.521 2.521 2.527 2.527 0 0 1-2.522-2.521V2.522A2.528 2.528 0 0 1 15.166 0a2.528 2.528 0 0 1 2.521 2.522v6.313z" fill="#2EB67D"/>
+                <path d="M15.166 18.958a2.528 2.528 0 0 1 2.522 2.522A2.528 2.528 0 0 1 15.166 24a2.527 2.527 0 0 1-2.521-2.52v-2.522h2.521z" fill="#ECB22E"/>
+                <path d="M15.166 17.687a2.527 2.527 0 0 1-2.522-2.521 2.527 2.527 0 0 1 2.522-2.521h6.312A2.528 2.528 0 0 1 24 15.166a2.528 2.528 0 0 1-2.522 2.521h-6.312z" fill="#ECB22E"/>
+              </svg>
+              Slack
+            </button>
+          </div>
+        </motion.div>
+
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        animate="show"
+        custom={4}
+        className="relative z-10 mt-16 mx-auto pb-12 w-full flex justify-center"
+      >
+        {activeMockup === 'imessage' ? (
+          <WispsMockup />
+        ) : (
+          <div className="w-[min(340px,86vw)] aspect-[9/19.5] bg-[#1a1d21] rounded-[58px] flex flex-col items-center justify-center text-white/50 border-[5px] border-[#3a3a3f] shadow-2xl">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-4 opacity-50">
+                <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52z" fill="#E01E5A"/>
+                <path d="M6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z" fill="#E01E5A"/>
+                <path d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834z" fill="#36C5F0"/>
+                <path d="M8.834 6.313a2.527 2.527 0 0 1 2.521 2.521 2.527 2.527 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z" fill="#36C5F0"/>
+                <path d="M18.956 8.835a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.835a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.835z" fill="#2EB67D"/>
+                <path d="M17.687 8.835a2.527 2.527 0 0 1-2.521 2.521 2.527 2.527 0 0 1-2.522-2.521V2.522A2.528 2.528 0 0 1 15.166 0a2.528 2.528 0 0 1 2.521 2.522v6.313z" fill="#2EB67D"/>
+                <path d="M15.166 18.958a2.528 2.528 0 0 1 2.522 2.522A2.528 2.528 0 0 1 15.166 24a2.527 2.527 0 0 1-2.521-2.52v-2.522h2.521z" fill="#ECB22E"/>
+                <path d="M15.166 17.687a2.527 2.527 0 0 1-2.522-2.521 2.527 2.527 0 0 1 2.522-2.521h6.312A2.528 2.528 0 0 1 24 15.166a2.528 2.528 0 0 1-2.522 2.521h-6.312z" fill="#ECB22E"/>
+            </svg>
+            Slack Mockup Here
+          </div>
+        )}
+      </motion.div>
     </section>
   );
 }
@@ -2544,7 +2617,6 @@ function Index() {
         <Features />
         <RelationshipCopilot />
         <HowItWorks />
-        <Pricing />
         <Testimonials />
         <CTA />
         <Footer />
