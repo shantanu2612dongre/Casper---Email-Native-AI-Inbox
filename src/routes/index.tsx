@@ -30,6 +30,8 @@ import {
   Handshake,
   ArrowRight,
   Timer,
+  Lock,
+  Database,
 } from "lucide-react";
 import { SiGooglecalendar, SiGmail } from "react-icons/si";
 import { Footer } from "../components/Footer";
@@ -85,12 +87,12 @@ function Hero() {
           WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 50%, transparent)"
         }}
       />
-      
+
       {/* Centered text container with readable max-width */}
       <div className="relative max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
         {/* Subtle glow behind text to ensure readability */}
         <div className="absolute inset-0 -z-10 bg-white/40 dark:bg-transparent blur-3xl rounded-full" />
-        
+
         <motion.h1
           variants={fadeUp}
           initial="hidden"
@@ -128,38 +130,36 @@ function Hero() {
         </motion.div>
       </div>
 
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={3}
-          className="mt-12 flex justify-center w-full relative z-20"
-        >
-          <div className="flex items-center p-1 rounded-full bg-white/40 border border-white/40 dark:bg-black/20 dark:border-white/10 shadow-sm backdrop-blur-md">
-            <button
-              onClick={() => setActiveMockup('imessage')}
-              className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium transition-all ${
-                activeMockup === 'imessage'
-                  ? 'bg-[#1D1C20] text-white shadow-md'
-                  : 'text-foreground/70 hover:text-foreground'
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        animate="show"
+        custom={3}
+        className="mt-12 flex justify-center w-full relative z-20"
+      >
+        <div className="flex items-center p-1 rounded-full bg-white/40 border border-white/40 dark:bg-black/20 dark:border-white/10 shadow-sm backdrop-blur-md">
+          <button
+            onClick={() => setActiveMockup('imessage')}
+            className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium transition-all ${activeMockup === 'imessage'
+                ? 'bg-[#1D1C20] text-white shadow-md'
+                : 'text-foreground/70 hover:text-foreground'
               }`}
-            >
-              <img src="/imessage.svg" className="w-[18px] h-[18px] object-contain" alt="iMessage" />
-              iMessage
-            </button>
-            <button
-              onClick={() => setActiveMockup('slack')}
-              className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium transition-all ${
-                activeMockup === 'slack'
-                  ? 'bg-[#1D1C20] text-white shadow-md'
-                  : 'text-foreground/70 hover:text-foreground'
+          >
+            <img src="/imessage.svg" className="w-[18px] h-[18px] object-contain" alt="iMessage" />
+            iMessage
+          </button>
+          <button
+            onClick={() => setActiveMockup('slack')}
+            className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium transition-all ${activeMockup === 'slack'
+                ? 'bg-[#1D1C20] text-white shadow-md'
+                : 'text-foreground/70 hover:text-foreground'
               }`}
-            >
-              <img src="/slack.svg" className="w-[18px] h-[18px] object-contain" alt="Slack" />
-              Slack
-            </button>
-          </div>
-        </motion.div>
+          >
+            <img src="/slack.svg" className="w-[18px] h-[18px] object-contain" alt="Slack" />
+            Slack
+          </button>
+        </div>
+      </motion.div>
 
       <motion.div
         variants={fadeUp}
@@ -453,8 +453,8 @@ function InboxMockup() {
                   <button
                     key={item.label}
                     className={`w-full flex items-center justify-between px-3 py-1.5 rounded-md font-medium transition-colors ${item.active
-                        ? "bg-muted text-foreground"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+                      ? "bg-muted text-foreground"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
                       }`}
                   >
                     <div className="flex items-center gap-2.5">
@@ -606,8 +606,8 @@ function InboxMockup() {
                       initial={{ opacity: 0, y: 4 }}
                       animate={{ opacity: 1, y: 0 }}
                       className={`p-2.5 rounded-xl text-xs ${msg.sender === "user"
-                          ? "bg-foreground text-background ml-4 font-medium"
-                          : "bg-muted/40 text-foreground border border-border/50"
+                        ? "bg-foreground text-background ml-4 font-medium"
+                        : "bg-muted/40 text-foreground border border-border/50"
                         }`}
                     >
                       {msg.text}
@@ -963,8 +963,8 @@ function DraftVoiceAnimation() {
                 >
                   <div
                     className={`w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-semibold shrink-0 ${message.sender === "You"
-                        ? "bg-foreground text-background"
-                        : "bg-primary/20 text-primary"
+                      ? "bg-foreground text-background"
+                      : "bg-primary/20 text-primary"
                       }`}
                   >
                     {message.initials}
@@ -1191,8 +1191,8 @@ function AutoOrganizedInboxAnimation() {
             animate={isCompleted ? { scale: [1, 1.05, 1] } : {}}
             transition={{ duration: 0.4 }}
             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border transition-all duration-300 ${isCompleted
-                ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/30 dark:bg-emerald-500/20 dark:text-emerald-400"
-                : "bg-primary-glow/10 text-primary-glow border-primary-glow/30"
+              ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/30 dark:bg-emerald-500/20 dark:text-emerald-400"
+              : "bg-primary-glow/10 text-primary-glow border-primary-glow/30"
               }`}
           >
             <span
@@ -1217,8 +1217,8 @@ function AutoOrganizedInboxAnimation() {
                 }}
                 transition={{ duration: 0.2 }}
                 className={`relative flex items-center justify-between py-1.5 px-2 rounded-lg border transition-colors ${isProcessing
-                    ? "border-primary-glow/40 shadow-sm"
-                    : "border-transparent hover:bg-muted/40"
+                  ? "border-primary-glow/40 shadow-sm"
+                  : "border-transparent hover:bg-muted/40"
                   }`}
               >
                 {/* Left side: Unread dot + Sender + Subject */}
@@ -1235,8 +1235,8 @@ function AutoOrganizedInboxAnimation() {
                   {/* Sender Name */}
                   <span
                     className={`truncate text-xs shrink-0 w-24 ${email.unread
-                        ? "font-semibold text-foreground"
-                        : "font-medium text-foreground/80"
+                      ? "font-semibold text-foreground"
+                      : "font-medium text-foreground/80"
                       }`}
                   >
                     {email.sender}
@@ -1584,7 +1584,7 @@ function Features() {
           className="max-w-2xl mx-auto text-center"
         >
           <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
-            Email that thinks ahead.
+            Agent that thinks ahead.
           </h2>
           <p className="mt-4 text-muted-foreground text-lg">
             A quiet, intelligent layer over your inbox — no plug-ins, no extra apps, no learning
@@ -1608,15 +1608,15 @@ function Features() {
                 transition={{ delay: i * 0.1, duration: 0.5 }}
                 onClick={() => setActiveFeature(i)}
                 className={`p-5 rounded-xl border cursor-pointer transition-all ${activeFeature === i
-                    ? "bg-card border-pink-wash/80 shadow-lg ring-1 ring-pink-wash/40"
-                    : "bg-card/50 border-border/60 hover:border-border hover:bg-card"
+                  ? "bg-card border-pink-wash/80 shadow-lg ring-1 ring-pink-wash/40"
+                  : "bg-card/50 border-border/60 hover:border-border hover:bg-card"
                   }`}
               >
                 <div className="flex items-start gap-4">
                   <span
                     className={`inline-flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${activeFeature === i
-                        ? "bg-pink-wash/20 text-foreground"
-                        : "bg-muted text-foreground"
+                      ? "bg-pink-wash/20 text-foreground"
+                      : "bg-muted text-foreground"
                       }`}
                   >
                     <f.icon className="h-5 w-5" strokeWidth={1.75} />
@@ -2268,92 +2268,85 @@ function RelationshipCopilot() {
   );
 }
 
-function HowItWorks() {
-  const steps = [
+function DataControl() {
+  const points = [
     {
-      n: "01",
-      t: "Connect your inbox",
-      d: "Sign in with Gmail or Outlook. Wisps is live in seconds, no migration required.",
+      icon: Shield,
+      title: "Encryption and access controls",
+      desc: "Your data is encrypted in transit and at rest. Access is limited, logged, and audited. We don't read your content except when you request it, for security, or where the law requires it.",
     },
     {
-      n: "02",
-      t: "Wisps gets to work",
-      d: "It reads your history, maps your contacts, and starts organizing — all within minutes.",
+      icon: Lock,
+      title: "No selling, no model training",
+      desc: "We don't sell, rent, or trade your data. We don't use it to train or improve our providers' AI models. The AI services that process your data are contractually barred from training on it.",
     },
     {
-      n: "03",
-      t: "You just review & send",
-      d: "Everything is handled in the background. You stay in control, without the busywork.",
-    },
+      icon: Database,
+      title: "Data control and deletion",
+      desc: "Disconnect any integration or close your account at any time from settings. We remove it from active systems within 30 days.",
+    }
   ];
+
   return (
-    <section id="how" className="relative py-28 bg-textured-paper">
+    <section id="data-control" className="relative py-28 bg-textured-paper">
       <div className="max-w-7xl mx-auto px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground max-w-2xl mx-auto text-center"
+          className="text-4xl md:text-5xl font-medium tracking-tight text-foreground max-w-2xl mx-auto text-center"
         >
-          From signed-in to inbox zero in three steps.
+          You control<br/>your data.
         </motion.h2>
-        <div className="mt-14 grid md:grid-cols-3 gap-6">
-          {steps.map((s, i) => (
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="mt-6 text-[15px] text-muted-foreground text-center max-w-xl mx-auto leading-relaxed font-medium"
+        >
+          Wisps reads your email, calendar, and messages to do its job. It's encrypted, it's never sold, it's never used to train AI, and you can delete it whenever you want.
+        </motion.p>
+        
+        <div className="mt-20 grid md:grid-cols-3 gap-8 md:gap-0 relative">
+          {/* Subtle vertical dividers between columns for md+ screens */}
+          <div className="hidden md:block absolute top-0 bottom-0 left-1/3 w-px bg-border/50 -translate-x-1/2"></div>
+          <div className="hidden md:block absolute top-0 bottom-0 left-2/3 w-px bg-border/50 -translate-x-1/2"></div>
+
+          {points.map((p, i) => (
             <motion.div
-              key={s.n}
+              key={p.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="relative rounded-2xl bg-card border border-border p-10 min-h-[400px] flex flex-col"
+              className="flex flex-col items-center text-center px-4 md:px-8"
             >
-              <span className="text-sm font-mono text-muted-foreground">{s.n}</span>
-              <h3 className="mt-3 text-xl font-semibold tracking-tight text-foreground">{s.t}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{s.d}</p>
-              <div className="mt-auto pt-8">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 + 0.3, duration: 0.6 }}
-                  className="h-32 bg-muted/30 rounded-lg flex items-center justify-center relative"
-                >
-                  {i === 0 && <OrbitalAnimation />}
-                  {i === 1 && (
-                    <motion.div
-                      animate={{
-                        y: [0, -10, 0],
-                        opacity: [0.5, 1, 0.5],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                      className="text-4xl"
-                    >
-                      🧠
-                    </motion.div>
-                  )}
+              {/* Graphic Area */}
+              <div className="w-full aspect-[16/9] rounded-xl border border-border/60 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.02)] relative overflow-hidden flex items-center justify-center mb-10">
+                {/* Concentric Circles */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.15]">
+                  <div className="w-[120%] aspect-square rounded-full border-[2px] border-[#c98a5e] absolute"></div>
+                  <div className="w-[85%] aspect-square rounded-full border-[2px] border-[#c98a5e] absolute"></div>
+                  <div className="w-[50%] aspect-square rounded-full border-[2px] border-[#c98a5e] absolute"></div>
+                </div>
+                
+                {/* Icon in Center */}
+                <div className="relative z-10 w-11 h-11 flex items-center justify-center bg-gradient-to-b from-[#ca7e58] to-[#b35d32] rounded-[6px] shadow-[0_4px_12px_rgba(201,138,94,0.4)] text-white">
+                  <p.icon className="w-5 h-5" />
                   {i === 2 && (
-                    <motion.div
-                      animate={{
-                        y: [0, -10, 0],
-                        opacity: [0.5, 1, 0.5],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                      className="text-4xl"
-                    >
-                      ✨
-                    </motion.div>
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="w-[1.5px] h-7 bg-white/90 rotate-45 rounded-full"></div>
+                    </div>
                   )}
-                </motion.div>
+                </div>
               </div>
+
+              <h3 className="text-[17px] font-medium tracking-tight text-foreground">{p.title}</h3>
+              <p className="mt-3 text-[14px] text-muted-foreground leading-relaxed">
+                {p.desc}
+              </p>
             </motion.div>
           ))}
         </div>
@@ -2448,8 +2441,8 @@ function Pricing() {
               type="button"
               onClick={() => setBillingCycle("monthly")}
               className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${billingCycle === "monthly"
-                  ? "bg-[#0a0a0a] dark:bg-foreground text-white dark:text-background"
-                  : "text-gray-500 dark:text-muted-foreground hover:text-black dark:hover:text-foreground"
+                ? "bg-[#0a0a0a] dark:bg-foreground text-white dark:text-background"
+                : "text-gray-500 dark:text-muted-foreground hover:text-black dark:hover:text-foreground"
                 }`}
             >
               Monthly
@@ -2458,8 +2451,8 @@ function Pricing() {
               type="button"
               onClick={() => setBillingCycle("yearly")}
               className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${billingCycle === "yearly"
-                  ? "bg-[#0a0a0a] dark:bg-foreground text-white dark:text-background"
-                  : "text-gray-500 dark:text-muted-foreground hover:text-black dark:hover:text-foreground"
+                ? "bg-[#0a0a0a] dark:bg-foreground text-white dark:text-background"
+                : "text-gray-500 dark:text-muted-foreground hover:text-black dark:hover:text-foreground"
                 }`}
             >
               Yearly
@@ -2593,7 +2586,7 @@ function Index() {
         <Logos />
         <Features />
         <RelationshipCopilot />
-        <HowItWorks />
+        <DataControl />
         <Testimonials />
         <CTA />
         <Footer />
