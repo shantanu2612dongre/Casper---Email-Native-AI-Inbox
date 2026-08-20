@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, createContext, useContext } from "react";
 import WispsMockup from "../components/WispsMockup";
 import WispsSlackMockup from "../components/WispsSlackMockup";
+import WispsFeatureMockup from "../components/WispsFeatureMockup";
 import { motion } from "motion/react";
 import {
   Inbox,
@@ -141,8 +142,8 @@ function Hero() {
           <button
             onClick={() => setActiveMockup('imessage')}
             className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium transition-all ${activeMockup === 'imessage'
-                ? 'bg-[#1D1C20] text-white shadow-md'
-                : 'text-foreground/70 hover:text-foreground'
+              ? 'bg-[#1D1C20] text-white shadow-md'
+              : 'text-foreground/70 hover:text-foreground'
               }`}
           >
             <img src="/imessage.svg" className="w-[18px] h-[18px] object-contain" alt="iMessage" />
@@ -151,8 +152,8 @@ function Hero() {
           <button
             onClick={() => setActiveMockup('slack')}
             className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium transition-all ${activeMockup === 'slack'
-                ? 'bg-[#1D1C20] text-white shadow-md'
-                : 'text-foreground/70 hover:text-foreground'
+              ? 'bg-[#1D1C20] text-white shadow-md'
+              : 'text-foreground/70 hover:text-foreground'
               }`}
           >
             <img src="/slack.svg" className="w-[18px] h-[18px] object-contain" alt="Slack" />
@@ -741,8 +742,8 @@ const features = [
   },
   {
     icon: Shield,
-    title: "Private by default",
-    desc: "End-to-end encrypted. We never train on your mail — your inbox stays yours.",
+    title: "Smart follow-ups",
+    desc: "Wisps reads the context and resurfaces conversations at the perfect moment — with an AI draft ready to go, so nothing slips through the cracks.",
   },
 ];
 
@@ -1576,80 +1577,67 @@ function Features() {
   return (
     <section id="features" className="relative py-28 bg-textured-paper">
       <div className="max-w-7xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7 }}
-          className="max-w-2xl mx-auto text-center"
-        >
-          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
-            Agent that thinks ahead.
-          </h2>
-          <p className="mt-4 text-muted-foreground text-lg">
-            A quiet, intelligent layer over your inbox — no plug-ins, no extra apps, no learning
-            curve.
-          </p>
-        </motion.div>
-
         <div
-          className="mt-14 grid md:grid-cols-2 gap-12 items-center"
+          className="grid md:grid-cols-12 gap-12 lg:gap-16 items-stretch"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          {/* Left side - Feature list */}
-          <div className="space-y-4">
-            {features.map((f, i) => (
-              <motion.div
-                key={f.title}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                onClick={() => setActiveFeature(i)}
-                className={`p-5 rounded-xl border cursor-pointer transition-all ${activeFeature === i
-                  ? "bg-card border-pink-wash/80 shadow-lg ring-1 ring-pink-wash/40"
-                  : "bg-card/50 border-border/60 hover:border-border hover:bg-card"
-                  }`}
+          {/* Left side - Title and Feature list */}
+          <div className="md:col-span-5 flex flex-col h-full justify-start py-2">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7 }}
+              className="mb-6"
+            >
+              <h2 
+                className="text-3xl md:text-4xl font-medium tracking-tight text-foreground"
+                style={{ fontFamily: "'Playfair Display', serif" }}
               >
-                <div className="flex items-start gap-4">
-                  <span
-                    className={`inline-flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${activeFeature === i
-                      ? "bg-pink-wash/20 text-foreground"
-                      : "bg-muted text-foreground"
-                      }`}
+                Agent that thinks ahead.
+              </h2>
+            </motion.div>
+
+            <div className="flex flex-col">
+              {features.map((f, i) => {
+                const isActive = activeFeature === i;
+                return (
+                  <motion.div
+                    key={f.title}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ delay: i * 0.1, duration: 0.5 }}
+                    onClick={() => setActiveFeature(i)}
+                    className="py-4 border-b border-border/40 cursor-pointer group"
                   >
-                    <f.icon className="h-5 w-5" strokeWidth={1.75} />
-                  </span>
-                  <div className="flex-1">
-                    <h3 className="text-base font-semibold text-foreground tracking-tight">
-                      {f.title}
-                    </h3>
-                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                    <div className={`flex items-center gap-3 mb-2 transition-colors duration-300 ${isActive ? "text-foreground" : "text-foreground/40 group-hover:text-foreground/60"}`}>
+                      <f.icon className="h-[18px] w-[18px]" strokeWidth={1.75} />
+                      <h3 className="text-[17px] font-medium tracking-tight">
+                        {f.title}
+                      </h3>
+                    </div>
+                    <p className={`text-[15px] leading-relaxed transition-colors duration-300 ${isActive ? "text-foreground/70" : "text-foreground/30 group-hover:text-foreground/50"}`}>
+                      {f.desc}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
 
-          {/* Right side - Animation box with Gradient Frame */}
-          <div className="relative">
-            <div
-              className="relative rounded-3xl p-2.5 md:p-3"
-              style={{
-                background: "var(--gradient-hero)",
-                boxShadow: "var(--shadow-soft)",
-              }}
-            >
-              <motion.div
-                key={activeFeature}
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4 }}
-                className="bg-card rounded-2xl p-6 md:p-8 min-h-[420px] flex items-center justify-center border border-border/40 overflow-hidden"
-              >
-                <FeatureAnimation activeFeature={activeFeature} />
-              </motion.div>
+          {/* Right side - Animation box with Background Image */}
+          <div className="md:col-span-7 relative rounded-3xl overflow-hidden h-full w-full flex items-center justify-center shadow-xl min-h-0">
+            {/* Constant Background */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center z-0" 
+              style={{ backgroundImage: "url('/card-background.webp')" }} 
+            />
+            
+            {/* Animated Inner Content (Phone Mockup) */}
+            <div className="relative z-10 w-full h-full p-6 md:p-8 flex items-center justify-center">
+              <WispsFeatureMockup activeIndex={activeFeature} />
             </div>
           </div>
         </div>
@@ -2206,6 +2194,7 @@ function RelationshipCopilot() {
       desc: "Wisps reads the context and resurfaces conversations at the perfect moment — with an AI draft ready to go, so nothing slips through the cracks.",
       animation: <SmartFollowUpAnimation />,
       size: "normal" as const,
+      bgImage: "/feature-card-1.jpeg",
     },
   ];
 
@@ -2237,12 +2226,22 @@ function RelationshipCopilot() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className={`group relative rounded-2xl border border-border bg-card p-6 md:p-8 flex flex-col transition-all hover:border-pink-wash/60 hover:shadow-lg ${feature.size === "hero" ? "md:col-span-2" : ""
+              className={`group relative rounded-2xl border border-border bg-card p-6 md:p-8 flex flex-col transition-all hover:border-pink-wash/60 hover:shadow-lg overflow-hidden ${feature.size === "hero" ? "md:col-span-2" : ""
                 }`}
             >
+              {feature.bgImage && (
+                <>
+                  <div
+                    className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                    style={{ backgroundImage: `url('${feature.bgImage}')` }}
+                  />
+                  <div className="absolute inset-0 z-0 bg-card/70 dark:bg-card/80 backdrop-blur-[2px]" />
+                </>
+              )}
+
               {/* Icon + Text */}
               <div
-                className={`flex flex-col ${feature.size === "hero" ? "md:flex-row md:gap-10" : ""}`}
+                className={`relative z-10 flex flex-col h-full ${feature.size === "hero" ? "md:flex-row md:gap-10" : ""}`}
               >
                 <div className={`${feature.size === "hero" ? "md:w-2/5" : ""} mb-6`}>
                   <h3 className="text-lg font-semibold tracking-tight text-foreground">
@@ -2255,7 +2254,7 @@ function RelationshipCopilot() {
 
                 {/* Animation */}
                 <div className={`${feature.size === "hero" ? "md:w-3/5" : ""} mt-auto`}>
-                  <div className="rounded-xl bg-muted/30 border border-border/40 p-4 min-h-[180px] flex items-center">
+                  <div className="rounded-xl bg-muted/30 border border-border/40 p-4 min-h-[180px] flex items-center backdrop-blur-sm">
                     {feature.animation}
                   </div>
                 </div>
@@ -2297,7 +2296,7 @@ function DataControl() {
           transition={{ duration: 0.7 }}
           className="text-4xl md:text-5xl font-medium tracking-tight text-foreground max-w-2xl mx-auto text-center"
         >
-          You control<br/>your data.
+          You control<br />your data.
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -2308,7 +2307,7 @@ function DataControl() {
         >
           Wisps reads your email, calendar, and messages to do its job. It's encrypted, it's never sold, it's never used to train AI, and you can delete it whenever you want.
         </motion.p>
-        
+
         <div className="mt-20 grid md:grid-cols-3 gap-8 md:gap-0 relative">
           {/* Subtle vertical dividers between columns for md+ screens */}
           <div className="hidden md:block absolute top-0 bottom-0 left-1/3 w-px bg-border/50 -translate-x-1/2"></div>
@@ -2331,7 +2330,7 @@ function DataControl() {
                   <div className="w-[85%] aspect-square rounded-full border-[2px] border-[#c98a5e] absolute"></div>
                   <div className="w-[50%] aspect-square rounded-full border-[2px] border-[#c98a5e] absolute"></div>
                 </div>
-                
+
                 {/* Icon in Center */}
                 <div className="relative z-10 w-11 h-11 flex items-center justify-center bg-gradient-to-b from-[#ca7e58] to-[#b35d32] rounded-[6px] shadow-[0_4px_12px_rgba(201,138,94,0.4)] text-white">
                   <p.icon className="w-5 h-5" />
