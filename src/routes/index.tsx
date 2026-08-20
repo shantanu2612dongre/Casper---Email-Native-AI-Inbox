@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, createContext, useContext } from "react";
 import WispsMockup from "../components/WispsMockup";
+import WispsSlackMockup from "../components/WispsSlackMockup";
 import { motion } from "motion/react";
 import {
   Inbox,
@@ -165,24 +166,12 @@ function Hero() {
         initial="hidden"
         animate="show"
         custom={4}
-        className="relative z-10 mt-16 mx-auto pb-12 w-full flex justify-center"
+        className="relative z-10 mt-16 mx-auto pb-0 w-full flex justify-center"
       >
         {activeMockup === 'imessage' ? (
           <WispsMockup />
         ) : (
-          <div className="w-[min(340px,86vw)] aspect-[9/19.5] bg-[#1a1d21] rounded-[58px] flex flex-col items-center justify-center text-white/50 border-[5px] border-[#3a3a3f] shadow-2xl">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-4 opacity-50">
-                <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52z" fill="#E01E5A"/>
-                <path d="M6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z" fill="#E01E5A"/>
-                <path d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834z" fill="#36C5F0"/>
-                <path d="M8.834 6.313a2.527 2.527 0 0 1 2.521 2.521 2.527 2.527 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z" fill="#36C5F0"/>
-                <path d="M18.956 8.835a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.835a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.835z" fill="#2EB67D"/>
-                <path d="M17.687 8.835a2.527 2.527 0 0 1-2.521 2.521 2.527 2.527 0 0 1-2.522-2.521V2.522A2.528 2.528 0 0 1 15.166 0a2.528 2.528 0 0 1 2.521 2.522v6.313z" fill="#2EB67D"/>
-                <path d="M15.166 18.958a2.528 2.528 0 0 1 2.522 2.522A2.528 2.528 0 0 1 15.166 24a2.527 2.527 0 0 1-2.521-2.52v-2.522h2.521z" fill="#ECB22E"/>
-                <path d="M15.166 17.687a2.527 2.527 0 0 1-2.522-2.521 2.527 2.527 0 0 1 2.522-2.521h6.312A2.528 2.528 0 0 1 24 15.166a2.528 2.528 0 0 1-2.522 2.521h-6.312z" fill="#ECB22E"/>
-            </svg>
-            Slack Mockup Here
-          </div>
+          <WispsSlackMockup />
         )}
       </motion.div>
     </section>
@@ -676,10 +665,10 @@ function Logos() {
     ...integrationLogos,
   ];
   return (
-    <section className="overflow-hidden py-28 bg-textured-paper">
+    <section className="overflow-hidden pt-0 pb-16 bg-textured-paper">
       <div>
         <p className="text-center text-xs uppercase tracking-[0.18em] text-muted-foreground px-6">
-          Trusted by professionals at
+          Early users from
         </p>
         <div className="relative mt-10 w-full overflow-hidden py-4">
           {/* Edge fade gradients for premium aesthetic */}
@@ -712,7 +701,7 @@ function Logos() {
               animate={{ x: ["0%", "-100%"] }}
               transition={{
                 ease: "linear",
-                duration: 120,
+                duration: 180,
                 repeat: Infinity,
               }}
               className="flex items-center gap-20 pr-20 shrink-0"
