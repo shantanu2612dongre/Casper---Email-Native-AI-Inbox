@@ -155,12 +155,15 @@
 
   body {
     background-color: var(--color-background);
+    background-image: linear-gradient(to bottom, #0580E8 0%, var(--color-background) 1200px);
+    background-repeat: no-repeat;
+    min-height: 100vh;
     color: var(--color-foreground);
   }
 }
 
 .bg-textured-paper {
-  background-color: #EEE8E0;
+  background-color: transparent;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
 }
 

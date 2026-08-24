@@ -81,9 +81,9 @@ function Hero() {
     <section className="relative overflow-hidden py-32 md:py-40 z-0 bg-textured-paper">
       {/* Dynamic Watercolor Background - reduced opacity for readability */}
       <div
-        className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat transition-all duration-300 opacity-40 dark:opacity-20 dark:invert"
+        className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat transition-all duration-300 dark:opacity-20 dark:invert"
         style={{
-          backgroundImage: "url('/website-back.png')",
+          backgroundImage: "url('/herobackground.png')",
           maskImage: "linear-gradient(to bottom, black 0%, black 50%, transparent)",
           WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 50%, transparent)"
         }}
@@ -1591,7 +1591,7 @@ function Features() {
               transition={{ duration: 0.7 }}
               className="mb-6"
             >
-              <h2 
+              <h2
                 className="text-3xl md:text-4xl font-medium tracking-tight text-foreground"
                 style={{ fontFamily: "'Playfair Display', serif" }}
               >
@@ -1630,11 +1630,13 @@ function Features() {
           {/* Right side - Animation box with Background Image */}
           <div className="md:col-span-7 relative rounded-3xl overflow-hidden h-full w-full flex items-center justify-center shadow-xl min-h-0">
             {/* Constant Background */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center z-0" 
-              style={{ backgroundImage: "url('/card-background.webp')" }} 
+            <div
+              className="absolute inset-0 bg-cover bg-center z-0"
+              style={{ backgroundImage: "url('/featuresbackground.png')" }}
             />
-            
+            {/* Overlay to reduce vibrancy and increase contrast for the phone mockup */}
+            <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px] z-0" />
+
             {/* Animated Inner Content (Phone Mockup) */}
             <div className="relative z-10 w-full h-full p-6 md:p-8 flex items-center justify-center">
               <WispsFeatureMockup activeIndex={activeFeature} />
@@ -2538,7 +2540,7 @@ function CTA() {
             className="text-5xl md:text-6xl text-foreground font-medium tracking-tight"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
-            Tell your inbox what you need
+            Tell your agent what you need
           </h2>
           <p className="mt-6 text-[17px] leading-relaxed text-muted-foreground max-w-2xl mx-auto font-sans">
             Ask Slashy to draft a reply, find context, schedule a meeting, or follow up. It handles the work across your inbox.
