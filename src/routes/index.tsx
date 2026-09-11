@@ -78,12 +78,12 @@ function Hero() {
   const { openWaitlist } = useContext(WaitlistContext);
   const [activeMockup, setActiveMockup] = useState<'imessage' | 'slack'>('imessage');
   return (
-    <section className="relative overflow-hidden min-h-[100dvh] 2xl:min-h-0 2xl:aspect-[16/8.5] flex items-center justify-center py-20 z-0 bg-textured-paper">
+    <section className="relative overflow-hidden min-h-[100dvh] lg:min-h-[85vh] 2xl:min-h-0 2xl:aspect-[16/9] flex items-center justify-center py-24 z-0 bg-textured-paper">
       {/* Background Image - Changed to bg-bottom to prevent cropping the skyline/bridge */}
       <div
-        className="absolute inset-0 -z-10 bg-no-repeat bg-no-repeat opacity-100 transition-all duration-300"
+        className="absolute inset-0 -z-10 bg-cover bg-[center_30%] bg-no-repeat opacity-100 brightness-[1.1] contrast-[1.05] saturate-[1.15] transition-all duration-300"
         style={{
-          backgroundImage: "url('/herobackground.png')", backgroundSize: "100% 100%", maskImage: "linear-gradient(to bottom, black 0%, black 60%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,0.5) 88%, rgba(0,0,0,0.15) 96%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 60%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,0.5) 88%, rgba(0,0,0,0.15) 96%, transparent 100%)",
+          backgroundImage: "url('/herobackground.png')", maskImage: "linear-gradient(to bottom, black 0%, black 60%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,0.5) 88%, rgba(0,0,0,0.15) 96%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 60%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,0.5) 88%, rgba(0,0,0,0.15) 96%, transparent 100%)",
         }}
       />
 
@@ -91,7 +91,7 @@ function Hero() {
       <div className="relative w-[clamp(320px,92vw,1600px)] mx-auto grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-[clamp(3rem,6vw,8rem)] items-center h-full max-w-[1500px]">
         {/* Left Column: Text */}
         <div className="relative flex flex-col items-center lg:items-start text-center lg:text-left z-10">
-          <div className="absolute -inset-12 -z-10 bg-white/70 dark:bg-black/70 blur-3xl rounded-full pointer-events-none" />
+          
 
           <motion.h1
             variants={fadeUp}
@@ -142,25 +142,25 @@ function Hero() {
         >
           {/* Removed scale hack, fluid width is now handled by components themselves */}
           <div className="flex flex-col items-center w-full origin-center">
-            <div className="flex items-center p-1 mb-[clamp(1rem,2vw,2rem)] rounded-full bg-white/70 border border-white/60 dark:bg-black/40 dark:border-white/10 shadow-lg backdrop-blur-md z-20">
+            <div className="flex items-center p-0.5 mb-2 rounded-full bg-white/70 border border-white/60 dark:bg-black/40 dark:border-white/10 shadow-md backdrop-blur-md z-20 relative translate-y-6 lg:translate-y-12">
               <button
                 onClick={() => setActiveMockup('imessage')}
-                className={`flex items-center gap-2 px-[clamp(1rem,1.5vw,1.5rem)] py-[clamp(0.5rem,0.75vw,0.75rem)] rounded-full text-[clamp(0.75rem,0.9vw,0.875rem)] font-semibold transition-all ${activeMockup === 'imessage'
+                className={`flex items-center gap-1.5 px-[clamp(0.75rem,1vw,1rem)] py-[clamp(0.35rem,0.5vw,0.5rem)] rounded-full text-[clamp(0.7rem,0.75vw,0.8rem)] font-medium transition-all ${activeMockup === 'imessage'
                   ? 'bg-[#1D1C20] text-white shadow-md'
                   : 'text-foreground/70 hover:text-foreground hover:bg-white/50'
                   }`}
               >
-                <img src="/imessage.svg" className="w-[18px] h-[18px] object-contain" alt="iMessage" />
+                <img src="/imessage.svg" className="w-[14px] h-[14px] object-contain" alt="iMessage" />
                 iMessage
               </button>
               <button
                 onClick={() => setActiveMockup('slack')}
-                className={`flex items-center gap-2 px-[clamp(1rem,1.5vw,1.5rem)] py-[clamp(0.5rem,0.75vw,0.75rem)] rounded-full text-[clamp(0.75rem,0.9vw,0.875rem)] font-semibold transition-all ${activeMockup === 'slack'
+                className={`flex items-center gap-1.5 px-[clamp(0.75rem,1vw,1rem)] py-[clamp(0.35rem,0.5vw,0.5rem)] rounded-full text-[clamp(0.7rem,0.75vw,0.8rem)] font-medium transition-all ${activeMockup === 'slack'
                   ? 'bg-[#1D1C20] text-white shadow-md'
                   : 'text-foreground/70 hover:text-foreground hover:bg-white/50'
                   }`}
               >
-                <img src="/slack.svg" className="w-[18px] h-[18px] object-contain" alt="Slack" />
+                <img src="/slack.svg" className="w-[14px] h-[14px] object-contain" alt="Slack" />
                 Slack
               </button>
             </div>
