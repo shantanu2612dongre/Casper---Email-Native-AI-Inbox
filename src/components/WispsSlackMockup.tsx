@@ -166,7 +166,7 @@ export default function WispsSlackMockup({ logoSrc }: { logoSrc?: string }) {
           padding: 32px 16px;
         }
         .wslack-window {
-          width: min(760px, 94vw);
+          width: clamp(520px, 50vw, 760px);
           background: #16181f;
           border-radius: 12px;
           overflow: hidden;

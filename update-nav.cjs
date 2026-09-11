@@ -1,9 +1,8 @@
-import { motion } from "motion/react";
-import { useState } from "react";
-import { WaitlistModal } from "./WaitlistModal";
-import { trackEvent } from "../lib/utils";
+const fs = require('fs');
+const path = '/Users/shantanudongre/Casper---Email-Native-AI-Inbox/src/components/Nav.tsx';
+let content = fs.readFileSync(path, 'utf8');
 
-export function Nav() {
+const newNav = `export function Nav() {
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
 
   return (
@@ -66,4 +65,8 @@ export function Nav() {
       <WaitlistModal isOpen={isWaitlistOpen} onClose={() => setIsWaitlistOpen(false)} />
     </>
   );
-}
+}`;
+
+content = content.replace(/export function Nav\(\) \{[\s\S]*\}\n/m, newNav + '\n');
+fs.writeFileSync(path, content);
+console.log("Updated Nav to match seamless Tomo header.");

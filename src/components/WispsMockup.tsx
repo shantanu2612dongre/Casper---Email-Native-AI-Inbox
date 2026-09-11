@@ -17,10 +17,10 @@ import React, { useEffect, useRef, useState } from "react";
  * ------------------------------------------------------------------
  */
 
-const DEFAULT_LOGO_SRC = "/wisps-logo.svg";
+const DEFAULT_LOGO_SRC = "/wisps-logo.png";
 
 const CONVERSATION = [
-  { from: "user", text: "hey Wisps, what's pending with Mark from dev team" },
+  { from: "user", text: "hey wisps, what's pending with Mark from dev team" },
   {
     from: "wisps",
     text: "hey — last he confirmed the PR is merged, now waiting on your approval",
@@ -56,7 +56,7 @@ function TypingBubble() {
 
 export default function WispsMockup({ logoSrc }: { logoSrc?: string }) {
   const [visibleCount, setVisibleCount] = useState(0);
-  const [typingFrom, setTypingFrom] = useState<string | null>(null);
+  const [typingFrom, setTypingFrom] = useState<string | null>(null); // 'wisps' | null
   const timers = useRef<NodeJS.Timeout[]>([]);
 
   useEffect(() => {
@@ -130,69 +130,88 @@ export default function WispsMockup({ logoSrc }: { logoSrc?: string }) {
         .wisps-phone {
           position: relative;
           z-index: 1;
-          width: min(340px, 86vw);
+          width: clamp(240px, 22vw, 340px);
           aspect-ratio: 9 / 19.5;
-          background: linear-gradient(155deg, #3a3a3f, #0b0b0d 40%);
-          border-radius: 58px;
-          padding: 5px;
+          background:
+            linear-gradient(135deg,
+              #4a4b50 0%, #3a3a3e 10%,
+              #1c1c1e 30%, #0a0a0b 100%);
+          border-radius: 62px;
+          padding: 9px;
           box-shadow:
-            0 30px 60px -20px rgba(20, 20, 40, 0.45),
-            0 0 0 1px rgba(255,255,255,0.08) inset;
+            inset 0 0 0 1px rgba(255,255,255,0.14),
+            inset 0 -2px 4px rgba(0,0,0,0.6),
+            0 30px 60px -20px rgba(20, 20, 40, 0.5);
         }
         .wisps-btn {
           position: absolute;
-          background: linear-gradient(180deg, #232326, #08080a);
-          box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+          background: linear-gradient(90deg, #dcdde2 0%, #6c6d73 35%, #1b1b1d 100%);
+          box-shadow:
+            inset 0 1px 1px rgba(255,255,255,0.5),
+            inset 0 -1px 1px rgba(0,0,0,0.5);
         }
         .wisps-btn--action {
-          left: -3px;
+          left: -5px;
           top: 15%;
-          width: 3px;
-          height: 20px;
-          border-radius: 2px 0 0 2px;
+          width: 5px;
+          height: 22px;
+          border-radius: 3px 0 0 3px;
         }
         .wisps-btn--vol-up {
-          left: -3px;
+          left: -5px;
           top: 25%;
-          width: 3px;
-          height: 44px;
-          border-radius: 2px 0 0 2px;
+          width: 5px;
+          height: 46px;
+          border-radius: 3px 0 0 3px;
         }
         .wisps-btn--vol-down {
-          left: -3px;
+          left: -5px;
           top: 34.5%;
-          width: 3px;
-          height: 44px;
-          border-radius: 2px 0 0 2px;
+          width: 5px;
+          height: 46px;
+          border-radius: 3px 0 0 3px;
         }
         .wisps-btn--power {
-          right: -3px;
+          right: -5px;
           top: 27%;
-          width: 3px;
-          height: 62px;
-          border-radius: 0 2px 2px 0;
+          width: 5px;
+          height: 66px;
+          background: linear-gradient(270deg, #dcdde2 0%, #6c6d73 35%, #1b1b1d 100%);
+          border-radius: 0 3px 3px 0;
         }
         .wisps-screen {
           position: relative;
           width: 100%;
           height: 100%;
           background: #f5f5f7;
-          border-radius: 52px;
+          border-radius: 53px;
           overflow: hidden;
           display: flex;
           flex-direction: column;
           font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+          box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06);
         }
         .wisps-island {
           position: absolute;
           top: 10px;
           left: 50%;
           transform: translateX(-50%);
-          width: 90px;
-          height: 26px;
+          width: 92px;
+          height: 27px;
           background: #0b0b0d;
           border-radius: 20px;
           z-index: 5;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          padding-right: 8px;
+        }
+        .wisps-island-cam {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: radial-gradient(circle at 35% 35%, #3d4a6b, #0a0a0c 70%);
+          box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
         }
         .wisps-statusbar {
           display: flex;
@@ -221,23 +240,23 @@ export default function WispsMockup({ logoSrc }: { logoSrc?: string }) {
           position: absolute;
           left: 14px;
           top: 6px;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: #fff;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.12);
           display: flex;
           align-items: center;
-          gap: 1px;
-          color: #007aff;
-          font-size: 20px;
+          justify-content: center;
+          color: #1c1c1e;
+          font-size: 17px;
           line-height: 1;
-        }
-        .wisps-back .count {
-          font-size: 12.5px;
-          font-weight: 500;
         }
         .wisps-avatar {
           width: 46px;
           height: 46px;
           border-radius: 50%;
-          background: #ffffff;
-          border: 1px solid rgba(0,0,0,0.05);
+          background: linear-gradient(135deg, #dcdaff, #b9bcff);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -354,7 +373,9 @@ export default function WispsMockup({ logoSrc }: { logoSrc?: string }) {
         <div className="wisps-btn wisps-btn--vol-down" />
         <div className="wisps-btn wisps-btn--power" />
         <div className="wisps-screen">
-          <div className="wisps-island" />
+          <div className="wisps-island">
+            <div className="wisps-island-cam" />
+          </div>
 
           <div className="wisps-statusbar">
             <span>9:41</span>
@@ -366,14 +387,12 @@ export default function WispsMockup({ logoSrc }: { logoSrc?: string }) {
           </div>
 
           <div className="wisps-header">
-            <span className="wisps-back">
-              ‹<span className="count">12</span>
-            </span>
+            <span className="wisps-back">‹</span>
             <div className="wisps-avatar">
-              <img src={logoSrc || DEFAULT_LOGO_SRC} alt="Wisps" />
+              <img src={logoSrc || DEFAULT_LOGO_SRC} alt="wisps" />
             </div>
             <div className="wisps-headertext">
-              <span className="name">Wisps</span>
+              <span className="name">wisps</span>
               <span className="chevron">›</span>
             </div>
             <svg className="wisps-video" width="20" height="15" viewBox="0 0 20 15" fill="currentColor">

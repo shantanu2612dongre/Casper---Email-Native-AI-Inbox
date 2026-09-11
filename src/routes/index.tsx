@@ -78,103 +78,103 @@ function Hero() {
   const { openWaitlist } = useContext(WaitlistContext);
   const [activeMockup, setActiveMockup] = useState<'imessage' | 'slack'>('imessage');
   return (
-    <section className="relative overflow-hidden py-32 md:py-40 z-0 bg-textured-paper">
-      {/* Dynamic Watercolor Background - reduced opacity for readability */}
+    <section className="relative overflow-hidden min-h-[100dvh] 2xl:min-h-0 2xl:aspect-[16/8.5] flex items-center justify-center py-20 z-0 bg-textured-paper">
+      {/* Background Image - Changed to bg-bottom to prevent cropping the skyline/bridge */}
       <div
-        className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat transition-all duration-300 dark:opacity-20 dark:invert"
+        className="absolute inset-0 -z-10 bg-no-repeat bg-no-repeat opacity-100 transition-all duration-300"
         style={{
-          backgroundImage: "url('/herobackground.png')",
-          maskImage: "linear-gradient(to bottom, black 0%, black 50%, transparent)",
-          WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 50%, transparent)"
+          backgroundImage: "url('/herobackground.png')", backgroundSize: "100% 100%", maskImage: "linear-gradient(to bottom, black 0%, black 60%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,0.5) 88%, rgba(0,0,0,0.15) 96%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 60%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,0.5) 88%, rgba(0,0,0,0.15) 96%, transparent 100%)",
         }}
       />
 
-      {/* Centered text container with readable max-width */}
-      <div className="relative max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
-        {/* Subtle glow behind text to ensure readability */}
-        <div className="absolute inset-0 -z-10 bg-white/40 dark:bg-transparent blur-3xl rounded-full" />
+      {/* Replaced fixed max-width with clamped fluid width constraints */}
+      <div className="relative w-[clamp(320px,92vw,1600px)] mx-auto grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-[clamp(3rem,6vw,8rem)] items-center h-full max-w-[1500px]">
+        {/* Left Column: Text */}
+        <div className="relative flex flex-col items-center lg:items-start text-center lg:text-left z-10">
+          <div className="absolute -inset-12 -z-10 bg-white/70 dark:bg-black/70 blur-3xl rounded-full pointer-events-none" />
 
-        <motion.h1
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={0}
-          className="text-5xl md:text-7xl font-semibold tracking-tight text-foreground leading-[1.05]"
-          style={{ fontFamily: "'Playfair Display', serif" }}
-        >
-          The copilot for your professional relationships.
-        </motion.h1>
+          <motion.h1
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={0}
+            // Fluid Headline Size
+            className="font-black tracking-tighter text-foreground leading-[1.05] text-[clamp(2.5rem,4.5vw,5rem)]"
+          >
+            The copilot for your professional relationships.
+          </motion.h1>
 
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={1}
-          className="mx-auto mt-6 max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed"
-        >
-          Wisps learns how you write, drafts your replies, and handles the busywork, so you can focus on what matters.
-        </motion.p>
+          <motion.p
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={1}
+            // Fluid Paragraph Size
+            className="mt-[clamp(1rem,2vw,1.5rem)] max-w-xl font-medium text-foreground/80 leading-relaxed text-[clamp(1rem,1.2vw+0.25rem,1.25rem)]"
+          >
+            Wisps learns how you write, drafts your replies, and handles the busywork, so you can focus on what matters.
+          </motion.p>
 
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={2}
+            className="mt-[clamp(2rem,3vw,3rem)] flex items-center justify-center lg:justify-start gap-4"
+          >
+            <button
+              onClick={() => openWaitlist("hero")}
+              // Fluid Button Size
+              className="inline-flex items-center rounded-full bg-foreground text-background px-[clamp(1.5rem,2.5vw,2.5rem)] py-[clamp(0.75rem,1.25vw,1.25rem)] text-[clamp(0.9rem,1vw,1.1rem)] font-bold hover:opacity-90 transition-opacity cursor-pointer shadow-xl shadow-black/10"
+            >
+              Join Waitlist
+            </button>
+          </motion.div>
+        </div>
+
+        {/* Right Column: Mockup */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          custom={2}
-          className="mt-10 flex items-center justify-center"
+          custom={3}
+          className="relative flex flex-col items-center justify-center w-full mt-12 lg:mt-0"
         >
-          <button
-            onClick={() => openWaitlist("hero")}
-            className="inline-flex items-center rounded-full bg-foreground text-background px-8 py-3.5 text-base font-medium hover:opacity-90 transition-opacity cursor-pointer shadow-sm"
-          >
-            Join Waitlist
-          </button>
+          {/* Removed scale hack, fluid width is now handled by components themselves */}
+          <div className="flex flex-col items-center w-full origin-center">
+            <div className="flex items-center p-1 mb-[clamp(1rem,2vw,2rem)] rounded-full bg-white/70 border border-white/60 dark:bg-black/40 dark:border-white/10 shadow-lg backdrop-blur-md z-20">
+              <button
+                onClick={() => setActiveMockup('imessage')}
+                className={`flex items-center gap-2 px-[clamp(1rem,1.5vw,1.5rem)] py-[clamp(0.5rem,0.75vw,0.75rem)] rounded-full text-[clamp(0.75rem,0.9vw,0.875rem)] font-semibold transition-all ${activeMockup === 'imessage'
+                  ? 'bg-[#1D1C20] text-white shadow-md'
+                  : 'text-foreground/70 hover:text-foreground hover:bg-white/50'
+                  }`}
+              >
+                <img src="/imessage.svg" className="w-[18px] h-[18px] object-contain" alt="iMessage" />
+                iMessage
+              </button>
+              <button
+                onClick={() => setActiveMockup('slack')}
+                className={`flex items-center gap-2 px-[clamp(1rem,1.5vw,1.5rem)] py-[clamp(0.5rem,0.75vw,0.75rem)] rounded-full text-[clamp(0.75rem,0.9vw,0.875rem)] font-semibold transition-all ${activeMockup === 'slack'
+                  ? 'bg-[#1D1C20] text-white shadow-md'
+                  : 'text-foreground/70 hover:text-foreground hover:bg-white/50'
+                  }`}
+              >
+                <img src="/slack.svg" className="w-[18px] h-[18px] object-contain" alt="Slack" />
+                Slack
+              </button>
+            </div>
+
+            <div className="relative w-full flex justify-center z-10">
+              {activeMockup === 'imessage' ? (
+                <WispsMockup />
+              ) : (
+                <WispsSlackMockup />
+              )}
+            </div>
+          </div>
         </motion.div>
       </div>
-
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        animate="show"
-        custom={3}
-        className="mt-12 flex justify-center w-full relative z-20"
-      >
-        <div className="flex items-center p-1 rounded-full bg-white/40 border border-white/40 dark:bg-black/20 dark:border-white/10 shadow-sm backdrop-blur-md">
-          <button
-            onClick={() => setActiveMockup('imessage')}
-            className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium transition-all ${activeMockup === 'imessage'
-              ? 'bg-[#1D1C20] text-white shadow-md'
-              : 'text-foreground/70 hover:text-foreground'
-              }`}
-          >
-            <img src="/imessage.svg" className="w-[18px] h-[18px] object-contain" alt="iMessage" />
-            iMessage
-          </button>
-          <button
-            onClick={() => setActiveMockup('slack')}
-            className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium transition-all ${activeMockup === 'slack'
-              ? 'bg-[#1D1C20] text-white shadow-md'
-              : 'text-foreground/70 hover:text-foreground'
-              }`}
-          >
-            <img src="/slack.svg" className="w-[18px] h-[18px] object-contain" alt="Slack" />
-            Slack
-          </button>
-        </div>
-      </motion.div>
-
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        animate="show"
-        custom={4}
-        className="relative z-10 mt-16 mx-auto pb-0 w-full flex justify-center"
-      >
-        {activeMockup === 'imessage' ? (
-          <WispsMockup />
-        ) : (
-          <WispsSlackMockup />
-        )}
-      </motion.div>
     </section>
   );
 }
@@ -2543,7 +2543,7 @@ function CTA() {
             Tell your agent what you need
           </h2>
           <p className="mt-6 text-[17px] leading-relaxed text-muted-foreground max-w-2xl mx-auto font-sans">
-            Ask Slashy to draft a reply, find context, schedule a meeting, or follow up. It handles the work across your inbox.
+            Ask Wisps to draft a reply, find context, schedule a meeting, or follow up. It handles the work across your inbox.
           </p>
           <div className="mt-10 flex items-center justify-center gap-4">
             <button
