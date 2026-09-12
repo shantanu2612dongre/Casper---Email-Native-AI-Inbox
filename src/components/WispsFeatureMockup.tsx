@@ -1,31 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
-/**
- * WispsFeatureMockup
- * ------------------------------------------------------------------
- * A single phone mockup that stays put in the features-section art
- * box while its SCREEN CONTENT swaps to match whichever feature is
- * currently highlighted. Built to be driven by your existing
- * feature-rotation timer — just pass the active index down:
- *
- *   <WispsFeatureMockup activeIndex={activeFeatureIndex} />
- *
- * Index order matches the feature copy top-to-bottom:
- *   0 = Drafts in your voice
- *   1 = Auto-organized inbox
- *   2 = Ask your inbox
- *   3 = Smart follow-ups
- *
- * If no activeIndex prop is passed, it free-runs on its own timer
- * (4s per screen) so it's previewable standalone — remove that
- * fallback once it's wired to your real timer, or just leave it,
- * since passing activeIndex always overrides it.
- *
- * The component renders ONLY the phone — no background box. Drop it
- * inside your existing textured art box and it'll fill/center itself
- * via the wrapper's max-width; it does not fight your box's size.
- * ------------------------------------------------------------------
- */
+
+
+const CONVERSATION = [
+  { from: "wisps", text: "hey — linda's been asking about the last PR's git issues" },
+  { from: "user", text: "what is it" },
+  { from: "wisps", text: "found two: the CI lint step is failing on the auth module, and the migration script conflicts with main" },
+  { from: "wisps", text: "want me to let her know?" },
+  { from: "user", text: "yes" },
+  { from: "wisps", text: "here's what I'd send — \"hey linda, found two issues on the last PR: the CI lint step's failing on auth, and the migration script conflicts with main. want me to open tickets for both?\"" },
+];
+const SUGGESTIONS = ["Send it", "Let me edit"];
+
+
+const TIMING = [
+  { pre: 600, typing: 1200 },
+  { pre: 500, typing: 0 },
+  { pre: 500, typing: 1500 },
+  { pre: 500, typing: 900 },
+  { pre: 700, typing: 0 },
+  { pre: 500, typing: 1600 },
+];
+const HOLD_AFTER_LAST = 3600;
+const RESET_PAUSE = 700;
 
 const AUTOPLAY_MS = 4000;
 
@@ -102,6 +99,11 @@ export default function WispsFeatureMockup({ activeIndex }: { activeIndex?: numb
           font-weight: 600;
           color: #0b0b0d;
         }
+        .wfm-statusbar .wfm-icons {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
         .wfm-appbar {
           display: flex;
           align-items: center;
@@ -151,7 +153,7 @@ export default function WispsFeatureMockup({ activeIndex }: { activeIndex?: numb
           pointer-events: auto;
         }
 
-        /* ---- Auto-organized inbox ---- */
+        /* ---- One brain, every tool ---- */
         .wfm-list { padding: 4px 12px; display: flex; flex-direction: column; gap: 1px; overflow: hidden; }
         .wfm-row { display: flex; align-items: center; gap: 7px; padding: 7px 4px; border-bottom: 1px solid rgba(0,0,0,0.05); }
         .wfm-row--highlight { background: #e9f0fb; border-radius: 8px; }
@@ -168,7 +170,172 @@ export default function WispsFeatureMockup({ activeIndex }: { activeIndex?: numb
         .wfm-tag--calendar { background: #efe4fb; color: #7f4bcf; }
         .wfm-tag--newsletter { background: #fbecd6; color: #b8791c; }
 
-        /* ---- Drafts in your voice ---- */
+        
+        .wfm-chat {
+          flex: 1;
+          padding: 10px 10px 6px;
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          overflow-y: auto;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          background: #f5f5f7;
+        }
+        .wfm-chat::-webkit-scrollbar {
+          display: none;
+        }
+        
+        .wfm-bubble--user {
+          align-self: flex-end;
+          background: #007aff;
+          color: #fff;
+          border-bottom-right-radius: 4px;
+        }
+        .wfm-bubble--wisps {
+          align-self: flex-start;
+          background: #e9e9eb;
+          color: #0b0b0d;
+          border-bottom-left-radius: 4px;
+        }
+        
+        .wfm-suggestion-chip {
+          font-size: 8.5px;
+          font-weight: 500;
+          color: #007aff;
+          background: #fff;
+          border: 1px solid rgba(0,0,0,0.1);
+          border-radius: 10px;
+          padding: 4px 8px;
+        }
+        .wfm-inputbar {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding: 4px 10px 12px;
+          background: #f5f5f7;
+        }
+        .wfm-inputpill {
+          flex: 1;
+          height: 24px;
+          border-radius: 12px;
+          border: 1px solid rgba(0,0,0,0.12);
+          background: #fff;
+          display: flex;
+          align-items: center;
+          padding: 0 10px;
+          font-size: 9px;
+          color: #9a9aa0;
+        }
+
+        
+        /* ---- Chat Header ---- */
+        .wfm-chat-header {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 2px;
+          padding: 6px 44px 8px;
+          border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        .wfm-back {
+          position: absolute;
+          left: 10px;
+          top: 6px;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: #fff;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #1c1c1e;
+          font-size: 15px;
+          line-height: 1;
+        }
+        .wfm-avatar {
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
+          background: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          overflow: hidden;
+        }
+        .wfm-avatar img {
+          width: 66%;
+          height: 66%;
+          object-fit: contain;
+        }
+        .wfm-headertext {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          line-height: 1.15;
+        }
+        .wfm-headertext .name {
+          font-size: 11px;
+          font-weight: 600;
+          color: #0b0b0d;
+        }
+        .wfm-headertext .chevron {
+          font-size: 7px;
+          color: #9a9aa0;
+        }
+        .wfm-video {
+          position: absolute;
+          right: 12px;
+          top: 8px;
+          color: #007aff;
+          width: 15px;
+          height: 11px;
+        }
+
+        
+        @keyframes wfm-rise {
+          from { opacity: 0; transform: translateY(8px) scale(0.98); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .wfm-bubble {
+          max-width: 82%;
+          padding: 7px 11px;
+          border-radius: 14px;
+          font-size: 9.5px;
+          line-height: 1.35;
+          animation: wfm-rise 0.32s ease-out;
+        }
+        .wfm-typing {
+          display: flex;
+          gap: 3px;
+          align-items: center;
+          padding: 7px 10px;
+        }
+        .wfm-dot {
+          width: 4px;
+          height: 4px;
+          border-radius: 50%;
+          background: #9a9aa0;
+          animation: wfm-bounce 1.1s infinite ease-in-out;
+        }
+        .wfm-dot:nth-child(2) { animation-delay: 0.15s; }
+        .wfm-dot:nth-child(3) { animation-delay: 0.3s; }
+        @keyframes wfm-bounce {
+          0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+          30% { transform: translateY(-2px); opacity: 1; }
+        }
+        .wfm-suggestions {
+          display: flex;
+          gap: 4px;
+          padding: 0 10px 6px;
+          background: #f5f5f7;
+          animation: wfm-rise 0.28s ease-out;
+        }
+
+        /* ---- Tone Memory ---- */
         .wfm-compose { padding: 10px 14px; display: flex; flex-direction: column; gap: 8px; }
         .wfm-compose-meta { font-size: 9.5px; color: #9a9aa0; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 6px; }
         .wfm-compose-meta b { color: #0b0b0d; font-weight: 600; }
@@ -179,7 +346,7 @@ export default function WispsFeatureMockup({ activeIndex }: { activeIndex?: numb
         .wfm-draft-text { font-size: 9.5px; color: #2c2a3a; line-height: 1.5; }
         .wfm-draft-btn { margin-top: 8px; align-self: flex-start; font-size: 8.5px; font-weight: 700; color: #fff; background: #6a63e0; padding: 5px 11px; border-radius: 8px; }
 
-        /* ---- Ask your inbox ---- */
+        /* ---- Ask anything ---- */
         .wfm-ask { padding: 10px 14px; display: flex; flex-direction: column; gap: 10px; }
         .wfm-search-bar { display: flex; align-items: center; gap: 6px; background: #fff; border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; padding: 8px 10px; font-size: 10px; color: #0b0b0d; }
         .wfm-search-bar svg { flex-shrink: 0; color: #9a9aa0; }
@@ -213,80 +380,25 @@ export default function WispsFeatureMockup({ activeIndex }: { activeIndex?: numb
 
           <div className="wfm-statusbar">
             <span>9:41</span>
-            <span></span>
+            <span className="wfm-icons">
+              <svg width="14" height="10" viewBox="0 0 16 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="0.5"/><rect x="4.5" y="5" width="3" height="6" rx="0.5"/><rect x="9" y="3" width="3" height="8" rx="0.5"/><rect x="13.5" y="0" width="3" height="11" rx="0.5"/></svg>
+              <svg width="13" height="10" viewBox="0 0 15 11" fill="currentColor"><path d="M7.5 10.5c.6 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1zM4.3 6.8a4.5 4.5 0 016.4 0l-1 1a3 3 0 00-4.3 0l-1-1zM2 4.5a7.8 7.8 0 0111 0l-1 1a6.3 6.3 0 00-9 0l-1-1z"/></svg>
+              <svg width="21" height="10" viewBox="0 0 24 11" fill="none"><rect x="0.5" y="0.5" width="20" height="10" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="15" height="7" rx="1.2" fill="currentColor"/><rect x="21.5" y="3.5" width="1.5" height="4" rx="0.7" fill="currentColor"/></svg>
+            </span>
           </div>
 
           <div className="wfm-screens">
-            {/* 0 — Drafts in your voice */}
-            <Screen active={index === 0} title="Alex Chen" pill="Draft ready">
-              <div className="wfm-compose">
-                <div className="wfm-compose-meta">
-                  Re: <b>Q4 report — final numbers?</b>
-                </div>
-                <div className="wfm-compose-body">
-                  "hey, can you send the finalized Q4 numbers before the board call tomorrow?"
-                </div>
-                <div className="wfm-draft-card">
-                  <div className="wfm-draft-label">
-                    <span className="wfm-draft-ghost" />
-                    WISPS DRAFT — IN YOUR VOICE
-                  </div>
-                  <div className="wfm-draft-text">
-                    "yep — finalizing now, you'll have it by 6pm tonight, ahead of the call."
-                  </div>
-                  <div className="wfm-draft-btn">Use draft</div>
-                </div>
-              </div>
-            </Screen>
+            {/* 0 — Tone Memory */}
+            <AnimatedChatScreen active={index === 0} title="wisps" pill="Tone Memory" conversation={CONVERSATION} suggestions={SUGGESTIONS} timing={TIMING} />
 
-            {/* 1 — Auto-organized inbox */}
-            <Screen active={index === 1} title="All Mail" pill="Auto-organized">
-              <div className="wfm-list">
-                <Row dot sender="Product Hunt" time="3:45 PM" subject="You're featured today!" tag="important" />
-                <Row dot sender="Figma" time="3:15 PM" subject="Design system updates" tag="work" />
-                <Row dot sender="Jira" time="2:45 PM" subject="Sprint review in 30 mins" tag="calendar" />
-                <Row dot sender="Alex Chen" time="2:15 PM" subject="Q4 report ready for review" tag="important" />
-                <Row sender="Sarah Kim" time="1:42 PM" subject="Meeting notes from standup" tag="work" />
-                <Row highlight sender="Notion" time="11:30 AM" subject="Your weekly digest is ready" tag="newsletter" />
-              </div>
-            </Screen>
+            {/* 1 — One brain, every tool */}
+            <AnimatedChatScreen active={index === 1} title="wisps" pill="One brain, every tool" conversation={ONE_BRAIN_CONVERSATION} suggestions={ONE_BRAIN_SUGGESTIONS} timing={ONE_BRAIN_TIMING} />
 
-            {/* 2 — Ask your inbox */}
-            <Screen active={index === 2} title="Ask" pill="Searching">
-              <div className="wfm-ask">
-                <div className="wfm-search-bar">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
-                    <circle cx="11" cy="11" r="7" />
-                    <path d="M21 21l-4.3-4.3" />
-                  </svg>
-                  when's the sprint review?
-                </div>
-                <div className="wfm-answer-card">
-                  <div className="wfm-answer-label">Answer</div>
-                  <div className="wfm-answer-text">
-                    Today at 2:45 PM — Jira sent a 30-minute heads-up. No prep doc attached.
-                  </div>
-                  <div className="wfm-answer-src">from: Jira · 2:45 PM</div>
-                </div>
-              </div>
-            </Screen>
+            {/* 2 — Ask anything */}
+            <AnimatedChatScreen active={index === 2} title="wisps" pill="Ask anything" conversation={ASK_ANYTHING_CONVERSATION} suggestions={ASK_ANYTHING_SUGGESTIONS} timing={ASK_ANYTHING_TIMING} />
 
             {/* 3 — Smart follow-ups */}
-            <Screen active={index === 3} title="Follow-ups" pill="1 resurfaced">
-              <div className="wfm-follow">
-                <div className="wfm-follow-card">
-                  <div className="wfm-follow-avatar">AC</div>
-                  <div className="wfm-follow-body">
-                    <div className="wfm-follow-name">Alex Chen</div>
-                    <div className="wfm-follow-sub">Q4 report — no reply in 4 days</div>
-                    <div className="wfm-follow-badge">
-                      <span className="wfm-pill-dot" />
-                      Draft ready to send
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Screen>
+            <AnimatedChatScreen active={index === 3} title="wisps" pill="Smart follow-ups" conversation={SMART_FOLLOWUP_CONVERSATION} suggestions={SMART_FOLLOWUP_SUGGESTIONS} timing={SMART_FOLLOWUP_TIMING} />
           </div>
         </div>
       </div>
@@ -294,16 +406,18 @@ export default function WispsFeatureMockup({ activeIndex }: { activeIndex?: numb
   );
 }
 
-function Screen({ active, title, pill, children }: { active: boolean, title: string, pill: string, children: React.ReactNode }) {
+function Screen({ active, title, pill, hideAppBar, children }: { active: boolean, title: string, pill: string, hideAppBar?: boolean, children: React.ReactNode }) {
   return (
     <div className={`wfm-screen-layer ${active ? "wfm-screen-layer--active" : ""}`}>
-      <div className="wfm-appbar">
-        <span className="title">{title}</span>
-        <span className="wfm-pill">
-          <span className="wfm-pill-dot" />
-          {pill}
-        </span>
-      </div>
+      {!hideAppBar && (
+        <div className="wfm-appbar">
+          <span className="title">{title}</span>
+          <span className="wfm-pill">
+            <span className="wfm-pill-dot" />
+            {pill}
+          </span>
+        </div>
+      )}
       {children}
     </div>
   );
@@ -326,3 +440,190 @@ function Row({ sender, time, subject, tag, dot, highlight }: { sender: string, t
     </div>
   );
 }
+
+
+function TypingBubble() {
+  return (
+    <div className="wfm-bubble wfm-bubble--wisps wfm-typing">
+      <span className="wfm-dot" />
+      <span className="wfm-dot" />
+      <span className="wfm-dot" />
+    </div>
+  );
+}
+
+
+function AnimatedChatScreen({ active, title, pill, conversation, suggestions, timing }: { active: boolean, title: string, pill: string, conversation: any[], suggestions: string[], timing: any[] }) {
+  const [visibleCount, setVisibleCount] = useState(0);
+  const [typingFrom, setTypingFrom] = useState<string | null>(null);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const timers = useRef<NodeJS.Timeout[]>([]);
+  const chatRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!active) {
+       setVisibleCount(0);
+       setTypingFrom(null);
+       setShowSuggestions(false);
+       return;
+    }
+
+    function clearAll() {
+      timers.current.forEach(clearTimeout);
+      timers.current = [];
+    }
+
+    function schedule(fn: () => void, delay: number) {
+      const id = setTimeout(fn, delay);
+      timers.current.push(id);
+      return id;
+    }
+
+    function runStep(index: number) {
+      if (index >= conversation.length) {
+        schedule(() => setShowSuggestions(true), 450);
+        schedule(() => {
+          setVisibleCount(0);
+          setTypingFrom(null);
+          setShowSuggestions(false);
+          schedule(() => runStep(0), RESET_PAUSE);
+        }, HOLD_AFTER_LAST);
+        return;
+      }
+
+      const { pre, typing } = timing[index];
+      const msg = conversation[index];
+
+      schedule(() => {
+        if (typing > 0) {
+          setTypingFrom(msg.from);
+          schedule(() => {
+            setTypingFrom(null);
+            setVisibleCount(index + 1);
+            runStep(index + 1);
+          }, typing);
+        } else {
+          setVisibleCount(index + 1);
+          runStep(index + 1);
+        }
+      }, pre);
+    }
+
+    runStep(0);
+    return clearAll;
+  }, [active, conversation, timing]);
+
+  useEffect(() => {
+    if (chatRef.current) {
+      setTimeout(() => {
+        if (chatRef.current) {
+          chatRef.current.scrollTo({
+            top: chatRef.current.scrollHeight,
+            behavior: 'smooth'
+          });
+        }
+      }, 50);
+    }
+  }, [visibleCount, typingFrom, showSuggestions]);
+
+  return (
+    <Screen active={active} title={title} pill={pill} hideAppBar>
+      <div className="wfm-chat-header">
+        <span className="wfm-back">‹</span>
+        <div className="wfm-avatar">
+          <img src="/wisps-logo.svg" alt="wisps" />
+        </div>
+        <div className="wfm-headertext">
+          <span className="name">wisps</span>
+          <span className="chevron">›</span>
+        </div>
+        <svg className="wfm-video" viewBox="0 0 20 15" fill="currentColor">
+          <rect x="0" y="1.5" width="13" height="12" rx="2.5" />
+          <path d="M13 5.5l6-3.5v11l-6-3.5z" />
+        </svg>
+      </div>
+      <div className="wfm-chat" ref={chatRef}>
+        {conversation.slice(0, visibleCount).map((m, i) => (
+          <div key={i} className={`wfm-bubble wfm-bubble--${m.from}`}>
+            {m.text}
+          </div>
+        ))}
+        {typingFrom === "wisps" && <TypingBubble />}
+      </div>
+      {showSuggestions && (
+        <div className="wfm-suggestions">
+          {suggestions.map((s) => (
+            <span className="wfm-suggestion-chip" key={s}>{s}</span>
+          ))}
+        </div>
+      )}
+      <div className="wfm-inputbar">
+        <div className="wfm-inputpill">iMessage</div>
+      </div>
+    </Screen>
+  );
+}
+
+
+const ASK_ANYTHING_CONVERSATION = [
+  { from: "user", text: "when does our AWS reserved instance renewal come up" },
+  { from: "wisps", text: "found it — it's in the invoice AWS sent on July 14th" },
+  { from: "wisps", text: "renewal date is Sept 30, auto-renews unless cancelled 7 days before" },
+  { from: "wisps", text: "from: billing@aws.com · attachment: invoice-9042.pdf" },
+  { from: "user", text: "perfect, thanks" },
+];
+
+const ASK_ANYTHING_SUGGESTIONS = [];
+
+const ASK_ANYTHING_TIMING = [
+  { pre: 500, typing: 0 },
+  { pre: 600, typing: 1400 },
+  { pre: 400, typing: 1600 },
+  { pre: 400, typing: 1200 },
+  { pre: 1000, typing: 0 },
+];
+
+
+const ONE_BRAIN_CONVERSATION = [
+  { from: "wisps", text: "morning — cleared 47 notifications overnight across slack, email, and github" },
+  { from: "wisps", text: "newsletters, CI pings, standup bot messages — none of it needed you" },
+  { from: "wisps", text: "2 things actually do:" },
+  { from: "wisps", text: "1. priya asked on slack if staging's ready for the demo" },
+  { from: "wisps", text: "2. github flagged a merge conflict on the pricing-page branch" },
+  { from: "user", text: "staging's ready, tell priya" },
+  { from: "wisps", text: "sent — \"hey priya, staging's ready whenever you want to walk through it\"" },
+];
+
+const ONE_BRAIN_SUGGESTIONS = [];
+
+const ONE_BRAIN_TIMING = [
+  { pre: 500, typing: 1500 },
+  { pre: 500, typing: 1200 },
+  { pre: 400, typing: 600 },
+  { pre: 400, typing: 1400 },
+  { pre: 400, typing: 1500 },
+  { pre: 1000, typing: 0 },
+  { pre: 500, typing: 1600 },
+];
+
+const SMART_FOLLOWUP_CONVERSATION = [
+  { from: "wisps", text: "hey — remember Sarah from Nimbus? she emailed 3 weeks ago asking about enterprise pricing, never got a reply" },
+  { from: "user", text: "oh damn, totally forgot about that" },
+  { from: "wisps", text: "she just posted on LinkedIn that they're finalizing a vendor by friday" },
+  { from: "wisps", text: "might be worth closing the loop today" },
+  { from: "user", text: "yeah, send something" },
+  { from: "wisps", text: "here's what I'd send — \"hi sarah, sorry for the delay! here's our enterprise pricing: [link]. happy to hop on a call before friday if that's useful.\"" },
+];
+
+const SMART_FOLLOWUP_SUGGESTIONS = ["Use draft", "Edit"];
+
+const SMART_FOLLOWUP_TIMING = [
+  { pre: 600, typing: 1500 },
+  { pre: 500, typing: 0 },
+  { pre: 500, typing: 1200 },
+  { pre: 400, typing: 800 },
+  { pre: 700, typing: 0 },
+  { pre: 500, typing: 1800 },
+];
+
+

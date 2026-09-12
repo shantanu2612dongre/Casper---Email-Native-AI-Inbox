@@ -17,9 +17,9 @@ export function Nav() {
         <nav className="flex items-center justify-between w-full max-w-[1500px] mx-auto">
           <a
             href="/"
-            className="flex items-center gap-2 font-black text-foreground tracking-tight text-2xl"
+            className="flex items-center gap-2.5 font-black text-foreground tracking-tight text-3xl lg:text-[2.25rem]"
           >
-            <img src="/wisps-logo.svg" alt="Wisps logo" className="h-8 w-8 object-contain" />
+            <img src="/wisps-logo.svg" alt="Wisps logo" className="h-10 w-10 lg:h-12 lg:w-12 object-contain" />
             Wisps
           </a>
           
@@ -53,7 +53,7 @@ export function Nav() {
                 });
                 setIsWaitlistOpen(true);
               }}
-              className="inline-flex items-center gap-2.5 rounded-full bg-[#E5F973] text-black px-7 py-3 text-[16px] font-medium hover:brightness-105 transition-all cursor-pointer shadow-sm hover:scale-105"
+              className="inline-flex items-center gap-2.5 rounded-full bg-white/40 dark:bg-black/20 hover:bg-white/60 text-foreground backdrop-blur-md px-7 py-3 text-[16px] font-medium transition-all cursor-pointer shadow-sm hover:scale-105"
             >
               <div className="bg-white rounded-full p-0.5 shadow-sm">
                 <img src="/imessage.svg" className="w-5 h-5 object-contain" alt="iMessage" />

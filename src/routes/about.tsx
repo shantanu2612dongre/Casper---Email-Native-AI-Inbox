@@ -10,12 +10,12 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "We're building the future of email — an intelligent inbox that learns your voice and handles the busywork.",
+          "We're building the future of email — an intelligent inbox that learns your tone and handles the busywork.",
       },
       { property: "og:title", content: "About Wisps — Reimagining Email for the AI Era" },
       {
         property: "og:description",
-        content: "An AI inbox that learns your voice and handles the busywork.",
+        content: "An AI inbox that learns your tone and handles the busywork.",
       },
     ],
   }),

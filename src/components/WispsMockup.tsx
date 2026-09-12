@@ -17,7 +17,7 @@ import React, { useEffect, useRef, useState } from "react";
  * ------------------------------------------------------------------
  */
 
-const DEFAULT_LOGO_SRC = "/wisps-logo.png";
+const DEFAULT_LOGO_SRC = "/wisps-logo.svg";
 
 const CONVERSATION = [
   { from: "user", text: "hey wisps, what's pending with Mark from dev team" },
@@ -256,7 +256,7 @@ export default function WispsMockup({ logoSrc }: { logoSrc?: string }) {
           width: 46px;
           height: 46px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #dcdaff, #b9bcff);
+          background: #ffffff;
           display: flex;
           align-items: center;
           justify-content: center;

@@ -58,7 +58,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Wisps — The Copilot for Your Professional Relationships" },
       {
         property: "og:description",
-        content: "An AI inbox that learns your voice and handles the busywork.",
+        content: "An AI inbox that learns your tone and handles the busywork.",
       },
     ],
   }),
@@ -91,7 +91,7 @@ function Hero() {
       <div className="relative w-[clamp(320px,92vw,1600px)] mx-auto grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-[clamp(3rem,6vw,8rem)] items-center h-full max-w-[1500px]">
         {/* Left Column: Text */}
         <div className="relative flex flex-col items-center lg:items-start text-center lg:text-left z-10">
-          
+
 
           <motion.h1
             variants={fadeUp}
@@ -329,7 +329,7 @@ function InboxMockup() {
         setMessages((prev) => [
           ...prev,
           { sender: "user", text: targetPrompt },
-          { sender: "wisps", text: "Drafting response in your voice..." },
+          { sender: "wisps", text: "Drafting response using Tone Memory..." },
         ]);
         setIsGenerating(true);
 
@@ -541,7 +541,7 @@ function InboxMockup() {
                     <Sparkles className="h-3.5 w-3.5 text-foreground" />
                     <span>Drafted by Wisps</span>
                     <span className="text-[10px] font-normal text-muted-foreground">
-                      (in your voice)
+                      (Tone Memory)
                     </span>
                   </div>
                   <span className="text-[9px] rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 font-medium border border-emerald-500/20 font-sans">
@@ -727,17 +727,17 @@ function Logos() {
 const features = [
   {
     icon: Sparkles,
-    title: "Drafts in your voice",
+    title: "Tone Memory",
     desc: "Wisps studies the way you write and proposes replies that actually sound like you.",
   },
   {
     icon: Inbox,
-    title: "Auto-organized inbox",
+    title: "One brain, every tool",
     desc: "Newsletters, receipts, and noise are quietly tucked away so only what matters stays in view.",
   },
   {
     icon: Search,
-    title: "Ask your inbox",
+    title: "Ask anything",
     desc: "Search like you think. Find any email, attachment, or detail with a single question.",
   },
   {
@@ -908,7 +908,7 @@ function DraftVoiceAnimation() {
                   className="w-2 h-2 rounded-full bg-green-500"
                 />
               </div>
-              <span className="text-[10px] text-muted-foreground">Writing in your voice</span>
+              <span className="text-[10px] text-muted-foreground">Using Tone Memory</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -1200,7 +1200,7 @@ function AutoOrganizedInboxAnimation() {
               className={`h-1.5 w-1.5 rounded-full ${isCompleted ? "bg-emerald-500" : "bg-primary-glow animate-pulse"
                 }`}
             />
-            <span>{isCompleted ? "Inbox Auto-Organized" : "Wisps AI Auto-Labeling..."}</span>
+            <span>{isCompleted ? "Inbox One brain, every tool" : "Wisps AI Auto-Labeling..."}</span>
           </motion.div>
         </div>
 
@@ -1493,15 +1493,15 @@ function AskYourInboxAnimation() {
 
 function FeatureAnimation({ activeFeature }: { activeFeature: number }) {
   const animations = [
-    // Drafts in your voice
+    // Tone Memory
     <div className="w-full h-full flex items-center justify-center">
       <DraftVoiceAnimation />
     </div>,
-    // Auto-organized inbox
+    // One brain, every tool
     <div className="w-full h-full flex items-center justify-center">
       <AutoOrganizedInboxAnimation />
     </div>,
-    // Ask your inbox
+    // Ask anything
     <div className="w-full h-full flex items-center justify-center">
       <AskYourInboxAnimation />
     </div>,
@@ -2211,11 +2211,10 @@ function RelationshipCopilot() {
           className="max-w-2xl mx-auto text-center"
         >
           <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
-            Your relationship copilot.
+            Future of networking .
           </h2>
           <p className="mt-4 text-muted-foreground text-lg">
-            More than email — Wisps helps you nurture every professional relationship without the
-            overhead.
+            Wisps helps you store the important details you don't want to forget:
           </p>
         </motion.div>
 
