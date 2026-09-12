@@ -573,7 +573,7 @@ const ASK_ANYTHING_CONVERSATION = [
   { from: "user", text: "perfect, thanks" },
 ];
 
-const ASK_ANYTHING_SUGGESTIONS = [];
+const ASK_ANYTHING_SUGGESTIONS: string[] = [];
 
 const ASK_ANYTHING_TIMING = [
   { pre: 500, typing: 0 },
@@ -594,7 +594,7 @@ const ONE_BRAIN_CONVERSATION = [
   { from: "wisps", text: "sent — \"hey priya, staging's ready whenever you want to walk through it\"" },
 ];
 
-const ONE_BRAIN_SUGGESTIONS = [];
+const ONE_BRAIN_SUGGESTIONS: string[] = [];
 
 const ONE_BRAIN_TIMING = [
   { pre: 500, typing: 1500 },

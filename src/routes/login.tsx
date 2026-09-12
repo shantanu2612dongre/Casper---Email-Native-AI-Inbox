@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion } from "motion/react";
-import { LoginCardLoop } from "../components/LoginCardLoop";
+
 import {
   Mail,
   ArrowRight,
@@ -14,6 +14,7 @@ import {
   Calendar,
   Bell,
   Check,
+  Search,
 } from "lucide-react";
 
 export const Route = createFileRoute("/login")({
@@ -151,8 +152,257 @@ function ConnectorButton({
 }
 
 /* ─── Main Login Page ─── */
+
+const COUNTRIES = [
+  { code: 'AF', dial: '+93', name: 'Afghanistan', flag: '🇦🇫' },
+  { code: 'AL', dial: '+355', name: 'Albania', flag: '🇦🇱' },
+  { code: 'DZ', dial: '+213', name: 'Algeria', flag: '🇩🇿' },
+  { code: 'AS', dial: '+1', name: 'American Samoa', flag: '🇦🇸' },
+  { code: 'AD', dial: '+376', name: 'Andorra', flag: '🇦🇩' },
+  { code: 'AO', dial: '+244', name: 'Angola', flag: '🇦🇴' },
+  { code: 'AI', dial: '+1', name: 'Anguilla', flag: '🇦🇮' },
+  { code: 'AQ', dial: '+672', name: 'Antarctica', flag: '🇦🇶' },
+  { code: 'AG', dial: '+1', name: 'Antigua and Barbuda', flag: '🇦🇬' },
+  { code: 'AR', dial: '+54', name: 'Argentina', flag: '🇦🇷' },
+  { code: 'AM', dial: '+374', name: 'Armenia', flag: '🇦🇲' },
+  { code: 'AW', dial: '+297', name: 'Aruba', flag: '🇦🇼' },
+  { code: 'AU', dial: '+61', name: 'Australia', flag: '🇦🇺' },
+  { code: 'AT', dial: '+43', name: 'Austria', flag: '🇦🇹' },
+  { code: 'AZ', dial: '+994', name: 'Azerbaijan', flag: '🇦🇿' },
+  { code: 'BS', dial: '+1', name: 'Bahamas', flag: '🇧🇸' },
+  { code: 'BH', dial: '+973', name: 'Bahrain', flag: '🇧🇭' },
+  { code: 'BD', dial: '+880', name: 'Bangladesh', flag: '🇧🇩' },
+  { code: 'BB', dial: '+1', name: 'Barbados', flag: '🇧🇧' },
+  { code: 'BY', dial: '+375', name: 'Belarus', flag: '🇧🇾' },
+  { code: 'BE', dial: '+32', name: 'Belgium', flag: '🇧🇪' },
+  { code: 'BZ', dial: '+501', name: 'Belize', flag: '🇧🇿' },
+  { code: 'BJ', dial: '+229', name: 'Benin', flag: '🇧🇯' },
+  { code: 'BM', dial: '+1', name: 'Bermuda', flag: '🇧🇲' },
+  { code: 'BT', dial: '+975', name: 'Bhutan', flag: '🇧🇹' },
+  { code: 'BO', dial: '+591', name: 'Bolivia', flag: '🇧🇴' },
+  { code: 'BA', dial: '+387', name: 'Bosnia and Herzegovina', flag: '🇧🇦' },
+  { code: 'BW', dial: '+267', name: 'Botswana', flag: '🇧🇼' },
+  { code: 'BR', dial: '+55', name: 'Brazil', flag: '🇧🇷' },
+  { code: 'IO', dial: '+246', name: 'British Indian Ocean Territory', flag: '🇮🇴' },
+  { code: 'VG', dial: '+1', name: 'British Virgin Islands', flag: '🇻🇬' },
+  { code: 'BN', dial: '+673', name: 'Brunei', flag: '🇧🇳' },
+  { code: 'BG', dial: '+359', name: 'Bulgaria', flag: '🇧🇬' },
+  { code: 'BF', dial: '+226', name: 'Burkina Faso', flag: '🇧🇫' },
+  { code: 'BI', dial: '+257', name: 'Burundi', flag: '🇧🇮' },
+  { code: 'KH', dial: '+855', name: 'Cambodia', flag: '🇰🇭' },
+  { code: 'CM', dial: '+237', name: 'Cameroon', flag: '🇨🇲' },
+  { code: 'CA', dial: '+1', name: 'Canada', flag: '🇨🇦' },
+  { code: 'CV', dial: '+238', name: 'Cape Verde', flag: '🇨🇻' },
+  { code: 'KY', dial: '+1', name: 'Cayman Islands', flag: '🇰🇾' },
+  { code: 'CF', dial: '+236', name: 'Central African Republic', flag: '🇨🇫' },
+  { code: 'TD', dial: '+235', name: 'Chad', flag: '🇹🇩' },
+  { code: 'CL', dial: '+56', name: 'Chile', flag: '🇨🇱' },
+  { code: 'CN', dial: '+86', name: 'China', flag: '🇨🇳' },
+  { code: 'CX', dial: '+61', name: 'Christmas Island', flag: '🇨🇽' },
+  { code: 'CC', dial: '+61', name: 'Cocos Islands', flag: '🇨🇨' },
+  { code: 'CO', dial: '+57', name: 'Colombia', flag: '🇨🇴' },
+  { code: 'KM', dial: '+269', name: 'Comoros', flag: '🇰🇲' },
+  { code: 'CK', dial: '+682', name: 'Cook Islands', flag: '🇨🇰' },
+  { code: 'CR', dial: '+506', name: 'Costa Rica', flag: '🇨🇷' },
+  { code: 'HR', dial: '+385', name: 'Croatia', flag: '🇭🇷' },
+  { code: 'CU', dial: '+53', name: 'Cuba', flag: '🇨🇺' },
+  { code: 'CW', dial: '+599', name: 'Curacao', flag: '🇨🇼' },
+  { code: 'CY', dial: '+357', name: 'Cyprus', flag: '🇨🇾' },
+  { code: 'CZ', dial: '+420', name: 'Czech Republic', flag: '🇨🇿' },
+  { code: 'CD', dial: '+243', name: 'Democratic Republic of the Congo', flag: '🇨🇩' },
+  { code: 'DK', dial: '+45', name: 'Denmark', flag: '🇩🇰' },
+  { code: 'DJ', dial: '+253', name: 'Djibouti', flag: '🇩🇯' },
+  { code: 'DM', dial: '+1', name: 'Dominica', flag: '🇩🇲' },
+  { code: 'DO', dial: '+1', name: 'Dominican Republic', flag: '🇩🇴' },
+  { code: 'TL', dial: '+670', name: 'East Timor', flag: '🇹🇱' },
+  { code: 'EC', dial: '+593', name: 'Ecuador', flag: '🇪🇨' },
+  { code: 'EG', dial: '+20', name: 'Egypt', flag: '🇪🇬' },
+  { code: 'SV', dial: '+503', name: 'El Salvador', flag: '🇸🇻' },
+  { code: 'GQ', dial: '+240', name: 'Equatorial Guinea', flag: '🇬🇶' },
+  { code: 'ER', dial: '+291', name: 'Eritrea', flag: '🇪🇷' },
+  { code: 'EE', dial: '+372', name: 'Estonia', flag: '🇪🇪' },
+  { code: 'ET', dial: '+251', name: 'Ethiopia', flag: '🇪🇹' },
+  { code: 'FK', dial: '+500', name: 'Falkland Islands', flag: '🇫🇰' },
+  { code: 'FO', dial: '+298', name: 'Faroe Islands', flag: '🇫🇴' },
+  { code: 'FJ', dial: '+679', name: 'Fiji', flag: '🇫🇯' },
+  { code: 'FI', dial: '+358', name: 'Finland', flag: '🇫🇮' },
+  { code: 'FR', dial: '+33', name: 'France', flag: '🇫🇷' },
+  { code: 'PF', dial: '+689', name: 'French Polynesia', flag: '🇵🇫' },
+  { code: 'GA', dial: '+241', name: 'Gabon', flag: '🇬🇦' },
+  { code: 'GM', dial: '+220', name: 'Gambia', flag: '🇬🇲' },
+  { code: 'GE', dial: '+995', name: 'Georgia', flag: '🇬🇪' },
+  { code: 'DE', dial: '+49', name: 'Germany', flag: '🇩🇪' },
+  { code: 'GH', dial: '+233', name: 'Ghana', flag: '🇬🇭' },
+  { code: 'GI', dial: '+350', name: 'Gibraltar', flag: '🇬🇮' },
+  { code: 'GR', dial: '+30', name: 'Greece', flag: '🇬🇷' },
+  { code: 'GL', dial: '+299', name: 'Greenland', flag: '🇬🇱' },
+  { code: 'GD', dial: '+1', name: 'Grenada', flag: '🇬🇩' },
+  { code: 'GU', dial: '+1', name: 'Guam', flag: '🇬🇺' },
+  { code: 'GT', dial: '+502', name: 'Guatemala', flag: '🇬🇹' },
+  { code: 'GG', dial: '+44', name: 'Guernsey', flag: '🇬🇬' },
+  { code: 'GN', dial: '+224', name: 'Guinea', flag: '🇬🇳' },
+  { code: 'GW', dial: '+245', name: 'Guinea-Bissau', flag: '🇬🇼' },
+  { code: 'GY', dial: '+592', name: 'Guyana', flag: '🇬🇾' },
+  { code: 'HT', dial: '+509', name: 'Haiti', flag: '🇭🇹' },
+  { code: 'HN', dial: '+504', name: 'Honduras', flag: '🇭🇳' },
+  { code: 'HK', dial: '+852', name: 'Hong Kong', flag: '🇭🇰' },
+  { code: 'HU', dial: '+36', name: 'Hungary', flag: '🇭🇺' },
+  { code: 'IS', dial: '+354', name: 'Iceland', flag: '🇮🇸' },
+  { code: 'IN', dial: '+91', name: 'India', flag: '🇮🇳' },
+  { code: 'ID', dial: '+62', name: 'Indonesia', flag: '🇮🇩' },
+  { code: 'IR', dial: '+98', name: 'Iran', flag: '🇮🇷' },
+  { code: 'IQ', dial: '+964', name: 'Iraq', flag: '🇮🇶' },
+  { code: 'IE', dial: '+353', name: 'Ireland', flag: '🇮🇪' },
+  { code: 'IM', dial: '+44', name: 'Isle of Man', flag: '🇮🇲' },
+  { code: 'IL', dial: '+972', name: 'Israel', flag: '🇮🇱' },
+  { code: 'IT', dial: '+39', name: 'Italy', flag: '🇮🇹' },
+  { code: 'CI', dial: '+225', name: 'Ivory Coast', flag: '🇨🇮' },
+  { code: 'JM', dial: '+1', name: 'Jamaica', flag: '🇯🇲' },
+  { code: 'JP', dial: '+81', name: 'Japan', flag: '🇯🇵' },
+  { code: 'JE', dial: '+44', name: 'Jersey', flag: '🇯🇪' },
+  { code: 'JO', dial: '+962', name: 'Jordan', flag: '🇯🇴' },
+  { code: 'KZ', dial: '+7', name: 'Kazakhstan', flag: '🇰🇿' },
+  { code: 'KE', dial: '+254', name: 'Kenya', flag: '🇰🇪' },
+  { code: 'KI', dial: '+686', name: 'Kiribati', flag: '🇰🇮' },
+  { code: 'XK', dial: '+383', name: 'Kosovo', flag: '🇽🇰' },
+  { code: 'KW', dial: '+965', name: 'Kuwait', flag: '🇰🇼' },
+  { code: 'KG', dial: '+996', name: 'Kyrgyzstan', flag: '🇰🇬' },
+  { code: 'LA', dial: '+856', name: 'Laos', flag: '🇱🇦' },
+  { code: 'LV', dial: '+371', name: 'Latvia', flag: '🇱🇻' },
+  { code: 'LB', dial: '+961', name: 'Lebanon', flag: '🇱🇧' },
+  { code: 'LS', dial: '+266', name: 'Lesotho', flag: '🇱🇸' },
+  { code: 'LR', dial: '+231', name: 'Liberia', flag: '🇱🇷' },
+  { code: 'LY', dial: '+218', name: 'Libya', flag: '🇱🇾' },
+  { code: 'LI', dial: '+423', name: 'Liechtenstein', flag: '🇱🇮' },
+  { code: 'LT', dial: '+370', name: 'Lithuania', flag: '🇱🇹' },
+  { code: 'LU', dial: '+352', name: 'Luxembourg', flag: '🇱🇺' },
+  { code: 'MO', dial: '+853', name: 'Macao', flag: '🇲🇴' },
+  { code: 'MK', dial: '+389', name: 'Macedonia', flag: '🇲🇰' },
+  { code: 'MG', dial: '+261', name: 'Madagascar', flag: '🇲🇬' },
+  { code: 'MW', dial: '+265', name: 'Malawi', flag: '🇲🇼' },
+  { code: 'MY', dial: '+60', name: 'Malaysia', flag: '🇲🇾' },
+  { code: 'MV', dial: '+960', name: 'Maldives', flag: '🇲🇻' },
+  { code: 'ML', dial: '+223', name: 'Mali', flag: '🇲🇱' },
+  { code: 'MT', dial: '+356', name: 'Malta', flag: '🇲🇹' },
+  { code: 'MH', dial: '+692', name: 'Marshall Islands', flag: '🇲🇭' },
+  { code: 'MR', dial: '+222', name: 'Mauritania', flag: '🇲🇷' },
+  { code: 'MU', dial: '+230', name: 'Mauritius', flag: '🇲🇺' },
+  { code: 'YT', dial: '+262', name: 'Mayotte', flag: '🇾🇹' },
+  { code: 'MX', dial: '+52', name: 'Mexico', flag: '🇲🇽' },
+  { code: 'FM', dial: '+691', name: 'Micronesia', flag: '🇫🇲' },
+  { code: 'MD', dial: '+373', name: 'Moldova', flag: '🇲🇩' },
+  { code: 'MC', dial: '+377', name: 'Monaco', flag: '🇲🇨' },
+  { code: 'MN', dial: '+976', name: 'Mongolia', flag: '🇲🇳' },
+  { code: 'ME', dial: '+382', name: 'Montenegro', flag: '🇲🇪' },
+  { code: 'MS', dial: '+1', name: 'Montserrat', flag: '🇲🇸' },
+  { code: 'MA', dial: '+212', name: 'Morocco', flag: '🇲🇦' },
+  { code: 'MZ', dial: '+258', name: 'Mozambique', flag: '🇲🇿' },
+  { code: 'MM', dial: '+95', name: 'Myanmar', flag: '🇲🇲' },
+  { code: 'NA', dial: '+264', name: 'Namibia', flag: '🇳🇦' },
+  { code: 'NR', dial: '+674', name: 'Nauru', flag: '🇳🇷' },
+  { code: 'NP', dial: '+977', name: 'Nepal', flag: '🇳🇵' },
+  { code: 'NL', dial: '+31', name: 'Netherlands', flag: '🇳🇱' },
+  { code: 'NC', dial: '+687', name: 'New Caledonia', flag: '🇳🇨' },
+  { code: 'NZ', dial: '+64', name: 'New Zealand', flag: '🇳🇿' },
+  { code: 'NI', dial: '+505', name: 'Nicaragua', flag: '🇳🇮' },
+  { code: 'NE', dial: '+227', name: 'Niger', flag: '🇳🇪' },
+  { code: 'NG', dial: '+234', name: 'Nigeria', flag: '🇳🇬' },
+  { code: 'NU', dial: '+683', name: 'Niue', flag: '🇳🇺' },
+  { code: 'KP', dial: '+850', name: 'North Korea', flag: '🇰🇵' },
+  { code: 'MP', dial: '+1', name: 'Northern Mariana Islands', flag: '🇲🇵' },
+  { code: 'NO', dial: '+47', name: 'Norway', flag: '🇳🇴' },
+  { code: 'OM', dial: '+968', name: 'Oman', flag: '🇴🇲' },
+  { code: 'PK', dial: '+92', name: 'Pakistan', flag: '🇵🇰' },
+  { code: 'PW', dial: '+680', name: 'Palau', flag: '🇵🇼' },
+  { code: 'PS', dial: '+970', name: 'Palestine', flag: '🇵🇸' },
+  { code: 'PA', dial: '+507', name: 'Panama', flag: '🇵🇦' },
+  { code: 'PG', dial: '+675', name: 'Papua New Guinea', flag: '🇵🇬' },
+  { code: 'PY', dial: '+595', name: 'Paraguay', flag: '🇵🇾' },
+  { code: 'PE', dial: '+51', name: 'Peru', flag: '🇵🇪' },
+  { code: 'PH', dial: '+63', name: 'Philippines', flag: '🇵🇭' },
+  { code: 'PN', dial: '+64', name: 'Pitcairn', flag: '🇵🇳' },
+  { code: 'PL', dial: '+48', name: 'Poland', flag: '🇵🇱' },
+  { code: 'PT', dial: '+351', name: 'Portugal', flag: '🇵🇹' },
+  { code: 'PR', dial: '+1', name: 'Puerto Rico', flag: '🇵🇷' },
+  { code: 'QA', dial: '+974', name: 'Qatar', flag: '🇶🇦' },
+  { code: 'CG', dial: '+242', name: 'Republic of the Congo', flag: '🇨🇬' },
+  { code: 'RE', dial: '+262', name: 'Reunion', flag: '🇷🇪' },
+  { code: 'RO', dial: '+40', name: 'Romania', flag: '🇷🇴' },
+  { code: 'RU', dial: '+7', name: 'Russia', flag: '🇷🇺' },
+  { code: 'RW', dial: '+250', name: 'Rwanda', flag: '🇷🇼' },
+  { code: 'BL', dial: '+590', name: 'Saint Barthelemy', flag: '🇧🇱' },
+  { code: 'SH', dial: '+290', name: 'Saint Helena', flag: '🇸🇭' },
+  { code: 'KN', dial: '+1', name: 'Saint Kitts and Nevis', flag: '🇰🇳' },
+  { code: 'LC', dial: '+1', name: 'Saint Lucia', flag: '🇱🇨' },
+  { code: 'MF', dial: '+590', name: 'Saint Martin', flag: '🇲🇫' },
+  { code: 'PM', dial: '+508', name: 'Saint Pierre and Miquelon', flag: '🇵🇲' },
+  { code: 'VC', dial: '+1', name: 'Saint Vincent and the Grenadines', flag: '🇻🇨' },
+  { code: 'WS', dial: '+685', name: 'Samoa', flag: '🇼🇸' },
+  { code: 'SM', dial: '+378', name: 'San Marino', flag: '🇸🇲' },
+  { code: 'ST', dial: '+239', name: 'Sao Tome and Principe', flag: '🇸🇹' },
+  { code: 'SA', dial: '+966', name: 'Saudi Arabia', flag: '🇸🇦' },
+  { code: 'SN', dial: '+221', name: 'Senegal', flag: '🇸🇳' },
+  { code: 'RS', dial: '+381', name: 'Serbia', flag: '🇷🇸' },
+  { code: 'SC', dial: '+248', name: 'Seychelles', flag: '🇸🇨' },
+  { code: 'SL', dial: '+232', name: 'Sierra Leone', flag: '🇸🇱' },
+  { code: 'SG', dial: '+65', name: 'Singapore', flag: '🇸🇬' },
+  { code: 'SX', dial: '+1', name: 'Sint Maarten', flag: '🇸🇽' },
+  { code: 'SK', dial: '+421', name: 'Slovakia', flag: '🇸🇰' },
+  { code: 'SI', dial: '+386', name: 'Slovenia', flag: '🇸🇮' },
+  { code: 'SB', dial: '+677', name: 'Solomon Islands', flag: '🇸🇧' },
+  { code: 'SO', dial: '+252', name: 'Somalia', flag: '🇸🇴' },
+  { code: 'ZA', dial: '+27', name: 'South Africa', flag: '🇿🇦' },
+  { code: 'KR', dial: '+82', name: 'South Korea', flag: '🇰🇷' },
+  { code: 'SS', dial: '+211', name: 'South Sudan', flag: '🇸🇸' },
+  { code: 'ES', dial: '+34', name: 'Spain', flag: '🇪🇸' },
+  { code: 'LK', dial: '+94', name: 'Sri Lanka', flag: '🇱🇰' },
+  { code: 'SD', dial: '+249', name: 'Sudan', flag: '🇸🇩' },
+  { code: 'SR', dial: '+597', name: 'Suriname', flag: '🇸🇷' },
+  { code: 'SJ', dial: '+47', name: 'Svalbard and Jan Mayen', flag: '🇸🇯' },
+  { code: 'SZ', dial: '+268', name: 'Swaziland', flag: '🇸🇿' },
+  { code: 'SE', dial: '+46', name: 'Sweden', flag: '🇸🇪' },
+  { code: 'CH', dial: '+41', name: 'Switzerland', flag: '🇨🇭' },
+  { code: 'SY', dial: '+963', name: 'Syria', flag: '🇸🇾' },
+  { code: 'TW', dial: '+886', name: 'Taiwan', flag: '🇹🇼' },
+  { code: 'TJ', dial: '+992', name: 'Tajikistan', flag: '🇹🇯' },
+  { code: 'TZ', dial: '+255', name: 'Tanzania', flag: '🇹🇿' },
+  { code: 'TH', dial: '+66', name: 'Thailand', flag: '🇹🇭' },
+  { code: 'TG', dial: '+228', name: 'Togo', flag: '🇹🇬' },
+  { code: 'TK', dial: '+690', name: 'Tokelau', flag: '🇹🇰' },
+  { code: 'TO', dial: '+676', name: 'Tonga', flag: '🇹🇴' },
+  { code: 'TT', dial: '+1', name: 'Trinidad and Tobago', flag: '🇹🇹' },
+  { code: 'TN', dial: '+216', name: 'Tunisia', flag: '🇹🇳' },
+  { code: 'TR', dial: '+90', name: 'Turkey', flag: '🇹🇷' },
+  { code: 'TM', dial: '+993', name: 'Turkmenistan', flag: '🇹🇲' },
+  { code: 'TC', dial: '+1', name: 'Turks and Caicos Islands', flag: '🇹🇨' },
+  { code: 'TV', dial: '+688', name: 'Tuvalu', flag: '🇹🇻' },
+  { code: 'VI', dial: '+1', name: 'U.S. Virgin Islands', flag: '🇻🇮' },
+  { code: 'UG', dial: '+256', name: 'Uganda', flag: '🇺🇬' },
+  { code: 'UA', dial: '+380', name: 'Ukraine', flag: '🇺🇦' },
+  { code: 'AE', dial: '+971', name: 'United Arab Emirates', flag: '🇦🇪' },
+  { code: 'GB', dial: '+44', name: 'United Kingdom', flag: '🇬🇧' },
+  { code: 'US', dial: '+1', name: 'United States', flag: '🇺🇸' },
+  { code: 'UY', dial: '+598', name: 'Uruguay', flag: '🇺🇾' },
+  { code: 'UZ', dial: '+998', name: 'Uzbekistan', flag: '🇺🇿' },
+  { code: 'VU', dial: '+678', name: 'Vanuatu', flag: '🇻🇺' },
+  { code: 'VA', dial: '+379', name: 'Vatican', flag: '🇻🇦' },
+  { code: 'VE', dial: '+58', name: 'Venezuela', flag: '🇻🇪' },
+  { code: 'VN', dial: '+84', name: 'Vietnam', flag: '🇻🇳' },
+  { code: 'WF', dial: '+681', name: 'Wallis and Futuna', flag: '🇼🇫' },
+  { code: 'EH', dial: '+212', name: 'Western Sahara', flag: '🇪🇭' },
+  { code: 'YE', dial: '+967', name: 'Yemen', flag: '🇾🇪' },
+  { code: 'ZM', dial: '+260', name: 'Zambia', flag: '🇿🇲' },
+  { code: 'ZW', dial: '+263', name: 'Zimbabwe', flag: '🇿🇼' }
+];
+
 function LoginPage() {
+
   const [showEmailForm, setShowEmailForm] = useState(false);
+  const [isOtpStep, setIsOtpStep] = useState(false);
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+  const [searchCountry, setSearchCountry] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState(COUNTRIES.find(c => c.code === 'IN') || COUNTRIES[0]); // Default India
+
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -259,90 +509,7 @@ function LoginPage() {
               handle the busywork for you.
             </motion.p>
 
-            {/* Product preview mockup — stacked card effect */}
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              animate="show"
-              custom={3}
-              className="mt-8 relative w-[400px] h-[320px]"
-            >
-              {/* Back card 1 (deepest) — notification snippet */}
-              <motion.div
-                initial={{ opacity: 0, y: 30, rotate: -4 }}
-                animate={{ opacity: 1, y: 0, rotate: -4 }}
-                transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute -top-2 left-1/2 w-[86%] rounded-2xl bg-white/90 border border-black/[0.05] shadow-md shadow-black/[0.04] overflow-hidden"
-                style={{ transform: "translateX(-50%) rotate(-4deg)", height: "280px" }}
-              >
-                <div className="px-5 py-3 border-b border-black/[0.04]">
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground/70">
-                    <Bell className="h-3 w-3" />
-                    <span className="font-medium">Notifications</span>
-                  </div>
-                </div>
-                <div className="px-5 py-3 space-y-3">
-                  <div className="flex items-center gap-2.5">
-                    <div className="h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center">
-                      <Check className="h-3 w-3 text-blue-500" />
-                    </div>
-                    <span className="text-[11px] text-muted-foreground">
-                      3 replies sent automatically
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2.5">
-                    <div className="h-6 w-6 rounded-full bg-emerald-100 flex items-center justify-center">
-                      <Mail className="h-3 w-3 text-emerald-500" />
-                    </div>
-                    <span className="text-[11px] text-muted-foreground">
-                      Inbox sorted — 12 low priority archived
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Back card 2 (middle) — schedule snippet */}
-              <motion.div
-                initial={{ opacity: 0, y: 25, rotate: -1.5 }}
-                animate={{ opacity: 1, y: 0, rotate: -1.5 }}
-                transition={{ delay: 0.65, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute top-0 left-1/2 w-[93%] rounded-2xl bg-white/95 border border-black/[0.05] shadow-lg shadow-black/[0.05] overflow-hidden"
-                style={{ transform: "translateX(-50%) rotate(-1.5deg)", height: "290px" }}
-              >
-                <div className="px-5 py-3 border-b border-black/[0.04]">
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground/70">
-                    <Calendar className="h-3 w-3" />
-                    <span className="font-medium">Today's Schedule</span>
-                  </div>
-                </div>
-                <div className="px-5 py-3 space-y-2.5">
-                  <div className="flex items-center gap-3">
-                    <span className="text-[10px] text-muted-foreground/60 w-10 shrink-0">
-                      10:00
-                    </span>
-                    <div className="h-1.5 w-1.5 rounded-full bg-blue-400" />
-                    <span className="text-[11px] text-foreground/70">Sync with design team</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-[10px] text-muted-foreground/60 w-10 shrink-0">
-                      14:00
-                    </span>
-                    <div className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-                    <span className="text-[11px] text-foreground/70">Client review call</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-[10px] text-muted-foreground/60 w-10 shrink-0">
-                      16:30
-                    </span>
-                    <div className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                    <span className="text-[11px] text-foreground/70">Sprint planning</span>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Front card — looping animated card component */}
-              <LoginCardLoop />
-            </motion.div>
+            
           </div>
 
           {/* Bottom: back nav */}
@@ -382,169 +549,151 @@ function LoginPage() {
         <div className="w-full max-w-[400px]">
           {/* Header */}
           <motion.div variants={fadeUp} initial="hidden" animate="show" custom={0}>
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground">Welcome back</h2>
-            <p className="mt-2 text-[15px] text-muted-foreground">
-              Sign in to your Wisps account to continue
+            <div className="mb-6 hidden lg:block">
+              <img src="/wisps-logo.svg" alt="Wisps logo" className="h-10 w-10 object-contain" />
+            </div>
+            <h2 className="text-[28px] font-semibold tracking-tight text-foreground">
+              {isOtpStep ? "Check your text bud!" : "Welcome back."}
+            </h2>
+            <p className="mt-2.5 text-[15px] text-muted-foreground/80 leading-relaxed max-w-[90%]">
+              {isOtpStep 
+                ? "Enter the 6 digit code we sent you" 
+                : "Log in with the phone number or email you texted Wisps with."}
             </p>
           </motion.div>
 
-          {/* SSO Connectors */}
-          <div className="mt-8 space-y-3">
-            <ConnectorButton icon={<GoogleIcon />} label="Continue with Google" delay={1} />
-            <ConnectorButton icon={<MicrosoftIcon />} label="Continue with Microsoft" delay={2} />
-            <ConnectorButton icon={<AppleIcon />} label="Continue with Apple" delay={3} />
-            <ConnectorButton icon={<SlackIcon />} label="Continue with Slack" delay={4} />
-          </div>
+          {/* Phone Input Form */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={1}
+            className="mt-8 relative"
+          >
+            {!isOtpStep ? (
+              <>
+                <div className="flex items-center w-full h-[54px] rounded-full border border-border/70 bg-white px-2 shadow-sm transition-all focus-within:border-foreground/30 focus-within:ring-4 focus-within:ring-foreground/5 relative z-20">
+              {/* Country code selector */}
+              {!showEmailForm && (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setShowCountryDropdown(!showCountryDropdown)}
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-full hover:bg-secondary/50 transition-colors cursor-pointer text-sm font-medium"
+                  >
+                    <span className="text-lg leading-none">{selectedCountry.flag}</span>
+                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-muted-foreground ml-0.5">
+                      <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
 
-          {/* Divider */}
+                  {/* Divider */}
+                  <div className="h-6 w-[1px] bg-border/60 mx-1" />
+                </>
+              )}
+
+              {/* Phone/Email input */}
+              <input
+                type={showEmailForm ? "email" : "tel"}
+                placeholder={showEmailForm ? "Enter your email" : "Enter your number here"}
+                className="flex-1 bg-transparent border-none outline-none px-3 text-[15px] text-foreground font-medium placeholder:text-muted-foreground/50 w-full min-w-0"
+                autoFocus
+              />
+
+              {/* Submit button */}
+              <button 
+                type="button" 
+                onClick={() => setIsOtpStep(true)}
+                className="w-[38px] h-[38px] rounded-full text-foreground flex items-center justify-center transition-all hover:scale-105 shadow-sm ml-2 cursor-pointer flex-shrink-0"
+                style={{
+                  background: "linear-gradient(165deg, oklch(0.95 0.04 30) 0%, oklch(0.94 0.06 350) 30%, oklch(0.92 0.05 320) 100%)",
+                }}
+              >
+                <ArrowRight className="h-4.5 w-4.5 text-black/80" strokeWidth={2.5} />
+              </button>
+            </div>
+
+            {/* Dropdown Menu */}
+            {showCountryDropdown && (
+              <div className="absolute left-0 bottom-[calc(100%+8px)] w-[320px] bg-white rounded-2xl shadow-xl shadow-black/[0.08] border border-black/[0.08] p-2 z-50 origin-bottom-left animate-in fade-in zoom-in-95 duration-200">
+                {/* Search */}
+                <div className="flex items-center gap-2 px-3 py-2.5 bg-secondary/60 rounded-xl mb-2">
+                  <Search className="h-4 w-4 text-muted-foreground" />
+                  <input
+                    type="text"
+                    placeholder="Search country"
+                    value={searchCountry}
+                    onChange={(e) => setSearchCountry(e.target.value)}
+                    className="bg-transparent border-none outline-none text-[13.5px] text-foreground w-full placeholder:text-muted-foreground"
+                    autoFocus
+                  />
+                </div>
+                {/* List */}
+                <div className="max-h-[260px] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-black/10 scrollbar-track-transparent">
+                  {COUNTRIES.filter(c => c.name.toLowerCase().includes(searchCountry.toLowerCase())).map(c => (
+                    <button
+                      key={c.code}
+                      type="button"
+                      onClick={() => {
+                        setSelectedCountry(c);
+                        setShowCountryDropdown(false);
+                        setSearchCountry("");
+                      }}
+                      className="w-full flex items-center justify-between px-3 py-2.5 hover:bg-secondary/60 rounded-xl transition-colors text-left"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="text-xl leading-none">{c.flag}</span>
+                        <span className="text-[13.5px] text-foreground font-medium">{c.name}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[13px] text-muted-foreground/80">{c.dial}</span>
+                        {selectedCountry.code === c.code && <Check className="h-4 w-4 text-foreground ml-1" />}
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Click outside overlay */}
+            {showCountryDropdown && (
+              <div
+                className="fixed inset-0 z-40"
+                onClick={() => setShowCountryDropdown(false)}
+              />
+            )}
+              </>
+            ) : (
+              <div className="flex gap-2.5 relative z-20 w-full justify-between max-w-[360px]">
+                {[...Array(6)].map((_, i) => (
+                  <input
+                    key={i}
+                    type="text"
+                    maxLength={1}
+                    className="w-[48px] h-[56px] rounded-2xl border border-black/[0.08] bg-white/90 backdrop-blur-md text-center text-2xl font-medium text-foreground focus:border-black/20 focus:ring-4 focus:ring-black/5 outline-none transition-all shadow-sm"
+                    autoFocus={i === 0}
+                  />
+                ))}
+              </div>
+            )}
+          </motion.div>
+
+          {/* Email login link */}
           <motion.div
             variants={fadeIn}
             initial="hidden"
             animate="show"
-            custom={5}
-            className="my-7 flex items-center gap-4"
+            custom={2}
+            className="mt-5"
           >
-            <div className="h-px flex-1 bg-border" />
-            <span className="text-xs font-medium text-muted-foreground uppercase tracking-widest">
-              or
-            </span>
-            <div className="h-px flex-1 bg-border" />
+            <button 
+              type="button"
+              onClick={() => setShowEmailForm(!showEmailForm)}
+              className="text-[13px] text-muted-foreground hover:text-foreground transition-colors font-medium cursor-pointer"
+            >
+              {showEmailForm ? "Log in with phone number instead" : "Log in with email instead"}
+            </button>
           </motion.div>
-
-          {/* Email login */}
-          {!showEmailForm ? (
-            <motion.button
-              variants={fadeUp}
-              initial="hidden"
-              animate="show"
-              custom={6}
-              onClick={() => setShowEmailForm(true)}
-              className="group relative flex w-full items-center justify-center gap-2.5 rounded-xl border border-border/60 bg-white px-5 py-3.5 text-[15px] font-medium text-foreground shadow-sm transition-all duration-200 hover:border-foreground/20 hover:shadow-md hover:bg-secondary/50 active:scale-[0.98] cursor-pointer"
-            >
-              <Mail className="h-5 w-5 text-muted-foreground" />
-              <span>Continue with Email</span>
-            </motion.button>
-          ) : (
-            <motion.form
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="space-y-3"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <div>
-                <label
-                  htmlFor="login-email"
-                  className="block text-sm font-medium text-foreground mb-1.5"
-                >
-                  Email
-                </label>
-                <input
-                  id="login-email"
-                  type="email"
-                  placeholder="you@company.com"
-                  autoFocus
-                  className="w-full rounded-xl border border-border bg-white px-4 py-3 text-[15px] text-foreground placeholder:text-muted-foreground/50 outline-none ring-0 transition-all focus:border-foreground/30 focus:ring-2 focus:ring-foreground/10"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="login-password"
-                  className="block text-sm font-medium text-foreground mb-1.5"
-                >
-                  Password
-                </label>
-                <div className="relative">
-                  <input
-                    id="login-password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder="••••••••"
-                    className="w-full rounded-xl border border-border bg-white px-4 py-3 pr-11 text-[15px] text-foreground placeholder:text-muted-foreground/50 outline-none ring-0 transition-all focus:border-foreground/30 focus:ring-2 focus:ring-foreground/10"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-                  >
-                    {showPassword ? (
-                      <EyeOff className="h-4.5 w-4.5" />
-                    ) : (
-                      <Eye className="h-4.5 w-4.5" />
-                    )}
-                  </button>
-                </div>
-              </div>
-              <div className="flex items-center justify-between pt-1">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-border text-foreground focus:ring-foreground/20 cursor-pointer"
-                  />
-                  <span className="text-sm text-muted-foreground">Remember me</span>
-                </label>
-                <a
-                  href="#"
-                  className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors"
-                >
-                  Forgot password?
-                </a>
-              </div>
-              <button
-                type="submit"
-                className="w-full mt-2 rounded-xl bg-foreground text-background px-5 py-3.5 text-[15px] font-medium transition-all duration-200 hover:opacity-90 active:scale-[0.98] cursor-pointer"
-              >
-                Sign in
-              </button>
-              <button
-                type="button"
-                onClick={() => setShowEmailForm(false)}
-                className="w-full text-sm text-muted-foreground hover:text-foreground transition-colors pt-1 cursor-pointer"
-              >
-                ← Back to all sign-in options
-              </button>
-            </motion.form>
-          )}
-
-          {/* Sign up link */}
-          <motion.p
-            variants={fadeIn}
-            initial="hidden"
-            animate="show"
-            custom={7}
-            className="mt-8 text-center text-sm text-muted-foreground"
-          >
-            Don't have an account?{" "}
-            <a
-              href="#"
-              className="font-medium text-foreground hover:underline underline-offset-4 transition-colors"
-            >
-              Get started for free
-            </a>
-          </motion.p>
-
-          {/* Footer */}
-          <motion.p
-            variants={fadeIn}
-            initial="hidden"
-            animate="show"
-            custom={8}
-            className="mt-12 text-center text-xs text-muted-foreground/60 leading-relaxed"
-          >
-            By continuing, you agree to our{" "}
-            <a
-              href="/terms"
-              className="underline underline-offset-2 hover:text-muted-foreground transition-colors"
-            >
-              Terms of Service
-            </a>{" "}
-            and{" "}
-            <a
-              href="/privacy"
-              className="underline underline-offset-2 hover:text-muted-foreground transition-colors"
-            >
-              Privacy Policy
-            </a>
-          </motion.p>
         </div>
       </div>
     </div>
