@@ -733,17 +733,17 @@ const features = [
   {
     icon: Inbox,
     title: "One brain, every tool",
-    desc: "Newsletters, receipts, and noise are quietly tucked away so only what matters stays in view.",
+    desc: "LinkedIn, Email, and Slack\nWisps remembers every conversation across all of them, so you never explain context twice.",
   },
   {
     icon: Search,
     title: "Ask anything",
-    desc: "Search like you think. Find any email, attachment, or detail with a single question.",
+    desc: "Ask about any person or conversation — across LinkedIn, email, or Slack — and get the answer instantly.",
   },
   {
     icon: Shield,
     title: "Smart follow-ups",
-    desc: "Wisps reads the context and resurfaces conversations at the perfect moment — with an AI draft ready to go, so nothing slips through the cracks.",
+    desc: "Wisps tracks every relationship — and resurfaces the ones that need you, right when they matter, with a draft ready to go.",
   },
 ];
 
@@ -2193,7 +2193,7 @@ function RelationshipCopilot() {
     {
       icon: Timer,
       title: "Smart follow-ups",
-      desc: "Wisps reads the context and resurfaces conversations at the perfect moment — with an AI draft ready to go, so nothing slips through the cracks.",
+      desc: "Wisps tracks every relationship — and resurfaces the ones that need you, right when they matter, with a draft ready to go.",
       animation: <SmartFollowUpAnimation />,
       size: "normal" as const,
       bgImage: "/feature-card-1.jpeg",
