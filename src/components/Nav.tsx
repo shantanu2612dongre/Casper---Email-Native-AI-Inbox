@@ -44,22 +44,15 @@ export function Nav() {
             >
               Login
             </a>
-            <button
-              onClick={() => {
-                trackEvent("join_waitlist_click", {
-                  event_category: "engagement",
-                  event_label: "Navbar Join Waitlist Button",
-                  button_location: "navbar",
-                });
-                setIsWaitlistOpen(true);
-              }}
+            <a
+              href={`sms:${import.meta.env.VITE_LINQ_NUMBER || "+13127195463"}?body=Hi`}
               className="inline-flex items-center gap-2.5 rounded-full bg-white/40 dark:bg-black/20 hover:bg-white/60 text-foreground backdrop-blur-md px-7 py-3 text-[16px] font-medium transition-all cursor-pointer shadow-sm hover:scale-105"
             >
               <div className="bg-white rounded-full p-0.5 shadow-sm">
                 <img src="/imessage.svg" className="w-5 h-5 object-contain" alt="iMessage" />
               </div>
               Join Waitlist
-            </button>
+            </a>
           </div>
         </nav>
       </motion.header>

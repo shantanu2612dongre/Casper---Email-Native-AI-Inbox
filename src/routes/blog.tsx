@@ -78,7 +78,7 @@ function Nav() {
             Login
           </a>
           <a
-            href="#"
+            href={`sms:${import.meta.env.VITE_LINQ_NUMBER || "+13127195463"}?body=Hi`}
             className="inline-flex items-center rounded-lg bg-foreground text-background px-4 py-2 text-sm font-medium hover:opacity-90 transition-opacity"
           >
             Get Started

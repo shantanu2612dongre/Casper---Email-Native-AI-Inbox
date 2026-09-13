@@ -80,7 +80,7 @@ function Hero() {
           className="mt-9 flex items-center justify-center gap-3"
         >
           <a
-            href="#"
+            href={`sms:${import.meta.env.VITE_LINQ_NUMBER || "+13127195463"}?body=Hi`}
             className="inline-flex items-center gap-2 rounded-lg bg-foreground text-background px-5 py-3 text-sm font-medium hover:opacity-90 transition-opacity"
           >
             Get Started for Free <ArrowRight className="h-4 w-4" />
@@ -413,7 +413,7 @@ function CTA() {
           className="mt-9 flex justify-center"
         >
           <a
-            href="#"
+            href={`sms:${import.meta.env.VITE_LINQ_NUMBER || "+13127195463"}?body=Hi`}
             className="inline-flex items-center gap-2 rounded-full bg-white border border-white/80 px-6 py-3.5 text-sm font-medium text-foreground shadow-[0_10px_40px_-10px_rgba(80,100,200,0.35)] hover:shadow-[0_14px_50px_-10px_rgba(80,100,200,0.45)] transition-shadow"
           >
             <span className="grid place-items-center h-5 w-5 rounded-sm bg-gradient-to-br from-red-500 via-yellow-400 to-blue-500 text-[10px] font-bold text-white">

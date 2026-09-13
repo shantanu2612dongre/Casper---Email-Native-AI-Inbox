@@ -122,13 +122,13 @@ function Hero() {
             custom={2}
             className="mt-[clamp(2rem,3vw,3rem)] flex items-center justify-center lg:justify-start gap-4"
           >
-            <button
-              onClick={() => openWaitlist("hero")}
+            <a
+              href={`sms:${import.meta.env.VITE_LINQ_NUMBER || "+13127195463"}?body=Hi`}
               // Fluid Button Size
               className="inline-flex items-center rounded-full bg-foreground text-background px-[clamp(1.5rem,2.5vw,2.5rem)] py-[clamp(0.75rem,1.25vw,1.25rem)] text-[clamp(0.9rem,1vw,1.1rem)] font-bold hover:opacity-90 transition-opacity cursor-pointer shadow-xl shadow-black/10"
             >
               Join Waitlist
-            </button>
+            </a>
           </motion.div>
         </div>
 
@@ -2545,12 +2545,12 @@ function CTA() {
             Ask Wisps to draft a reply, find context, schedule a meeting, or follow up. It handles the work across your inbox.
           </p>
           <div className="mt-10 flex items-center justify-center gap-4">
-            <button
-              onClick={() => openWaitlist("cta")}
+            <a
+              href={`sms:${import.meta.env.VITE_LINQ_NUMBER || "+13127195463"}?body=Hi`}
               className="inline-flex items-center justify-center rounded-full bg-foreground text-background px-8 py-3 text-[14px] font-semibold hover:opacity-90 transition-opacity cursor-pointer"
             >
               Get started
-            </button>
+            </a>
             <a
               href="#"
               className="inline-flex items-center justify-center rounded-full border border-border bg-card text-foreground px-8 py-3 text-[14px] font-semibold hover:bg-muted transition-colors"
