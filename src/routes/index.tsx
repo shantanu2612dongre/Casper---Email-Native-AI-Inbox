@@ -2583,11 +2583,11 @@ function Index() {
       <main className="min-h-screen bg-background text-foreground antialiased">
         <Nav />
         <Hero />
-        <Logos />
+        {/* <Logos /> */}
         <Features />
         <RelationshipCopilot />
         <DataControl />
-        <Testimonials />
+        {/* <Testimonials /> */}
         <CTA />
         <Footer />
       </main>

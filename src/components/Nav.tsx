@@ -22,7 +22,7 @@ export function Nav() {
             <img src="/wisps-logo.svg" alt="Wisps logo" className="h-10 w-10 lg:h-12 lg:w-12 object-contain" />
             Wisps
           </a>
-          
+
           {/* Main Links */}
           <div className="hidden md:flex items-center gap-10 text-[15px] font-medium text-foreground/80">
             <a href="/#pricing" className="hover:text-foreground transition-colors">
@@ -51,7 +51,7 @@ export function Nav() {
               <div className="bg-white rounded-full p-0.5 shadow-sm">
                 <img src="/imessage.svg" className="w-5 h-5 object-contain" alt="iMessage" />
               </div>
-              Join Waitlist
+              Text Wisps
             </a>
           </div>
         </nav>
