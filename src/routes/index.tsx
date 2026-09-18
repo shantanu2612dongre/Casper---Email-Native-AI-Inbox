@@ -2585,7 +2585,9 @@ function Index() {
         <Hero />
         {/* <Logos /> */}
         <Features />
-        <RelationshipCopilot />
+        {/* <RelationshipCopilot /> */}
+        {/* Spacer to fill up the space previously occupied by RelationshipCopilot */}
+        <div className="min-h-[800px] bg-textured-paper" />
         <DataControl />
         {/* <Testimonials /> */}
         <CTA />
