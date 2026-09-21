@@ -79,9 +79,9 @@ function Hero() {
   const [activeMockup, setActiveMockup] = useState<'imessage' | 'slack'>('imessage');
   return (
     <section className="relative overflow-hidden min-h-[100dvh] lg:min-h-[85vh] 2xl:min-h-0 2xl:aspect-[16/9] flex items-center justify-center py-24 z-0 bg-textured-paper">
-      {/* Background Image - Changed to bg-bottom to prevent cropping the skyline/bridge */}
+      {/* Background Image */}
       <div
-        className="absolute inset-0 -z-10 bg-cover bg-[center_30%] bg-no-repeat opacity-100 brightness-[1.1] contrast-[1.05] saturate-[1.15] transition-all duration-300"
+        className="absolute inset-0 -z-10 bg-cover bg-top bg-no-repeat opacity-100 brightness-[1.1] contrast-[1.05] saturate-[1.15] transition-all duration-300"
         style={{
           backgroundImage: "url('/herobackground.png')", maskImage: "linear-gradient(to bottom, black 0%, black 60%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,0.5) 88%, rgba(0,0,0,0.15) 96%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 60%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,0.5) 88%, rgba(0,0,0,0.15) 96%, transparent 100%)",
         }}
@@ -90,7 +90,7 @@ function Hero() {
       {/* Replaced fixed max-width with clamped fluid width constraints */}
       <div className="relative w-[clamp(320px,92vw,1600px)] mx-auto grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-[clamp(3rem,6vw,8rem)] items-center h-full max-w-[1500px]">
         {/* Left Column: Text */}
-        <div className="relative flex flex-col items-center lg:items-start text-center lg:text-left z-10">
+        <div className="relative flex flex-col items-center lg:items-start text-center lg:text-left z-10 -mt-8 lg:-mt-16">
 
 
           <motion.h1
@@ -98,8 +98,9 @@ function Hero() {
             initial="hidden"
             animate="show"
             custom={0}
-            // Fluid Headline Size
-            className="font-black tracking-tighter text-foreground leading-[1.05] text-[clamp(2.5rem,4.5vw,5rem)]"
+            style={{ fontFamily: 'var(--font-season)', fontWeight: 'inherit' }}
+            // Fixed Headline Size
+            className="tracking-tighter text-foreground leading-[1.05] text-[64px]"
           >
             The copilot for your professional relationships.
           </motion.h1>
@@ -2585,10 +2586,10 @@ function Index() {
         <Hero />
         {/* <Logos /> */}
         <Features />
+        <DataControl />
         {/* <RelationshipCopilot /> */}
         {/* Spacer to fill up the space previously occupied by RelationshipCopilot */}
         <div className="min-h-[800px] bg-textured-paper" />
-        <DataControl />
         {/* <Testimonials /> */}
         <CTA />
         <Footer />
